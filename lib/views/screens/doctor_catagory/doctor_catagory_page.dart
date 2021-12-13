@@ -1,18 +1,20 @@
 import 'package:care_plus/data/specialist_information/getInformation.dart';
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/find_by_specialist_widget/find_by_specialist_widget.dart';
 import 'package:flutter/material.dart';
 
 class DoctorCatagory extends StatefulWidget {
-  const DoctorCatagory({Key? key}) : super(key: key);
+  List<SpecializationResponse> informationslist;
+  DoctorCatagory({Key? key, required this.informationslist}) : super(key: key);
 
   @override
   _DoctorCatagoryState createState() => _DoctorCatagoryState();
 }
 
 class _DoctorCatagoryState extends State<DoctorCatagory> {
-  List<Diseasesinformation> informationslist = List.of(GetInformation);
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -62,10 +64,10 @@ class _DoctorCatagoryState extends State<DoctorCatagory> {
                   crossAxisSpacing: 5.0,
                   mainAxisSpacing: 5.0,
                 ),
-                itemCount: informationslist.length,
+                itemCount: widget.informationslist.length,
                 itemBuilder: (context, index) {
-                  Diseasesinformation information = informationslist[index];
-                  return Findspecialist(information, index, context);
+                  //Diseasesinformation information = informationslist[index];
+                  return Findspecialist(widget.informationslist[index], context, index);
                 },
               ),
             ),

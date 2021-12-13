@@ -4,6 +4,7 @@ import 'package:care_plus/data/upcomming_appointment/upcomming_appointment.dart'
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
 import 'package:care_plus/models/ui_model/upcomming_appointment/upcomming_appointment_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_list_by_catagory/doctor_list_by_catagory.dart';
 import 'package:care_plus/views/screens/featured_doctor/featured_doctor.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
@@ -19,7 +20,7 @@ class DoctorsNavbar extends StatefulWidget {
 }
 
 class _DoctorsNavbarState extends State<DoctorsNavbar> {
-  List<Diseasesinformation> informationslist = List.of(GetInformation);
+  List<SpecializationResponse> informationslist = [];
   List<DoctorINformation> allinformatonss = List.of(allinformations);
   List<UpcommingAppointment> appointment = List.of(allappointmnet);
 
@@ -101,7 +102,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
                 itemCount: informationslist.length,
                 itemBuilder: (context,index) {
                   var information = informationslist[index];
-                  return Findspecialist(information, index, context);
+                  return Findspecialist(informationslist[index], context, index);
                 }
             ),
           ),

@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:care_plus/data/near_by/near_by.dart';
+import 'package:care_plus/helper/alertDialogue.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
 import 'package:care_plus/data/doctor_list_and_details/doctorlist_and_%20details.dart';
 import 'package:care_plus/data/specialist_information/getInformation.dart';
@@ -6,6 +10,8 @@ import 'package:care_plus/models/ui_model/near_by_ambulance_and_hospital/near_by
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
 import 'package:care_plus/data/upcomming_appointment/upcomming_appointment.dart';
 import 'package:care_plus/models/ui_model/upcomming_appointment/upcomming_appointment_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/doctor_specialization_controller.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_catagory/doctor_catagory_page.dart';
 import 'package:care_plus/views/screens/featured_doctor/featured_doctor.dart';
 import 'package:care_plus/views/screens/notificaitonUi/notificaitonUi.dart';
@@ -17,6 +23,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -29,10 +36,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //List informations = GetInformation.infomations;
   List<DoctorINformation> doctorInformation = List.of(allinformations);
-  List<Diseasesinformation> informationslist = List.of(GetInformation);
+  // List<Diseasesinformation> informationslist = List.of(GetInformation);
   List<UpcommingAppointment> appointment = List.of(allappointmnet);
   List<NearBy> nearby = List.of(near_by_hospital_ambulance);
   int _index = 0;
+  List<SpecializationResponse> informationslist = [];
+
+
+  _getNotification() async {
+    DoctorSpecializationController.requestThenResponsePrint().then((response) async {
+      if (response.statusCode == 200) {
+        print("successfully done");
+        print(response);
+        print(response.body);
+        setState(() {
+          informationslist = (json.decode(response.body.toString()) as List).map(
+                  (jsonElement) => SpecializationResponse.fromJson(jsonElement)).toList();
+        });
+      }else{
+        SnackbarDialogueHelper().showSnackbarDialog(context, 'No Data Found',Colors.red);
+      }
+    }
+    );
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getNotification();
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                   minWidth: 10,
                   onPressed: () {
                     Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => DoctorCatagory()));
+                        context, MaterialPageRoute(builder: (context) => DoctorCatagory(informationslist: informationslist,)));
                   },
                   child: Text(
                     "See All",
@@ -157,15 +192,25 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.centerLeft,
           height: 80,
           child: ListView.builder(
-              //controller: PageController(viewportFraction: 0.3),
+            //controller: PageController(viewportFraction: 0.3),
               scrollDirection: Axis.horizontal,
               itemCount: informationslist.length,
               itemBuilder: (context,index) {
-                return Findspecialist(informationslist[index], index, context);
+                return Findspecialist(informationslist[index], context, index);
 
               }
-              ),
+          ),
         ),
+
+        // Container(
+        //     child: ListView.builder(
+        //         itemCount: informationslist.length,
+        //         itemBuilder: (BuildContext context, int index) {
+        //           return Findspecialist(
+        //               informationslist[index], context, index);
+        //         }
+        //     )
+        // ),
 
 
         Container(
@@ -259,6 +304,9 @@ class _HomePageState extends State<HomePage> {
 
 
 }
+
+
+
 
 
 

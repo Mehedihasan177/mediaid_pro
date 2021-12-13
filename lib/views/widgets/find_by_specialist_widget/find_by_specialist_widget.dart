@@ -1,4 +1,6 @@
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_list_by_catagory/doctor_list_by_catagory.dart';
 import 'package:flutter/material.dart';
 var colors = [
@@ -11,7 +13,7 @@ var colors = [
   Colors.green,
   Colors.yellow,
 ];
-Widget Findspecialist(Diseasesinformation information, int index, context) =>Padding(
+Widget Findspecialist(SpecializationResponse informationslist, BuildContext context, int index) =>Padding(
 
   padding: const EdgeInsets.only(right: 8),
   child: GestureDetector(
@@ -27,7 +29,7 @@ Widget Findspecialist(Diseasesinformation information, int index, context) =>Pad
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 20, top: 10),
             child: Text(
-              '${information.name}',
+              '${informationslist.name}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -43,7 +45,7 @@ Widget Findspecialist(Diseasesinformation information, int index, context) =>Pad
             child: Image(
               height: 25,
               width: 25,
-              image: AssetImage(information.image),
+              image: NetworkImage(apiDomainRoot+'/'+informationslist.icon),
             ),
           ),
         ],

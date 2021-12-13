@@ -25,35 +25,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
       child: Scaffold(
         body: ListView(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 20),
-            //   child: Row(
-            //     children: [
-            //       FlatButton(
-            //         child: Icon(
-            //           Icons.arrow_back_ios,
-            //           size: 30,
-            //           color: Colors.black.withOpacity(0.5),
-            //         ),
-            //         splashColor: Colors.transparent,
-            //         onPressed: () {},
-            //       ),
-            //       Text("About Doctor",
-            //         style: TextStyle(
-            //           fontSize: 23,
-            //           color: Colors.black.withOpacity(0.5),
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 30,
-            // ),
-            SizedBox(
-              height: 40,
-            ),
+
+
             Row(
               children: [
                 Flexible(

@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
         Container(
           padding: EdgeInsets.only(left: 20),
           alignment: Alignment.centerLeft,
-          height: 105,
+          height: 90,
           child: ListView.builder(
             //controller: PageController(viewportFraction: 0.3),
               scrollDirection: Axis.horizontal,

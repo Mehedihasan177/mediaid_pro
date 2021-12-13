@@ -54,15 +54,16 @@ class _DoctorCatagoryState extends State<DoctorCatagory> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 0),
               child: GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: (1 / .9),
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
+                  childAspectRatio: (1 / 0.8),
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 2.0,
+                  mainAxisSpacing: 9.0,
+
                 ),
                 itemCount: widget.informationslist.length,
                 itemBuilder: (context, index) {

@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'package:care_plus/controllers/user/registration_controller.dart';
+import 'package:care_plus/controllers/user/signin_controller.dart';
+import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/models/reg_requst_model.dart';
+import 'package:care_plus/models/signIn_model/signIn_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -320,32 +324,32 @@ class _SingUpPageState extends State<SingUpPage> {
                           //EasyLoading.dismiss();
                           if(value.statusCode==200){
                             print("successfull");
-                            // //EasyLoading.showSuccess('logging in...');
-                            // SigninModel myInfo = new SigninModel(
-                            //     mobile: "111222", password: "12349876");
-                            // await SigninController.requestThenResponsePrint(myInfo)
-                            //     .then((value) async {
-                            //   print(value.statusCode);
-                            //   print(value.body);
-                            //   final Map parsed = json.decode(value.body);
-                            //
-                            //   var jsonData = null;
-                            //   SharedPreferences sharedPreferences =
-                            //   await SharedPreferences.getInstance();
-                            //   final loginobject = SignInResponse.fromJson(parsed);
-                            //   print(loginobject.data.token);
-                            //   sharedPreferences.setString("token", loginobject.data.token);
-                            //   //EasyLoading.dismiss();
-                            //   if (value.statusCode == 200) {
-                            //     sharedPreferences.setString("mobile", "111222");
-                            //     sharedPreferences.setString("password", "12349876");
-                            //     //return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ChangePassword(Usertoken: loginobject.data.token)),);
-                            //   } else {
-                            //     // return LoginController.requestThenResponsePrint(jsonData);
-                            //     AlertDialogueHelper().showAlertDialog(context, 'Warning', 'Please recheck email and password');
-                            //   }
-                            //
-                            // });
+                            //EasyLoading.showSuccess('logging in...');
+                            SigninModel myInfo = new SigninModel(
+                                mobile: _textMobile.text, password: _textPassword.text);
+                            await SigninController.requestThenResponsePrint(myInfo)
+                                .then((value) async {
+                              print(value.statusCode);
+                              print(value.body);
+                              final Map parsed = json.decode(value.body);
+
+                              var jsonData = null;
+                              SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                              final loginobject = SignInResponse.fromJson(parsed);
+                              print(loginobject.data.token);
+                              sharedPreferences.setString("token", loginobject.data.token);
+                              //EasyLoading.dismiss();
+                              if (value.statusCode == 200) {
+                                sharedPreferences.setString("mobile", _textMobile.text);
+                                sharedPreferences.setString("password", _textPassword.text);
+                                //return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ChangePassword(Usertoken: loginobject.data.token)),);
+                              } else {
+                                // return LoginController.requestThenResponsePrint(jsonData);
+                                AlertDialogueHelper().showAlertDialog(context, 'Warning', 'Please recheck email and password');
+                              }
+
+                            });
 
                           }else{
                             //AlertDialogueHelper().showAlertDialog(context, '', value.body);

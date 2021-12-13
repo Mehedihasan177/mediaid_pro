@@ -14,26 +14,35 @@ Widget doctorList(Datum doctorINformation, context) => Container(
             ),
             child: Row(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Image.network(
-                    '$apiDomainRoot/images/${doctorINformation.image}',
-                    height: 70,
-                    width: 70,
+                Expanded(
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Image.network(
+                      '$apiDomainRoot/images/${doctorINformation.image}',
+                      height: 70,
+                      width: 70,
+                    ),
                   ),
                 ),
                 Expanded(
+                  flex: 5,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20,top: 5),
                     child: Column(
                       children: [
-                        Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            doctorINformation.name,
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.bold),
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                doctorINformation.name,
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 5),
@@ -46,19 +55,12 @@ Widget doctorList(Datum doctorINformation, context) => Container(
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      doctorINformation.chambers,
+                                      doctorINformation.specialization.replaceAll(',', '')+" at ",
                                       style: TextStyle(
                                           fontSize: 15,),
                                     ),
                                   ),
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      doctorINformation.hospitalName,
-                                      style: TextStyle(
-                                          fontSize: 15,),
-                                    ),
-                                  ),
+
                                 ],
                               ),
                     ]
@@ -70,35 +72,24 @@ Widget doctorList(Datum doctorINformation, context) => Container(
                           child: Container(
                             height: 22,
                             child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [Row(
+                                // scrollDirection: Axis.horizontal,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        doctorINformation.experience,
-                                        style: TextStyle(
-                                          fontSize: 15,),
-                                      ),
+                                    Text(
+                                      "Exp: "+doctorINformation.experience.replaceAll('null', ''),
+                                      style: TextStyle(
+                                        fontSize: 15,),
                                     ),
-                                    SizedBox(width: 20,),
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        doctorINformation.fee,
-                                        style: TextStyle(
-                                          fontSize: 15,),
-                                      ),
-                                    ),
-                                    SizedBox(width: 20,),
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        doctorINformation.rating,
-                                        style: TextStyle(
-                                          fontSize: 15,),
-                                      ),
-                                    ),
+
+                                    // SizedBox(width: 20,),
+                                    Text(
+                                      "Fee: "+doctorINformation.fee,
+                                      style: TextStyle(
+                                        fontSize: 15,),
+                                    )
 
                                   ],
                                 ),

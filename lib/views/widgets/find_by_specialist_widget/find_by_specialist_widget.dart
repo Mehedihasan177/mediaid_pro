@@ -1,59 +1,61 @@
+import 'dart:math';
+
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_list_by_catagory/doctor_list_by_catagory.dart';
 import 'package:flutter/material.dart';
 var colors = [
-  Color(0xFF1CBFA8).withOpacity(0.8),
-  Colors.blue.withOpacity(0.8),
-  Colors.red.withOpacity(0.8),
   Colors.green,
-  Colors.yellow,
+  Colors.orange,
   Colors.deepPurpleAccent,
-  Colors.green,
-  Colors.yellow,
+  Colors.red,
 ];
-Widget Findspecialist(SpecializationResponse informationslist, BuildContext context, int index) =>Padding(
+Widget Findspecialist(SpecializationResponse informationslist, BuildContext context, int index) {
 
-  padding: const EdgeInsets.only(right: 8),
-  child: GestureDetector(
-    child: Container(
-      width: 115,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: colors[index],
-          borderRadius: BorderRadius.circular(18)),
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 20, top: 10),
-            child: Text(
-              '${informationslist.name}',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                //fontWeight: FontWeight.bold,
+  return Padding(
+
+    padding: const EdgeInsets.only(right: 8),
+    child: GestureDetector(
+      child: Container(
+        width: 115,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: (index%4)==0?colors[0]:(index%3)==0?colors[1]:(index%2)==0?colors[2]:colors[3],
+            borderRadius: BorderRadius.circular(18)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${informationslist.name}',
+                    textAlign: TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 14,),
+                  )
+                ],
               ),
             ),
-          ),
-
-          Container(
-            alignment: Alignment.bottomRight,
-            padding: EdgeInsets.only(right: 10, top: 35),
-            child: Image(
-              height: 25,
-              width: 25,
-              image: NetworkImage(apiDomainRoot+'/'+informationslist.icon),
+            SizedBox(height: 5,),
+            Container(
+              // alignment: Alignment.bottomRight,
+              // padding: EdgeInsets.only(right: 10, top: 5),
+              child: Image(
+                height: 35,
+                width: 35,
+                image: NetworkImage(apiDomainRoot+'/'+informationslist.icon),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-    onTap: (){
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory(name: informationslist.name)));
+      onTap: (){
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory(name: informationslist.name)));
 
-    },
-  ),
-);
+      },
+    ),
+  );
+}

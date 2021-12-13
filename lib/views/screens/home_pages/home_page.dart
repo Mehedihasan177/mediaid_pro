@@ -10,6 +10,7 @@ import 'package:care_plus/models/ui_model/near_by_ambulance_and_hospital/near_by
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
 import 'package:care_plus/data/upcomming_appointment/upcomming_appointment.dart';
 import 'package:care_plus/models/ui_model/upcomming_appointment/upcomming_appointment_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/doctor_specialization_controller.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_catagory/doctor_catagory_page.dart';
@@ -35,7 +36,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //List informations = GetInformation.infomations;
-  List<DoctorINformation> doctorInformation = List.of(allinformations);
+  // List<DoctorINformation> doctorInformation = List.of(allinformations);
+  List<Datum> doctorInformation = [];
   // List<Diseasesinformation> informationslist = List.of(GetInformation);
   List<UpcommingAppointment> appointment = List.of(allappointmnet);
   List<NearBy> nearby = List.of(near_by_hospital_ambulance);
@@ -190,7 +192,7 @@ class _HomePageState extends State<HomePage> {
         Container(
           padding: EdgeInsets.only(left: 20),
           alignment: Alignment.centerLeft,
-          height: 80,
+          height: 105,
           child: ListView.builder(
             //controller: PageController(viewportFraction: 0.3),
               scrollDirection: Axis.horizontal,
@@ -285,7 +287,7 @@ class _HomePageState extends State<HomePage> {
             // color: Colors.red,
             child: ListView.builder(
                   // scrollDirection: Axis.vertical,
-                  itemCount: 3,
+                  itemCount: doctorInformation.length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {

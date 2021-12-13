@@ -1,18 +1,58 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/data/doctor_list_by_catagory_data/doctor_list_by_catagory_data.dart';
 import 'package:care_plus/models/ui_model/doctor_list_by_catagory_model/doctor_list_by_catagory_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/doctor_list_by_catagory_widget/doctor_list_by_catagory_widget.dart';
+import 'package:care_plus/views/widgets/homepage_doctor_card_widget/homepage_doctor_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DoctorListByCatagory extends StatefulWidget {
-  const DoctorListByCatagory({Key? key}) : super(key: key);
+
+  final String name;
+
+  const DoctorListByCatagory({Key? key,required this.name}) : super(key: key);
 
   @override
   _DoctorListByCatagoryState createState() => _DoctorListByCatagoryState();
 }
 
 class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
-  List<DoctorListByCatagorymodel> doctorlistbycatagory = List.of(doctor_list_by_catagory_data);
+  // List<DoctorListByCatagorymodel> doctorlistbycatagory = List.of(doctor_list_by_catagory_data);
+
+
+  List<Datum> doctorlistbycatagory = [];
+
+
+  _getDoctorListByCatagory() async {
+
+
+    DoctorListController.requestThenResponsePrint(USERTOKEN,widget.name).then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        doctorlistbycatagory =
+            listNotification.map((model) => Datum.fromJson(model)).toList();
+        print(doctorlistbycatagory);
+
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    _getDoctorListByCatagory();
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -39,20 +79,18 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
                       Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                     },
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 0),
-                      child: Text(
-                        "Doctor List By Catagory",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 0),
+                    child: Text(
+                      "Find Best ${widget.name}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 23,
+                        color: Colors.black.withOpacity(0.5),
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -86,14 +124,13 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
             Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Container(
-                height: 700,
+                height: 900,
                 child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: doctorlistbycatagory.length,
                     itemBuilder: (context, index) {
-                      return DoctorListByCatagoryWidget(
-                          doctorlistbycatagory[index], context);
+                      return doctorList(doctorlistbycatagory[index], context);
                     }),
               ),
             ),

@@ -11,50 +11,58 @@ String doctorListResponseToJson(DoctorListResponse data) => json.encode(data.toJ
 class DoctorListResponse {
   DoctorListResponse({
     required this.message,
-    required this.doctorList,
+    required this.data,
   });
 
   String message;
-  List<DoctorList> doctorList;
+  List<Datum> data;
 
   factory DoctorListResponse.fromJson(Map<String, dynamic> json) => DoctorListResponse(
     message: json["message"],
-    doctorList: List<DoctorList>.from(json["DoctorList"].map((x) => DoctorList.fromJson(x))),
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "message": message,
-    "DoctorList": List<dynamic>.from(doctorList.map((x) => x.toJson())),
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
   };
 }
 
-class DoctorList {
-  DoctorList({
+class Datum {
+  Datum({
     required this.id,
     this.adminId,
     required this.name,
     required this.email,
+    required this.hospitalName,
+    required this.experience,
+    required this.fee,
+    required this.rating,
     required this.referralCode,
     required this.doctorid,
     required this.mobile,
-    this.nid,
+    required this.nid,
     required this.bmdcReg,
-    this.department,
-    this.degree,
-    this.designation,
+    required this.department,
+    required this.degree,
+    required this.designation,
     required this.specialization,
     this.dob,
-    this.address,
-    this.district,
-    this.policeStation,
-    this.postOffice,
+    required this.address,
+    required this.district,
+    required this.policeStation,
+    required this.postOffice,
     required this.status,
-    this.image,
+    required this.image,
     this.emailVerifiedAt,
+    required this.featured,
+    required this.chambers,
+    required this.introduction,
     required this.createdAt,
     required this.updatedAt,
-    this.gender,
+    required this.gender,
     this.deletedAt,
+    required this.doctorService,
     required this.visitingFee,
   });
 
@@ -62,56 +70,72 @@ class DoctorList {
   dynamic adminId;
   String name;
   String email;
+  String hospitalName;
+  String experience;
+  String fee;
+  String rating;
   String referralCode;
   String doctorid;
   String mobile;
-  dynamic nid;
+  String nid;
   String bmdcReg;
-  dynamic department;
-  dynamic degree;
-  dynamic designation;
+  String department;
+  String degree;
+  String designation;
   String specialization;
   dynamic dob;
-  dynamic address;
-  dynamic district;
-  dynamic policeStation;
-  dynamic postOffice;
+  String address;
+  String district;
+  String policeStation;
+  String postOffice;
   String status;
-  dynamic image;
+  String image;
   dynamic emailVerifiedAt;
+  String featured;
+  String chambers;
+  String introduction;
   DateTime createdAt;
   DateTime updatedAt;
-  dynamic gender;
+  String gender;
   dynamic deletedAt;
+  List<dynamic> doctorService;
   String visitingFee;
 
-  factory DoctorList.fromJson(Map<String, dynamic> json) => DoctorList(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
     adminId: json["admin_id"],
     name: json["name"],
     email: json["email"],
+    hospitalName: json["hospital_name"].toString(),
+    experience: json["experience"].toString(),
+    fee: json["fee"].toString(),
+    rating: json["rating"].toString(),
     referralCode: json["referral_code"],
     doctorid: json["doctorid"],
     mobile: json["mobile"],
-    nid: json["nid"],
-    bmdcReg: json["bmdc_reg"],
-    department: json["department"],
-    degree: json["degree"],
-    designation: json["designation"],
+    nid: json["nid"].toString(),
+    bmdcReg: json["bmdc_reg"].toString(),
+    department: json["department"].toString(),
+    degree: json["degree"].toString(),
+    designation: json["designation"].toString(),
     specialization: json["specialization"].toString(),
     dob: json["dob"],
-    address: json["address"],
-    district: json["district"],
-    policeStation: json["police_station"],
-    postOffice: json["post_office"],
-    status: json["status"],
-    image: json["image"],
+    address: json["address"].toString(),
+    district: json["district"].toString(),
+    policeStation: json["police_station"].toString(),
+    postOffice: json["post_office"].toString(),
+    status: json["status"].toString(),
+    image: json["image"].toString(),
     emailVerifiedAt: json["email_verified_at"],
+    featured: json["featured"],
+    chambers: json["chambers"].toString(),
+    introduction: json["introduction"].toString(),
     createdAt: DateTime.parse(json["created_at"]),
     updatedAt: DateTime.parse(json["updated_at"]),
-    gender: json["gender"],
-    deletedAt: json["deleted_at"],
-    visitingFee: json["visiting_fee"].toString(),
+    gender: json["gender"].toString(),
+    deletedAt: json["deleted_at"].toString(),
+    doctorService: List<dynamic>.from(json["doctor_service"].map((x) => x)),
+    visitingFee:json["visiting_fee"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -119,6 +143,10 @@ class DoctorList {
     "admin_id": adminId,
     "name": name,
     "email": email,
+    "hospital_name": hospitalName == null ? null : hospitalName,
+    "experience": experience,
+    "fee": fee,
+    "rating": rating,
     "referral_code": referralCode,
     "doctorid": doctorid,
     "mobile": mobile,
@@ -126,7 +154,7 @@ class DoctorList {
     "bmdc_reg": bmdcReg,
     "department": department,
     "degree": degree,
-    "designation": designation,
+    "designation": designation == null ? null : designation,
     "specialization": specialization,
     "dob": dob,
     "address": address,
@@ -134,12 +162,16 @@ class DoctorList {
     "police_station": policeStation,
     "post_office": postOffice,
     "status": status,
-    "image": image,
+    "image": image == null ? null : image,
     "email_verified_at": emailVerifiedAt,
+    "featured": featured,
+    "chambers": chambers == null ? null : chambers,
+    "introduction": introduction == null ? null : introduction,
     "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt.toIso8601String(),
     "gender": gender,
     "deleted_at": deletedAt,
+    "doctor_service": List<dynamic>.from(doctorService.map((x) => x)),
     "visiting_fee": visitingFee,
   };
 }
@@ -152,13 +184,13 @@ class VisitingFee {
     required this.commission,
     required this.createdAt,
     required this.updatedAt,
-    this.deletedAt,
+    required this.deletedAt,
   });
 
   int id;
-  int doctorId;
-  int visitCharge;
-  int commission;
+  String doctorId;
+  String visitCharge;
+  String commission;
   DateTime createdAt;
   DateTime updatedAt;
   dynamic deletedAt;

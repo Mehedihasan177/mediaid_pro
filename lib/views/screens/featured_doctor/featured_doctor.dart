@@ -1,5 +1,6 @@
 import 'package:care_plus/data/doctor_list_and_details/doctorlist_and_%20details.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/homepage_doctor_card_widget/homepage_doctor_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class FeaturedDoctor extends StatefulWidget {
 
 class _FeaturedDoctorState extends State<FeaturedDoctor> {
   List<DoctorINformation> doctorInformation = List.of(allinformations);
+  List<Datum> doctorlistbycatagory = [];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -96,7 +98,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
                   // shrinkWrap: true,
                   // physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return doctorList(doctorInformation[index], context);
+                    return doctorList(doctorlistbycatagory[index], context);
                   }),
 
             ),

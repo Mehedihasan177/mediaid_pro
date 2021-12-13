@@ -1,10 +1,12 @@
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_responses.dart';
 import 'package:care_plus/views/screens/doctor_appointment_pages/doctor_about_and_appointment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-Widget doctorList(DoctorINformation doctorINformation, context) => Container(
+Widget doctorList(Datum doctorINformation, context) => Container(
         child: GestureDetector(
           child: Card(
             shape: RoundedRectangleBorder(
@@ -14,9 +16,10 @@ Widget doctorList(DoctorINformation doctorINformation, context) => Container(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
-                  child: Image.asset(
-                    doctorINformation.image,
+                  child: Image.network(
+                    '$apiDomainRoot/images/${doctorINformation.image}',
                     height: 70,
+                    width: 70,
                   ),
                 ),
                 Expanded(
@@ -43,7 +46,7 @@ Widget doctorList(DoctorINformation doctorINformation, context) => Container(
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      doctorINformation.department,
+                                      doctorINformation.chambers,
                                       style: TextStyle(
                                           fontSize: 15,),
                                     ),
@@ -51,7 +54,7 @@ Widget doctorList(DoctorINformation doctorINformation, context) => Container(
                                   Container(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      doctorINformation.hospital,
+                                      doctorINformation.hospitalName,
                                       style: TextStyle(
                                           fontSize: 15,),
                                     ),

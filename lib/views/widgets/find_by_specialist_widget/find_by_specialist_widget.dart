@@ -18,7 +18,7 @@ Widget Findspecialist(SpecializationResponse informationslist, BuildContext cont
   padding: const EdgeInsets.only(right: 8),
   child: GestureDetector(
     child: Container(
-      width: 80,
+      width: 115,
       alignment: Alignment.center,
       decoration: BoxDecoration(
           color: colors[index],
@@ -41,7 +41,7 @@ Widget Findspecialist(SpecializationResponse informationslist, BuildContext cont
 
           Container(
             alignment: Alignment.bottomRight,
-            padding: EdgeInsets.only(right: 10, top: 15),
+            padding: EdgeInsets.only(right: 10, top: 35),
             child: Image(
               height: 25,
               width: 25,
@@ -52,7 +52,7 @@ Widget Findspecialist(SpecializationResponse informationslist, BuildContext cont
       ),
     ),
     onTap: (){
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory()));
+      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory(name: informationslist.name)));
 
     },
   ),

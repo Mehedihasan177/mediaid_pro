@@ -4,6 +4,7 @@ import 'package:care_plus/data/upcomming_appointment/upcomming_appointment.dart'
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
 import 'package:care_plus/models/ui_model/upcomming_appointment/upcomming_appointment_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_list_by_catagory/doctor_list_by_catagory.dart';
 import 'package:care_plus/views/screens/featured_doctor/featured_doctor.dart';
@@ -23,7 +24,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
   List<SpecializationResponse> informationslist = [];
   List<DoctorINformation> allinformatonss = List.of(allinformations);
   List<UpcommingAppointment> appointment = List.of(allappointmnet);
-
+  List<Datum> doctorlistbycatagory = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,7 +80,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
                 child: FlatButton(
                   minWidth: 10,
                   onPressed: () {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory()));
+                    //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory()));
                   },
                   child: Text(
                     "See All",
@@ -146,7 +147,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
                 itemCount: allinformatonss.length,
                 itemBuilder: (context, index) {
                   //final item = allinformatonss[index];
-                  return doctorList(allinformatonss[index], context);
+                  return doctorList(doctorlistbycatagory[index], context);
                 }),
 
           ),

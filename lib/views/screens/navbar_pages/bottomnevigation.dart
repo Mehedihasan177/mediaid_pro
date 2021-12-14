@@ -44,17 +44,17 @@ class _BottomNevigationState extends State<BottomNevigation> {
                 activeColor: Color(0xFF1CBFA8),
                 inactiveColor:Color(0xFF1CBFA8)
             ),
-            BottomNavyBarItem(
-                title: Text('Doctors', style: TextStyle(color: Color(0xFF1CBFA8)),),
-                icon: Container(
-                    height: 28,
-                    width: 28,
-                    child: Image.asset("images/doctorIcon.png")),
-                textAlign: TextAlign.center,
-                activeColor: Color(0xFF1CBFA8),
-                inactiveColor:Color(0xFF1CBFA8)
-
-            ),
+            // BottomNavyBarItem(
+            //     title: Text('Doctors', style: TextStyle(color: Color(0xFF1CBFA8)),),
+            //     icon: Container(
+            //         height: 28,
+            //         width: 28,
+            //         child: Image.asset("images/doctorIcon.png")),
+            //     textAlign: TextAlign.center,
+            //     activeColor: Color(0xFF1CBFA8),
+            //     inactiveColor:Color(0xFF1CBFA8)
+            //
+            // ),
             BottomNavyBarItem(
                 title: Text('Appointment List', style: TextStyle(color: Color(0xFF1CBFA8)),),
                 icon: Container(
@@ -97,13 +97,13 @@ class _BottomNevigationState extends State<BottomNevigation> {
     switch(cindex) {
       case 0:
         return HomePage();
+      // case 1:
+      //   return DoctorsNavbar();
       case 1:
-        return DoctorsNavbar();
-      case 2:
         return AppointmentList();
-      case 3:
+      case 2:
         return HealthHistory();
-      case 4:
+      case 3:
         return ProfilePage();
 
     }

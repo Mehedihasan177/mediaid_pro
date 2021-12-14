@@ -1,3 +1,8 @@
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/reset_password_controller.dart';
+import 'package:care_plus/helper/alertDialogue.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
+import 'package:care_plus/models/reset_password_model.dart';
 import 'package:care_plus/views/screens/otp/otp.dart';
 import 'package:care_plus/views/screens/otp/otp_two.dart';
 import 'package:care_plus/views/screens/reset_Password/reset_Password.dart';
@@ -101,9 +106,33 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     "Next",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () async {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => OTPTwo()));
-                  },
+    onPressed: () {
+            print("token of user\n");
+            print("token at call mehedi hasan who are you: " + USERTOKEN);
+            ResetPasswordModel passChange = new ResetPasswordModel(mobile: _textEmail.text);
+
+            ResetPasswordController.requestThenResponsePrint(passChange, USERTOKEN, ).then((value) {
+              print('dddddddd');
+              print(value.statusCode);
+              if (value.statusCode == 200) {
+                print("successfully done");
+                print(value.body);
+                SnackbarDialogueHelper().showSnackbarDialog(context, 'Password reset successfully $passChange', Colors.green);
+                AlertDialogueHelper().showAlertDialog(context, "New Passowrd",value.body);
+                // if (yOn == 0) {
+                //   navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => ChangePasswordSuccessPage()));
+                // } else {
+                //   SigninController.requestThenResponsePrint(context, widget.userType, widget.userPhone, newPassC.text);
+                // }
+              }else{
+                SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not reset', Colors.green);
+                // BasicFunctions.showAlertDialogTOView(context,
+                //     AppLocalizations.of(context).translate("passwordRecheckTitle"),
+                //     AppLocalizations.of(context).translate("passwordRecheckMessage"));
+                // BasicFunctions.showAlertDialogTOView(context, "Warning", "Please recheck your passwords to change");
+              }
+            });
+          },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),
                     maximumSize: const Size(350, 59),

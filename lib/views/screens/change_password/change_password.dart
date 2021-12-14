@@ -1,9 +1,19 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/change_password_controller.dart';
+import 'package:care_plus/controllers/user/signin_controller.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
+import 'package:care_plus/models/change_password_model.dart';
+import 'package:care_plus/models/signIn_model/signIn_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
 import 'package:care_plus/views/screens/otp/otp_three.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
 import 'package:care_plus/views/screens/reset_Password/reset_Password.dart';
 import 'package:care_plus/views/screens/signInPage/sign_in_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -13,8 +23,9 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  TextEditingController _textEmail = TextEditingController();
-  TextEditingController _textPassword = TextEditingController();
+  TextEditingController _oldPassword = TextEditingController();
+  TextEditingController _newPassword = TextEditingController();
+  TextEditingController _confirmPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -52,6 +63,9 @@ class _ChangePasswordState extends State<ChangePassword> {
 
             ),
 
+
+            ///old Password
+
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
@@ -78,7 +92,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     width: 20,
                   ),
                   TextField(
-                    controller: _textEmail,
+                    controller: _oldPassword,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),
                     //scrollPadding: EdgeInsets.all(10),
@@ -94,6 +108,9 @@ class _ChangePasswordState extends State<ChangePassword> {
             SizedBox(
               height: 30,
             ),
+
+            ///new password
+
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
@@ -120,7 +137,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     width: 20,
                   ),
                   TextField(
-                    controller: _textEmail,
+                    controller: _newPassword,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),
                     //scrollPadding: EdgeInsets.all(10),
@@ -135,6 +152,11 @@ class _ChangePasswordState extends State<ChangePassword> {
             SizedBox(
               height: 30,
             ),
+
+
+            ///confirm password
+
+
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
@@ -161,7 +183,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     width: 20,
                   ),
                   TextField(
-                    controller: _textEmail,
+                    controller: _confirmPassword,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),
                     //scrollPadding: EdgeInsets.all(10),
@@ -184,8 +206,50 @@ class _ChangePasswordState extends State<ChangePassword> {
                     "Next",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  onPressed: () async {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => OTPThree()));
+                  onPressed: () {
+                    print("token of user\n");
+                    print("token at call mehedi hasan who are you: " + USERTOKEN);
+                    PasswordChange passChange = new PasswordChange(_oldPassword.text, _newPassword.text, _confirmPassword.text);
+                    UserChangePass.requestThenResponsePrint(context, USERTOKEN, passChange).then((value) async {
+                      print('dddddddd');
+                      print(value.statusCode);
+                      if (value.statusCode == 200) {
+
+                        print("successfully done");
+                        print(value.body);
+                        SigninModel myInfo = new SigninModel(
+                            mobile: USERNAME, password: USERPASS);
+                        await SigninController.requestThenResponsePrint(myInfo)
+                            .then((value) async {
+                          print(value.statusCode);
+                          print(value.body);
+
+                          if (value.statusCode == 200) {
+                            SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                            setState(() {
+                              var reobj = SignInResponse.fromJson(json.decode(value.body));
+                              var loginobject = reobj.data.user;
+                              print('loginobject.image');
+                              print(loginobject.image);
+                              SIGNINGRESPONSE = loginobject;
+                              print(loginobject.token);
+                              sharedPreferences.setString("token", loginobject.token);
+
+                              sharedPreferences.setString("mobile", USERNAME);
+                              sharedPreferences.setString("password", USERPASS);
+                            });
+                          }
+                        });
+                        SnackbarDialogueHelper().showSnackbarDialog(context, 'Password changed successfully', Colors.green);
+                        //SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
+                        return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SingInPage()),);
+                      }
+                      else{
+                        // SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not matched $passChange', Colors.red);
+                        SnackbarDialogueHelper().showSnackbarDialog(context, value.body,Colors.red);
+                      }
+                    });
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),

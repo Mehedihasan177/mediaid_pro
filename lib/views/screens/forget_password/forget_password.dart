@@ -1,13 +1,20 @@
+import 'dart:convert';
+
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/controllers/user/reset_password_controller.dart';
+import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/reset_password_model.dart';
+import 'package:care_plus/models/signIn_model/signIn_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
+import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/otp/otp.dart';
 import 'package:care_plus/views/screens/otp/otp_two.dart';
 import 'package:care_plus/views/screens/reset_Password/reset_Password.dart';
 import 'package:care_plus/views/screens/signInPage/sign_in_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({Key? key}) : super(key: key);
@@ -73,7 +80,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         width: 20,
                       ),
                       Text(
-                        "Email",
+                        "Mobile Number",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],
@@ -88,7 +95,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     //scrollPadding: EdgeInsets.all(10),
                     decoration: InputDecoration(
                       //contentPadding: EdgeInsets.all(20),
-                      hintText: "Enter your email",
+                      hintText: "Enter your mobile number",
                     ),
                   ),
                 ],
@@ -111,25 +118,42 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             print("token at call mehedi hasan who are you: " + USERTOKEN);
             ResetPasswordModel passChange = new ResetPasswordModel(mobile: _textEmail.text);
 
-            ResetPasswordController.requestThenResponsePrint(passChange, USERTOKEN, ).then((value) {
+            ResetPasswordController.requestThenResponsePrint(passChange, USERTOKEN, ).then((value) async {
               print('dddddddd');
               print(value.statusCode);
               if (value.statusCode == 200) {
                 print("successfully done");
                 print(value.body);
+                SigninModel myInfo = new SigninModel(
+                    mobile: USERNAME, password: USERPASS);
+                await SigninController.requestThenResponsePrint(myInfo)
+                    .then((value) async {
+                  print(value.statusCode);
+                  print(value.body);
+
+                  if (value.statusCode == 200) {
+                    SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                    setState(() {
+                      var reobj = SignInResponse.fromJson(json.decode(value.body));
+                      var loginobject = reobj.data.user;
+                      print('loginobject.image');
+                      print(loginobject.image);
+                      SIGNINGRESPONSE = loginobject;
+                      print(loginobject.token);
+                      sharedPreferences.setString("token", loginobject.token);
+
+                      sharedPreferences.setString("mobile", USERNAME);
+                      sharedPreferences.setString("password", USERPASS);
+                    });
+                  }
+                });
                 SnackbarDialogueHelper().showSnackbarDialog(context, 'Password reset successfully $passChange', Colors.green);
-                AlertDialogueHelper().showAlertDialog(context, "New Passowrd",value.body);
-                // if (yOn == 0) {
-                //   navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => ChangePasswordSuccessPage()));
-                // } else {
-                //   SigninController.requestThenResponsePrint(context, widget.userType, widget.userPhone, newPassC.text);
-                // }
+                SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
+                return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SingInPage()),);
+
               }else{
                 SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not reset', Colors.green);
-                // BasicFunctions.showAlertDialogTOView(context,
-                //     AppLocalizations.of(context).translate("passwordRecheckTitle"),
-                //     AppLocalizations.of(context).translate("passwordRecheckMessage"));
-                // BasicFunctions.showAlertDialogTOView(context, "Warning", "Please recheck your passwords to change");
               }
             });
           },

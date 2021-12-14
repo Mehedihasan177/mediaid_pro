@@ -5,16 +5,7 @@ import 'package:care_plus/views/screens/doctor_appointment_pages/doctor_about_an
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-//Datum doctorInformations = Datum
-Datum profData = Datum( name: 'name', email: 'email', mobile: 'phone',
-    district: 'district',
-    image: 'image',
-     featured: '', introduction: '',
-    degree: '', address: '', visitingFee: '', gender: '', doctorService: [],
-    chambers: '', postOffice: '', department: '', status: '', rating: '', fee: '',
-    doctorid: '', designation: '', referralCode: '', bmdcReg: '', experience: '',
-    policeStation: '', createdAt: "", updatedAt: "", nid: '', specialization: '', hospitalName: '', id: 999, deletedAt: ''
-);
+
 Widget doctorList(Datum doctorINformation, context) => Container(
         child: GestureDetector(
           child: Card(
@@ -114,8 +105,19 @@ Widget doctorList(Datum doctorINformation, context) => Container(
             ),
           ),
           onTap: (){
-            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorAppointment()));
+            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorAppointment(
+              image: doctorINformation.image,
+              name: doctorINformation.name,
+              specialization: doctorINformation.specialization,
+              hospital_name: doctorINformation.hospitalName,
+              fee: doctorINformation.fee,
+              rating: doctorINformation.rating,
+              experience: doctorINformation.experience,
+              about: doctorINformation.introduction,
+              department: doctorINformation.department,
+
+            )));
           },
         ),
       );
-    
+

@@ -18,8 +18,8 @@ class _ConfirmaAppointmentState extends State<ConfirmaAppointment> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => DoctorAppointment()));
+        // Navigator.pushReplacement(context,
+        //     MaterialPageRoute(builder: (context) => DoctorAppointment()));
         return true;
       },
       child: Scaffold(
@@ -37,10 +37,10 @@ class _ConfirmaAppointmentState extends State<ConfirmaAppointment> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DoctorAppointment()));
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => DoctorAppointment()));
                     },
                   ),
                   Text(

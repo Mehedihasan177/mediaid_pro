@@ -14,7 +14,7 @@ import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SingInPage extends StatefulWidget {
@@ -137,7 +137,7 @@ class _SingInPageState extends State<SingInPage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onPressed: () async {
-                  EasyLoading.show(status: 'loading...');
+                  //EasyLoading.show(status: 'loading...');
 
                   // SharedPreferences sharedPreferences =
                   // await SharedPreferences.getInstance();

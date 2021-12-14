@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/controllers/user/user_edit_img_ctrl.dart';
@@ -10,17 +11,14 @@ import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-
-
 class NewImageUploadPage extends StatefulWidget {
 
-final int page;
+  final int page;
 
   const NewImageUploadPage({Key? key, required this.page}) : super(key: key);
 
@@ -37,7 +35,11 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()));
+        if(widget.page == 1){
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        }else{
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()));
+        }
         return true;
       },
       child: Scaffold(
@@ -186,13 +188,17 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                             print(value.statusCode);
                             print(value.body);
 
+
+
+
+
                             //EasyLoading.dismiss();
                             if (value.statusCode == 200) {
                               SharedPreferences sharedPreferences =
                               await SharedPreferences.getInstance();
                               setState(() {
-                                var reobj = User.fromJson(json.decode(value.body));
-                                var loginobject = reobj;
+                                var reobj = SignInResponse.fromJson(json.decode(value.body));
+                                var loginobject = reobj.data.user;
                                 print('loginobject.image');
                                 print(loginobject.image);
                                 SIGNINGRESPONSE = loginobject;
@@ -214,8 +220,6 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
 
                         }
 
-
-
                       });
                     } else {
                       // BasicFunctions.showAlertDialogTOView(context, 'Warning', 'Select an image to upload');
@@ -235,4 +239,55 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
       ),
     );
   }
+
+
+// Future<void> signInAgain(BuildContext context) async {
+//   //EasyLoading.show(status: 'loading...');
+//
+//   DoctorSignInModel myInfo = new DoctorSignInModel(mobile: PHONE_NUMBER, password: PASSWORD, );
+//   await DoctorSigninController.requestThenResponsePrint(myInfo).then((value) async {
+//     print(value.statusCode);
+//     print(value.body);
+//     final Map parsed = json.decode(value.body);
+//
+//     final loginobject = User.fromJson(parsed);
+//     DOCTOR_INITIAL = loginobject;
+//     print(loginobject.token);
+//     print(loginobject.token);
+//
+//
+//
+//     USERTOKEN = loginobject.token;
+//     // sharedPreferences.setString("token", loginobject.accessToken);
+//     //EasyLoading.dismiss();
+//     if (value.statusCode == 200) {
+//       PHONE_NUMBER = PHONE_NUMBER;
+//       PASSWORD = PASSWORD;
+//       return Navigator.pushReplacement(
+//         context,
+//         MaterialPageRoute(builder: (context) => BottomNevigation()),
+//       );
+//     } else {
+//       // return LoginController.requestThenResponsePrint(jsonData);
+//       AlertDialogueHelper().showAlertDialog(
+//           context, 'Warning', 'Please recheck email and password');
+//     }
+//   });
+// }
 }
+
+
+
+
+
+//if (value.statusCode == 200) {
+//                           // Navigator.pop(context,"Bar");
+//                           if(widget.page == 1){
+//                             Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+//                           }
+//                           else{
+//                             Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+//                           }
+//
+//
+//                         }

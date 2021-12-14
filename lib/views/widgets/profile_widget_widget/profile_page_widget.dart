@@ -14,17 +14,17 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
               padding: const EdgeInsets.only(left: 10),
               child: Row(
                 children: [
-                  ClipRRect(
-                    child: Container(
-                      height: 77,
-                      width: 77,
-                      child: Image.asset(
-                        // profile_model.image,
-                        '$apiDomainRoot/images/${profile_model.image}',
-
+                  Container(
+                    height: 80,
+                    width: 80,
+                    child: ClipRRect(
+                      child: Image.network(
+                        '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
+                        height: 70,
+                        width: 70,
                       ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    borderRadius: BorderRadius.circular(10),
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 20),

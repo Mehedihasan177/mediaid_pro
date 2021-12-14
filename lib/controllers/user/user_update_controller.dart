@@ -1,30 +1,26 @@
+import 'dart:convert';
+
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/user_update_model.dart';
 import 'package:http/http.dart' as http;
 class UserUpdateController{
   //this class is for make understand how it works actually
 
-  static Future<http.Response> requestThenResponsePrint(UpdateReqModel updateReqModel) async {
+  static Future<http.Response> requestThenResponsePrint(String token,Map dataMap) async {
 
     // This is a a callof global veriable
     String domain = apiDomainRoot;
     // This is a url for the request
     var url = '$domain/api/user-profile-update';
 
-    Map data1 = {
-      'name': "${updateReqModel.name}",
-      'email': "${updateReqModel.email}",
-      'password': "${updateReqModel.password}",
-      'mobile': "${updateReqModel.mobile}",
-      'address': "${updateReqModel.address}",
-      'Password_confirmation': "${updateReqModel.password_confirmation}",
-      'image': "${updateReqModel.image}",
-    };
+    var body = json.encode(dataMap);
 
     // Here we are getting the response
-    var response = await http.post(Uri.parse(url), body: data1,
+    var response = await http.post(Uri.parse(url), body: body,
         headers: {
+          "Content-Type": "application/json",
           "Accept": "application/json",
+          'Authorization': 'Bearer $token',
         }
     );
 

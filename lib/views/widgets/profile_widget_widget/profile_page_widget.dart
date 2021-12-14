@@ -1,3 +1,4 @@
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/ui_model/profile_model/profile_model.dart';
 import 'package:care_plus/views/screens/update_profile/update_profile.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,10 +15,14 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
               child: Row(
                 children: [
                   ClipRRect(
-                    child: Image.asset(
-                      profile_model.image,
-                      height: 70,
-                      width: 70,
+                    child: Container(
+                      height: 77,
+                      width: 77,
+                      child: Image.asset(
+                        // profile_model.image,
+                        '$apiDomainRoot/images/${profile_model.image}',
+
+                      ),
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -34,7 +39,7 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                           children: [
                             Image.asset("images/emergency_number.png"),
                             SizedBox(width: 5),
-                            Text("6959 14235 9"),
+                            Text(profile_model.medicare_id),
                           ],
                         ),
                       ],
@@ -51,7 +56,7 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                 iconSize: 30,
                 onPressed: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => UpdateProfile()));
+                      MaterialPageRoute(builder: (context) => UpdateProfile(page: 1)));
                 },
               ),
             ),

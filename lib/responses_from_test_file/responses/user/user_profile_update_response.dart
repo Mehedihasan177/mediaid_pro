@@ -56,7 +56,7 @@ class Data {
     this.deletedAt,
   });
 
-  int id;
+  String id;
   dynamic adminId;
   String name;
   String email;
@@ -71,8 +71,8 @@ class Data {
   String referralCode;
   dynamic image;
   dynamic emailVerifiedAt;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
   dynamic gender;
   String lat;
   String lng;
@@ -81,31 +81,31 @@ class Data {
   dynamic relationship;
   dynamic deletedAt;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-    id: json["id"],
+  factory Data.fromJson(Map<dynamic, dynamic> json) => Data(
+    id: json["id"].toString(),
     adminId: json["admin_id"],
-    name: json["name"],
-    email: json["email"],
-    userid: json["userid"],
-    mobile: json["mobile"],
-    dob: json["dob"],
-    address: json["address"],
-    district: json["district"],
-    policeStation: json["police_station"],
-    postOffice: json["post_office"],
-    status: json["status"],
-    referralCode: json["referral_code"],
+    name: json["name"].toString(),
+    email: json["email"].toString(),
+    userid: json["userid"].toString(),
+    mobile: json["mobile"].toString(),
+    dob: json["dob"].toString(),
+    address: json["address"].toString(),
+    district: json["district"].toString(),
+    policeStation: json["police_station"].toString(),
+    postOffice: json["post_office"].toString(),
+    status: json["status"].toString(),
+    referralCode: json["referral_code"].toString(),
     image: json["image"],
-    emailVerifiedAt: json["email_verified_at"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-    gender: json["gender"],
-    lat: json["lat"],
-    lng: json["lng"],
-    viewPassword: json["view_password"],
-    parentId: json["parent_id"],
-    relationship: json["relationship"],
-    deletedAt: json["deleted_at"],
+    emailVerifiedAt: json["email_verified_at"].toString(),
+    createdAt: json["created_at"].toString(),
+    updatedAt: json["updated_at"].toString(),
+    gender: json["gender"].toString(),
+    lat: json["lat"].toString(),
+    lng: json["lng"].toString(),
+    viewPassword: json["view_password"].toString(),
+    parentId: json["parent_id"].toString(),
+    relationship: json["relationship"].toString(),
+    deletedAt: json["deleted_at"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -124,8 +124,8 @@ class Data {
     "referral_code": referralCode,
     "image": image,
     "email_verified_at": emailVerifiedAt,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
+    "created_at": createdAt,
+    "updated_at": updatedAt,
     "gender": gender,
     "lat": lat,
     "lng": lng,

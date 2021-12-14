@@ -2,6 +2,7 @@ import 'package:care_plus/data/profile_data/profile_data.dart';
 import 'package:care_plus/models/ui_model/profile_model/profile_model.dart';
 import 'package:care_plus/views/screens/change_password/change_password.dart';
 import 'package:care_plus/views/screens/notificaitonUi/notificaitonUi.dart';
+import 'package:care_plus/views/screens/splash_screen/splash_Screen.dart';
 import 'package:care_plus/views/screens/wallet/wallet.dart';
 import 'package:care_plus/views/widgets/profile_widget_widget/profile_page_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -121,62 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       },
                     ),
                   ),
-                  GridTile(
-                    child: new Card(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 10,
-                              left: 20,
-                            ),
-                            child: Container(
-                              // padding: EdgeInsets.only(left: 20, ),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Saved',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                    top: 5,
-                                    left: 20,
-                                  ),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Favorite Doctor',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 20, right: 10),
-                                child: Icon(
-                                  Icons.bookmark_outlined,
-                                  color: Colors.black.withOpacity(0.5),
-                                  size: 30,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+
                   GridTile(
                     child: new Card(
                       color: Colors.white,
@@ -406,62 +352,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  GridTile(
-                    child: new Card(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 10,
-                              left: 20,
-                            ),
-                            child: Container(
-                              // padding: EdgeInsets.only(left: 20, ),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'My Address',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                    top: 5,
-                                    left: 20,
-                                  ),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Save Address',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 20, right: 10),
-                                child: Icon(
-                                  Icons.location_on_sharp,
-                                  color: Colors.black.withOpacity(0.5),
-                                  size: 30,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+
                   GridTile(
                     child: GestureDetector(
                       onTap: (){
@@ -580,58 +471,64 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   GridTile(
-                    child: new Card(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              top: 10,
-                              left: 20,
-                            ),
-                            child: Container(
-                              // padding: EdgeInsets.only(left: 20, ),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Logout',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SplashScreen()));
+
+                      },
+                      child: new Card(
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                                left: 20,
+                              ),
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20, ),
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  'Logout',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: Container(
-                                  padding: EdgeInsets.only(
-                                    top: 5,
-                                    left: 20,
-                                  ),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Logout',
-                                    style: TextStyle(
-                                      fontSize: 14,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      top: 5,
+                                      left: 20,
+                                    ),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      'Logout',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 20, right: 10),
-                                child: Icon(
-                                  Icons.logout,
-                                  color: Colors.black.withOpacity(0.5),
-                                  size: 30,
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 20, right: 10),
+                                  child: Icon(
+                                    Icons.logout,
+                                    color: Colors.black.withOpacity(0.5),
+                                    size: 30,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

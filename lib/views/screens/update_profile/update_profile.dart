@@ -1,9 +1,11 @@
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
+import 'package:care_plus/views/screens/setUp_Profile/image_upload_page.dart';
 import 'package:flutter/material.dart';
 
 class UpdateProfile extends StatefulWidget {
-  const UpdateProfile({Key? key}) : super(key: key);
+  final int page;
+  const UpdateProfile({Key? key, required this.page}) : super(key: key);
 
   @override
   _UpdateProfileState createState() => _UpdateProfileState();
@@ -54,7 +56,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             //flex: 1,
                             fit: FlexFit.loose,
                             child: GestureDetector(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 1)),);
+                              },
                               child: Container(
                                 height: 130,
                                 width: 120,

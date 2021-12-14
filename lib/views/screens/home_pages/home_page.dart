@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/doctorList_controller.dart';
+import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
 import 'package:care_plus/data/near_by/near_by.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
@@ -12,10 +15,12 @@ import 'package:care_plus/data/upcomming_appointment/upcomming_appointment.dart'
 import 'package:care_plus/models/ui_model/upcomming_appointment/upcomming_appointment_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/doctor_specialization_controller.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/featured_doctor_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/views/screens/doctor_catagory/doctor_catagory_page.dart';
 import 'package:care_plus/views/screens/featured_doctor/featured_doctor.dart';
 import 'package:care_plus/views/screens/notificaitonUi/notificaitonUi.dart';
+import 'package:care_plus/views/widgets/featured_doctor_widget.dart';
 import 'package:care_plus/views/widgets/find_by_specialist_widget/find_by_specialist_widget.dart';
 import 'package:care_plus/views/widgets/homepage_doctor_card_widget/homepage_doctor_card_widget.dart';
 import 'package:care_plus/views/widgets/homepage_upcomming_appointment_widget/upcomming_appointment_widget.dart';
@@ -43,9 +48,26 @@ class _HomePageState extends State<HomePage> {
   List<NearBy> nearby = List.of(near_by_hospital_ambulance);
   int _index = 0;
   List<SpecializationResponse> informationslist = [];
+  List<FeaturedDoctorrr> doctorFeturedlist = [];
+
+  _getFeturedDoctor() async {
 
 
-  _getNotification() async {
+
+    GetFeaturedDoctorController.requestThenResponsePrint(USERTOKEN).then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        doctorFeturedlist =
+            listNotification.map((model) => FeaturedDoctorrr.fromJson(model)).toList();
+        print(doctorFeturedlist);
+
+      });
+    });
+  }
+  _getDoctorSpecialization() async {
     DoctorSpecializationController.requestThenResponsePrint().then((response) async {
       if (response.statusCode == 200) {
         print("successfully done");
@@ -66,7 +88,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    _getNotification();
+    _getDoctorSpecialization();
+    _getFeturedDoctor();
     super.initState();
   }
 
@@ -282,19 +305,18 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
 
-       Container(
-            // height: 200,
-            // color: Colors.red,
+        Container(
+          // height: 300,
             child: ListView.builder(
-                  // scrollDirection: Axis.vertical,
-                  itemCount: doctorInformation.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return doctorList(doctorInformation[index], context);
-                  }),
-
-          ),
+              physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
+                itemBuilder: (BuildContext context, int index) {
+                  return index<1? buildDoctorListTile(
+                      doctorFeturedlist[index]):Container();
+                }
+            )
+        ),
 
 
       ],

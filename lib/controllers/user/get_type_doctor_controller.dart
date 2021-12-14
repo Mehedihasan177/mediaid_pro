@@ -1,12 +1,12 @@
 import 'package:care_plus/constents/constant.dart';
 import 'package:http/http.dart' as http;
-class GetDoctorsController{
+class GetFeaturedDoctorController{
 
   static Future<http.Response> requestThenResponsePrint(String token) async {
 
     String domain = apiDomainRoot;
 
-    var url = '$domain/api/user/doctor-list/a';
+    var url = '$domain/api/user/doctor-list';
 
     var response = await http.get(Uri.parse(url),
         headers: {

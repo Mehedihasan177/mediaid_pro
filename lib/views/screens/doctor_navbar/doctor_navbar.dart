@@ -144,7 +144,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
             // color: Colors.red,
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: allinformatonss.length,
+                itemCount: doctorlistbycatagory.length,
                 itemBuilder: (context, index) {
                   //final item = allinformatonss[index];
                   return doctorList(doctorlistbycatagory[index], context);

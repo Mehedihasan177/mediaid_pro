@@ -3,7 +3,9 @@
 //     final signInResponse = signInResponseFromJson(jsonString);
 
 import 'dart:convert';
+
 SignInResponse signInResponseFromJson(String str) => SignInResponse.fromJson(json.decode(str));
+
 String signInResponseToJson(SignInResponse data) => json.encode(data.toJson());
 
 class SignInResponse {
@@ -49,8 +51,12 @@ class Data {
 class User {
   User({
     required this.id,
+    required this.token,
     this.adminId,
     required this.name,
+    required this.weight,
+    required this.height,
+    required this.medicareNo,
     required this.email,
     required this.userid,
     required this.mobile,
@@ -72,11 +78,16 @@ class User {
     this.parentId,
     this.relationship,
     this.deletedAt,
+    required this.labReports,
   });
 
   String id;
+  String token;
   dynamic adminId;
   String name;
+  String weight;
+  String height;
+  String medicareNo;
   String email;
   String userid;
   String mobile;
@@ -89,8 +100,8 @@ class User {
   String referralCode;
   String image;
   dynamic emailVerifiedAt;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
   dynamic gender;
   String lat;
   String lng;
@@ -98,11 +109,16 @@ class User {
   dynamic parentId;
   dynamic relationship;
   dynamic deletedAt;
+  String labReports; //List<dynamic> labReports;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
     id: json["id"].toString(),
+    token: json["token"].toString(),
     adminId: json["admin_id"].toString(),
     name: json["name"].toString(),
+    weight: json["weight"].toString(),
+    height: json["height"].toString(),
+    medicareNo: json["medicare_no"].toString(),
     email: json["email"].toString(),
     userid: json["userid"].toString(),
     mobile: json["mobile"].toString(),
@@ -115,8 +131,8 @@ class User {
     referralCode: json["referral_code"].toString(),
     image: json["image"].toString(),
     emailVerifiedAt: json["email_verified_at"].toString(),
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: json["created_at"].toString(),
+    updatedAt: json["updated_at"].toString(),
     gender: json["gender"].toString(),
     lat: json["lat"].toString(),
     lng: json["lng"].toString(),
@@ -124,12 +140,17 @@ class User {
     parentId: json["parent_id"].toString(),
     relationship: json["relationship"].toString(),
     deletedAt: json["deleted_at"].toString(),
+    labReports: json["lab_reports"].toString(), //List<dynamic>.from(json["lab_reports"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "token": token,
     "admin_id": adminId,
     "name": name,
+    "weight": weight,
+    "height": height,
+    "medicare_no": medicareNo,
     "email": email,
     "userid": userid,
     "mobile": mobile,
@@ -142,8 +163,8 @@ class User {
     "referral_code": referralCode,
     "image": image,
     "email_verified_at": emailVerifiedAt,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
+    "created_at": createdAt,
+    "updated_at": updatedAt,
     "gender": gender,
     "lat": lat,
     "lng": lng,
@@ -151,5 +172,6 @@ class User {
     "parent_id": parentId,
     "relationship": relationship,
     "deleted_at": deletedAt,
+    "lab_reports": labReports,
   };
 }

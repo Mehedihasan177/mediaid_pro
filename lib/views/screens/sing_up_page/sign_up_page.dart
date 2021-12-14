@@ -5,6 +5,7 @@ import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/models/reg_requst_model.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
+import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -74,7 +75,7 @@ class _SingUpPageState extends State<SingUpPage> {
                       ),
                       TextField(
                         controller: _textEmail,
-                        keyboardType: TextInputType.text,
+                        keyboardType: TextInputType.emailAddress,
                         style: TextStyle(color: Colors.black),
                         //scrollPadding: EdgeInsets.all(10),
                         decoration: InputDecoration(
@@ -183,7 +184,7 @@ class _SingUpPageState extends State<SingUpPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Icon(
-                            Icons.lock,
+                            Icons.account_balance,
                             size: 18,
                             color: Colors.black.withOpacity(0.6),
                           ),
@@ -211,6 +212,9 @@ class _SingUpPageState extends State<SingUpPage> {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
@@ -343,7 +347,7 @@ class _SingUpPageState extends State<SingUpPage> {
                               if (value.statusCode == 200) {
                                 sharedPreferences.setString("mobile", _textMobile.text);
                                 sharedPreferences.setString("password", _textPassword.text);
-                                //return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ChangePassword(Usertoken: loginobject.data.token)),);
+                                return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
                               } else {
                                 // return LoginController.requestThenResponsePrint(jsonData);
                                 AlertDialogueHelper().showAlertDialog(context, 'Warning', 'Please recheck email and password');
@@ -352,7 +356,10 @@ class _SingUpPageState extends State<SingUpPage> {
                             });
 
                           }else{
-                            //AlertDialogueHelper().showAlertDialog(context, '', value.body);
+                            AlertDialogueHelper().showAlertDialog(context, '', value.body.replaceAll("{", "").replaceAll("}", "")
+                            .replaceAll("[", "").replaceAll("]", "")
+
+                            );
                             print(value.body);
                           }
                         });

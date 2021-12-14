@@ -15,11 +15,11 @@ class DoctorListResponse {
   });
 
   String message;
-  List<Datum> data;
+  List<FeaturedDoctorrr> data;
 
   factory DoctorListResponse.fromJson(Map<String, dynamic> json) => DoctorListResponse(
     message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<FeaturedDoctorrr>.from(json["data"].map((x) => FeaturedDoctorrr.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,8 +28,8 @@ class DoctorListResponse {
   };
 }
 
-class Datum {
-  Datum({
+class FeaturedDoctorrr {
+  FeaturedDoctorrr({
     required this.id,
     this.adminId,
     required this.name,
@@ -61,7 +61,7 @@ class Datum {
     required this.createdAt,
     required this.updatedAt,
     required this.gender,
-    required this.deletedAt,
+    this.deletedAt,
     required this.doctorService,
     required this.visitingFee,
   });
@@ -94,14 +94,14 @@ class Datum {
   String featured;
   String chambers;
   String introduction;
-  String createdAt;
-  String updatedAt;
+  DateTime createdAt;
+  DateTime updatedAt;
   String gender;
-  String deletedAt;
+  dynamic deletedAt;
   List<dynamic> doctorService;
   String visitingFee;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory FeaturedDoctorrr.fromJson(Map<String, dynamic> json) => FeaturedDoctorrr(
     id: json["id"],
     adminId: json["admin_id"],
     name: json["name"],
@@ -130,8 +130,8 @@ class Datum {
     featured: json["featured"],
     chambers: json["chambers"].toString(),
     introduction: json["introduction"].toString(),
-    createdAt:json["created_at"].toString(),
-    updatedAt:json["updated_at"].toString(),
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
     gender: json["gender"].toString(),
     deletedAt: json["deleted_at"].toString(),
     doctorService: List<dynamic>.from(json["doctor_service"].map((x) => x)),
@@ -167,8 +167,8 @@ class Datum {
     "featured": featured,
     "chambers": chambers == null ? null : chambers,
     "introduction": introduction == null ? null : introduction,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
     "gender": gender,
     "deleted_at": deletedAt,
     "doctor_service": List<dynamic>.from(doctorService.map((x) => x)),

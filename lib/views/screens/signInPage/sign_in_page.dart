@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses/signIn_response.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
@@ -138,10 +139,12 @@ class _SingInPageState extends State<SingInPage> {
                 onPressed: () async {
                   EasyLoading.show(status: 'loading...');
 
-                  SharedPreferences sharedPreferences =
-                  await SharedPreferences.getInstance();
+                  // SharedPreferences sharedPreferences =
+                  // await SharedPreferences.getInstance();
                   SigninModel myInfo = new SigninModel(
                       mobile: _textMobile.text, password: _textPassword.text);
+                  USERNAME = _textMobile.text;
+                  USERPASS = _textPassword.text;
                   await SigninController.requestThenResponsePrint(myInfo)
                       .then((value) async {
                     print(value.statusCode);
@@ -149,20 +152,15 @@ class _SingInPageState extends State<SingInPage> {
 
                     final Map<String,dynamic> parsed = json.decode(value.body);
 
-                    final loginobject = SignInResponse.fromJson(parsed);
-                    SIGNINGRESPONSE = loginobject;
                     print("this is the token" + USERTOKEN);
-                    USERTOKEN = loginobject.data.token;
-                    sharedPreferences.setString("token", loginobject.data.token);
-                    EasyLoading.dismiss();
+                    //EasyLoading.dismiss();
                     if (value.statusCode == 200) {
-                      sharedPreferences.setString("email", _textMobile.text);
-                      sharedPreferences.setString("password", _textPassword.text);
-                      AlertDialogueHelper().showAlertDialog(context, 'Congress', 'Sign in successfully');
+
+                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign in successfully', Colors.green);
                       return  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
                     } else {
                       // return LoginController.requestThenResponsePrint(jsonData);
-                      AlertDialogueHelper().showAlertDialog(context, 'Warning', 'Please recheck email and password');
+                      SnackbarDialogueHelper().showSnackbarDialog(context, value.body, Colors.red);
                     }
 
                   });

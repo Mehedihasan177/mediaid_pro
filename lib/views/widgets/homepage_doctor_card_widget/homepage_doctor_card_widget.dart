@@ -5,7 +5,16 @@ import 'package:care_plus/views/screens/doctor_appointment_pages/doctor_about_an
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-
+//Datum doctorInformations = Datum
+Datum profData = Datum( name: 'name', email: 'email', mobile: 'phone',
+    district: 'district',
+    image: 'image',
+     featured: '', introduction: '',
+    degree: '', address: '', visitingFee: '', gender: '', doctorService: [],
+    chambers: '', postOffice: '', department: '', status: '', rating: '', fee: '',
+    doctorid: '', designation: '', referralCode: '', bmdcReg: '', experience: '',
+    policeStation: '', createdAt: "", updatedAt: "", nid: '', specialization: '', hospitalName: '', id: 999, deletedAt: ''
+);
 Widget doctorList(Datum doctorINformation, context) => Container(
         child: GestureDetector(
           child: Card(

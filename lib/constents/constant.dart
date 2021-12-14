@@ -7,5 +7,5 @@ String APITOKEN = "";
 String USERNAME = "";
 String USERPASS = "";
 String USERTOKEN = '';
-late SignInResponse SIGNINGRESPONSE;
-late SpecializationResponse SPECIALIZATION;
+late User SIGNINGRESPONSE;
+// late SpecializationResponse SPECIALIZATION;

@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/create_appointment_schedule_controller.dart';
 import 'package:care_plus/controllers/user/user_get_doctor_slots.dart';
 import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointment_data.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/doctor_7_slots_model.dart';
 import 'package:care_plus/models/ui_model/doctor_appointment_model/doctor_about_and_appointment_model.dart';
 import 'package:care_plus/views/screens/confirm_appointment/confirm_appointment.dart';
@@ -10,6 +12,7 @@ import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/doctor_about_and_appointment_widget/doctor_about_and_appointment_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DoctorAppointment extends StatefulWidget {
   final String name,
@@ -414,69 +417,13 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(height: 10,),
+
                                   SizedBox(
                                     height: 10,
+                                  ),
 
-                                ),
 
-                                ///visiting fee
-                                // Column(
-                                //   children: [
-                                //     Container(
-                                //       alignment: Alignment.centerLeft,
-                                //       child: Text(
-                                //         "Visiting Fee",
-                                //         style: TextStyle(
-                                //             color: Colors.black.withOpacity(0.5),
-                                //             fontSize: 16,
-                                //             fontWeight: FontWeight.bold),
-                                //       ),
-                                //     ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(top: 10  ),
-                                    //   child: Container(
-                                    //     alignment: Alignment.centerLeft,
-                                    //     child: Text(
-                                    //       widget.visitingfee.replaceAll("null", "Not yet"),
-                                    //       style: TextStyle(
-                                    //         color: Colors.black.withOpacity(0.5),
-                                    //         fontSize: 16,
-                                    //         //fontWeight: FontWeight.bold
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                //   ],
-                                // ),
-                                SizedBox(
-                                  height: 10,
-
-                                ),
-
-                                Row(
-                                  children: [
-                                    // Container(
-                                    //   alignment: Alignment.centerLeft,
-                                    //   child: Text(
-                                    //     doctorAppointment.day,
-                                    //     style: TextStyle(
-                                    //       color: Colors.black.withOpacity(0.5),
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                    // Container(
-                                    //   padding: EdgeInsets.only(left: 10),
-                                    //   alignment: Alignment.centerLeft,
-                                    //   child: Text(
-                                    //     doctorAppointment.time_range,
-                                    //     style: TextStyle(
-                                    //       color: Colors.black.withOpacity(0.5),
-                                    //       // fontSize: 16,
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
                                 Container(
                                   padding: EdgeInsets.only(top: 20),
                                   alignment: Alignment.centerLeft,
@@ -698,111 +645,13 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
 
                                 Container(
                                   margin: EdgeInsets.symmetric(vertical: 5.0),
-                                  height: 40.0,
-                                  child: ListView(
+                                  height: 100.0,
+                                  child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    children: [
-                                      // Container(
-                                      //   width: 90,
-                                      //   child: Card(
-                                      //     shape: RoundedRectangleBorder(
-                                      //       borderRadius: BorderRadius.circular(15.0),
-                                      //     ),
-                                      //     color: Colors.white,
-                                      //     child: Column(
-                                      //       children: [
-                                      //         Padding(
-                                      //           padding: const EdgeInsets.only(top: 10),
-                                      //           child: Center(
-                                      //             child: Text(doctorAppointment.times,
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ],
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                      // Container(
-                                      //   width: 90,
-                                      //   child: Card(
-                                      //     shape: RoundedRectangleBorder(
-                                      //       borderRadius: BorderRadius.circular(15.0),
-                                      //     ),
-                                      //     color: Colors.white,
-                                      //     child: Column(
-                                      //       children: [
-                                      //         Padding(
-                                      //           padding: const EdgeInsets.only(top: 10),
-                                      //           child: Center(
-                                      //             child: Text(doctorAppointment.times,
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ],
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                      // Container(
-                                      //   width: 90,
-                                      //   child: Card(
-                                      //     shape: RoundedRectangleBorder(
-                                      //       borderRadius: BorderRadius.circular(15.0),
-                                      //     ),
-                                      //     color: Colors.white,
-                                      //     child: Column(
-                                      //       children: [
-                                      //         Padding(
-                                      //           padding: const EdgeInsets.only(top: 10),
-                                      //           child: Center(
-                                      //             child: Text(doctorAppointment.times,
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ],
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                      // Container(
-                                      //   width: 90,
-                                      //   child: Card(
-                                      //     shape: RoundedRectangleBorder(
-                                      //       borderRadius: BorderRadius.circular(15.0),
-                                      //     ),
-                                      //     color: Colors.white,
-                                      //     child: Column(
-                                      //       children: [
-                                      //         Padding(
-                                      //           padding: const EdgeInsets.only(top: 10),
-                                      //           child: Center(
-                                      //             child: Text(doctorAppointment.times,
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ],
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                      // Container(
-                                      //   width: 90,
-                                      //   child: Card(
-                                      //     shape: RoundedRectangleBorder(
-                                      //       borderRadius: BorderRadius.circular(15.0),
-                                      //     ),
-                                      //     color: Colors.white,
-                                      //     child: Column(
-                                      //       children: [
-                                      //         Padding(
-                                      //           padding: const EdgeInsets.only(top: 10),
-                                      //           child: Center(
-                                      //             child: Text(doctorAppointment.times,
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ],
-                                      //     ),
-                                      //   ),
-                                      // ),
-                                    ],
+                                    itemCount: slotWithDate.length,
+                                      itemBuilder: (BuildContext context,int index){
+                                        return cardBuilder(slotWithDate[index],index);
+                                      }
                                   ),
                                 ),
                               ],
@@ -816,17 +665,38 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                             child: Container(
                               alignment: Alignment.bottomCenter,
                               child: ElevatedButton(
-                                child: Text(
+                                child: const Text(
                                   "Book Appointment",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),
                                 onPressed: () async {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ConfirmaAppointment()));
+
+                                  if(selectedIndex!=-1){
+
+                                    CreateAppointmentReq createAppointmentSchedule = CreateAppointmentReq(
+                                        SIGNINGRESPONSE.id,
+                                        slotWithDate[selectedIndex].timeslotlist.doctorId,
+                                        slotWithDate[selectedIndex].timeslotlist.id,
+                                        slotWithDate[selectedIndex].date,
+                                    );
+
+                                    CreateAppointmentScheduleController.requestThenResponsePrint(createAppointmentSchedule, USERTOKEN).then((value) {
+                                      setState(() {
+                                        print(value.statusCode);
+                                        if(value.statusCode==200){
+                                          SnackbarDialogueHelper().showSnackbarDialog(context, 'Appointment Created Successfully', Colors.green);
+                                          Navigator.pushReplacement(context,
+                                              MaterialPageRoute(builder: (context) => BottomNevigation()));
+                                        }
+                                      });
+                                    });
+
+
+                                  }else{
+                                    SnackbarDialogueHelper().showSnackbarDialog(context, 'Please Select a Time Slot', Colors.red);
+                                  }
+
                                 },
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(350, 59),
@@ -898,25 +768,22 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
       print(value.statusCode);
       // print(value.body);
 
+      setState(() {
 
-      // List jsonList = json.decode(value.body.toString()) as List;
-      //
-      // List<Doctor7SlotResponse> myList = jsonList.map(
-      //         (jsonElement) => Doctor7SlotResponse.fromJson(jsonElement)
-      // ).toList();
-      // print(myList);
+      });
+
+
 
       Map<String, dynamic> decoded = json.decode(value.body);
       for (var date in decoded.keys) {
-        List pharmacyJSON = json.decode(json.encode(decoded[date]));
-        timeSlotList = pharmacyJSON.map((m) => new Doctor7SlotResponse.fromJson(m)).toList();
+        List Doctor7SlotResponseJSON = json.decode(json.encode(decoded[date]));
+        timeSlotList = Doctor7SlotResponseJSON.map((m) => new Doctor7SlotResponse.fromJson(m)).toList();
         print(timeSlotList);
         for (var slot in timeSlotList) {
-          toShowNextSlotsArray.add(SlotsWithDate(slot,date));
+          slotWithDate.add(SlotsWithDate(slot,date));
         }
-
       }
-      print(toShowNextSlotsArray);
+      print(slotWithDate);
 
 
 
@@ -924,7 +791,48 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
   }
 
   List<Doctor7SlotResponse> timeSlotList = [];
-  List<SlotsWithDate> toShowNextSlotsArray = [];
+  List<SlotsWithDate> slotWithDate = [];
+  int selectedIndex = -1;
+
+  Widget cardBuilder(SlotsWithDate slotWithDate, int index) {
+    return GestureDetector(
+      onTap: (){
+        setState(() {
+          selectedIndex=index;
+          SnackbarDialogueHelper().showSnackbarDialog(context, 'Appointment on ${slotWithDate.timeslotlist.day} ${slotWithDate.date} is Selected', Colors.blue);
+        });
+      },
+      child: Card(
+        color: selectedIndex==index?Colors.green:Colors.white,
+        child: Container(
+          // height: 150,
+          width: 150,
+          // color: Colors.red,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(DateFormat('yyyy-MM-dd').parse(slotWithDate.date).day.toString()),
+                  Text('-'),
+                  Text(DateFormat('yyyy-MM-dd').parse(slotWithDate.date).month.toString()),
+                  Text('-'),
+                  Text(DateFormat('yyyy-MM-dd').parse(slotWithDate.date).year.toString()),
+                ],
+              ),
+
+              Text(slotWithDate.timeslotlist.day),
+              // Text('From:'),
+              Text(slotWithDate.timeslotlist.startTime),
+              // Text('To:'),
+              Text(slotWithDate.timeslotlist.endTime),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
 
 }

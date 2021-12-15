@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class CreateAppointmentScheduleController{
   //this class is for make understand how it works actually
 
-  static Future<http.Response> requestThenResponsePrint(CreateAppointmentSchedule createAppointmentSchedule, String token) async {
+  static Future<http.Response> requestThenResponsePrint(CreateAppointmentReq createAppointmentSchedule, String token) async {
 
     // This is a a callof global veriable
     String domain = apiDomainRoot;
@@ -12,12 +12,15 @@ class CreateAppointmentScheduleController{
     var url = '$domain/api/user/appointment-schedule';
 
     Map data1 = {
-      'UserID': "${createAppointmentSchedule.userId}",
-      'doctorID': "${createAppointmentSchedule.doctorId}",
-      'appointmentSlot': "${createAppointmentSchedule.appointmentSlotId}",
+      // 'UserID': "${createAppointmentSchedule.userId}",
+      'doctor_id': "${createAppointmentSchedule.doctorId}",
+      'appointment_slot_id': "${createAppointmentSchedule.appointmentSlotId}",
       'date': "${createAppointmentSchedule.date}",
 
     };
+
+    print(data1);
+    print(token);
 
     // Here we are getting the response
     var response = await http.post(Uri.parse(url), body: data1,
@@ -32,4 +35,15 @@ class CreateAppointmentScheduleController{
     return response;
   }
 
+}
+
+class CreateAppointmentReq {
+
+  late String userId;
+  late String doctorId;
+  late int appointmentSlotId;
+  late String date;
+
+  CreateAppointmentReq(
+      this.userId, this.doctorId, this.appointmentSlotId, this.date);
 }

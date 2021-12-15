@@ -115,6 +115,7 @@ Widget doctorList(Datum doctorINformation, context) => Container(
               experience: doctorINformation.experience,
               about: doctorINformation.introduction,
               department: doctorINformation.department,
+              docID: doctorINformation.id,
 
             )));
           },

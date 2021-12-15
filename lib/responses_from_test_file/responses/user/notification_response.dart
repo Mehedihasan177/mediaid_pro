@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final notifcationResponse = notifcationResponseFromJson(jsonString);
+//     final notificationResponses = notificationResponsesFromJson(jsonString);
 
 import 'dart:convert';
 
-NotifcationResponse notifcationResponseFromJson(String str) => NotifcationResponse.fromJson(json.decode(str));
+NotificationResponses notificationResponsesFromJson(String str) => NotificationResponses.fromJson(json.decode(str));
 
-String notifcationResponseToJson(NotifcationResponse data) => json.encode(data.toJson());
+String notificationResponsesToJson(NotificationResponses data) => json.encode(data.toJson());
 
-class NotifcationResponse {
-  NotifcationResponse({
+class NotificationResponses {
+  NotificationResponses({
     required this.data,
   });
 
   List<Datum> data;
 
-  factory NotifcationResponse.fromJson(Map<String, dynamic> json) => NotifcationResponse(
+  factory NotificationResponses.fromJson(Map<String, dynamic> json) => NotificationResponses(
     data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
@@ -40,7 +40,7 @@ class Datum {
     this.deletedAt,
   });
 
-  String id;
+  int id;
   String userId;
   dynamic doctorId;
   dynamic pharmacyId;
@@ -53,8 +53,8 @@ class Datum {
   DateTime updatedAt;
   dynamic deletedAt;
 
-  factory Datum.fromJson(Map<dynamic, dynamic> json) => Datum(
-    id: json["id"].toString(),
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"],
     userId: json["user_id"],
     doctorId: json["doctor_id"],
     pharmacyId: json["pharmacy_id"],

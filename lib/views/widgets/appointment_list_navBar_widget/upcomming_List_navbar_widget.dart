@@ -1,13 +1,16 @@
 
 
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_list_navBar.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/screens/doctor_appointment_pages/doctor_about_and_appointment_page.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upcoming_appointment_doctor_details.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-Widget Appointment_List(Appointment_list_navBar appointment_list_navBar, context) =>
+Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context) =>
     GestureDetector(
   child:   Card(
 
@@ -19,214 +22,223 @@ Widget Appointment_List(Appointment_list_navBar appointment_list_navBar, context
 
             padding: const EdgeInsets.only(top: 20),
 
-            child: Image.asset(appointment_list_navBar.image,
+            child: Container(
+              height: 120,
 
-            height: 90,
+              width: 120,
+              child: Image.network(
 
-              width: 90,
+                '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',
 
+
+
+              ),
             ),
 
           ),
 
           Expanded(
 
-            child: Column(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
 
-              mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
 
-              children: [
+                children: [
 
-                Row(
+                  Row(
 
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                  children: [
-
-                    Container(
-
-                        alignment: Alignment.centerLeft,
-
-                        child: Text(appointment_list_navBar.name),
-
-                    ),
-
-                    Row(
-
-                      children: [
-
-                        Padding(
-
-                          padding: const EdgeInsets.only(right: 0),
-
-                          child: Container(
-
-                            alignment: Alignment.centerRight,
-
-                            child: Text(appointment_list_navBar.fee,
-
-                            style: TextStyle(
-
-                              color: Color(0xFF1CBFA8)
-
-                            ),
-
-                            ),
-
-                          ),
-
-                        ),
-
-                        PopupMenuButton(
-
-                          itemBuilder: (_) => <PopupMenuEntry>[
-
-                            const PopupMenuItem(
-
-                              child: Text('Reshedule'),
-
-                              value: 'hot',
-
-                            ),
-
-                            const PopupMenuItem(
-
-                              child: Text('Set Reminder'),
-
-                            ),
-
-                            const PopupMenuItem(
-
-                              child: Text('Cancel'),
-
-                            ),
-
-                          ],
-
-
-
-                        )
-
-                      ],
-
-                    ),
-
-
-
-                  ],
-
-                ),
-
-                Container(
-
-                  height: 25,
-
-                  child: ListView(
-
-                    scrollDirection: Axis.horizontal,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                     children: [
 
+                      Container(
+
+                          alignment: Alignment.centerLeft,
+
+                          child: Text(appointment_list_navBar.doctor.name),
+
+
+                      ),
+
                       Row(
 
-                      children: [
+                        children: [
 
-                        Container(
+                          Padding(
 
-                          alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.only(right: 0),
 
-                          child: Text(appointment_list_navBar.department),
+                            child: Container(
 
-                        ),
+                              alignment: Alignment.centerRight,
 
-                        Container(
+                              child: Text("\$"+appointment_list_navBar.doctor.fee,
 
-                          alignment: Alignment.centerLeft,
+                              style: TextStyle(
 
-                          child: Text(appointment_list_navBar.hospital),
+                                color: Colors.red
 
-                        ),
+                              ),
 
-                      ],
+                              ),
 
-                    ),
+                            ),
 
-                    ]
+                          ),
+
+                          PopupMenuButton(
+
+                            itemBuilder: (_) => <PopupMenuEntry>[
+
+                              const PopupMenuItem(
+
+                                child: Text('Reshedule'),
+
+                                value: 'hot',
+
+                              ),
+
+                              const PopupMenuItem(
+
+                                child: Text('Set Reminder'),
+
+                              ),
+
+                              const PopupMenuItem(
+
+                                child: Text('Cancel'),
+
+                              ),
+
+                            ],
+
+
+
+                          )
+
+                        ],
+
+                      ),
+
+
+
+                    ],
 
                   ),
 
-                ),
+                  Container(
 
-                Row(
+                    height: 25,
 
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: ListView(
 
-                  children: [
-
-                    Container(
-
-                        alignment: Alignment.bottomLeft,
-
-                        child: Text(appointment_list_navBar.date)),
-
-                    Text(" | "),
-
-                    Container(
-
-                        alignment: Alignment.bottomLeft,
-
-                        child: Text(appointment_list_navBar.time)),
-
-                    Row(
+                      scrollDirection: Axis.horizontal,
 
                       children: [
 
-                        IconButton(
+                        Row(
 
-                          icon: Icon(
+                        children: [
 
-                            Icons.call,
+                          Container(
 
-                          ),
+                            alignment: Alignment.centerLeft,
 
-                          iconSize: 20,
-
-                          color: Color(0xFF1CBFA8),
-
-                          splashColor: Color(0xFF1CBFA8),
-
-                          onPressed: () {},
-
-                        ),
-
-                        IconButton(
-
-                          icon: Icon(
-
-                            Icons.message,
+                            child: Text(appointment_list_navBar.doctor.department),
 
                           ),
 
-                          iconSize: 20,
+                          // Container(
+                          //
+                          //   alignment: Alignment.centerLeft,
+                          //
+                          //   child: Text(" at "+appointment_list_navBar.doctor.hospitalName),
+                          //
+                          // ),
 
-                          color: Color(0xFF1CBFA8),
+                        ],
 
-                          splashColor: Color(0xFF1CBFA8),
+                      ),
 
-                          onPressed: () {},
-
-                        ),
-
-                      ],
+                      ]
 
                     ),
 
-                  ],
+                  ),
 
-                ),
+                  Row(
 
-              ],
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
+                    children: [
+
+                      Container(
+
+                          alignment: Alignment.bottomLeft,
+
+                          child: Text(DateFormat("dd-MM-yyyy").format(appointment_list_navBar.date))),
+
+                      // Text(" | "),
+                      //
+                      // Container(
+                      //
+                      //     alignment: Alignment.bottomLeft,
+                      //
+                      //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
+
+                      Row(
+
+                        children: [
+
+                          IconButton(
+
+                            icon: Icon(
+
+                              Icons.call,
+
+                            ),
+
+                            iconSize: 20,
+
+                            color: Color(0xFF1CBFA8),
+
+                            splashColor: Color(0xFF1CBFA8),
+
+                            onPressed: () {},
+
+                          ),
+
+                          IconButton(
+
+                            icon: Icon(
+
+                              Icons.message,
+
+                            ),
+
+                            iconSize: 20,
+
+                            color: Color(0xFF1CBFA8),
+
+                            splashColor: Color(0xFF1CBFA8),
+
+                            onPressed: () {},
+
+                          ),
+
+                        ],
+
+                      ),
+
+                    ],
+
+                  ),
+
+                ],
+
+              ),
             ),
 
           ),

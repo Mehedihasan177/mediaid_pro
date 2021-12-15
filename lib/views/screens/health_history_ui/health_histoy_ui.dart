@@ -11,6 +11,8 @@ import 'package:care_plus/views/screens/setUp_Profile/image_upload_page.dart';
 import 'package:care_plus/views/screens/upload_documents/upload_documents.dart';
 import 'package:care_plus/views/widgets/health_history_ui_widget/health_history_widget_widget.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:intl/intl.dart';
 
 class HealthHistory extends StatefulWidget {
   const HealthHistory({Key? key}) : super(key: key);
@@ -20,6 +22,12 @@ class HealthHistory extends StatefulWidget {
 }
 
 class _HealthHistoryState extends State<HealthHistory> {
+
+
+  //ReportPrescription data = ReportPrescription(userId: '', type: '', updatedAt: '', createdAt: '', file: '', name: '', id: 99, deletedAt: '', refDoctor: '');
+
+
+//
   List<ReportPrescription> health_history = [];
 
 
@@ -105,6 +113,11 @@ class _HealthHistoryState extends State<HealthHistory> {
                 }),
 
           ),
+
+
+
+
+
         ],
       ),
     );

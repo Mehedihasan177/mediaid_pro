@@ -7,6 +7,7 @@ import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/change_password_model.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
+import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/otp/otp_three.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
 import 'package:care_plus/views/screens/reset_Password/reset_Password.dart';
@@ -243,7 +244,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         });
                         SnackbarDialogueHelper().showSnackbarDialog(context, 'Password changed successfully', Colors.green);
                         //SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
-                        return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SingInPage()),);
+                        return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
                       }
                       else{
                         // SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not matched $passChange', Colors.red);

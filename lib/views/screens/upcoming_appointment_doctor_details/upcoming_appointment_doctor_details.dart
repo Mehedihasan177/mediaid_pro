@@ -1,7 +1,12 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
 import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointment_data.dart';
 import 'package:care_plus/data/upcoming_appointment_doctor_details_data/upcoming_appointment_doctor_details_data.dart';
 import 'package:care_plus/models/ui_model/doctor_appointment_model/doctor_about_and_appointment_model.dart';
 import 'package:care_plus/models/ui_model/upcoming_appointment_doctor_details_model/upcoming_appointment_doctor_details_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/doctor_about_and_appointment_widget/doctor_about_and_appointment_widget.dart';
 import 'package:care_plus/views/widgets/upcoming_Appointment_Doctor_widget/upcoming_Appointment_Doctor_widget.dart';
@@ -15,7 +20,41 @@ class UpcomingAppointmentDoctorDetails extends StatefulWidget {
 }
 
 class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDoctorDetails> {
-  List<UpcomingAppointmentDoctorDetailsModel> upcomingAppointmentDoctorDetails = List.of(upcoming_appointment_doctor_details_data);
+  List<UpcomingAppointment> upcomingAppointmentDoctorDetails = [];
+
+
+  // UpcomingAppointment responses = UpcomingAppointment(createdAt: null, doctor: null,
+  //     updatedAt: null, appointmentFor: '', consult: '', userId: '', reschedule: '', appointmentSlot: null, id: null, active: '', doctorId: '', appointmentSlotId: '', date: null);
+
+
+
+  _getUpcomingAppointment() async {
+
+
+    UpcomingAppointmentController.requestThenResponsePrint( USERTOKEN).then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        upcomingAppointmentDoctorDetails =
+            listNotification.map((model) => UpcomingAppointment.fromJson(model)).toList();
+        print(upcomingAppointmentDoctorDetails);
+
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _getUpcomingAppointment();
+    super.initState();
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

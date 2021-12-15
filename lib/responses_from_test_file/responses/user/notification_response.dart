@@ -31,7 +31,7 @@ class NotificationRes {
     this.doctorId,
     this.pharmacyId,
     this.serviceProviderId,
-    this.type,
+    required this.type,
     required this.title,
     required this.body,
     required this.status,
@@ -45,7 +45,7 @@ class NotificationRes {
   dynamic doctorId;
   dynamic pharmacyId;
   dynamic serviceProviderId;
-  dynamic type;
+  String type;
   String title;
   String body;
   String status;
@@ -59,7 +59,7 @@ class NotificationRes {
     doctorId: json["doctor_id"],
     pharmacyId: json["pharmacy_id"],
     serviceProviderId: json["service_provider_id"],
-    type: json["type"],
+    type: json["type"].toString(),
     title: json["title"],
     body: json["body"],
     status: json["status"],

@@ -220,15 +220,29 @@ Widget DoctorAboutAppointmentWidget(DoctorAppointmentModel doctorAppointment, co
                         SizedBox(
                           height: 20,
                         ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Working Time",
-                            style: TextStyle(
-                                color: Colors.black.withOpacity(0.5),
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold),
-                          ),
+                        Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Address",
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.5),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                doctorAppointment.time_range,
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.5),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 10,

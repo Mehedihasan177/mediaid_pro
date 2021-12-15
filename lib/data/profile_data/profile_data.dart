@@ -8,7 +8,7 @@ final profile_data =[
   Profile_Model(
     image: SIGNINGRESPONSE.image,
       name: SIGNINGRESPONSE.name,
-    medicare_id: SIGNINGRESPONSE.medicareNo
+      medicare_no: SIGNINGRESPONSE.medicareNo
   ),
 
 ];

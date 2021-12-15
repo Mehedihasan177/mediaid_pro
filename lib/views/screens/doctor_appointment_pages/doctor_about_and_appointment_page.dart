@@ -16,7 +16,11 @@ class DoctorAppointment extends StatefulWidget {
       experience,
       about,
       image,
-      department;
+      department,
+      chamber,
+      address,
+      visitingfee
+  ;
   const DoctorAppointment({
     Key? key,
     required this.name,
@@ -27,7 +31,7 @@ class DoctorAppointment extends StatefulWidget {
     required this.experience,
     required this.about,
     required this.image,
-    required this.department,
+    required this.department, required this.address, required this.chamber, required this.visitingfee,
   }) : super(key: key);
 
   @override
@@ -266,6 +270,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                               "images/experience.png")),
                                     ),
                                   ),
+
+                                  ///experience
                                   Column(
                                     children: [
                                       Padding(
@@ -295,6 +301,9 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                               ),
                             ],
                           ),
+
+
+                          ///about doctor
                           Padding(
                             padding: EdgeInsets.only(top: 60, left: 30),
                             child: Column(
@@ -324,19 +333,110 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Working Time",
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.5),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+
+                                ///address
+                                Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Address",
+                                        style: TextStyle(
+                                            color: Colors.black.withOpacity(0.5),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10  ),
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          widget.address,
+                                          style: TextStyle(
+                                              color: Colors.black.withOpacity(0.5),
+                                              fontSize: 16,
+                                              //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
+
+                                  ///chamber
+
+                                  Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Chamber",
+                                          style: TextStyle(
+                                              color: Colors.black.withOpacity(0.5),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10  ),
+                                        child: Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            widget.chamber.replaceAll("null", "Not yet"),
+                                            style: TextStyle(
+                                              color: Colors.black.withOpacity(0.5),
+                                              fontSize: 16,
+                                              //fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+
+                                ),
+
+                                ///visiting fee
+                                // Column(
+                                //   children: [
+                                //     Container(
+                                //       alignment: Alignment.centerLeft,
+                                //       child: Text(
+                                //         "Visiting Fee",
+                                //         style: TextStyle(
+                                //             color: Colors.black.withOpacity(0.5),
+                                //             fontSize: 16,
+                                //             fontWeight: FontWeight.bold),
+                                //       ),
+                                //     ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(top: 10  ),
+                                    //   child: Container(
+                                    //     alignment: Alignment.centerLeft,
+                                    //     child: Text(
+                                    //       widget.visitingfee.replaceAll("null", "Not yet"),
+                                    //       style: TextStyle(
+                                    //         color: Colors.black.withOpacity(0.5),
+                                    //         fontSize: 16,
+                                    //         //fontWeight: FontWeight.bold
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                //   ],
+                                // ),
+                                SizedBox(
+                                  height: 10,
+
+                                ),
+
+
                                 Row(
                                   children: [
                                     // Container(

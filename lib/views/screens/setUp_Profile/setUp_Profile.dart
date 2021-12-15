@@ -27,10 +27,7 @@ class _SetupProfileState extends State<SetupProfile> {
   bool checkbox = true;
   String gender = 'Male';
 
-  Map<String, bool> values = {
-    'Male': true,
-    'Female': false,
-  };
+
 
 
   @override
@@ -354,7 +351,13 @@ class _SetupProfileState extends State<SetupProfile> {
                 onPressed: () async{
 
                   // EasyLoading.show(status: 'loading...');
-
+                  print(checkbox);
+                  if(checkbox==true){
+                    gender='Male';
+                  }else{
+                    gender='Female';
+                  }
+                  print(gender);
 
                   Map data1 = {
                     'gender': "${gender}",

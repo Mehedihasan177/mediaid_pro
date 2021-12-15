@@ -30,16 +30,24 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                     padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(profile_model.name),
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(profile_model.name)),
                         SizedBox(
                           height: 5,
                         ),
                         Row(
                           children: [
-                            Image.asset("images/emergency_number.png"),
+                            // Container(
+                            //     height: 25,
+                            //     width: 25,
+                            //     child: Image.asset("images/medicareID_logo.png")),
+                            Text("Medicare id: "),
                             SizedBox(width: 5),
-                            Text(profile_model.medicare_id),
+                            Text(profile_model.medicare_no),
                           ],
                         ),
                       ],

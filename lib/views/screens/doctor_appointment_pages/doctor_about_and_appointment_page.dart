@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:care_plus/constents/constant.dart';
-import 'package:care_plus/controllers/user/user_get_doctor_slots.dart';
 import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointment_data.dart';
-import 'package:care_plus/models/doctor_7_slots_model.dart';
 import 'package:care_plus/models/ui_model/doctor_appointment_model/doctor_about_and_appointment_model.dart';
 import 'package:care_plus/views/screens/confirm_appointment/confirm_appointment.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
@@ -20,8 +16,11 @@ class DoctorAppointment extends StatefulWidget {
       experience,
       about,
       image,
-      department;
-  final int docID;
+      department,
+      chamber,
+      address,
+      visitingfee
+  ;
   const DoctorAppointment({
     Key? key,
     required this.name,
@@ -32,8 +31,7 @@ class DoctorAppointment extends StatefulWidget {
     required this.experience,
     required this.about,
     required this.image,
-    required this.department,
-    required this.docID,
+    required this.department, required this.address, required this.chamber, required this.visitingfee,
   }) : super(key: key);
 
   @override
@@ -43,18 +41,6 @@ class DoctorAppointment extends StatefulWidget {
 class _DoctorAppointmentState extends State<DoctorAppointment> {
   List<DoctorAppointmentModel> doctorAppointment =
       List.of(doctor_appointment_data);
-
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    print('oo');
-    fetchDoctorSlots(widget.docID);
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -284,6 +270,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                               "images/experience.png")),
                                     ),
                                   ),
+
+                                  ///experience
                                   Column(
                                     children: [
                                       Padding(
@@ -313,6 +301,9 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                               ),
                             ],
                           ),
+
+
+                          ///about doctor
                           Padding(
                             padding: EdgeInsets.only(top: 60, left: 30),
                             child: Column(
@@ -342,19 +333,110 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Working Time",
-                                    style: TextStyle(
-                                        color: Colors.black.withOpacity(0.5),
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+
+                                ///address
+                                Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Address",
+                                        style: TextStyle(
+                                            color: Colors.black.withOpacity(0.5),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10  ),
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          widget.address,
+                                          style: TextStyle(
+                                              color: Colors.black.withOpacity(0.5),
+                                              fontSize: 16,
+                                              //fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 10,
                                 ),
+
+                                  ///chamber
+
+                                  Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Chamber",
+                                          style: TextStyle(
+                                              color: Colors.black.withOpacity(0.5),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10  ),
+                                        child: Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            widget.chamber.replaceAll("null", "Not yet"),
+                                            style: TextStyle(
+                                              color: Colors.black.withOpacity(0.5),
+                                              fontSize: 16,
+                                              //fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+
+                                ),
+
+                                ///visiting fee
+                                // Column(
+                                //   children: [
+                                //     Container(
+                                //       alignment: Alignment.centerLeft,
+                                //       child: Text(
+                                //         "Visiting Fee",
+                                //         style: TextStyle(
+                                //             color: Colors.black.withOpacity(0.5),
+                                //             fontSize: 16,
+                                //             fontWeight: FontWeight.bold),
+                                //       ),
+                                //     ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(top: 10  ),
+                                    //   child: Container(
+                                    //     alignment: Alignment.centerLeft,
+                                    //     child: Text(
+                                    //       widget.visitingfee.replaceAll("null", "Not yet"),
+                                    //       style: TextStyle(
+                                    //         color: Colors.black.withOpacity(0.5),
+                                    //         fontSize: 16,
+                                    //         //fontWeight: FontWeight.bold
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                //   ],
+                                // ),
+                                SizedBox(
+                                  height: 10,
+
+                                ),
+
+
                                 Row(
                                   children: [
                                     // Container(
@@ -794,48 +876,4 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
           ),
         ],
       );
-
-  void fetchDoctorSlots(doctorID) {
-    UserGetSlotDoctor.requestThenResponsePrint(context, USERTOKEN, doctorID).then((value) {
-      print(value.statusCode);
-      // print(value.body);
-
-
-      // List jsonList = json.decode(value.body.toString()) as List;
-      //
-      // List<Doctor7SlotResponse> myList = jsonList.map(
-      //         (jsonElement) => Doctor7SlotResponse.fromJson(jsonElement)
-      // ).toList();
-      // print(myList);
-
-      Map<String, dynamic> decoded = json.decode(value.body);
-      for (var date in decoded.keys) {
-        List pharmacyJSON = json.decode(json.encode(decoded[date]));
-        timeSlotList = pharmacyJSON.map((m) => new Doctor7SlotResponse.fromJson(m)).toList();
-        print(timeSlotList);
-        for (var slot in timeSlotList) {
-          toShowNextSlotsArray.add(SlotsWithDate(slot,date));
-        }
-
-      }
-      print(toShowNextSlotsArray);
-
-
-
-    });
-  }
-
-  List<Doctor7SlotResponse> timeSlotList = [];
-  List<SlotsWithDate> toShowNextSlotsArray = [];
-
-
-}
-
-
-
-class SlotsWithDate{
-  late Doctor7SlotResponse timeslotlist;
-  late String date;
-
-  SlotsWithDate(this.timeslotlist, this.date);
 }

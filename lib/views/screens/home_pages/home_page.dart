@@ -313,7 +313,7 @@ class _HomePageState extends State<HomePage> {
                 itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
                 itemBuilder: (BuildContext context, int index) {
                   return index<1? buildDoctorListTile(
-                      doctorFeturedlist[index]):Container();
+                      doctorFeturedlist[index], context):Container();
                 }
             )
         ),

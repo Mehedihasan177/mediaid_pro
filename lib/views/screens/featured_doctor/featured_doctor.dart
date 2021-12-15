@@ -133,7 +133,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
                     itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
                     itemBuilder: (BuildContext context, int index) {
                       return buildDoctorListTile(
-                          doctorFeturedlist[index]);
+                          doctorFeturedlist[index], context);
                     }
                 )
             ),

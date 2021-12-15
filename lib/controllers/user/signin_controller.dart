@@ -31,6 +31,7 @@ class SigninController{
       final loginobject = SignInResponse.fromJson(parsed);
       print(loginobject.data.token);
       USERTOKEN = loginobject.data.token;
+      USERID = loginobject.data.user.id;
       SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
       sharedPreferences.setString("token", loginobject.data.token);

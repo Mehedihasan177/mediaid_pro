@@ -3,7 +3,7 @@ import 'package:care_plus/models/ui_model/health_histoy/health_history_model.dar
 import 'package:care_plus/responses_from_test_file/responses/user/report_presctiption_responses.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:webview_flutter/webview_flutter.dart';
 
 Widget Health_History_List(ReportPrescription health_history, BuildContext context) => Card(
   child: Row(
@@ -100,15 +100,15 @@ Widget Health_History_List(ReportPrescription health_history, BuildContext conte
                 //     "$apiDomainRoot/api/view-file/" + health_history.file.toString();
                 // print(helloWorld);
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => WebView(
-                        initialUrl: '$apiDomainRoot/api/view-file/ '+ health_history.file,
-                      )
-                  ),
-
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => WebView(
+                //         initialUrl: '$apiDomainRoot/api/view-file/ '+ health_history.file,
+                //       )
+                //   ),
+                //
+                // );
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(0, 25),

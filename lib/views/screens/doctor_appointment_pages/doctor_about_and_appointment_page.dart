@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/user_get_doctor_slots.dart';
 import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointment_data.dart';
+import 'package:care_plus/models/doctor_7_slots_model.dart';
 import 'package:care_plus/models/ui_model/doctor_appointment_model/doctor_about_and_appointment_model.dart';
 import 'package:care_plus/views/screens/confirm_appointment/confirm_appointment.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
@@ -20,6 +24,8 @@ class DoctorAppointment extends StatefulWidget {
       chamber,
       address,
       visitingfee;
+  final int docID;
+
   const DoctorAppointment({
     Key? key,
     required this.name,
@@ -30,7 +36,11 @@ class DoctorAppointment extends StatefulWidget {
     required this.experience,
     required this.about,
     required this.image,
-    required this.department, required this.address, required this.chamber, required this.visitingfee,
+    required this.department,
+    required this.address,
+    required this.chamber,
+    required this.visitingfee,
+    required this.docID
   }) : super(key: key);
 
   @override
@@ -40,6 +50,14 @@ class DoctorAppointment extends StatefulWidget {
 class _DoctorAppointmentState extends State<DoctorAppointment> {
   List<DoctorAppointmentModel> doctorAppointment =
       List.of(doctor_appointment_data);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchDoctorSlots(widget.docID);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -278,15 +296,15 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                             left: 20, top: 40),
                                         child: Text(
                                           widget.experience.replaceAll("null", "0"),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 17,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 20),
+                                            EdgeInsets.only(left: 20),
                                         child: Text(
                                           "Experience",
                                           style: TextStyle(
@@ -434,7 +452,6 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   height: 10,
 
                                 ),
-
 
                                 Row(
                                   children: [
@@ -795,7 +812,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                             height: 20,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 250),
+                            padding: const EdgeInsets.only(top: 50),
                             child: Container(
                               alignment: Alignment.bottomCenter,
                               child: ElevatedButton(
@@ -875,4 +892,48 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
           ),
         ],
       );
+
+  void fetchDoctorSlots(doctorID) {
+    UserGetSlotDoctor.requestThenResponsePrint(context, USERTOKEN, doctorID).then((value) {
+      print(value.statusCode);
+      // print(value.body);
+
+
+      // List jsonList = json.decode(value.body.toString()) as List;
+      //
+      // List<Doctor7SlotResponse> myList = jsonList.map(
+      //         (jsonElement) => Doctor7SlotResponse.fromJson(jsonElement)
+      // ).toList();
+      // print(myList);
+
+      Map<String, dynamic> decoded = json.decode(value.body);
+      for (var date in decoded.keys) {
+        List pharmacyJSON = json.decode(json.encode(decoded[date]));
+        timeSlotList = pharmacyJSON.map((m) => new Doctor7SlotResponse.fromJson(m)).toList();
+        print(timeSlotList);
+        for (var slot in timeSlotList) {
+          toShowNextSlotsArray.add(SlotsWithDate(slot,date));
+        }
+
+      }
+      print(toShowNextSlotsArray);
+
+
+
+    });
+  }
+
+  List<Doctor7SlotResponse> timeSlotList = [];
+  List<SlotsWithDate> toShowNextSlotsArray = [];
+
+
+}
+
+
+
+class SlotsWithDate{
+  late Doctor7SlotResponse timeslotlist;
+  late String date;
+
+  SlotsWithDate(this.timeslotlist, this.date);
 }

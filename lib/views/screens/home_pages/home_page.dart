@@ -312,8 +312,7 @@ class _HomePageState extends State<HomePage> {
                 shrinkWrap: true,
                 itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
                 itemBuilder: (BuildContext context, int index) {
-                  return index<1? buildDoctorListTile(
-                      doctorFeturedlist[index], context):Container();
+                  return index<1? buildDoctorListTile(doctorFeturedlist[index], context):Container();
                 }
             )
         ),

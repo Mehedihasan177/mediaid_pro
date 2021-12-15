@@ -130,7 +130,7 @@ Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext cont
   onTap: (){
     Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorAppointment(fee: doctorFeturedlist.fee, rating: doctorFeturedlist.rating, image: doctorFeturedlist.image,
       address: doctorFeturedlist.address, specialization: doctorFeturedlist.specialization, department: doctorFeturedlist.department, visitingfee: doctorFeturedlist.visitingFee,
-      hospital_name: doctorFeturedlist.hospitalName, chamber: doctorFeturedlist.chambers, about: doctorFeturedlist.introduction, experience: doctorFeturedlist.experience, name: doctorFeturedlist.name,)));
+      hospital_name: doctorFeturedlist.hospitalName, chamber: doctorFeturedlist.chambers, about: doctorFeturedlist.introduction, experience: doctorFeturedlist.experience, name: doctorFeturedlist.name,docID: doctorFeturedlist.id,)));
 
   },
 );

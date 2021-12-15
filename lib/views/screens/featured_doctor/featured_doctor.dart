@@ -132,8 +132,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
                     // shrinkWrap: true,
                     itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
                     itemBuilder: (BuildContext context, int index) {
-                      return buildDoctorListTile(
-                          doctorFeturedlist[index], context);
+                      return buildDoctorListTile(doctorFeturedlist[index], context);
                     }
                 )
             ),

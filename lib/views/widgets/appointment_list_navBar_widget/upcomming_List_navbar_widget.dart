@@ -178,7 +178,10 @@ Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context) =>
 
                           alignment: Alignment.bottomLeft,
 
-                          child: Text(DateFormat("dd-MM-yyyy").format(appointment_list_navBar.date))),
+                          child: Text(
+                              DateFormat("dd-MM-yyyy").format(appointment_list_navBar.date)
+                          )
+                      ),
 
                       // Text(" | "),
                       //

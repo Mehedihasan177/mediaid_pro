@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/notification_controller.dart';
 import 'package:care_plus/data/notification_data/notification_data.dart';
 import 'package:care_plus/models/ui_model/notification_model/notification_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/notification_response.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
 import 'package:care_plus/views/widgets/notification_widget/notification_widget.dart';
@@ -14,7 +19,34 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  List<NotificationModel> notification = List.of(notification_data);
+  List<NotificationRes> notification = [];
+
+  _getNotification() async {
+
+
+    NotificationController.requestThenResponsePrint( USERTOKEN).then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        notification =
+            listNotification.map((model) => NotificationRes.fromJson(model)).toList();
+        print(notification);
+
+      });
+    });
+  }
+
+
+  @override
+  void initState() {
+    _getNotification();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

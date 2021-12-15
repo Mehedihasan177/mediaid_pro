@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
+import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
 import 'package:care_plus/data/near_by/near_by.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
@@ -17,6 +18,7 @@ import 'package:care_plus/responses_from_test_file/responses/user/doctor_list_re
 import 'package:care_plus/responses_from_test_file/responses/user/doctor_specialization_controller.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/featured_doctor_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/screens/doctor_catagory/doctor_catagory_page.dart';
 import 'package:care_plus/views/screens/featured_doctor/featured_doctor.dart';
 import 'package:care_plus/views/screens/notificaitonUi/notificaitonUi.dart';
@@ -44,11 +46,30 @@ class _HomePageState extends State<HomePage> {
   // List<DoctorINformation> doctorInformation = List.of(allinformations);
   List<Datum> doctorInformation = [];
   // List<Diseasesinformation> informationslist = List.of(GetInformation);
-  List<UpcommingAppointment> appointment = List.of(allappointmnet);
+  List<UpcomingAppointment> appointment = [];
   List<NearBy> nearby = List.of(near_by_hospital_ambulance);
   int _index = 0;
   List<SpecializationResponse> informationslist = [];
   List<FeaturedDoctorrr> doctorFeturedlist = [];
+
+
+  _getUpcomingAppointment() async {
+
+
+    UpcomingAppointmentController.requestThenResponsePrint( USERTOKEN).then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        appointment =
+            listNotification.map((model) => UpcomingAppointment.fromJson(model)).toList();
+        print(appointment);
+
+      });
+    });
+  }
+
 
   _getFeturedDoctor() async {
 
@@ -90,6 +111,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     _getDoctorSpecialization();
     _getFeturedDoctor();
+    _getUpcomingAppointment();
     super.initState();
   }
 
@@ -254,7 +276,7 @@ class _HomePageState extends State<HomePage> {
 
         Padding(
           padding: const EdgeInsets.only(left: 20),
-          child: Text("Upcomming Appointment", style: TextStyle(
+          child: Text("Upcoming Appointment", style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold
           ),),

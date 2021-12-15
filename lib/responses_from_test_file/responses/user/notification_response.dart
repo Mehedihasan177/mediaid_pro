@@ -13,10 +13,10 @@ class NotificationResponses {
     required this.data,
   });
 
-  List<Datum> data;
+  List<NotificationRes> data;
 
   factory NotificationResponses.fromJson(Map<String, dynamic> json) => NotificationResponses(
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    data: List<NotificationRes>.from(json["data"].map((x) => NotificationRes.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -24,8 +24,8 @@ class NotificationResponses {
   };
 }
 
-class Datum {
-  Datum({
+class NotificationRes {
+  NotificationRes({
     required this.id,
     required this.userId,
     this.doctorId,
@@ -53,7 +53,7 @@ class Datum {
   DateTime updatedAt;
   dynamic deletedAt;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory NotificationRes.fromJson(Map<String, dynamic> json) => NotificationRes(
     id: json["id"],
     userId: json["user_id"],
     doctorId: json["doctor_id"],

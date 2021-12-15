@@ -19,8 +19,7 @@ class DoctorAppointment extends StatefulWidget {
       department,
       chamber,
       address,
-      visitingfee
-  ;
+      visitingfee;
   const DoctorAppointment({
     Key? key,
     required this.name,

@@ -184,7 +184,7 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () async {
-                    // _launchURL("tel://21213123123");
+                    _launchURL("tel://${widget.phone_number}");
 
                     // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                   },

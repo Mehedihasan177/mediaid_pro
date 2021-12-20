@@ -2,6 +2,7 @@ import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/views/screens/hospital_list/hospital_list.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HospitalDetailsPage extends StatefulWidget {
   final String name;
@@ -169,6 +170,7 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () async {
+                    _launchURL("tel://${widget.phone_number}");
                     // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                   },
                   style: ElevatedButton.styleFrom(
@@ -191,5 +193,9 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
         ),
       ),
     );
+  }
+
+  void _launchURL(_url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
   }
 }

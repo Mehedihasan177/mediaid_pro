@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // import 'package:webview_flutter/webview_flutter.dart';
 
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+
+import '../../webscreen.dart';
+
 Widget Health_History_List(ReportPrescription health_history, BuildContext context) => Card(
   child: Row(
     children: [
@@ -96,6 +100,7 @@ Widget Health_History_List(ReportPrescription health_history, BuildContext conte
                 style: TextStyle(color: Colors.white, fontSize: 15),
               ),
               onPressed: () {
+                _launchURL(context, '$apiDomainRoot/files/${health_history.file.toString()}');
                 // String helloWorld =
                 //     "$apiDomainRoot/api/view-file/" + health_history.file.toString();
                 // print(helloWorld);
@@ -103,9 +108,7 @@ Widget Health_History_List(ReportPrescription health_history, BuildContext conte
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
-                //       builder: (context) => WebView(
-                //         initialUrl: '$apiDomainRoot/api/view-file/ '+ health_history.file,
-                //       )
+                //       builder: (context) => WebPage()
                 //   ),
                 //
                 // );
@@ -128,3 +131,31 @@ Widget Health_History_List(ReportPrescription health_history, BuildContext conte
   ),
 );
 
+
+
+void _launchURL(BuildContext context,String url) async {
+  try {
+    await launch(
+      url,
+      customTabsOption: CustomTabsOption(
+
+        extraCustomTabs: const <String>[
+          // ref. https://play.google.com/store/apps/details?id=org.mozilla.firefox
+          'org.mozilla.firefox',
+          // ref. https://play.google.com/store/apps/details?id=com.microsoft.emmx
+          'com.microsoft.emmx',
+        ],
+      ),
+      safariVCOption: SafariViewControllerOption(
+        preferredBarTintColor: Theme.of(context).primaryColor,
+        preferredControlTintColor: Colors.white,
+        barCollapsingEnabled: true,
+        entersReaderIfAvailable: false,
+        dismissButtonStyle: SafariViewControllerDismissButtonStyle.close,
+      ),
+    );
+  } catch (e) {
+    // An exception is thrown if browser app is not installed on Android device.
+    debugPrint(e.toString());
+  }
+}

@@ -1,5 +1,12 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/user_wallet_controller.dart';
+import 'package:care_plus/controllers/user/user_wallet_log_controller.dart';
 import 'package:care_plus/data/wallet_data/wallet_data.dart';
 import 'package:care_plus/models/ui_model/wallet_model/wallet_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/wallet_log_responses.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/wallet_response.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
 import 'package:care_plus/views/widgets/money_wallet_wdget/money_wallet_wdget.dart';
@@ -15,7 +22,17 @@ class walletUi extends StatefulWidget {
 }
 
 class _walletUiState extends State<walletUi> {
-  List<Wallet_Model> moneyWallet = List.of(wallet_data);
+  List<WalletLogResponses> moneyWallet = [];
+
+  String userbalance = '0';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getWalletBal();
+    getTrxHist();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +95,7 @@ class _walletUiState extends State<walletUi> {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "\$520",
+                          "\$${userbalance}",
                           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -161,6 +178,43 @@ class _walletUiState extends State<walletUi> {
         ),
       ),
     );
+  }
+
+  void getWalletBal() {
+    UserWalletController.requestThenResponsePrint(USERTOKEN).then((value) {
+      setState(() {
+        print(value.statusCode);
+        print(value.body);
+
+        if(value.statusCode==200){
+          Map<String, dynamic> decoded = json.decode("${value.body}");
+          var walletbal = WalletResponse.fromJson(decoded);
+          print(walletbal.data);
+          userbalance = walletbal.data;
+        }
+
+      });
+    });
+  }
+
+
+  void getTrxHist() {
+
+    WalletLogController.requestThenResponsePrint(USERTOKEN).then((value) {
+      setState(() {
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listTrx = decoded['data'];
+        print(decoded['data']);
+        moneyWallet =
+            listTrx.map((model) => WalletLogResponses.fromJson(model)).toList();
+
+        print('moneyWallet');
+        print(moneyWallet);
+
+
+
+      });
+    });
   }
 }
 

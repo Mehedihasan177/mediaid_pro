@@ -1,7 +1,9 @@
 import 'package:care_plus/models/ui_model/wallet_model/wallet_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/wallet_log_responses.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-Widget MoneyWallet(Wallet_Model moneyWallet) =>
+Widget MoneyWallet(WalletLogResponses moneyWallet) =>
     Card(
       child: Padding(
         padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10,
@@ -18,7 +20,7 @@ Widget MoneyWallet(Wallet_Model moneyWallet) =>
                     children: [
                       Container(
                           alignment: Alignment.topLeft,
-                          child: Text(moneyWallet.money_add,
+                          child: Text(moneyWallet.paymentNote,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 17
@@ -33,9 +35,9 @@ Widget MoneyWallet(Wallet_Model moneyWallet) =>
                             child: Icon(Icons.calendar_today_rounded, size: 15,),
                           ),
                           SizedBox(width: 5,),
-                          Text(moneyWallet.date),
+                          Text(moneyWallet.paymentGateway),
                           SizedBox(width: 10,),
-                          Text(moneyWallet.time),
+                          Text(DateFormat("dd MMM yyyy || hh:mm a").format(moneyWallet.createdAt)),
                           //Text(carePlushLabReportList.time),
                         ],
                       ),
@@ -44,7 +46,7 @@ Widget MoneyWallet(Wallet_Model moneyWallet) =>
                   ),
                 ),
 
-                Text(moneyWallet.money_history,
+                Text('\$'+moneyWallet.amount.toString(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold
                 ),

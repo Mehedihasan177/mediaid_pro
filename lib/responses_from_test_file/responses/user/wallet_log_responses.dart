@@ -36,22 +36,22 @@ class WalletLogResponses {
     required this.deposit,
     required this.paymentGateway,
     required this.paymentNote,
-    this.createdAt,
+    required this.createdAt,
     this.updatedAt,
     this.deletedAt,
   });
 
   int id;
   String trxId;
-  int userId;
+  String userId;
   dynamic doctorId;
   dynamic serviceProviderId;
   dynamic type;
-  int amount;
-  int deposit;
+  String amount;
+  String deposit;
   String paymentGateway;
   String paymentNote;
-  dynamic createdAt;
+  DateTime createdAt;
   dynamic updatedAt;
   dynamic deletedAt;
 
@@ -66,7 +66,7 @@ class WalletLogResponses {
     deposit: json["deposit"],
     paymentGateway: json["payment_gateway"],
     paymentNote: json["payment_note"],
-    createdAt: json["created_at"],
+    createdAt: DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"],
     deletedAt: json["deleted_at"],
   );
@@ -82,7 +82,7 @@ class WalletLogResponses {
     "deposit": deposit,
     "payment_gateway": paymentGateway,
     "payment_note": paymentNote,
-    "created_at": createdAt,
+    "created_at": createdAt.toIso8601String(),
     "updated_at": updatedAt,
     "deleted_at": deletedAt,
   };

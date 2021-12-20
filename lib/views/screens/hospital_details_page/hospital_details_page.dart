@@ -59,7 +59,7 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 60),
                       child: Text(
-                        "Ambulance Details",
+                        "Hospital Details",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 23,

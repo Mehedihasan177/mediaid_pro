@@ -114,7 +114,7 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                     SizedBox(height: 20,),
                     Container(
                         alignment: Alignment.centerLeft,
-                        child: Text("Address",
+                        child: Text("Phone",
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold
@@ -128,7 +128,7 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                     SizedBox(height: 20,),
                     Container(
                         alignment: Alignment.centerLeft,
-                        child: Text("Phone Number",
+                        child: Text("Address",
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold

@@ -70,12 +70,12 @@ class _AppointmentListState extends State<AppointmentList> {
             height: 300,
             // color: Colors.red,
             child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-                shrinkWrap: true,
+                //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+                //shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: appointmentlist.length,
                 itemBuilder: (context, index) {
-                  return index <4 ?Appointment_List(appointmentlist[index], context): Container();
+                  return Appointment_List(appointmentlist[index], context);
                 }),
 
           ),
@@ -95,8 +95,8 @@ class _AppointmentListState extends State<AppointmentList> {
           //   height: 390,
           //   // color: Colors.red,
           //   child: ListView.builder(
-          //       physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-          //       shrinkWrap: true,
+          //       // physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+          //       // shrinkWrap: true,
           //       scrollDirection: Axis.vertical,
           //       itemCount: 4,
           //       itemBuilder: (context, index) {
@@ -108,19 +108,19 @@ class _AppointmentListState extends State<AppointmentList> {
 
         ///this is the upcoming appiontment only for test. jehetu history api te data nai tai
 
-          Container(
-            height: 300,
-            // color: Colors.red,
-            child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: appointmentlist.length,
-                itemBuilder: (context, index) {
-                  return index <4 ?Appointment_List(appointmentlist[index], context): Container();
-                }),
-
-          ),
+          // Container(
+          //   height: 300,
+          //   // color: Colors.red,
+          //   child: ListView.builder(
+          //       physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+          //       shrinkWrap: true,
+          //       scrollDirection: Axis.vertical,
+          //       itemCount: appointmentlist.length,
+          //       itemBuilder: (context, index) {
+          //         return index <4 ?Appointment_List(appointmentlist[index], context): Container();
+          //       }),
+          //
+          // ),
 
 
 

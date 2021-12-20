@@ -1,7 +1,11 @@
+import 'dart:convert';
+
+import 'package:care_plus/controllers/user/ambulanceList_controller.dart';
 import 'package:care_plus/data/ambulance_list_data/ambulance_list_data.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
 import 'package:care_plus/models/ui_model/ambulance_model/ambulance_model.dart';
 import 'package:care_plus/models/ui_model/hospital_model/hospital_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/ambulance_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/ambulance_list_widget/ambulance_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +19,39 @@ class AmbulanceList extends StatefulWidget {
 }
 
 class _AmbulanceListState extends State<AmbulanceList> {
-  List<AmbulanceModel> ambulancelist = List.of(ambulanceList);
+  List<AmbulanceRes> ambulancelist = [];
+
+
+  _getAmbulanceList() async {
+
+
+    AmbulanceListController.requestThenResponsePrint().then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        ambulancelist =
+            listNotification.map((model) => AmbulanceRes.fromJson(model)).toList();
+        print(ambulancelist);
+
+      });
+    });
+  }
+
+
+
+
+
+  @override
+  void initState() {
+    _getAmbulanceList();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+
   bool nevigation = false;
   @override
   Widget build(BuildContext context) {
@@ -23,6 +59,7 @@ class _AmbulanceListState extends State<AmbulanceList> {
 
       onWillPop: () async {
         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.pop(context);
         return true;
       },
       child: Scaffold(
@@ -78,7 +115,7 @@ class _AmbulanceListState extends State<AmbulanceList> {
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 14),
                       border: InputBorder.none,
-                      hintText: "Search your doctor",
+                      hintText: "Search your ambulance",
                       hintStyle: TextStyle(
                           color: Colors.black.withOpacity(0.5), fontSize: 15),
                       prefixIcon: Icon(
@@ -106,19 +143,27 @@ class _AmbulanceListState extends State<AmbulanceList> {
                         itemBuilder: (context,index) {
                           return AmbulanceHospitalWidget(
                               ambulancelist[index].id,
-                              ambulancelist[index].type,
-                              ambulancelist[index].hospital,
-                              ambulancelist[index].about,
-                              ambulancelist[index].phone_number,
-                              ambulancelist[index].address,
-                              ambulancelist[index].image,
-                              ambulancelist[index].website,
-                              ambulancelist[index].latitude,
-                              ambulancelist[index].longtitude,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].hospital.type,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
                               nevigation,
                             context
                           );
-
+                        // String id,
+                          //         String type,
+                          //         String hospital,
+                          //         String about,
+                          //         String phone_number,
+                          //         String address,
+                          //         String image,
+                          //         String website,
+                          //
+                          //         bool nevigation,
+                          //         BuildContext context
                         }
                     ),
                   ),

@@ -208,49 +208,61 @@ class _ChangePasswordState extends State<ChangePassword> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () {
-                    print("token of user\n");
-                    print("token at call mehedi hasan who are you: " + USERTOKEN);
-                    PasswordChange passChange = new PasswordChange(_oldPassword.text, _newPassword.text, _confirmPassword.text);
-                    UserChangePass.requestThenResponsePrint(context, USERTOKEN, passChange).then((value) async {
-                      print('dddddddd');
-                      print(value.statusCode);
-                      if (value.statusCode == 200) {
 
-                        print("successfully done");
-                        print(value.body);
-                        SigninModel myInfo = new SigninModel(
-                            mobile: USERNAME, password: USERPASS);
-                        await SigninController.requestThenResponsePrint(myInfo)
-                            .then((value) async {
-                          print(value.statusCode);
+
+                    if(_oldPassword.text!=USERPASS){
+                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Old Password not matched',Colors.red);
+                    }else if(_newPassword.text.length<6){
+                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Password Should be 6 digit',Colors.red);
+                    }else if(_newPassword.text != _confirmPassword.text){
+                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Please Confirm new Password',Colors.red);
+                    }else{
+                      print("token of user\n");
+                      print("token at call mehedi hasan who are you: " + USERTOKEN);
+                      PasswordChange passChange = new PasswordChange(_oldPassword.text, _newPassword.text, _confirmPassword.text);
+                      UserChangePass.requestThenResponsePrint(context, USERTOKEN, passChange).then((value) async {
+                        print('dddddddd');
+                        print(value.statusCode);
+                        if (value.statusCode == 200) {
+
+                          print("successfully done");
                           print(value.body);
+                          SigninModel myInfo = new SigninModel(
+                              mobile: USERNAME, password: USERPASS);
+                          await SigninController.requestThenResponsePrint(myInfo)
+                              .then((value) async {
+                            print(value.statusCode);
+                            print(value.body);
 
-                          if (value.statusCode == 200) {
-                            SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
-                            setState(() {
-                              var reobj = SignInResponse.fromJson(json.decode(value.body));
-                              var loginobject = reobj.data.user;
-                              print('loginobject.image');
-                              print(loginobject.image);
-                              SIGNINGRESPONSE = loginobject;
-                              print(loginobject.token);
-                              sharedPreferences.setString("token", loginobject.token);
+                            if (value.statusCode == 200) {
+                              SharedPreferences sharedPreferences =
+                              await SharedPreferences.getInstance();
+                              setState(() {
+                                var reobj = SignInResponse.fromJson(json.decode(value.body));
+                                var loginobject = reobj.data.user;
+                                print('loginobject.image');
+                                print(loginobject.image);
+                                SIGNINGRESPONSE = loginobject;
+                                print(loginobject.token);
+                                sharedPreferences.setString("token", loginobject.token);
 
-                              sharedPreferences.setString("mobile", USERNAME);
-                              sharedPreferences.setString("password", USERPASS);
-                            });
-                          }
-                        });
-                        SnackbarDialogueHelper().showSnackbarDialog(context, 'Password changed successfully', Colors.green);
-                        //SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
-                        return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
-                      }
-                      else{
-                        // SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not matched $passChange', Colors.red);
-                        SnackbarDialogueHelper().showSnackbarDialog(context, value.body,Colors.red);
-                      }
-                    });
+                                sharedPreferences.setString("mobile", USERNAME);
+                                sharedPreferences.setString("password", USERPASS);
+                              });
+                            }
+                          });
+                          SnackbarDialogueHelper().showSnackbarDialog(context, 'Password changed successfully', Colors.green);
+                          //SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
+                          return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                        }
+                        else{
+                          // SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not matched $passChange', Colors.red);
+                          SnackbarDialogueHelper().showSnackbarDialog(context, value.body,Colors.red);
+                        }
+                      });
+                    }
+
+
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),

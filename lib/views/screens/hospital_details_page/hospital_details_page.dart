@@ -1,3 +1,4 @@
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/views/screens/hospital_list/hospital_list.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,6 @@ class HospitalDetailsPage extends StatefulWidget {
   final String website;
   final String image;
   final String about;
-  final double latitude;
-  final double longitude;
 
   const HospitalDetailsPage({Key? key,
     required this.name,
@@ -19,8 +18,6 @@ class HospitalDetailsPage extends StatefulWidget {
     required this.phone_number,
     required this.address,
     required this.website,
-    required this.latitude,
-    required this.longitude,
     required this.about,
     required this.image,
   }) : super(key: key);
@@ -74,7 +71,11 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                 ],
               ),
             ),
-            Image.asset(widget.image),
+            Container(
+                // height: 200,
+                // width: double.infinity,
+                child: Image.network('$apiDomainRoot/images/${widget.image}')),
+
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 20),
               child: Container(
@@ -155,8 +156,8 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
-            Image.asset("images/map.png",),
+            // SizedBox(height: 50),
+            // Image.asset("images/map.png",),
             SizedBox(
               height: 30,
             ),
@@ -168,7 +169,7 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () async {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                    // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),

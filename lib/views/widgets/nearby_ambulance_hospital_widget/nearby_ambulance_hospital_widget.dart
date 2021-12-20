@@ -11,6 +11,10 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
             Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => AmbulanceList()));
           },
+
+
+       ///ambulance
+
           child: Card(
             shape:  OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
@@ -23,7 +27,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                 Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: EdgeInsets.only(top: 35),
                             alignment: Alignment.topLeft,
                             child: Text(nearby_hospital_ambulance.ambulance,
                                 style: TextStyle(
@@ -32,7 +36,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                                 )),
                           ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 20),
+                          padding: const EdgeInsets.only(left: 24, top: 10, right: 20),
                           child: Container(
                             alignment: Alignment.centerLeft,
                             child: Text(nearby_hospital_ambulance.text_for_ambulance,
@@ -42,11 +46,13 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
 
                       ],
                     ),
+
+
                 Padding(
-                  padding: const EdgeInsets.only(right: 20),
+                  padding: const EdgeInsets.only(right: 10),
                   child: Container(
-                    height: 65,
-                    width: 65,
+                    height: 70,
+                    width:70,
                     child: Image(
                       image: AssetImage(nearby_hospital_ambulance.image_ambulance),
                     ),
@@ -62,6 +68,9 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
       SizedBox(
         width: 20,
       ),
+
+      ///hospital
+
       GestureDetector(
           onTap: (){
             Navigator.pushReplacement(
@@ -80,7 +89,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                   Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: 10),
+                            padding: EdgeInsets.only(top: 40, left: 10),
                             alignment: Alignment.topLeft,
                             child: Text(nearby_hospital_ambulance.hospital,
                                 style: TextStyle(
@@ -89,10 +98,10 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                                 )),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 30),
+                            padding: const EdgeInsets.only(left: 20, top: 10),
                             child: Container(
                               alignment: Alignment.centerLeft,
-                              child: Text(nearby_hospital_ambulance.text_for_ambulance,
+                              child: Text(nearby_hospital_ambulance.text_for_hospital,
                               ),
                             ),
                           ),
@@ -100,12 +109,12 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                         ],
                       ),
 
-                  SizedBox(width: 20),
+                  SizedBox(width: 5),
                   Padding(
-                    padding: const EdgeInsets.only(right: 0),
+                    padding: const EdgeInsets.only(right: 10, left: 10),
                     child: Container(
-                      height: 55,
-                      width: 55,
+                      height: 70,
+                      width: 70,
                       child: Image(
                         image: AssetImage(nearby_hospital_ambulance.image),
                       ),

@@ -4,7 +4,7 @@ import 'package:care_plus/responses_from_test_file/responses/user/featured_docto
 import 'package:care_plus/views/screens/doctor_appointment_pages/doctor_about_and_appointment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+bool _loaded = false;
 Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext context) => GestureDetector(
   child:   Card(
 
@@ -20,11 +20,11 @@ Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext cont
 
               width: 90,
 
-              child: Image.network(
+              child:  Image.network(  //
 
                   '$apiDomainRoot/images/${doctorFeturedlist.image}'
-
               ),
+                  // :  Image.asset("images/download.png") ,
 
             ),
 

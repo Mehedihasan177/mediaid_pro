@@ -46,7 +46,7 @@ dependencies:
 #  webview_flutter:
 #  flutter_webview_plugin: ^0.4.0
 #  flutter_inappwebview: ^5.3.2
-#  url_launcher: ^6.0.12
+  url_launcher: ^6.0.12
 
 
 dev_dependencies:
@@ -117,6 +117,7 @@ flutter:
     - images/care.jpg
     - images/girl.jpg
     - images/medicareID_logo.png
+    - images/download.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

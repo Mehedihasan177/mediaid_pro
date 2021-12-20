@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/hospital_controller.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
+import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/models/ui_model/hospital_model/hospital_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/hospital_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/ambulance_list_widget/ambulance_list_widget.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +18,38 @@ class HospitalList extends StatefulWidget {
 }
 
 class _HospitalListState extends State<HospitalList> {
-  List<HospitalModel> hospitallist = List.of(hospitalList);
+  List<HospitalRes> hospitallist = [];
   bool nevigation = true;
+
+  _getHospitalList() async {
+
+
+    HospitalController.requestThenResponsePrint().then((value) {
+      setState(() {
+        print(value.body);
+        Map<String, dynamic> decoded = json.decode("${value.body}");
+        Iterable listNotification = decoded['data'];
+        print(decoded['data']);
+        hospitallist =
+            listNotification.map((model) => HospitalRes.fromJson(model)).toList();
+        print(hospitallist);
+
+      });
+    });
+  }
+
+
+
+
+
+  @override
+  void initState() {
+    _getHospitalList();
+    // TODO: implement initState
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -91,29 +127,26 @@ class _HospitalListState extends State<HospitalList> {
               children: [
                 Flexible(
                   child: Container(
-                    padding: EdgeInsets.only(left: 5, right: 5),
+                    //padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
-                    height: 750,
+                    height: 780,
                     child: ListView.builder(
                       //controller: PageController(viewportFraction: 0.3),
                         scrollDirection: Axis.vertical,
                         itemCount: hospitallist.length,
                         itemBuilder: (context,index) {
                           return AmbulanceHospitalWidget(
-                            hospitallist[index].id,
-                            hospitallist[index].name,
-                            hospitallist[index].hospital,
-                            hospitallist[index].about,
-                            hospitallist[index].phone_number,
-                            hospitallist[index].address,
-                            hospitallist[index].image,
-                            hospitallist[index].website,
-                            hospitallist[index].latitude,
-                            hospitallist[index].longtitude,
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
                               nevigation,
-                              context
+                              context,
                           );
-
                         }
                     ),
                   ),
@@ -126,3 +159,11 @@ class _HospitalListState extends State<HospitalList> {
     );
   }
 }
+// int id,
+//     String type,
+// String hospital,
+//     String about,
+// String phone_number,
+//     String address,
+
+//AmbulanceHospitalWidget

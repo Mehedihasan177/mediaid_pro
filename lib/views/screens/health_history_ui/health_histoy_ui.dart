@@ -61,16 +61,33 @@ class _HealthHistoryState extends State<HealthHistory> {
     return Scaffold(
       body: ListView(
         children: [
+
+
+
+
+
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                    "Health Reports",
-                    style: TextStyle(color: Colors.blue, fontSize: 17, fontStyle: FontStyle.italic, decoration: TextDecoration.underline),
+                // Text(
+                //     "Add Health Reports",
+                //     style: TextStyle(color: Colors.blue, fontSize: 17, fontStyle: FontStyle.italic, decoration: TextDecoration.underline),
+                //   ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Center(
+                    child: Text(
+                      "Health History",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
                   ),
-
+                ),
 
                 Container(
                   height: 40,

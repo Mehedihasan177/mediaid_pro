@@ -1,9 +1,11 @@
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/data/ambulance_list_data/ambulance_list_data.dart';
 import 'package:care_plus/models/ui_model/ambulance_model/ambulance_model.dart';
 import 'package:care_plus/views/screens/ambulance_list/ambulance_list.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/ambulance_hospital_details_widget/ambulance_hospital_details_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceDetailsPage extends StatefulWidget {
   final String name;
@@ -13,8 +15,7 @@ class AmbulanceDetailsPage extends StatefulWidget {
   final String address;
   final String image;
   final String website;
-  final double latitude;
-  final double longitude;
+
 
   const AmbulanceDetailsPage({
     Key? key,
@@ -25,8 +26,7 @@ class AmbulanceDetailsPage extends StatefulWidget {
     required this.address,
     required this.image,
     required this.website,
-    required this.latitude,
-    required this.longitude,
+
   }) : super(key: key);
 
   @override
@@ -86,7 +86,11 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                 ],
               ),
             ),
-            Image.asset(widget.image),
+            Image.network(
+                '$apiDomainRoot/images/${widget.image}'
+
+
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 20),
               child: Container(
@@ -167,8 +171,8 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
-            Image.asset("images/map.png",),
+            // SizedBox(height: 50),
+            // Image.asset("images/map.png",),
             SizedBox(
               height: 30,
             ),
@@ -180,7 +184,9 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () async {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                    // _launchURL("tel://21213123123");
+
+                    // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),
@@ -202,5 +208,10 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
         ),
       ),
     );
+  }
+
+
+  void _launchURL(_url) async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
   }
 }

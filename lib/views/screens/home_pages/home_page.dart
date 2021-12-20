@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(width: 20),
                 Text(
-                  "Canberra",
+                  "${SIGNINGRESPONSE.address}",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ]),
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.topLeft,
           padding: EdgeInsets.only(left: 17),
           child: Text(
-            "Hello, H. Rodney Withers",
+            "Hello, ${SIGNINGRESPONSE.name}",
             style: TextStyle(
                 fontSize: 15,
                 color: Colors.black.withOpacity(0.5),

@@ -257,7 +257,7 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                           //           )),
                           //   // (Route<dynamic> route) => false
                           // );
-                          SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded SUccessfully', Colors.green);
+                          SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
                           //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ProfilePage()));
 
                         });

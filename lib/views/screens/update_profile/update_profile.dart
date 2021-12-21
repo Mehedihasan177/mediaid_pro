@@ -7,7 +7,8 @@ import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
-import 'package:care_plus/responses_from_test_file/responses/user/user_profile_update_response.dart' as update;
+import 'package:care_plus/responses_from_test_file/responses/user/user_profile_update_response.dart'
+    as update;
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
 import 'package:care_plus/views/screens/setUp_Profile/image_upload_page.dart';
@@ -26,42 +27,26 @@ class UpdateProfile extends StatefulWidget {
 }
 
 class _UpdateProfileState extends State<UpdateProfile> {
-  TextEditingController _textName = TextEditingController(text: SIGNINGRESPONSE.name);
-  TextEditingController _textAddress = TextEditingController(text: SIGNINGRESPONSE.address);
-  TextEditingController _textPhone = TextEditingController(text: SIGNINGRESPONSE.mobile);
-  TextEditingController _textEmail = TextEditingController(text: SIGNINGRESPONSE.email);
-  TextEditingController _textWeight = TextEditingController(text: SIGNINGRESPONSE.weight);
-  TextEditingController _textHeight = TextEditingController(text: SIGNINGRESPONSE.height);
+  TextEditingController _textName =
+      TextEditingController(text: SIGNINGRESPONSE.name);
+  TextEditingController _textAddress =
+      TextEditingController(text: SIGNINGRESPONSE.address);
+  TextEditingController _textPhone =
+      TextEditingController(text: SIGNINGRESPONSE.mobile);
+  TextEditingController _textEmail =
+      TextEditingController(text: SIGNINGRESPONSE.email);
+  TextEditingController _textWeight =
+      TextEditingController(text: SIGNINGRESPONSE.weight);
+  TextEditingController _textHeight =
+      TextEditingController(text: SIGNINGRESPONSE.height);
 
   bool checkbox = true;
   String gender = 'Male';
 
-  String dateTime = '' ;
+  String dateTime = '';
   late DateTime _selectedDate;
 
   //Method for showing the date picker
-  void _pickDateDialog() {
-    showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        //which date will display when user open the picker
-        firstDate: DateTime(1950),
-        //what will be the previous supported year in picker
-        lastDate: DateTime
-            .now()) //what will be the up to supported date in picker
-        .then((pickedDate) {
-      //then usually do the future job
-      if (pickedDate == null) {
-        //if user tap cancel then this function will stop
-        return;
-      }
-      setState(() {
-        //for rebuilding the ui
-        _selectedDate = pickedDate;
-      });
-    });
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -111,26 +96,38 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                   NewImageUploadPage(page: 1)),
                         );
                       },
-                      child: Container(
-                        height: 130,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          // border: Border.all(color: Colors.black.withOpacity(0.1)),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black.withOpacity(0.07),
-                        ), //BoxDecoration
+                      child: CircleAvatar(
+                        radius: 78,
+                        backgroundColor: Colors.white,
+                        child: ClipOval(
+                            child: Image.network(
+                          '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
+                          fit: BoxFit.fill,
+                          width: 170,
+                          height: 190,
+                        )),
                       ),
                     ), //Container
                   ),
                 ],
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 115),
-                  child: Image.asset(
-                    "images/camera.png",
-                    height: 30,
-                    width: 30,
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            NewImageUploadPage(page: 1)),
+                  );
+                },
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 138),
+                    child: Image.asset(
+                      "images/camera.png",
+                      height: 30,
+                      width: 30,
+                    ),
                   ),
                 ),
               ),
@@ -143,8 +140,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
             padding: const EdgeInsets.only(left: 36, right: 20),
             child: Column(
               children: [
-
-
                 ///Name
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -269,7 +264,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
             height: 40,
           ),
 
-
           ///Calender
           Padding(
             padding: const EdgeInsets.only(left: 30),
@@ -290,7 +284,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                           "Date of Birth       ",
                           style: TextStyle(fontSize: 17),
                         ),
-
                         Text("${SIGNINGRESPONSE.dob}".replaceAll("null", " "))
                       ],
                     ),
@@ -303,27 +296,29 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   padding: EdgeInsets.only(left: 20),
                   alignment: Alignment.centerLeft,
                   child: TextButton(
-          onPressed:  () {
-            Picker(
-                  hideHeader: true,
-                  adapter: DateTimePickerAdapter(),
-                  title: Text("Select Data"),
-                  selectedTextStyle: TextStyle(color: Colors.blue),
-                  onConfirm: (Picker picker, List value) {
-                    print((picker.adapter as DateTimePickerAdapter).value);
-                    dateTime = (picker.adapter as DateTimePickerAdapter).value.toString();
-                    dateTime = DateFormat('yyyy-MM-dd').format(DateTime.parse(dateTime.toString()));
-                    print("dateTime");
-                    print(dateTime);
-                    setState(() {
-                      dateTime = dateTime;
-                    });
-
-                  }
-            ).showDialog(context);
-    },
-          child: Text("Select date of birth: "+"${dateTime}")
-      ),
+                      onPressed: () {
+                        Picker(
+                            hideHeader: true,
+                            adapter: DateTimePickerAdapter(),
+                            title: Text("Select Data"),
+                            selectedTextStyle: TextStyle(color: Colors.blue),
+                            onConfirm: (Picker picker, List value) {
+                              print((picker.adapter as DateTimePickerAdapter)
+                                  .value);
+                              dateTime =
+                                  (picker.adapter as DateTimePickerAdapter)
+                                      .value
+                                      .toString();
+                              dateTime = DateFormat('yyyy-MM-dd')
+                                  .format(DateTime.parse(dateTime.toString()));
+                              print("dateTime");
+                              print(dateTime);
+                              setState(() {
+                                dateTime = dateTime;
+                              });
+                            }).showDialog(context);
+                      },
+                      child: Text("Select date of birth: " + "${dateTime}")),
                 ),
               ],
             ),
@@ -331,7 +326,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
           SizedBox(
             height: 40,
           ),
-
 
           ///Address
           Padding(
@@ -368,7 +362,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
           SizedBox(
             height: 40,
           ),
-
 
           ///Phone Number
           Padding(
@@ -409,7 +402,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
             height: 40,
           ),
 
-
           ///Email
           Padding(
             padding: EdgeInsets.only(left: 25),
@@ -449,7 +441,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
             height: 30,
           ),
 
-
           ///Weight
           Padding(
             padding: EdgeInsets.only(left: 25),
@@ -476,63 +467,59 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10, right: 10),
                         child: Container(
-                            width: 90,
-                            child: TextField(
-                              controller: _textWeight,
-                              keyboardType: TextInputType.emailAddress,
-                              style: TextStyle(color: Colors.black),
-                              //scrollPadding: EdgeInsets.all(10),
-                              decoration: InputDecoration(
-                                //contentPadding: EdgeInsets.all(20),
-                                hintText: "Weight",
-                              ),
+                          width: 90,
+                          child: TextField(
+                            controller: _textWeight,
+                            keyboardType: TextInputType.emailAddress,
+                            style: TextStyle(color: Colors.black),
+                            //scrollPadding: EdgeInsets.all(10),
+                            decoration: InputDecoration(
+                              //contentPadding: EdgeInsets.all(20),
+                              hintText: "Weight",
                             ),
                           ),
-
+                        ),
                       ),
                     ],
                   ),
                 ),
 
-
                 ///Height
-                 Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(children: [
-                        Image.asset(
-                          "images/height.png",
-                          height: 30,
-                          width: 30,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Height",
-                          style: TextStyle(fontSize: 17),
-                        ),
-                      ]),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10),
-                        child: Container(
-                            width: 90,
-                            child: TextField(
-                              controller: _textHeight,
-                              keyboardType: TextInputType.emailAddress,
-                              style: TextStyle(color: Colors.black),
-                              //scrollPadding: EdgeInsets.all(10),
-                              decoration: InputDecoration(
-                                //contentPadding: EdgeInsets.all(20),
-                                hintText: "Height",
-                              ),
-                            ),
-                          ),
-
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      Image.asset(
+                        "images/height.png",
+                        height: 30,
+                        width: 30,
                       ),
-                    ],
-                  ),
-
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Height",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ]),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10),
+                      child: Container(
+                        width: 90,
+                        child: TextField(
+                          controller: _textHeight,
+                          keyboardType: TextInputType.emailAddress,
+                          style: TextStyle(color: Colors.black),
+                          //scrollPadding: EdgeInsets.all(10),
+                          decoration: InputDecoration(
+                            //contentPadding: EdgeInsets.all(20),
+                            hintText: "Height",
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -546,15 +533,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   "Save",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                onPressed: () async{
-
+                onPressed: () async {
                   // EasyLoading.show(status: 'loading...');
 
                   print(checkbox);
-                  if(checkbox==true){
-                    gender='Male';
-                  }else{
-                    gender='Female';
+                  if (checkbox == true) {
+                    gender = 'Male';
+                  } else {
+                    gender = 'Female';
                   }
                   print(gender);
                   Map data1 = {
@@ -566,38 +552,42 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     'email': "${_textEmail.text}",
                     'weight': "${_textWeight.text}",
                     'height': "${_textHeight.text}",
-
-
-
                   };
                   //EasyLoading.show(status: 'loading...');
-                  await UserUpdateController.requestThenResponsePrint( USERTOKEN, data1).then((value) async {
+                  await UserUpdateController.requestThenResponsePrint(
+                          USERTOKEN, data1)
+                      .then((value) async {
                     print(value.statusCode);
                     print(value.body);
                     final Map parsed = json.decode(value.body);
 
                     final doctorProfile = update.Data.fromJson(parsed);
 
-
                     print(value.statusCode);
                     print(value.body);
                     //EasyLoading.dismiss();
-                    if(value.statusCode==200){
+                    if (value.statusCode == 200) {
                       USERNAME = _textPhone.text;
                       signInAgain(context);
-                      SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully Added', Colors.green);
-                      return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
-
-                    }else{
-                      SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')
-                          .replaceAll('{', ' ')
-                          .replaceAll('}', ' ')
-                          .replaceAll('[', ' ')
-                          .replaceAll(']', ' '), Colors.red);
+                      SnackbarDialogueHelper().showSnackbarDialog(
+                          context, 'successfully Added', Colors.green);
+                      return Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BottomNevigation()),
+                      );
+                    } else {
+                      SnackbarDialogueHelper().showSnackbarDialog(
+                          context,
+                          value.body
+                              .replaceAll('"', ' ')
+                              .replaceAll('{', ' ')
+                              .replaceAll('}', ' ')
+                              .replaceAll('[', ' ')
+                              .replaceAll(']', ' '),
+                          Colors.red);
                     }
-                  }
-                  );
-
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(350, 59),
@@ -623,7 +613,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Future<void> signInAgain(BuildContext context) async {
     //EasyLoading.show(status: 'loading...');
 
-    SigninModel myInfo = new SigninModel(mobile: USERNAME, password: USERPASS, );
+    SigninModel myInfo = new SigninModel(
+      mobile: USERNAME,
+      password: USERPASS,
+    );
     await SigninController.requestThenResponsePrint(myInfo).then((value) async {
       print(value.statusCode);
       print(value.body);
@@ -632,8 +625,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
       final loginobject = User.fromJson(parsed);
       print(loginobject.token);
       print(loginobject.token);
-
-
 
       USERTOKEN = loginobject.token;
       // sharedPreferences.setString("token", loginobject.accessToken);
@@ -652,6 +643,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       }
     });
   }
+
   showPickerDate(BuildContext context) {
     Picker(
         hideHeader: true,
@@ -660,8 +652,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
         selectedTextStyle: TextStyle(color: Colors.blue),
         onConfirm: (Picker picker, List value) {
           print((picker.adapter as DateTimePickerAdapter).value);
-
-        }
-    ).showDialog(context);
+        }).showDialog(context);
   }
 }

@@ -56,7 +56,7 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                   child: Text(
                                     "\$" +
                                         upcomingAppointmentDoctorDetail
-                                            .doctor.fee,
+                                            .doctor.chambers,
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontSize: 17,

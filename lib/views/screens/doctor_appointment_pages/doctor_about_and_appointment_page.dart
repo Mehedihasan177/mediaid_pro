@@ -65,7 +65,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(context,
+        Navigator.push(context,
             MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },

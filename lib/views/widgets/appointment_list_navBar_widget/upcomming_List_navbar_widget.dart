@@ -1,6 +1,7 @@
 
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/apponitment_cencel_controller.dart';
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_list_navBar.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/screens/doctor_appointment_pages/doctor_about_and_appointment_page.dart';
@@ -10,7 +11,7 @@ import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upco
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context) =>
+Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context, int index) =>
     GestureDetector(
   child:   Card(
 
@@ -217,17 +218,20 @@ Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context) =>
 
                             icon: Icon(
 
-                              Icons.message,
+                              Icons.cancel,
 
                             ),
 
                             iconSize: 20,
 
-                            color: Color(0xFF1CBFA8),
+                            color: Colors.red,
 
                             splashColor: Color(0xFF1CBFA8),
 
-                            onPressed: () {},
+                            onPressed: () {
+                              print(appointment_list_navBar.doctor.id.toString());
+                             // cancelThisAppointment(appointment_list_navBar.doctor.id.toString(),context);
+                            },
 
                           ),
 
@@ -257,3 +261,4 @@ Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context) =>
         Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => UpcomingAppointmentDoctorDetails()));
       },
 );
+

@@ -51,10 +51,13 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
     super.initState();
   }
 
+  TextEditingController searchC = TextEditingController();
+
 
 
   @override
   Widget build(BuildContext context) {
+
     return WillPopScope(
 
       onWillPop: () async {
@@ -103,7 +106,10 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
+                  controller: searchC,
+                  onChanged: onSearch,
+                  onSubmitted: onSearch,
                   style: TextStyle(color: Colors.black),
                   scrollPadding: EdgeInsets.all(10),
                   decoration: InputDecoration(
@@ -130,6 +136,39 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
                     scrollDirection: Axis.vertical,
                     itemCount: doctorlistbycatagory.length,
                     itemBuilder: (context, index) {
+
+                      if(searchKey.length==0){
+                        return doctorList(doctorlistbycatagory[index], context);
+                      }else{
+                        if(doctorlistbycatagory[index].name.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].specialization.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].address.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].bmdcReg.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].chambers.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].department.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].hospitalName.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].degree.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].introduction.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].visitingFee.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].doctorService.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else if(doctorlistbycatagory[index].district.contains(searchKey)){
+                          return doctorList(doctorlistbycatagory[index], context);
+                        }else{
+                          return Container();
+                        }
+                      }
+
                       return doctorList(doctorlistbycatagory[index], context);
                     }),
               ),
@@ -138,5 +177,12 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
         ),
       ),
     );
+  }
+
+  String searchKey = '';
+  void onSearch(String value) {
+    setState(() {
+      searchKey=value;
+    });
   }
 }

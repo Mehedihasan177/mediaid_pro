@@ -140,29 +140,27 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
                       if(searchKey.length==0){
                         return doctorList(doctorlistbycatagory[index], context);
                       }else{
-                        if(doctorlistbycatagory[index].name.contains(searchKey)){
+                        if(doctorlistbycatagory[index].name.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].specialization.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].specialization.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].address.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].address.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].bmdcReg.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].bmdcReg.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].chambers.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].chambers.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].department.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].department.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].hospitalName.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].hospitalName.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].degree.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].degree.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].introduction.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].introduction.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].visitingFee.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].visitingFee.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].doctorService.contains(searchKey)){
-                          return doctorList(doctorlistbycatagory[index], context);
-                        }else if(doctorlistbycatagory[index].district.contains(searchKey)){
+                        }else if(doctorlistbycatagory[index].district.toLowerCase().contains(searchKey)){
                           return doctorList(doctorlistbycatagory[index], context);
                         }else{
                           return Container();

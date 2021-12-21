@@ -246,6 +246,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 print(loginobject.token);
                                 sharedPreferences.setString("token", loginobject.token);
 
+                                USERPASS = _confirmPassword.text;
+
                                 sharedPreferences.setString("mobile", USERNAME);
                                 sharedPreferences.setString("password", USERPASS);
                               });

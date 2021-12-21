@@ -9,6 +9,7 @@ String USERNAME = "";
 String USERPASS = "";
 String USERTOKEN = '';
 String USERID = '';
+String USERPHONE = '';
 
 late User SIGNINGRESPONSE;
 // late SpecializationResponse SPECIALIZATION;

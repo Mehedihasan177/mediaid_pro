@@ -35,7 +35,7 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                       children: [
                         Container(
                             alignment: Alignment.centerLeft,
-                            child: Text(profile_model.name)),
+                            child: Text(SIGNINGRESPONSE.name)),
                         SizedBox(
                           height: 5,
                         ),

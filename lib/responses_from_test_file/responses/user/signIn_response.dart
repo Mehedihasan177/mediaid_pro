@@ -111,7 +111,7 @@ class User {
   dynamic deletedAt;
   String labReports; //List<dynamic> labReports;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<dynamic, dynamic> json) => User(
     id: json["id"].toString(),
     token: json["token"].toString(),
     adminId: json["admin_id"].toString(),

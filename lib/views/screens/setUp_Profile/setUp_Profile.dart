@@ -378,7 +378,7 @@ class _SetupProfileState extends State<SetupProfile> {
                     final Map parsed = json.decode(value.body);
 
 
-                    final doctorProfile = Data.fromJson(parsed);
+                    //final doctorProfile = Data.fromJson(parsed);
                     //DOCTORUPDATEPROFILERESPONSES = doctorProfile;
                     // DoctorSigninController();
 

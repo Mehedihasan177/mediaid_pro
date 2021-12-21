@@ -23,7 +23,7 @@ class _AppointmentListState extends State<AppointmentList> {
 
 
 
-  List<Appointment_History_navBar> appointmentHistoy = List.of(appointmentHistory);
+
 
 
   _getUpcomingAppointment() async {

@@ -28,7 +28,7 @@ class SingInPage extends StatefulWidget {
 
 class _SingInPageState extends State<SingInPage> {
   TextEditingController _textMobile = TextEditingController(text: "01744319");
-  TextEditingController _textPassword = TextEditingController(text: "1122334455");
+  TextEditingController _textPassword = TextEditingController(text: "12345678");
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();

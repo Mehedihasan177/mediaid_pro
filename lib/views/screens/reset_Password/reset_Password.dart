@@ -1,3 +1,6 @@
+import 'package:care_plus/controllers/user/reset_password_controller.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
+import 'package:care_plus/models/reset_password_model.dart';
 import 'package:care_plus/views/screens/change_password/change_password.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,7 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  TextEditingController _textEmail = TextEditingController();
+  TextEditingController _textMobile = TextEditingController();
   TextEditingController _textPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -82,7 +85,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                           width: 20,
                         ),
                         TextField(
-                          controller: _textEmail,
+                          controller: _textMobile,
                           keyboardType: TextInputType.emailAddress,
                           style: TextStyle(color: Colors.black),
                           //scrollPadding: EdgeInsets.all(10),
@@ -139,8 +142,24 @@ class _ResetPasswordState extends State<ResetPassword> {
                           "Next",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                        onPressed: () async {
-                          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomePage()));
+                        onPressed: () {
+                          // print("token of user\n");
+                          // print("token at call mehedi hasan who are you: " + USERTOKEN);
+                          ResetPasswordModel passChange = new ResetPasswordModel(mobile: _textMobile.text);
+
+                          ResetPasswordController.requestThenResponsePrint(passChange ).then((value) {
+                            print('dddddddd');
+                            print(value.statusCode);
+                            if (value.statusCode == 200) {
+
+                              SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully reset password', Colors.green);
+                            }else{
+                              // BasicFunctions.showAlertDialogTOView(context,
+                              //     AppLocalizations.of(context).translate("passwordRecheckTitle"),
+                              //     AppLocalizations.of(context).translate("passwordRecheckMessage"));
+                              // BasicFunctions.showAlertDialogTOView(context, "Warning", "Please recheck your passwords to change");
+                            }
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(350, 59),

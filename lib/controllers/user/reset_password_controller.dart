@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class ResetPasswordController{
   //this class is for make understand how it works actually
 
-  static Future<http.Response> requestThenResponsePrint(ResetPasswordModel resetPasswordModel, String token) async {
+  static Future<http.Response> requestThenResponsePrint(ResetPasswordModel resetPasswordModel) async {
 
     // This is a a callof global veriable
     String domain = apiDomainRoot;
@@ -20,7 +20,7 @@ class ResetPasswordController{
     var response = await http.post(Uri.parse(url), body: resetpassword,
         headers: {
           "Accept": "application/json",
-          'Authorization': 'Bearer $token',
+          //'Authorization': 'Bearer $token',
         }
     );
 

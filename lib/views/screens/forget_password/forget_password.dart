@@ -118,38 +118,15 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             print("token at call mehedi hasan who are you: " + USERTOKEN);
             ResetPasswordModel passChange = new ResetPasswordModel(mobile: _textEmail.text);
 
-            ResetPasswordController.requestThenResponsePrint(passChange, USERTOKEN, ).then((value) async {
+            ResetPasswordController.requestThenResponsePrint(passChange).then((value) async {
               print('dddddddd');
               print(value.statusCode);
               if (value.statusCode == 200) {
+                //USERNAME = _textEmail.text;
                 print("successfully done");
                 print(value.body);
-                SigninModel myInfo = new SigninModel(
-                    mobile: USERNAME, password: USERPASS);
-                await SigninController.requestThenResponsePrint(myInfo)
-                    .then((value) async {
-                  print(value.statusCode);
-                  print(value.body);
-
-                  if (value.statusCode == 200) {
-                    SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                    setState(() {
-                      var reobj = SignInResponse.fromJson(json.decode(value.body));
-                      var loginobject = reobj.data.user;
-                      print('loginobject.image');
-                      print(loginobject.image);
-                      SIGNINGRESPONSE = loginobject;
-                      print(loginobject.token);
-                      sharedPreferences.setString("token", loginobject.token);
-
-                      sharedPreferences.setString("mobile", USERNAME);
-                      sharedPreferences.setString("password", USERPASS);
-                    });
-                  }
-                });
-                SnackbarDialogueHelper().showSnackbarDialog(context, 'Password reset successfully $passChange', Colors.green);
-                SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
+                SnackbarDialogueHelper().showSnackbarDialog(context, 'Password reset successfully ${value.body}', Colors.green);
+                // SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
                 return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SingInPage()),);
 
               }else{

@@ -13,84 +13,90 @@ Widget NotificationWidget(NotificationRes notification) =>
         children: [
 
 
-          Container(
-            height: 45,
-            width: 45,
-            decoration: BoxDecoration(
-              borderRadius:
-              BorderRadius.all(Radius.circular(10)),
-              color: Colors.blue.withOpacity(0.2),
-            ),
-            child: Icon(
-              Icons.notification_important_rounded,
-              color: Colors.blue.withOpacity(0.9),
-              size: 30,
+          Expanded(
+            flex: 1,
+            child: Container(
+              height: 45,
+              width: 45,
+              decoration: BoxDecoration(
+                borderRadius:
+                BorderRadius.all(Radius.circular(10)),
+                color: Colors.blue.withOpacity(0.2),
+              ),
+              child: Icon(
+                Icons.notification_important_rounded,
+                color: Colors.blue.withOpacity(0.9),
+                size: 30,
+              ),
             ),
           ),
 
 
-          Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(notification.title,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold
-                    ),
-                    )
-                ),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(notification.title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                      ),
+                      )
+                  ),
 
-                SizedBox(height: 10,),
+                  SizedBox(height: 10,),
 
-                Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(notification.body,
-                    style: TextStyle(
-                      fontSize: 10,
-                      //fontWeight: FontWeight.bold
-                    ),
-                    )
-                ),
+                  Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(notification.body,
+                      style: TextStyle(
+                        fontSize: 10,
+                        //fontWeight: FontWeight.bold
+                      ),
+                      )
+                  ),
 
-                // Container(
-                //     alignment: Alignment.centerLeft,
-                //     child: Text(notification.type,
-                //     style: TextStyle(
-                //       fontSize: 10,
-                //       //fontWeight: FontWeight.bold
-                //     ),
-                //     )
-                // ),
+                  // Container(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Text(notification.type,
+                  //     style: TextStyle(
+                  //       fontSize: 10,
+                  //       //fontWeight: FontWeight.bold
+                  //     ),
+                  //     )
+                  // ),
 
-                SizedBox(height: 10,),
+                  SizedBox(height: 10,),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Text(DateFormat("dd-MMMM-yyyy").format(notification.createdAt))
-                    ),
-
-
-                    Text("    ||    "),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(DateFormat("dd-MMMM-yyyy").format(notification.createdAt))
+                      ),
 
 
-                    Container(
-                        alignment: Alignment.bottomLeft,
-                        child: Text(DateFormat.jm().format(DateTime.parse(notification.createdAt.toString())))
-                    ),
-                    
-                  ],
-                ),
+                      Text("    ||    "),
 
-              ],
+
+                      Container(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(DateFormat.jm().format(DateTime.parse(notification.createdAt.toString())))
+                      ),
+
+                    ],
+                  ),
+
+                ],
+              ),
             ),
           ),
         ],

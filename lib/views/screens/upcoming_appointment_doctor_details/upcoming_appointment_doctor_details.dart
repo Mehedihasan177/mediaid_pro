@@ -13,14 +13,15 @@ import 'package:care_plus/views/widgets/upcoming_Appointment_Doctor_widget/upcom
 import 'package:flutter/material.dart';
 
 class UpcomingAppointmentDoctorDetails extends StatefulWidget {
-  const UpcomingAppointmentDoctorDetails({Key? key}) : super(key: key);
+  final UpcomingAppointment upcomingAppointmentDoctorDetails;
+  const UpcomingAppointmentDoctorDetails({Key? key, required this.upcomingAppointmentDoctorDetails}) : super(key: key);
 
   @override
   _UpcomingAppointmentDoctorDetailsState createState() => _UpcomingAppointmentDoctorDetailsState();
 }
 
 class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDoctorDetails> {
-  List<UpcomingAppointment> upcomingAppointmentDoctorDetails = [];
+
 
 
   // UpcomingAppointment responses = UpcomingAppointment(createdAt: null, doctor: null,
@@ -28,27 +29,27 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
 
 
 
-  _getUpcomingAppointment() async {
-
-
-    UpcomingAppointmentController.requestThenResponsePrint( USERTOKEN).then((value) {
-      setState(() {
-        print(value.body);
-        Map<String, dynamic> decoded = json.decode("${value.body}");
-        Iterable listNotification = decoded['data'];
-        print(decoded['data']);
-        upcomingAppointmentDoctorDetails =
-            listNotification.map((model) => UpcomingAppointment.fromJson(model)).toList();
-        print(upcomingAppointmentDoctorDetails);
-
-      });
-    });
-  }
+  // _getUpcomingAppointment() async {
+  //
+  //
+  //   UpcomingAppointmentController.requestThenResponsePrint( USERTOKEN).then((value) {
+  //     setState(() {
+  //       print(value.body);
+  //       Map<String, dynamic> decoded = json.decode("${value.body}");
+  //       Iterable listNotification = decoded['data'];
+  //       print(decoded['data']);
+  //       upcomingAppointmentDoctorDetails =
+  //           listNotification.map((model) => UpcomingAppointment.fromJson(model)).toList();
+  //       print(upcomingAppointmentDoctorDetails);
+  //
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
-    _getUpcomingAppointment();
+    // _getUpcomingAppointment();
     super.initState();
   }
 
@@ -60,7 +61,7 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
@@ -109,11 +110,11 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
                       shrinkWrap: true,
                       //controller: PageController(viewportFraction: 0.3),
                         scrollDirection: Axis.vertical,
-                        itemCount: upcomingAppointmentDoctorDetails.length,
+                        itemCount: 1,
                         itemBuilder: (context,index) {
                           //var information = carePlushPrescriptionList[index];
                           return UpcomingAppointmentDoctorDetailsWidget(
-                              upcomingAppointmentDoctorDetails[index],
+                              widget.upcomingAppointmentDoctorDetails,
                               context);
 
                         }

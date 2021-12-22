@@ -235,7 +235,7 @@ class Doctor {
     referralCode: json["referral_code"],
     doctorid: json["doctorid"],
     mobile: json["mobile"],
-    nid: json["nid"],
+    nid: json["nid"].toString(),
     bmdcReg: json["bmdc_reg"],
     department: json["department"],
     degree: json["degree"],

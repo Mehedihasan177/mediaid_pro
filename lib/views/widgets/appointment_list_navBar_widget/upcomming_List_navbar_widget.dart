@@ -258,7 +258,7 @@ Widget Appointment_List(UpcomingAppointment appointment_list_navBar, context, in
 
   ),
       onTap: (){
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => UpcomingAppointmentDoctorDetails()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => UpcomingAppointmentDoctorDetails(upcomingAppointmentDoctorDetails: appointment_list_navBar,)));
       },
 );
 

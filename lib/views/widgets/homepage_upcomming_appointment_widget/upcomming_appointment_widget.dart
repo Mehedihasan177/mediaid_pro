@@ -88,7 +88,7 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
       ),
       // onTap: onCardTapped(upcomingAppointment),
           onTap: (){
-            Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => UpcomingAppointmentDoctorDetails()));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => UpcomingAppointmentDoctorDetails(upcomingAppointmentDoctorDetails: upcomingAppointment,)));
           },
     )
     );

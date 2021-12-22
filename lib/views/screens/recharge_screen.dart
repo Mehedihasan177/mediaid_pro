@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/others/recharge_request.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
+import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:flutter/material.dart';
 
 class RechargeScreen extends StatefulWidget {
@@ -38,9 +44,9 @@ class _RechargeScreenState extends State<RechargeScreen> {
                   suffixStyle: const TextStyle(color: Colors.green)),
             ),
 
-            SizedBox(height: 5,),
+            SizedBox(height: 7,),
             Text('Please Enter Transaction Gateway',style: TextStyle(fontSize: 16),),
-            SizedBox(height: 5,),
+            SizedBox(height: 7,),
             TextField(
               controller: _noteC,
               decoration: InputDecoration(
@@ -56,6 +62,58 @@ class _RechargeScreenState extends State<RechargeScreen> {
                   prefixText: ' ',
                   suffixStyle: const TextStyle(color: Colors.green)),
             ),
+
+
+
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Center(
+                child: Container(
+                  child: ElevatedButton(
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(color: Colors.white, fontSize: 17),
+                    ),
+                    onPressed: () async{
+
+                      print(USERTOKEN);
+
+                      await UserRechargeWallet.requestThenResponsePrint( USERTOKEN,  _gatewayC.text  + _noteC.text).then((value) async {
+                        print(value.statusCode);
+                        print("mmmmmm :   ");
+                        print(value.body);
+                        final Map parsed = json.decode(value.body);
+
+                        if(value.statusCode==200){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully Recharged', Colors.green);
+                          return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+
+                        }else{
+                          SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')
+                              .replaceAll('{', ' ')
+                              .replaceAll('}', ' ')
+                              .replaceAll('[', ' ')
+                              .replaceAll(']', ' '), Colors.red);
+                        }
+                      }
+                      );
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(150, 45),
+                      primary: Color(0xFF1CBFA8),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    //color: Color(0xF60D72),
+                      borderRadius: BorderRadius.circular(18)),
+                ),
+              ),
+            ),
+
+
           ],
         ),
       ),

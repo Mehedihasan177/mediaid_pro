@@ -9,12 +9,14 @@ import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_hi
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_list_navBar.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/screens/give_review.dart';
+import 'package:care_plus/views/screens/lib/pages/call_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upcoming_appointment_doctor_details.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/appointmnet_history_widget.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/upcomming_List_navbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AppointmentList extends StatefulWidget {
   const AppointmentList({Key? key}) : super(key: key);
@@ -283,7 +285,22 @@ class _AppointmentListState extends State<AppointmentList> {
                                 iconSize: 20,
                                 color: Color(0xFF1CBFA8),
                                 splashColor: Color(0xFF1CBFA8),
-                                onPressed: () {},
+                                onPressed: () async {
+                                  String channelName = "abcdefg";
+                                  if (channelName.isNotEmpty) {
+                                    // await for camera and mic permissions before pushing video page
+                                    //await _handleCameraAndMic();
+                                    await _handleCameraAndMic(Permission.camera);
+                                    await _handleCameraAndMic(Permission.microphone);
+                                    // push video page with given channel name
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CallPage(channelName),//testing
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                               // IconButton(
                               //
@@ -488,4 +505,8 @@ class _AppointmentListState extends State<AppointmentList> {
               builder: (context) => GiveReview(appointment: appointment_list_navBar,)));
     });
   }
+}
+Future<void> _handleCameraAndMic(Permission permission) async {
+  final status = await permission.request();
+  print(status);
 }

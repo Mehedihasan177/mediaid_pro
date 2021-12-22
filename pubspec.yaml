@@ -52,7 +52,12 @@ dependencies:
   url_launcher: ^6.0.12
   cloud_firestore: ^3.1.5
   firebase_database: ^9.0.4
+  agora_rtc_engine: ^4.0.7
+  permission_handler: ^8.2.5
+  audioplayer: ^0.8.1
+  path_provider:
   flutter_rating_bar: ^4.0.0
+
 
 
 dev_dependencies:

@@ -50,6 +50,8 @@ dependencies:
 #  flutter_webview_plugin: ^0.4.0
 #  flutter_inappwebview: ^5.3.2
   url_launcher: ^6.0.12
+  cloud_firestore: ^3.1.5
+  firebase_database: ^9.0.4
 
 
 dev_dependencies:

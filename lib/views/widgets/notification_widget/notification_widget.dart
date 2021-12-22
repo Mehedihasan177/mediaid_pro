@@ -3,7 +3,8 @@ import 'package:care_plus/responses_from_test_file/responses/user/notification_r
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-Widget NotificationWidget(NotificationRes notification) => Padding(
+Widget NotificationWidget(NotificationRes notification) =>
+    Padding(
   padding: const EdgeInsets.only(left: 10, right: 10),
   child:   Card(
     child: Padding(

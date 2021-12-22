@@ -36,9 +36,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
   TextEditingController _textEmail =
       TextEditingController(text: SIGNINGRESPONSE.email);
   TextEditingController _textWeight =
-      TextEditingController(text: SIGNINGRESPONSE.weight);
+      TextEditingController(text: SIGNINGRESPONSE.weight.replaceAll("null", "0"));
   TextEditingController _textHeight =
-      TextEditingController(text: SIGNINGRESPONSE.height);
+      TextEditingController(text: SIGNINGRESPONSE.height.replaceAll("null", "0"));
 
   bool checkbox = true;
   String gender = 'Male';
@@ -298,6 +298,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   child: TextButton(
                       onPressed: () {
                         Picker(
+                          backgroundColor: Colors.blue,
                             hideHeader: true,
                             adapter: DateTimePickerAdapter(),
                             title: Text("Select Data"),
@@ -385,6 +386,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 Padding(
                   padding: const EdgeInsets.only(left: 43.0, right: 10),
                   child: TextField(
+                    enableInteractiveSelection: false, // will disable paste operation
+                    readOnly: true,
                     controller: _textPhone,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),
@@ -424,6 +427,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 Padding(
                   padding: const EdgeInsets.only(left: 43.0, right: 10),
                   child: TextField(
+                    enableInteractiveSelection: false, // will disable paste operation
+                    readOnly: true,
                     controller: _textEmail,
                     keyboardType: TextInputType.emailAddress,
                     style: TextStyle(color: Colors.black),

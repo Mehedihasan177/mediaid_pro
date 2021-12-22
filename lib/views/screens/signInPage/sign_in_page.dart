@@ -13,6 +13,8 @@ import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,8 +29,19 @@ class SingInPage extends StatefulWidget {
 class _SingInPageState extends State<SingInPage> {
   TextEditingController _textMobile = TextEditingController(text: "01744319");
   TextEditingController _textPassword = TextEditingController(text: "1122334455");
+
+  final databaseRef = FirebaseDatabase.instance.reference();
+  //final Future<FirebaseApp> _future = Firebase.initializeApp();
+
+  void addData(String data) {
+    databaseRef.push().set({'name': data, 'comment': 'A good season'});
+  }
+  final fb = FirebaseDatabase.instance;
+  final name = "Name";
+
   @override
   Widget build(BuildContext context) {
+    final ref = fb.reference();
     return Scaffold(
       body: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -129,6 +142,14 @@ class _SingInPageState extends State<SingInPage> {
           SizedBox(
             height: 30,
           ),
+          RaisedButton(
+              child: Text("Demo button"),
+              onPressed: (){
+                Map <String,dynamic> data = {"field2" :  _textMobile.text};
+                FirebaseFirestore.instance.collection("test").add(data);
+                ref.child(name).set(_textMobile.text);
+              }
+          ),
           Center(
             child: Container(
               child: ElevatedButton(
@@ -137,6 +158,7 @@ class _SingInPageState extends State<SingInPage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onPressed: () async {
+                  addData(_textMobile.text);
                   //EasyLoading.show(status: 'loading...');
 
                   // SharedPreferences sharedPreferences =

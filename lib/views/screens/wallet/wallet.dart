@@ -14,6 +14,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
+import '../recharge_screen.dart';
+
 class walletUi extends StatefulWidget {
   const walletUi({Key? key}) : super(key: key);
 
@@ -123,7 +125,7 @@ class _walletUiState extends State<walletUi> {
                           style: TextStyle(color: Colors.white, fontSize: 15),
                         ),
                         onPressed: () async {
-                          // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Otp()));
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => RechargeScreen()));
 
                         },
                         style: ElevatedButton.styleFrom(

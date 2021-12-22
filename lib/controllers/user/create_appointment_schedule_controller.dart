@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class CreateAppointmentScheduleController{
   //this class is for make understand how it works actually
 
-  static Future<http.Response> requestThenResponsePrint(CreateAppointmentReq createAppointmentSchedule, String token) async {
+  static Future<http.Response> requestThenResponsePrint(CreateAppointmentReq createAppointmentSchedule,appointmentFor, String token) async {
 
     // This is a a callof global veriable
     String domain = apiDomainRoot;
@@ -16,6 +16,7 @@ class CreateAppointmentScheduleController{
       'doctor_id': "${createAppointmentSchedule.doctorId}",
       'appointment_slot_id': "${createAppointmentSchedule.appointmentSlotId}",
       'date': "${createAppointmentSchedule.date}",
+      'appointment_for': appointmentFor
 
     };
 

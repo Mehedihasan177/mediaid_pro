@@ -11,6 +11,7 @@ import 'package:care_plus/views/screens/confirm_appointment/confirm_appointment.
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/widgets/doctor_about_and_appointment_widget/doctor_about_and_appointment_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -424,6 +425,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   ),
 
 
+
                                 Container(
                                   padding: EdgeInsets.only(top: 20),
                                   alignment: Alignment.centerLeft,
@@ -435,213 +437,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                // Container(
-                                //   margin: EdgeInsets.symmetric(vertical: 5.0),
-                                //   height: 95.0,
-                                //   child: ListView(
-                                //     scrollDirection: Axis.horizontal,
-                                //     children: [
-                                //       Container(
-                                //         width: 70,
-                                //         child: Card(
-                                //           shape: RoundedRectangleBorder(
-                                //             borderRadius: BorderRadius.circular(15.0),
-                                //           ),
-                                //           color: Colors.white,
-                                //           child: Column(
-                                //             children: [
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 10),
-                                //                 child: Text(doctorAppointment.card_day,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 20),
-                                //                 child: Text(doctorAppointment.card_date,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Container(
-                                //         width: 70,
-                                //         child: Card(
-                                //           shape: RoundedRectangleBorder(
-                                //             borderRadius: BorderRadius.circular(15.0),
-                                //           ),
-                                //           color: Colors.white,
-                                //           child: Column(
-                                //             children: [
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 10),
-                                //                 child: Text(doctorAppointment.card_day,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 20),
-                                //                 child: Text(doctorAppointment.card_date,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Container(
-                                //         width: 70,
-                                //         child: Card(
-                                //           shape: RoundedRectangleBorder(
-                                //             borderRadius: BorderRadius.circular(15.0),
-                                //           ),
-                                //           color: Colors.white,
-                                //           child: Column(
-                                //             children: [
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 10),
-                                //                 child: Text(doctorAppointment.card_day,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 20),
-                                //                 child: Text(doctorAppointment.card_date,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Container(
-                                //         width: 70,
-                                //         child: Card(
-                                //           shape: RoundedRectangleBorder(
-                                //             borderRadius: BorderRadius.circular(15.0),
-                                //           ),
-                                //           color: Colors.white,
-                                //           child: Column(
-                                //             children: [
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 10),
-                                //                 child: Text(doctorAppointment.card_day,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 20),
-                                //                 child: Text(doctorAppointment.card_date,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Container(
-                                //         width: 70,
-                                //         child: Card(
-                                //           shape: RoundedRectangleBorder(
-                                //             borderRadius: BorderRadius.circular(15.0),
-                                //           ),
-                                //           color: Colors.white,
-                                //           child: Column(
-                                //             children: [
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 10),
-                                //                 child: Text(doctorAppointment.card_day,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 20),
-                                //                 child: Text(doctorAppointment.card_date,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                //       Container(
-                                //         width: 70,
-                                //         child: Card(
-                                //           shape: RoundedRectangleBorder(
-                                //             borderRadius: BorderRadius.circular(15.0),
-                                //           ),
-                                //           color: Colors.white,
-                                //           child: Column(
-                                //             children: [
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 10),
-                                //                 child: Text(doctorAppointment.card_day,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //               Padding(
-                                //                 padding: const EdgeInsets.only(top: 20),
-                                //                 child: Text(doctorAppointment.card_date,
-                                //                   style: TextStyle(
-                                //                       fontSize: 20,
-                                //                       fontWeight: FontWeight.bold
-                                //                   ),
-                                //                 ),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //         ),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-                                //
-                                // Container(
-                                //   padding: EdgeInsets.only(top: 20),
-                                //   alignment: Alignment.centerLeft,
-                                //   child: Text(doctorAppointment.dateandtime,
-                                //     style: TextStyle(
-                                //         color: Colors.black.withOpacity(0.5),
-                                //         fontSize: 16,
-                                //         fontWeight: FontWeight.bold
-                                //     ),
-                                //   ),
-                                // ),
+
 
                                 Container(
                                   margin: EdgeInsets.symmetric(vertical: 5.0),
@@ -652,6 +448,26 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                       itemBuilder: (BuildContext context,int index){
                                         return cardBuilder(slotWithDate[index],index);
                                       }
+                                  ),
+                                ),
+
+
+
+                                Container(
+                                  padding: EdgeInsets.only(top: 20,right: 20),
+                                  alignment: Alignment.centerLeft,
+                                  child: TextFormField(
+                                    controller: appointmentForC,
+                                    cursorColor: Colors.black,
+                                    decoration: new InputDecoration(
+                                        // border: InputBorder.none,
+                                        // focusedBorder: InputBorder.none,
+                                        // enabledBorder: InputBorder.none,
+                                        // errorBorder: InputBorder.none,
+                                        // disabledBorder: InputBorder.none,
+                                        contentPadding:
+                                        EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                                        hintText: "Appointment For"),
                                   ),
                                 ),
                               ],
@@ -681,7 +497,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         slotWithDate[selectedIndex].date,
                                     );
 
-                                    CreateAppointmentScheduleController.requestThenResponsePrint(createAppointmentSchedule, USERTOKEN).then((value) {
+                                    CreateAppointmentScheduleController.requestThenResponsePrint(createAppointmentSchedule,appointmentForC.text, USERTOKEN).then((value) {
                                       setState(() {
                                         print(value.statusCode);
                                         if(value.statusCode==200){
@@ -723,6 +539,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
       ),
     );
   }
+
+  TextEditingController appointmentForC = new TextEditingController();
 
   designPortion() => Row(
         children: [

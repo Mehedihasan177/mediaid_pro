@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/controllers/user/others/viewUserHealthHistory.dart';
 import 'package:care_plus/controllers/user/view_all_prescription/userViewAllPrevPrescription.dart';
 import 'package:care_plus/data/health_history/health_history_data.dart';
 import 'package:care_plus/models/ui_model/health_histoy/health_history_model.dart';
+import 'package:care_plus/responses/others/userHealthHistory.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/report_presctiption_responses.dart';
 import 'package:care_plus/views/screens/care_plus_lab_report_list/care_plus_lab_report_list.dart';
 import 'package:care_plus/views/screens/care_plus_prescriptions_list/care_plus_prescriptions_list.dart';
@@ -28,29 +30,30 @@ class _HealthHistoryState extends State<HealthHistory> {
 
 
 //
-  List<ReportPrescription> health_history = [];
+  List<Health_History> health_history = [];
 
 
-  _getDoctorListByCatagory() async {
-
-
-    UserViewAllPres.requestThenResponsePrint(context, USERTOKEN).then((value) {
-      setState(() {
-        print(value.body);
-        Map<String, dynamic> decoded = json.decode("${value.body}");
-        Iterable listNotification = decoded['data'];
-        print(decoded['data']);
-        health_history =
-            listNotification.map((model) => ReportPrescription.fromJson(model)).toList();
-        print(health_history);
-
-      });
-    });
-  }
+  // _getDoctorListByCatagory() async {
+  //
+  //
+  //   UserViewAllPres.requestThenResponsePrint(context, USERTOKEN).then((value) {
+  //     setState(() {
+  //       print(value.body);
+  //       Map<String, dynamic> decoded = json.decode("${value.body}");
+  //       Iterable listNotification = decoded['data'];
+  //       print(decoded['data']);
+  //       health_history =
+  //           listNotification.map((model) => ReportPrescription.fromJson(model)).toList();
+  //       print(health_history);
+  //
+  //     });
+  //   });
+  // }
 
   @override
   void initState() {
-    _getDoctorListByCatagory();
+    // _getDoctorListByCatagory();
+    getPatientHealthHistory();
     super.initState();
   }
 
@@ -112,22 +115,15 @@ class _HealthHistoryState extends State<HealthHistory> {
             height: 20,
           ),
           Container(
-            height: 700,
+            height: 750,
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemCount: health_history.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                      onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             CardDemo(arrSongList[index])));
-                      },
-                      child: Health_History_List(health_history[index], context));
-                }),
+                  return Health_History_List(health_history[index],context);
+                }
+            ),
 
           ),
 
@@ -139,6 +135,45 @@ class _HealthHistoryState extends State<HealthHistory> {
       ),
     );
   }
+
+  void getPatientHealthHistory() {
+    health_history.clear();
+    DocViewUserHistory.requestThenResponsePrint(SIGNINGRESPONSE.id).then((value){
+      print(value.statusCode);
+      print(value.body);
+
+      var myvar = UserHealthHistory.fromJson(jsonDecode(value.body));
+      print(myvar);
+
+      myvar.epres.forEach((element) {
+        setState(() {
+          print(element.doctor.name);
+          health_history.add(Health_History(
+              name: element.doctor.name,lab_report_type: 'Care+ Prescription',time: DateFormat('hh:mm a').format(element.createdAt),date: DateFormat('dd MMM yyyy').format(element.createdAt), image: '$apiDomainRoot/images/${element.doctor.image.toString()}',id: element.id.toString()
+          ));
+
+
+        });
+      });
+
+      myvar.report.forEach((element) {
+        setState(() {
+          print(element.name);
+          health_history.add(Health_History(
+              name: element.name,lab_report_type: element.type,time: DateFormat('hh:mm a').format(element.createdAt),date: DateFormat('dd MMM yyyy').format(element.createdAt), image: '$apiDomainRoot/files/${element.file.toString()}', id: element.id.toString()
+          ));
+
+
+        });
+      });
+
+
+    });
+
+  }
 }
+
+
+
 
 

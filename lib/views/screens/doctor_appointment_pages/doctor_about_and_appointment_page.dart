@@ -262,7 +262,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         padding:
                                             const EdgeInsets.only(left: 20),
                                         child: Text(
-                                          "Patients",
+                                          widget.experience.replaceAll("null", "").replaceAll("years", "")+" years",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -272,54 +272,10 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   ),
                                 ],
                               ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 40, left: 50),
-                                    child: Container(
-                                      height: 60,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.6),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(40),
-                                        ),
-                                      ),
-                                      child: Center(
-                                          child: Image.asset(
-                                              "images/experience.png")),
-                                    ),
-                                  ),
 
-                                  ///experience
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, top: 40),
-                                        child: Text(
-                                          widget.experience.replaceAll("null", "0"),
-                                          style: const TextStyle(
-                                              fontSize: 17,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.only(left: 20),
-                                        child: Text(
-                                          "Experience",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+
+
+
                             ],
                           ),
 
@@ -352,7 +308,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
 
                                 ///address
@@ -420,14 +376,12 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   ),
                                   SizedBox(height: 10,),
 
-                                  SizedBox(
-                                    height: 10,
-                                  ),
+
 
 
 
                                 Container(
-                                  padding: EdgeInsets.only(top: 20),
+                                  padding: EdgeInsets.only(top: 10),
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     "Available date and time",
@@ -454,7 +408,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
 
 
                                 Container(
-                                  padding: EdgeInsets.only(top: 20,right: 20),
+                                  padding: EdgeInsets.only(top: 10,right: 20),
                                   alignment: Alignment.centerLeft,
                                   child: TextFormField(
                                     controller: appointmentForC,
@@ -477,7 +431,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                             height: 20,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 50),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Container(
                               alignment: Alignment.bottomCenter,
                               child: ElevatedButton(
@@ -540,7 +494,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
     );
   }
 
-  TextEditingController appointmentForC = new TextEditingController();
+  TextEditingController appointmentForC = new TextEditingController(text: 'Appointment For ');
 
   designPortion() => Row(
         children: [
@@ -629,22 +583,19 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
+              Text(slotWithDate.timeslotlist.day,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+              Text(DateFormat('dd MMM yyyy').format(DateFormat('yyyy-MM-dd').parse(slotWithDate.date))),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(DateFormat('yyyy-MM-dd').parse(slotWithDate.date).day.toString()),
-                  Text('-'),
-                  Text(DateFormat('yyyy-MM-dd').parse(slotWithDate.date).month.toString()),
-                  Text('-'),
-                  Text(DateFormat('yyyy-MM-dd').parse(slotWithDate.date).year.toString()),
+                  Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(slotWithDate.timeslotlist.startTime))),
+                  Text(' - '),
+                  Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(slotWithDate.timeslotlist.endTime))),
                 ],
-              ),
+              )
 
-              Text(slotWithDate.timeslotlist.day),
-              // Text('From:'),
-              Text(slotWithDate.timeslotlist.startTime),
-              // Text('To:'),
-              Text(slotWithDate.timeslotlist.endTime),
             ],
           ),
         ),

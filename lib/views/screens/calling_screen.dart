@@ -1,7 +1,12 @@
+import 'package:care_plus/responses/firebase_model.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'lib/pages/call_page.dart';
 
 class CallingScreen extends StatefulWidget {
-  const CallingScreen({Key? key}) : super(key: key);
+  final CallModule callModule;
+  const CallingScreen({Key? key, required this.callModule}) : super(key: key);
 
   @override
   _CallingScreenState createState() => _CallingScreenState();
@@ -23,8 +28,8 @@ class _CallingScreenState extends State<CallingScreen> {
                   radius: 88,
                   backgroundColor: Colors.deepOrangeAccent,
                   child: ClipOval(
-                      child: Image.asset(
-                    "images/doc.jpg",
+                      child: Image.network(
+                    widget.callModule.doctorImage,
                     fit: BoxFit.fill,
                     width: 170,
                     height: 170,
@@ -38,7 +43,7 @@ class _CallingScreenState extends State<CallingScreen> {
                 children: [
                   Container(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: Text("Dr. Jems",
+                      child: Text(widget.callModule.doctor,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18
@@ -48,7 +53,7 @@ class _CallingScreenState extends State<CallingScreen> {
 
                   Container(
                       padding: EdgeInsets.only(bottom: 0),
-                      child: Text("Dentist")),
+                      child: Text("Calling...")),
 
 
                 ],
@@ -63,31 +68,43 @@ class _CallingScreenState extends State<CallingScreen> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: CircleAvatar(
-                      radius: 37,
-                      backgroundColor: Colors.red,
-                      child: Icon(
-                        Icons.call,
-                        color: Colors.white,
-                        size: 40.0,
-                        textDirection: TextDirection.ltr,
-                        semanticLabel:
-                            'Icon', // Announced in accessibility modes (e.g TalkBack/VoiceOver). This label does not show in the UI.
+                    child: GestureDetector(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: CircleAvatar(
+                        radius: 37,
+                        backgroundColor: Colors.red,
+                        child: Icon(
+                          Icons.call,
+                          color: Colors.white,
+                          size: 40.0,
+                          textDirection: TextDirection.ltr,
+                          semanticLabel:
+                              'Reject', // Announced in accessibility modes (e.g TalkBack/VoiceOver). This label does not show in the UI.
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 2,
-                    child: CircleAvatar(
-                      radius: 37,
-                      backgroundColor: Colors.green,
-                      child: Icon(
-                        Icons.call,
-                        color: Colors.white,
-                        size: 40.0,
-                        textDirection: TextDirection.ltr,
-                        semanticLabel:
-                            'Icon', // Announced in accessibility modes (e.g TalkBack/VoiceOver). This label does not show in the UI.
+                    child: GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          callNow(widget.callModule.appointmentId);
+                        });
+                      },
+                      child: CircleAvatar(
+                        radius: 37,
+                        backgroundColor: Colors.green,
+                        child: Icon(
+                          Icons.call,
+                          color: Colors.white,
+                          size: 40.0,
+                          textDirection: TextDirection.ltr,
+                          semanticLabel:
+                              'Accept', // Announced in accessibility modes (e.g TalkBack/VoiceOver). This label does not show in the UI.
+                        ),
                       ),
                     ),
                   ),
@@ -99,4 +116,34 @@ class _CallingScreenState extends State<CallingScreen> {
       ),
     );
   }
+
+
+  void callNow(channelName) {
+    setState(() async {
+      // String channelName = "abcdefg";
+      if (channelName.isNotEmpty) {
+        // await for camera and mic permissions before pushing video page
+        //await _handleCameraAndMic();
+        await _handleCameraAndMic(Permission.camera);
+        await _handleCameraAndMic(Permission.microphone);
+        // push video page with given channel name
+        await Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CallPage(channelName),//testing
+          ),
+        );
+      }
+    });
+  }
+
+  Future<void> _handleCameraAndMic(Permission permission) async {
+    final status = await permission.request();
+    print(status);
+  }
+
+
+
+
+
 }

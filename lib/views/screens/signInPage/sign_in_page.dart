@@ -5,11 +5,15 @@ import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
+import 'package:care_plus/responses/firebase_model.dart';
 import 'package:care_plus/responses/signIn_response.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
+import 'package:care_plus/services/call_check_service.dart';
+import 'package:care_plus/services/firebase_services.dart';
 import 'package:care_plus/views/screens/change_password/change_password.dart';
 import 'package:care_plus/views/screens/forget_password/forget_password.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
+import 'package:care_plus/views/screens/lib/pages/call_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
@@ -17,8 +21,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../calling_screen.dart';
 
 class SingInPage extends StatefulWidget {
   const SingInPage({Key? key}) : super(key: key);
@@ -34,11 +41,6 @@ class _SingInPageState extends State<SingInPage> {
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();
   late DatabaseReference databaseReference;
-  void addData(String data) {
-    databaseRef.push().set({'name': data, 'comment': 'A good season'});
-  }
-  final fb = FirebaseDatabase.instance;
-  final name = "Name";
 
 
   @override
@@ -46,10 +48,13 @@ class _SingInPageState extends State<SingInPage> {
     // TODO: implement initState
     super.initState();
     databaseReference = databaseRef;
+    // goForCallorNot(9);
+
+
   }
   @override
   Widget build(BuildContext context) {
-    final ref = fb.reference();
+
     return Scaffold(
       body: ListView(
         // mainAxisAlignment: MainAxisAlignment.center,
@@ -150,30 +155,26 @@ class _SingInPageState extends State<SingInPage> {
           SizedBox(
             height: 30,
           ),
-          RaisedButton(
-              child: Text("Demo button"),
-              onPressed: (){
-                Map <String,dynamic> data = {"field2" :  _textMobile.text};
-                FirebaseFirestore.instance.collection("test").add(data);
-                ref.child(name).set(_textMobile.text);
 
-              }
-          ),
 
 
           ///firebase realtime data is showing in this section
 
-          Container(
-            height: 200,
-            child: FirebaseAnimatedList(
-                shrinkWrap: true,
-                query: databaseReference,
-                itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                    Animation animation, int index) {
-
-                  return Text("${snapshot.value}\n");
-                })
-          ),
+          // Container(
+          //   // height: 200,
+          //   child: FirebaseAnimatedList(
+          //       shrinkWrap: true,
+          //       query: databaseReference.child('callModule').child('Patient').child('9'),
+          //       itemBuilder: (BuildContext context, DataSnapshot snapshot,
+          //           Animation animation, int index) {
+          //         // print(snapshot.value);
+          //
+          //         // fetchHistoricalStockData(databaseReference.child('callModule').child('Patient').child('9'));
+          //
+          //
+          //         return Text("${snapshot.value}\n");
+          //       })
+          // ),
           Center(
             child: Container(
               child: ElevatedButton(
@@ -182,7 +183,7 @@ class _SingInPageState extends State<SingInPage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onPressed: () async {
-                  addData(_textMobile.text);
+
                   //EasyLoading.show(status: 'loading...');
 
                   // SharedPreferences sharedPreferences =
@@ -322,4 +323,11 @@ class _SingInPageState extends State<SingInPage> {
       ),
     );
   }
+
+
+
+
+
+
+
 }

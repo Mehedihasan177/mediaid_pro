@@ -19,6 +19,8 @@ import 'package:care_plus/responses_from_test_file/responses/user/doctor_special
 import 'package:care_plus/responses_from_test_file/responses/user/featured_doctor_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
+import 'package:care_plus/services/call_check_service.dart';
+import 'package:care_plus/services/firebase_services.dart';
 import 'package:care_plus/views/screens/doctor_catagory/doctor_catagory_page.dart';
 import 'package:care_plus/views/screens/featured_doctor/featured_doctor.dart';
 import 'package:care_plus/views/screens/notificaitonUi/notificaitonUi.dart';
@@ -27,6 +29,7 @@ import 'package:care_plus/views/widgets/find_by_specialist_widget/find_by_specia
 import 'package:care_plus/views/widgets/homepage_doctor_card_widget/homepage_doctor_card_widget.dart';
 import 'package:care_plus/views/widgets/homepage_upcomming_appointment_widget/upcomming_appointment_widget.dart';
 import 'package:care_plus/views/widgets/nearby_ambulance_hospital_widget/nearby_ambulance_hospital_widget.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -109,6 +112,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
+
+
     _getDoctorSpecialization();
     _getFeturedDoctor();
     _getUpcomingAppointment();
@@ -337,6 +342,24 @@ class _HomePageState extends State<HomePage> {
                   return index<1? buildDoctorListTile(doctorFeturedlist[index], context):Container();
                 }
             )
+        ),
+
+        StreamBuilder(
+          stream: FirebaseDatabase().reference().child('callModule').child("Patient").child('${SIGNINGRESPONSE.id}').onValue,
+          builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+            print(snapshot.data?.snapshot.value.toString());
+            if(snapshot.hasData && !snapshot.hasError &&
+                snapshot.data?.snapshot.value != null){
+              print('prev $gone');
+              if(gone==0)goForCallorNot(SIGNINGRESPONSE.id,context);
+              gone=1;
+              print('next $gone');
+
+              return const Text('');
+            }else{
+              return (const Text(''));
+            }
+          },
         ),
 
 

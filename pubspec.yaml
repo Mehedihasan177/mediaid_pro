@@ -57,6 +57,7 @@ dependencies:
   audioplayer: ^0.8.1
   path_provider:
   flutter_rating_bar: ^4.0.0
+  firebase_core: ^1.10.6
 
 
 

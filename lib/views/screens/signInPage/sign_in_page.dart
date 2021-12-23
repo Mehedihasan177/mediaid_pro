@@ -15,6 +15,7 @@ import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,13 +33,20 @@ class _SingInPageState extends State<SingInPage> {
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();
-
+  late DatabaseReference databaseReference;
   void addData(String data) {
     databaseRef.push().set({'name': data, 'comment': 'A good season'});
   }
   final fb = FirebaseDatabase.instance;
   final name = "Name";
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    databaseReference = databaseRef;
+  }
   @override
   Widget build(BuildContext context) {
     final ref = fb.reference();
@@ -148,7 +156,23 @@ class _SingInPageState extends State<SingInPage> {
                 Map <String,dynamic> data = {"field2" :  _textMobile.text};
                 FirebaseFirestore.instance.collection("test").add(data);
                 ref.child(name).set(_textMobile.text);
+
               }
+          ),
+
+
+          ///firebase realtime data is showing here
+
+          Container(
+            height: 200,
+            child: FirebaseAnimatedList(
+                shrinkWrap: true,
+                query: databaseReference,
+                itemBuilder: (BuildContext context, DataSnapshot snapshot,
+                    Animation animation, int index) {
+
+                  return Text("${snapshot.value}\n");
+                })
           ),
           Center(
             child: Container(

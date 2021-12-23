@@ -286,7 +286,7 @@ class _AppointmentListState extends State<AppointmentList> {
                                 color: Color(0xFF1CBFA8),
                                 splashColor: Color(0xFF1CBFA8),
                                 onPressed: () async {
-                                  String channelName = "abcdefg";
+                                  String channelName = appointment_list_navBar.id.toString();
                                   if (channelName.isNotEmpty) {
                                     // await for camera and mic permissions before pushing video page
                                     //await _handleCameraAndMic();

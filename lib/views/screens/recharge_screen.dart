@@ -45,7 +45,7 @@ class _RechargeScreenState extends State<RechargeScreen> {
             ),
 
             SizedBox(height: 7,),
-            Text('Please Enter Transaction Gateway',style: TextStyle(fontSize: 16),),
+            Text('Please Enter Transaction Details',style: TextStyle(fontSize: 16),),
             SizedBox(height: 7,),
             TextField(
               controller: _noteC,

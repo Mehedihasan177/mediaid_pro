@@ -15,6 +15,7 @@ class _CallPageState extends State<CallPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Stack(
         children: <Widget>[
           VideoCall(widget.channelName),

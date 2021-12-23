@@ -160,8 +160,10 @@ class _walletUiState extends State<walletUi> {
                   child: Container(
                     //padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
-                    height: 750,
+                    // height: 750,
                     child: ListView.builder(
+                      reverse: true,
+                      shrinkWrap: true,
                       //controller: PageController(viewportFraction: 0.3),
                         scrollDirection: Axis.vertical,
                         itemCount: moneyWallet.length,

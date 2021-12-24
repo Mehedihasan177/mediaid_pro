@@ -14,7 +14,7 @@ class _OTPTwoState extends State<OTPTwo> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ForgetPassword()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => ForgetPassword()));
         return true;
       },
       child: Scaffold(
@@ -74,7 +74,7 @@ class _OTPTwoState extends State<OTPTwo> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       onPressed: () async {
-                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => EnterPasswordForgetPassword()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => EnterPasswordForgetPassword()));
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 59),

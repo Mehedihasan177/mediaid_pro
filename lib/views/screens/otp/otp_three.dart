@@ -15,7 +15,7 @@ class _OTPThreeState extends State<OTPThree> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ProfilePage()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => ProfilePage()));
         return true;
       },
       child: Scaffold(
@@ -75,7 +75,7 @@ class _OTPThreeState extends State<OTPThree> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       onPressed: () async {
-                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ChangePasswordSuccessfully()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => ChangePasswordSuccessfully()));
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 59),

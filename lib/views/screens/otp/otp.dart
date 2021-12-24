@@ -15,7 +15,7 @@ class _OTPpageState extends State<OTPpage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SingUpPage()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => SingUpPage()));
         return true;
       },
       child: Scaffold(
@@ -75,7 +75,7 @@ class _OTPpageState extends State<OTPpage> {
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       onPressed: () async {
-                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()));
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 59),

@@ -55,7 +55,7 @@ class _HospitalListState extends State<HospitalList> {
     return WillPopScope(
 
       onWillPop: () async {
-        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(

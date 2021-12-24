@@ -58,7 +58,7 @@ class _AmbulanceListState extends State<AmbulanceList> {
     return WillPopScope(
 
       onWillPop: () async {
-        //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         //Navigator.pop(context);
         return true;
       },

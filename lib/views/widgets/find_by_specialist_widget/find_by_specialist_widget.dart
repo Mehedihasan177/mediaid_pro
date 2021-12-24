@@ -53,7 +53,7 @@ Widget Findspecialist(SpecializationResponse informationslist, BuildContext cont
         ),
       ),
       onTap: (){
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory(name: informationslist.name)));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => DoctorListByCatagory(name: informationslist.name)));
 
       },
     ),

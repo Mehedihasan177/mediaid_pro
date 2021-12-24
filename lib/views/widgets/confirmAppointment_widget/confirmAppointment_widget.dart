@@ -414,7 +414,7 @@ Widget ConfirmAppointmentWidget(DoctorAppointmentModel confirmAppointment, conte
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () async {
-                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => PaymentPage()));
+                Navigator.push(context,MaterialPageRoute(builder: (context) => PaymentPage()));
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(350, 59),

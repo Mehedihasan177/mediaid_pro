@@ -34,7 +34,7 @@ class _SetupProfileState extends State<SetupProfile> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(
+        Navigator.push(
             context, MaterialPageRoute(builder: (context) => SingUpPage()));
         return true;
       },
@@ -69,7 +69,7 @@ class _SetupProfileState extends State<SetupProfile> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 2)),);
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 2)),);
                     },
                     child: Container(
                       height: 130,
@@ -386,7 +386,7 @@ class _SetupProfileState extends State<SetupProfile> {
                     //EasyLoading.dismiss();
                     if(value.statusCode==200){
                       SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
-                      return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                      return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
 
                     }else{
                       SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')

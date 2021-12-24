@@ -22,7 +22,7 @@ class _CarePlusPrescriptionsListState extends State<CarePlusPrescriptionsList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AppointmentList()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
         return true;
       },
       child: Scaffold(
@@ -39,7 +39,7 @@ class _CarePlusPrescriptionsListState extends State<CarePlusPrescriptionsList> {
                   ),
                   splashColor: Colors.transparent,
                   onPressed: () {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AppointmentList()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
                   },
                 ),
                 Text("Care+ Prescriptions List",

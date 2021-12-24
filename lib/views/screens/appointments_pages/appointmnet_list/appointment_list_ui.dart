@@ -11,6 +11,7 @@ import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appoi
 import 'package:care_plus/views/screens/give_review.dart';
 import 'package:care_plus/views/screens/lib/pages/call_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
+import 'package:care_plus/views/screens/splash_screen/splash_Screen.dart';
 import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upcoming_appointment_doctor_details.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/appointmnet_history_widget.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/upcomming_List_navbar_widget.dart';
@@ -70,104 +71,111 @@ class _AppointmentListState extends State<AppointmentList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10),
-            child: Text(
-              "Upcoming Appointments",
-              style:
-                  TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
+    return WillPopScope(
+
+      onWillPop: () async {
+        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        return true;
+      },
+      child: Scaffold(
+        body: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: Text(
+                "Upcoming Appointments",
+                style:
+                    TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
+              ),
             ),
-          ),
-          Container(
-            // height: 430,
-            // color: Colors.red,
-            child: ListView.builder(
-                //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: appointmentlist.length,
-                itemBuilder: (context, index) {
-                  //return Appointment_List(appointmentlist[index], context);
+            Container(
+              // height: 430,
+              // color: Colors.red,
+              child: ListView.builder(
+                  //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: appointmentlist.length,
+                  itemBuilder: (context, index) {
+                    //return Appointment_List(appointmentlist[index], context);
 
-                  if ((appointmentlist[index].active.toString() != '0') &&
-                      (appointmentlist[index].consult == '0')) {
-                    return Appointment_List(
-                        appointmentlist[index], context, index);
-                  } else {
-                    return Container();
-                    // return Appointment_List(appointmentlist[index], context, index);
-                  }
-                }),
-          ),
-
-          SizedBox(
-            height: 10,
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 10),
-            child: Text(
-              "Appointment History",
-              style:
-                  TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
+                    if ((appointmentlist[index].active.toString() != '0') &&
+                        (appointmentlist[index].consult == '0')) {
+                      return Appointment_List(
+                          appointmentlist[index], context, index);
+                    } else {
+                      return Container();
+                      // return Appointment_List(appointmentlist[index], context, index);
+                    }
+                  }),
             ),
-          ),
-          // Container(
-          //   height: 390,
-          //   // color: Colors.red,
-          //   child: ListView.builder(
-          //       // physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-          //       // shrinkWrap: true,
-          //       scrollDirection: Axis.vertical,
-          //       itemCount: 4,
-          //       itemBuilder: (context, index) {
-          //         return Appointment_History(appointmentHistoy[index], context);
-          //       }),
-          //
-          // ),
 
-          Container(
-            // height: 300,
-            // color: Colors.red,
-            child: ListView.builder(
-                //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: appointmentlistH.length,
-                itemBuilder: (context, index) {
-                  return Appointment_ListHist(
-                      appointmentlistH[index], context, index);
-                  //return Appointment_List(appointmentlist[index], context);
-                  if ((appointmentlist[index].active.toString() != '0') &&
-                      (appointmentlist[index].consult == '1')) {
+            SizedBox(
+              height: 10,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: Text(
+                "Appointment History",
+                style:
+                    TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
+              ),
+            ),
+            // Container(
+            //   height: 390,
+            //   // color: Colors.red,
+            //   child: ListView.builder(
+            //       // physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+            //       // shrinkWrap: true,
+            //       scrollDirection: Axis.vertical,
+            //       itemCount: 4,
+            //       itemBuilder: (context, index) {
+            //         return Appointment_History(appointmentHistoy[index], context);
+            //       }),
+            //
+            // ),
+
+            Container(
+              // height: 300,
+              // color: Colors.red,
+              child: ListView.builder(
+                  //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: appointmentlistH.length,
+                  itemBuilder: (context, index) {
                     return Appointment_ListHist(
-                        appointmentlist[index], context, index);
-                  } else {
-                    return Container();
-                    // return Appointment_List(appointmentlist[index], context, index);
-                  }
-                }),
-          ),
+                        appointmentlistH[index], context, index);
+                    //return Appointment_List(appointmentlist[index], context);
+                    if ((appointmentlist[index].active.toString() != '0') &&
+                        (appointmentlist[index].consult == '1')) {
+                      return Appointment_ListHist(
+                          appointmentlist[index], context, index);
+                    } else {
+                      return Container();
+                      // return Appointment_List(appointmentlist[index], context, index);
+                    }
+                  }),
+            ),
 
-          ///this is the upcoming appiontment only for test. jehetu history api te data nai tai
+            ///this is the upcoming appiontment only for test. jehetu history api te data nai tai
 
-          // Container(
-          //   height: 300,
-          //   // color: Colors.red,
-          //   child: ListView.builder(
-          //       physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-          //       shrinkWrap: true,
-          //       scrollDirection: Axis.vertical,
-          //       itemCount: appointmentlist.length,
-          //       itemBuilder: (context, index) {
-          //         return index <4 ?Appointment_List(appointmentlist[index], context): Container();
-          //       }),
-          //
-          // ),
-        ],
+            // Container(
+            //   height: 300,
+            //   // color: Colors.red,
+            //   child: ListView.builder(
+            //       physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+            //       shrinkWrap: true,
+            //       scrollDirection: Axis.vertical,
+            //       itemCount: appointmentlist.length,
+            //       itemBuilder: (context, index) {
+            //         return index <4 ?Appointment_List(appointmentlist[index], context): Container();
+            //       }),
+            //
+            // ),
+          ],
+        ),
       ),
     );
   }

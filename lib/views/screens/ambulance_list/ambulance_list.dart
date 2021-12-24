@@ -58,7 +58,7 @@ class _AmbulanceListState extends State<AmbulanceList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         //Navigator.pop(context);
         return true;
       },
@@ -77,7 +77,7 @@ class _AmbulanceListState extends State<AmbulanceList> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                     },
                   ),
                   Expanded(
@@ -144,7 +144,7 @@ class _AmbulanceListState extends State<AmbulanceList> {
                           return AmbulanceHospitalWidget(
                               ambulancelist[index].id,
                               ambulancelist[index].hospital.name,
-                              ambulancelist[index].hospital.type,
+                              ambulancelist[index].name,
                               ambulancelist[index].hospital.description,
                               ambulancelist[index].hospital.address,
                               ambulancelist[index].hospital.mobile,

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 
 import 'package:care_plus/views/screens/lib/utils/settings.dart';
+import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:flutter/material.dart';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
@@ -282,6 +283,7 @@ class _VideoCallState extends State<VideoCall> {
 
   void _onCallEnd(BuildContext context) {
     Navigator.pop(context);
+    // Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
 
   }
 

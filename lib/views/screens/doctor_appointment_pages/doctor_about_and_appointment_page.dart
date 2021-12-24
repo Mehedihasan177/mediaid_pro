@@ -66,8 +66,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => BottomNevigation()));
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
@@ -456,8 +456,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         print(value.statusCode);
                                         if(value.statusCode==200){
                                           SnackbarDialogueHelper().showSnackbarDialog(context, 'Appointment Created Successfully', Colors.green);
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(builder: (context) => BottomNevigation()));
+                                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                              BottomNevigation()), (Route<dynamic> route) => false);
                                         }
                                       });
                                     });

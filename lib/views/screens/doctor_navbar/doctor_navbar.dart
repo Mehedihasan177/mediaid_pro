@@ -125,7 +125,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
                 child: FlatButton(
                   minWidth: 10,
                   onPressed: () {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => FeaturedDoctor()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor()));
                   },
                   child: Text(
                     "See All",

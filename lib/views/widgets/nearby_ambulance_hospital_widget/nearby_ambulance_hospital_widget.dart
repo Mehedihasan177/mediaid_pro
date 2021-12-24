@@ -8,7 +8,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
     children: <Widget>[
      GestureDetector(
           onTap: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, MaterialPageRoute(builder: (context) => AmbulanceList()));
           },
 
@@ -73,7 +73,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
 
       GestureDetector(
           onTap: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HospitalList()));
           },
           child: Card(

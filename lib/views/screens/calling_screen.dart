@@ -162,7 +162,7 @@ class _CallingScreenState extends State<CallingScreen> {
         await _handleCameraAndMic(Permission.camera);
         await _handleCameraAndMic(Permission.microphone);
         // push video page with given channel name
-        await Navigator.push(
+        await Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => CallPage(channelName),//testing

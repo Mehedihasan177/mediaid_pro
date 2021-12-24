@@ -9,7 +9,9 @@ import 'package:care_plus/responses/others/userHealthHistory.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/report_presctiption_responses.dart';
 import 'package:care_plus/views/screens/care_plus_lab_report_list/care_plus_lab_report_list.dart';
 import 'package:care_plus/views/screens/care_plus_prescriptions_list/care_plus_prescriptions_list.dart';
+import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/image_upload_page.dart';
+import 'package:care_plus/views/screens/splash_screen/splash_Screen.dart';
 import 'package:care_plus/views/screens/upload_documents/upload_documents.dart';
 import 'package:care_plus/views/widgets/health_history_ui_widget/health_history_widget_widget.dart';
 import 'package:flutter/material.dart';
@@ -61,77 +63,84 @@ class _HealthHistoryState extends State<HealthHistory> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
+    return WillPopScope(
+
+      onWillPop: () async {
+        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        return true;
+      },
+      child: Scaffold(
+        body: ListView(
+          children: [
 
 
 
 
 
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Text(
-                //     "Add Health Reports",
-                //     style: TextStyle(color: Colors.blue, fontSize: 17, fontStyle: FontStyle.italic, decoration: TextDecoration.underline),
-                //   ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Center(
-                    child: Text(
-                      "Health History",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black.withOpacity(0.5),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Text(
+                  //     "Add Health Reports",
+                  //     style: TextStyle(color: Colors.blue, fontSize: 17, fontStyle: FontStyle.italic, decoration: TextDecoration.underline),
+                  //   ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20),
+                    child: Center(
+                      child: Text(
+                        "Health History",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
                       ),
                     ),
                   ),
-                ),
 
-                Container(
-                  height: 40,
-                  width: 40,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 3,)));
-                    },
-                    child: Icon(Icons.add, color: Colors.white),
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.only(right: 0),
-                      primary: Color(0xFF1CBFA8), // <-- Button color
-                      onPrimary: Color(0xFF1CBFA8), // <-- Splash color
+                  Container(
+                    height: 40,
+                    width: 40,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 3,)));
+                      },
+                      child: Icon(Icons.add, color: Colors.white),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.only(right: 0),
+                        primary: Color(0xFF1CBFA8), // <-- Button color
+                        onPrimary: Color(0xFF1CBFA8), // <-- Splash color
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            height: 750,
-            child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                itemCount: health_history.length,
-                itemBuilder: (context, index) {
-                  return Health_History_List(health_history[index],context);
-                }
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 750,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: health_history.length,
+                  itemBuilder: (context, index) {
+                    return Health_History_List(health_history[index],context);
+                  }
+              ),
+
             ),
 
-          ),
 
 
 
 
-
-        ],
+          ],
+        ),
       ),
     );
   }

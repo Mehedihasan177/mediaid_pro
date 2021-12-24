@@ -17,7 +17,7 @@ class _UploadDocumentState extends State<UploadDocument> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(
+        Navigator.push(
             context, MaterialPageRoute(builder: (context) => BottomNevigation())); //HealthHistory()
         return true;
       },
@@ -300,7 +300,7 @@ class _UploadDocumentState extends State<UploadDocument> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onPressed: () async {
-                  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => UploadedSuccessfully()));
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => UploadedSuccessfully()));
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(350, 61),

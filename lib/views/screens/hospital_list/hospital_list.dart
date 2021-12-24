@@ -55,7 +55,7 @@ class _HospitalListState extends State<HospitalList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
@@ -73,7 +73,7 @@ class _HospitalListState extends State<HospitalList> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                     },
                   ),
                   Expanded(
@@ -104,7 +104,7 @@ class _HospitalListState extends State<HospitalList> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextField(
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
                     style: TextStyle(color: Colors.black),
                     scrollPadding: EdgeInsets.all(10),
                     decoration: InputDecoration(

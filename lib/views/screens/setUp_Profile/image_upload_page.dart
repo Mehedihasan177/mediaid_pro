@@ -41,13 +41,13 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
 
       onWillPop: () async {
         if(widget.page == 1){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+          Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         }
         else if(widget.page == 3){
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+          Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         }
         else{
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()));
+          Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()));
         }
         return true;
       },
@@ -306,10 +306,10 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                                 });
 
                                 SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
-                                return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                                return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
                               } else {
                                 // return LoginController.requestThenResponsePrint(jsonData);
-                                Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+                                Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
                               }
 
                             });
@@ -319,9 +319,9 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                         });
                       } else {
                         // BasicFunctions.showAlertDialogTOView(context, 'Warning', 'Select an image to upload');
-                        BasicFunctions.showAlertDialogTOView(context,
-                            "Warning",
-                            "Please Select an Image to Upload");
+                        // BasicFunctions.showAlertDialogTOView(context,
+                        //     "Warning",
+                        //     "Please Select an Image to Upload");
                       }
                     }
                   },

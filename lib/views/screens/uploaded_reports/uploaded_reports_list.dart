@@ -18,7 +18,7 @@ class _UploadedReportsState extends State<UploadedReports> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AppointmentList()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
         return true;
       },
       child: Scaffold(
@@ -35,7 +35,7 @@ class _UploadedReportsState extends State<UploadedReports> {
                   ),
                   splashColor: Colors.transparent,
                   onPressed: () {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AppointmentList()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
                   },
                 ),
                 Text("Uploaded Report List",

@@ -612,7 +612,7 @@ Widget DoctorAboutAppointmentWidget(DoctorAppointmentModel doctorAppointment, co
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                       onPressed: () async {
-                        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(350, 59),

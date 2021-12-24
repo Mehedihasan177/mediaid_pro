@@ -55,7 +55,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
@@ -73,7 +73,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                     },
                   ),
                   Expanded(

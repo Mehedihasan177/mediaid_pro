@@ -64,7 +64,7 @@ Widget AmbulanceHospitalWidget(
       ),
       onTap: () {
         if (nevigation == true) {
-          Navigator.pushReplacement(
+          Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => HospitalDetailsPage(
@@ -78,7 +78,7 @@ Widget AmbulanceHospitalWidget(
                         image: image,
                       )));
         } else {
-          Navigator.pushReplacement(
+          Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => AmbulanceDetailsPage(

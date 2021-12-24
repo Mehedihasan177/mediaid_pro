@@ -15,7 +15,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
         return true;
       },
       child: Scaffold(
@@ -33,7 +33,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
                     },
                   ),
                   Expanded(

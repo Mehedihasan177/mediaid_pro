@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future getValidationData() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
-    Navigator.pushReplacement(
+    Navigator.push(
         context, MaterialPageRoute(builder: (context) => SingInPage()));
   }
 

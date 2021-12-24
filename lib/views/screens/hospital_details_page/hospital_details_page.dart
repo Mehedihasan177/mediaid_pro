@@ -34,7 +34,7 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HospitalList()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => HospitalList()));
         return true;
       },
       child: Scaffold(
@@ -52,7 +52,7 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HospitalList()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => HospitalList()));
                     },
                   ),
                   Expanded(
@@ -171,7 +171,7 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
                   ),
                   onPressed: () async {
                     _launchURL("tel://${widget.phone_number}");
-                    // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                    // Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),

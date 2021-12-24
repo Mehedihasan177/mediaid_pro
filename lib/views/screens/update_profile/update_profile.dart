@@ -52,7 +52,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(context,
+        Navigator.push(context,
             MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
@@ -89,7 +89,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     fit: FlexFit.loose,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
@@ -113,7 +113,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
@@ -576,7 +576,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       signInAgain(context);
                       SnackbarDialogueHelper().showSnackbarDialog(
                           context, 'successfully Added', Colors.green);
-                      return Navigator.pushReplacement(
+                      return Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => BottomNevigation()),
@@ -637,7 +637,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       if (value.statusCode == 200) {
         USERPASS = USERPASS;
         USERNAME = USERNAME;
-        return Navigator.pushReplacement(
+        return Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => BottomNevigation()),
         );

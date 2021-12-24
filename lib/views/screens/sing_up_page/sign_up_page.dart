@@ -347,7 +347,7 @@ class _SingUpPageState extends State<SingUpPage> {
                               if (value.statusCode == 200) {
                                 sharedPreferences.setString("mobile", _textMobile.text);
                                 sharedPreferences.setString("password", _textPassword.text);
-                                return Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+                                return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
                               } else {
                                 // return LoginController.requestThenResponsePrint(jsonData);
                                 AlertDialogueHelper().showAlertDialog(context, 'Warning', 'Please recheck email and password');

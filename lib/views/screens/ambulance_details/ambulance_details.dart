@@ -47,7 +47,7 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(
+        Navigator.push(
             context, MaterialPageRoute(builder: (context) => AmbulanceList()));
         return true;
       },
@@ -66,7 +66,7 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
                     ),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AmbulanceList()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => AmbulanceList()));
                     },
                   ),
                   Expanded(

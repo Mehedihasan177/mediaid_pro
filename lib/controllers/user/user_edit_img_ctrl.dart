@@ -70,7 +70,7 @@ class UserRegisterControllerExtraImg{
       // currentState.push( MaterialPageRoute(builder: (context) =>PatientPrescriptionUploadPage(toShow:true)));
     }else{
       // BasicFunctions.showAlertDialogTOView(context, "${response.statusCode}", "${response.data}");
-      BasicFunctions.showAlertDialogTOView(context, "Warning", "You are trying to upload a too big image");
+      //BasicFunctions.showAlertDialogTOView(context, "Warning", "You are trying to upload a too big image");
     }
 
     return response;

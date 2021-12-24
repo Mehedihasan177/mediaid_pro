@@ -105,7 +105,7 @@ Widget doctorList(Datum doctorINformation, context) => Container(
       ),
     ),
     onTap: (){
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => DoctorAppointment(
+      Navigator.push(context,MaterialPageRoute(builder: (context) => DoctorAppointment(
         image: doctorINformation.image,
         name: doctorINformation.name,
         specialization: doctorINformation.specialization,

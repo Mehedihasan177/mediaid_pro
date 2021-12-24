@@ -184,10 +184,7 @@ class _SingInPageState extends State<SingInPage> {
                 ),
                 onPressed: () async {
 
-                  //EasyLoading.show(status: 'loading...');
 
-                  // SharedPreferences sharedPreferences =
-                  // await SharedPreferences.getInstance();
                   SigninModel myInfo = new SigninModel(
                       mobile: _textMobile.text, password: _textPassword.text);
                   USERNAME = _textMobile.text;
@@ -204,7 +201,7 @@ class _SingInPageState extends State<SingInPage> {
                     if (value.statusCode == 200) {
 
                       SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign in successfully', Colors.green);
-                      return  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                      return  Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
                     } else {
                       // return LoginController.requestThenResponsePrint(jsonData);
                       SnackbarDialogueHelper().showSnackbarDialog(context, value.body, Colors.red);
@@ -232,7 +229,7 @@ class _SingInPageState extends State<SingInPage> {
             child: FlatButton(
               minWidth: 10,
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context, MaterialPageRoute(builder: (context) => ForgetPassword()));
               },
               child: Text(
@@ -306,7 +303,7 @@ class _SingInPageState extends State<SingInPage> {
                 FlatButton(
                   minWidth: 10,
                   onPressed: () {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context, MaterialPageRoute(builder: (context) => SingUpPage()));
                   },
                   child: Text(

@@ -50,17 +50,17 @@ class UserPrevPres{
 
     // After geting the response we need to split all the json formatted data. Otherwise
     if(response.statusCode==200){
-    BasicFunctions.showAlertDialogTOView(context, "Successful", "You have successfully added your health attachment");
+    //BasicFunctions.showAlertDialogTOView(context, "Successful", "You have successfully added your health attachment");
     print(response);
     // currentState.push( MaterialPageRoute(builder: (context) =>PatientPrescriptionUploadPage(toShow:true)));
     }
 
     else if(response.statusCode==401){
-      BasicFunctions.showAlertDialogTOView(context, "Warning", "Please select a type of upload");
+      //BasicFunctions.showAlertDialogTOView(context, "Warning", "Please select a type of upload");
     }
 
     else{
-      BasicFunctions.showAlertDialogTOView(context, "${response.statusCode}", "${response.data}");
+      //BasicFunctions.showAlertDialogTOView(context, "${response.statusCode}", "${response.data}");
     }
     return response;
   }

@@ -17,7 +17,7 @@ class _EnterPasswordForgetPasswordState extends State<EnterPasswordForgetPasswor
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => OTPpage()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => OTPpage()));
         return true;
       },
       child: Scaffold(
@@ -100,7 +100,7 @@ class _EnterPasswordForgetPasswordState extends State<EnterPasswordForgetPasswor
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPressed: () async {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomePage()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => HomePage()));
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(350, 59),

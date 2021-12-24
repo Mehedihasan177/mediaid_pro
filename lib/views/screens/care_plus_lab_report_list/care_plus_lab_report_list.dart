@@ -19,7 +19,7 @@ class _CarePlusLabReportListState extends State<CarePlusLabReportList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
@@ -36,7 +36,7 @@ class _CarePlusLabReportListState extends State<CarePlusLabReportList> {
                   ),
                   splashColor: Colors.transparent,
                   onPressed: () {
-                    Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => AppointmentList()));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
                   },
                 ),
                 Text("Care+ Lab Report List",

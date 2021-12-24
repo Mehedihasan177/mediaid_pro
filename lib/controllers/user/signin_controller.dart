@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
+import 'package:care_plus/services/call_check_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +28,7 @@ class SigninController{
         }
     );
     if(response.statusCode==200) {
+      gone = 0;
       final Map<String, dynamic> parsed = json.decode(response.body);
       final loginobject = SignInResponse.fromJson(parsed);
       print(loginobject.data.token);

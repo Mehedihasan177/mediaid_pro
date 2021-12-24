@@ -41,7 +41,14 @@ class _walletUiState extends State<walletUi> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.pop(context, true);
+        // Navigator.push<void>(
+        //   context,
+        //   MaterialPageRoute<void>(
+        //     builder: (BuildContext context) =>  BottomNevigation(),
+        //   ),
+        // );
         return true;
       },
       child: Scaffold(

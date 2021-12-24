@@ -29,27 +29,27 @@ class BasicFunctions {
     );
   }
 
-  static void showAlertDialogTOView(
-      BuildContext context, String title, String message) {
-    // ignore: unused_local_variable
-    Widget okButton = FlatButton(
-      child: Text("OK"),
-      onPressed: () {
-        // final navigatorKey = GlobalKey<NavigatorState>();
-        // Navigator.pop(context);
-      },
-    );
-    AlertDialog alert = AlertDialog(
-      title: Text(title),
-      content: Text(message),
-    );
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+  // static void showAlertDialogTOView(
+  //     BuildContext context, String title, String message) {
+  //   // ignore: unused_local_variable
+  //   Widget okButton = FlatButton(
+  //     child: Text("OK"),
+  //     onPressed: () {
+  //       // final navigatorKey = GlobalKey<NavigatorState>();
+  //       // Navigator.pop(context);
+  //     },
+  //   );
+  //   AlertDialog alert = AlertDialog(
+  //     title: Text(title),
+  //     content: Text(message),
+  //   );
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return alert;
+  //     },
+  //   );
+  // }
 
   static void showAlertDialogToShare(
       BuildContext context, String title, String message) {

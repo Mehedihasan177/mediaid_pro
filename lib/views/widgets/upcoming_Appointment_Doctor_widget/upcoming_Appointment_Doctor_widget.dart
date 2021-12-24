@@ -2,6 +2,7 @@ import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/models/ui_model/upcoming_appointment_doctor_details_model/upcoming_appointment_doctor_details_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/widgets/doctor_about_and_appointment_widget/doctor_about_and_appointment_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -106,8 +107,15 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                             ),
                             Container(
                                 alignment: Alignment.centerLeft,
-                                child: Text(upcomingAppointmentDoctorDetail
-                                    .doctor.rating)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text("Experience of "),
+                                    Text(upcomingAppointmentDoctorDetail
+                                        .doctor.experience.replaceAll('years', '')+' years')
+                                  ],
+                                )
+                            ),
                           ],
                         ),
                       ),
@@ -180,7 +188,8 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                         alignment: Alignment.topLeft,
                                         child: Text(
                                           //DateFormat("dd-MM-yyyy").format(
-                                          ", " + upcomingAppointmentDoctorDetail.appointmentSlot.startTime,
+                                          ", " + DateFormat("dd-MM-yyyy").format(
+                                              upcomingAppointmentDoctorDetail.date),
 //),
                                           style: TextStyle(
                                               fontSize: 14,
@@ -192,31 +201,9 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                   ),
 
 
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      //DateFormat("dd-MM-yyyy").format(
-                                      "End: " + upcomingAppointmentDoctorDetail.appointmentSlot.endTime,
-//),
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
 
-                                  Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      DateFormat("dd-MM-yyyy").format(
-                                      upcomingAppointmentDoctorDetail.date),
-//),
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
+
+
 
                                 ],
                               ),
@@ -228,7 +215,7 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                         child: Row(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 40, left: 20),
+                              padding: const EdgeInsets.only(top: 40, left: 10),
                               child: Container(
                                 height: 40,
                                 width: 40,
@@ -239,18 +226,21 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                   ),
                                 ),
                                 child: Center(
-                                    child:
-                                        Image.asset("images/experience.png")),
+                                    child:Icon(
+                                      Icons.timer_outlined,
+                                      color: Colors.white,
+                                      size: 18,
+                                    )),
                               ),
                             ),
                             Column(
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(left: 20, top: 40),
-                                  child: Text(
-                                    upcomingAppointmentDoctorDetail
-                                        .doctor.experience
+                                      const EdgeInsets.only(left: 10, top: 40),
+                                  child: Text('From: '+
+                                    DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(upcomingAppointmentDoctorDetail
+                                        .appointmentSlot.startTime))
                                         .replaceAll("null", "0"),
                                     style: TextStyle(
                                         fontSize: 14,
@@ -259,9 +249,11 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    "Experience",
+                                  padding: const EdgeInsets.only(left: 0),
+                                  child: Text('Till: '+
+                                      DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(upcomingAppointmentDoctorDetail
+                                          .appointmentSlot.startTime))
+                                          .replaceAll("null", "0"),
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Colors.white,

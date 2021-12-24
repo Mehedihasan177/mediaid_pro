@@ -90,6 +90,7 @@ flutter:
 
   assets:
     - images/
+    - assets/music.mp3
     - images/care+_Logo.png
     - images/location.png
     - images/notification.png

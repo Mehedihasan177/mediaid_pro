@@ -1,5 +1,10 @@
+import 'dart:io';
+
+import 'package:audioplayer/audioplayer.dart';
 import 'package:care_plus/responses/firebase_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'lib/pages/call_page.dart';
@@ -13,6 +18,34 @@ class CallingScreen extends StatefulWidget {
 }
 
 class _CallingScreenState extends State<CallingScreen> {
+
+  String mp3Uri = "assets/music.mp3";
+  AudioPlayer player = AudioPlayer();
+  void _playsound(String mp3uri) {
+    player.play(mp3Uri);
+  }
+
+  void _stopsound() {
+    player.stop();
+  }
+
+  void _loadsound() async {
+    final ByteData data = await rootBundle.load("assets/music.mp3");
+    Directory tempDir = await getTemporaryDirectory();
+    File tempFile = File('${tempDir.path}/music.mp3"');
+    await tempFile.writeAsBytes(data.buffer.asUint8List(), flush: true);
+    mp3Uri = tempFile.uri.toString();
+    _playsound(mp3Uri);
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _loadsound();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +103,7 @@ class _CallingScreenState extends State<CallingScreen> {
                     flex: 2,
                     child: GestureDetector(
                       onTap: (){
+                        _stopsound();
                         Navigator.pop(context);
                       },
                       child: CircleAvatar(
@@ -91,6 +125,7 @@ class _CallingScreenState extends State<CallingScreen> {
                     child: GestureDetector(
                       onTap: (){
                         setState(() {
+                          _stopsound();
                           callNow(widget.callModule.appointmentId);
                         });
                       },

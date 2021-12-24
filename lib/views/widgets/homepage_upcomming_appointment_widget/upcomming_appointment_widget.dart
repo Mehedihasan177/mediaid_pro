@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 
 Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
     Container(
-      width: 300,
+      width: 290,
         child: GestureDetector(
         child: Card(
         shape: RoundedRectangleBorder(
@@ -20,7 +20,9 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Column(children: [
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 10),
                   child: Container(
@@ -37,7 +39,7 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
                     alignment: Alignment.topLeft,
                     child: Text(
                       upcomingAppointment.doctor.name,
-                      style: TextStyle(fontSize: 13),
+                      style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -51,22 +53,22 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
                     ),
                   ),
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 2, left: 10),
+                //   child: Container(
+                //     alignment: Alignment.topLeft,
+                //     child: Text(
+                //       "Exp: " + upcomingAppointment.doctor.experience.replaceAll("null", "0"),
+                //       style: TextStyle(fontSize: 13),
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 2, left: 10),
                   child: Container(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Exp: " + upcomingAppointment.doctor.experience.replaceAll("null", "0"),
-                      style: TextStyle(fontSize: 13),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 2, left: 10),
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      upcomingAppointment.doctor.hospitalName.replaceAll("null", "Dhaka Medical College"),
+                      upcomingAppointment.doctor.hospitalName.replaceAll("null", ""),
                       style: TextStyle(fontSize: 13),
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/hospital_controller.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
@@ -59,16 +60,7 @@ class _HospitalListState extends State<HospitalList> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Hospital List', style: TextStyle(
-            color: Colors.black
-        ),
-
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Hospital List", null),
         body: ListView(
           children: [
             // Padding(
@@ -142,6 +134,7 @@ class _HospitalListState extends State<HospitalList> {
               child: Container(
                 height: 900,
                 child: ListView.builder(
+                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: hospitallist.length,

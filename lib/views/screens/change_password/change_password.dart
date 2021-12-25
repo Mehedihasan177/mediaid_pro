@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/change_password_controller.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
@@ -36,17 +37,10 @@ class _ChangePasswordState extends State<ChangePassword> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Change Password', style: TextStyle(
-            color: Colors.black
-        ),
-
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Change Password", null),
         body: ListView(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [

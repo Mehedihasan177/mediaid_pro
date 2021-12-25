@@ -1,3 +1,4 @@
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/data/specialist_information/getInformation.dart';
 import 'package:care_plus/models/ui_model/specialist_information/information_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
@@ -24,11 +25,12 @@ class _DoctorCatagoryState extends State<DoctorCatagory> {
         return true;
       },
       child: Scaffold(
+        appBar: myAppBar("Search Doctor", null),
         body: Column(
           children: [
             Center(
               child: Container(
-                margin: EdgeInsets.only(left: 10,right: 10, top: 60),
+                margin: EdgeInsets.only(left: 10,right: 10, top: 20, bottom: 20),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -55,21 +57,25 @@ class _DoctorCatagoryState extends State<DoctorCatagory> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10, right: 0),
-              child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: (1 / 0.8),
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 2.0,
-                  mainAxisSpacing: 9.0,
+              child: Container(
+                height: 693,
+                //color: Colors.red,
+                child: GridView.builder(
+                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: (1 / 0.8),
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 2.0,
+                    mainAxisSpacing: 9.0,
 
+                  ),
+                  itemCount: widget.informationslist.length,
+                  itemBuilder: (context, index) {
+                    //Diseasesinformation information = informationslist[index];
+                    return Findspecialist(widget.informationslist[index], context, index);
+                  },
                 ),
-                itemCount: widget.informationslist.length,
-                itemBuilder: (context, index) {
-                  //Diseasesinformation information = informationslist[index];
-                  return Findspecialist(widget.informationslist[index], context, index);
-                },
               ),
             ),
           ],

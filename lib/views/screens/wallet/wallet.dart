@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/user_wallet_controller.dart';
 import 'package:care_plus/controllers/user/user_wallet_log_controller.dart';
 import 'package:care_plus/data/wallet_data/wallet_data.dart';
@@ -52,17 +53,9 @@ class _walletUiState extends State<walletUi> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Wallet', style: TextStyle(
-          color: Colors.black
-        ),
-
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Wallet", null),
         body: ListView(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
             
             Row(
@@ -148,8 +141,10 @@ class _walletUiState extends State<walletUi> {
                   child: Container(
                     //padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
-                    // height: 750,
+                    //height: 750,
+                    //color: Colors.red,
                     child: ListView.builder(
+                        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       reverse: true,
                       shrinkWrap: true,
                       //controller: PageController(viewportFraction: 0.3),

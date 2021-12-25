@@ -1,3 +1,4 @@
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/data/profile_data/profile_data.dart';
 import 'package:care_plus/models/ui_model/profile_model/profile_model.dart';
 import 'package:care_plus/views/screens/change_password/change_password.dart';
@@ -23,21 +24,13 @@ class _ProfilePageState extends State<ProfilePage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Profile', style: TextStyle(
-            color: Colors.black
-        ),
-
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Profile", null),
         body: ListView(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
 
             Row(
@@ -65,6 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 20,),
 
             GridView.count(
+                physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                   childAspectRatio: (1 / .55),
                   shrinkWrap: true,
                   crossAxisCount: 2,

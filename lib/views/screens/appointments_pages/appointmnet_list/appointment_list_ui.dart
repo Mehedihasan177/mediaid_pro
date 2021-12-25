@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/apponitment_cencel_controller.dart';
 import 'package:care_plus/controllers/user/previous_appointment_controller.dart';
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
@@ -8,6 +9,7 @@ import 'package:care_plus/data/appointment_list_navbar/appointment_list_navbar_d
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_history_navBar.dart';
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_list_navBar.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
+import 'package:care_plus/views/screens/appointment_history/appointment_history.dart';
 import 'package:care_plus/views/screens/give_review.dart';
 import 'package:care_plus/views/screens/lib/pages/call_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
@@ -78,22 +80,25 @@ class _AppointmentListState extends State<AppointmentList> {
         return true;
       },
       child: Scaffold(
+        appBar: myAppBar("Appointments", [IconButton(
+          icon: Icon(
+            Icons.history,
+          ),
+          //iconSize: 50,
+          color: Colors.white,
+          splashColor: Colors.purple,
+          onPressed: () {
+            Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentHistory()));
+          },
+        ),]),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Text(
-                "Upcoming Appointments",
-                style:
-                    TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
-              ),
-            ),
             Container(
-              // height: 430,
-              // color: Colors.red,
+               height: 725,
+               //color: Colors.red,
               child: ListView.builder(
-                  //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), // <-- this will disable scroll
+                  //shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: appointmentlist.length,
                   itemBuilder: (context, index) {
@@ -114,14 +119,14 @@ class _AppointmentListState extends State<AppointmentList> {
               height: 10,
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Text(
-                "Appointment History",
-                style:
-                    TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, top: 10),
+            //   child: Text(
+            //     "Appointment History",
+            //     style:
+            //         TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
+            //   ),
+            // ),
             // Container(
             //   height: 390,
             //   // color: Colors.red,
@@ -136,28 +141,28 @@ class _AppointmentListState extends State<AppointmentList> {
             //
             // ),
 
-            Container(
-              // height: 300,
-              // color: Colors.red,
-              child: ListView.builder(
-                  //physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: appointmentlistH.length,
-                  itemBuilder: (context, index) {
-                    return Appointment_ListHist(
-                        appointmentlistH[index], context, index);
-                    //return Appointment_List(appointmentlist[index], context);
-                    if ((appointmentlist[index].active.toString() != '0') &&
-                        (appointmentlist[index].consult == '1')) {
-                      return Appointment_ListHist(
-                          appointmentlist[index], context, index);
-                    } else {
-                      return Container();
-                      // return Appointment_List(appointmentlist[index], context, index);
-                    }
-                  }),
-            ),
+            // Container(
+            //    height: 300,
+            //   // color: Colors.red,
+            //   child: ListView.builder(
+            //       physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), // <-- this will disable scroll
+            //       //shrinkWrap: true,
+            //       scrollDirection: Axis.vertical,
+            //       itemCount: appointmentlistH.length,
+            //       itemBuilder: (context, index) {
+            //         return Appointment_ListHist(
+            //             appointmentlistH[index], context, index);
+            //         //return Appointment_List(appointmentlist[index], context);
+            //         if ((appointmentlist[index].active.toString() != '0') &&
+            //             (appointmentlist[index].consult == '1')) {
+            //           return Appointment_ListHist(
+            //               appointmentlist[index], context, index);
+            //         } else {
+            //           return Container();
+            //           // return Appointment_List(appointmentlist[index], context, index);
+            //         }
+            //       }),
+            // ),
 
             ///this is the upcoming appiontment only for test. jehetu history api te data nai tai
 
@@ -186,7 +191,7 @@ class _AppointmentListState extends State<AppointmentList> {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20, left: 10),
                 child: Container(
                   height: 120,
                   width: 120,

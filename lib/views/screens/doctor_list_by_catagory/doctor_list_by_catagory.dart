@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/data/doctor_list_by_catagory_data/doctor_list_by_catagory_data.dart';
 import 'package:care_plus/models/ui_model/doctor_list_by_catagory_model/doctor_list_by_catagory_model.dart';
@@ -65,23 +66,15 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
         return true;
       },
       child: Scaffold(
-       
-        appBar: AppBar(title: Text('Find Best ${widget.name}', style: TextStyle(
-            color: Colors.black
-        ),
 
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar('Find Best ${widget.name}', null),
         body: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
 
             Center(
               child: Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 30),
+                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -114,6 +107,7 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
               child: Container(
                 height: 900,
                 child: ListView.builder(
+                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: doctorlistbycatagory.length,

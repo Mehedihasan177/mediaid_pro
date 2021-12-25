@@ -72,6 +72,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
       },
       child: Scaffold(
         body: ListView(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+
           children: [
             // Row(
             //   children: [

@@ -20,8 +20,7 @@ Widget Health_History_List(Health_History health_history, BuildContext context) 
           child: Container(
             width: 90,height: 90,
             child: Image.network(health_history.image,
-              height: 90,
-              width: 90,
+
             ),
           ),
         ),

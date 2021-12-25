@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/notification_controller.dart';
 import 'package:care_plus/data/notification_data/notification_data.dart';
 import 'package:care_plus/models/ui_model/notification_model/notification_model.dart';
@@ -57,16 +58,7 @@ class _NotificationPageState extends State<NotificationPage> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Notification', style: TextStyle(
-            color: Colors.black
-        ),
-
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Notification", null),
         body: ListView(
           children: [
 
@@ -75,10 +67,11 @@ class _NotificationPageState extends State<NotificationPage> {
               children: [
                 Flexible(
                   child: Container(
-                    //padding: EdgeInsets.only(left: 20),
+                    //padding: EdgeInsets.only(top: 10),
                     alignment: Alignment.centerLeft,
                     height: 780,
                     child: ListView.builder(
+                        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       //controller: PageController(viewportFraction: 0.3),
                         scrollDirection: Axis.vertical,
                         itemCount: notification.length,

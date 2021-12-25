@@ -39,6 +39,8 @@ class _HospitalDetailsPageState extends State<HospitalDetailsPage> {
       },
       child: Scaffold(
         body: ListView(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 20),

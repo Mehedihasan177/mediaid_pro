@@ -3,6 +3,7 @@ import 'dart:io';
 
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/controllers/user/user_edit_img_ctrl.dart';
 import 'package:care_plus/helper/basic_functions.dart';
@@ -52,7 +53,7 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
         return true;
       },
       child: Scaffold(
-
+        appBar: myAppBar("Upload image", null),
           body: imageUploadSection()
       ),
     );
@@ -159,12 +160,12 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                 ),
               ),
                Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
                 child: Container(
-                  // alignment: Alignment.center,
+                 alignment: Alignment.centerLeft,
                   // height:
                   //     MediaQuery.of(context).size.height * 0.067,
-                  width: MediaQuery.of(context).size.width * 0.87,
+                  width: MediaQuery.of(context).size.width * 0.97,
                   decoration: BoxDecoration(
                     border: Border.all(),
                     borderRadius: BorderRadius.circular(10),
@@ -258,12 +259,12 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                           //   // (Route<dynamic> route) => false
                           // );
                           SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
-                          //Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => ProfilePage()));
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
 
                         });
                       }
                       else{
-                        SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.red);
+                        SnackbarDialogueHelper().showSnackbarDialog(context, 'Image not Uploaded', Colors.red);
 
                       }
                     }

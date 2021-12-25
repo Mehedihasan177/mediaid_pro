@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
 import 'package:care_plus/data/doctor_list_and_details/doctorlist_and_%20details.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
@@ -59,23 +60,15 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Featured Doctor', style: TextStyle(
-            color: Colors.black
-        ),
 
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Featured Doctor", null),
         body: ListView(
+          physics: NeverScrollableScrollPhysics(),
           children: [
-
 
             Center(
               child: Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 30),
+                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -104,13 +97,12 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
               ),
             ),
 
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Container(
-                height: 900,
+            //SizedBox(height: 20),
+            Container(
+                height: 735,
                 child: ListView.builder(
-                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                    //shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: doctorFeturedlist.length,
                     itemBuilder: (context, index) {
@@ -148,7 +140,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
 
                     }),
               ),
-            ),
+
 
           ],
         ),

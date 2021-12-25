@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/reset_password_controller.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
@@ -35,22 +36,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Forget Password', style: TextStyle(
-            color: Colors.black
-        ),
-
-        ),
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          backgroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Forget Password", null),
         body: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
-
 
             Center(
               child: Image(

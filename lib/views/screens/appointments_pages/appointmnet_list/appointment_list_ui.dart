@@ -6,6 +6,7 @@ import 'package:care_plus/controllers/user/previous_appointment_controller.dart'
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
 import 'package:care_plus/data/appointment_list_navbar/appointment_history_data.dart';
 import 'package:care_plus/data/appointment_list_navbar/appointment_list_navbar_data.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_history_navBar.dart';
 import 'package:care_plus/models/ui_model/appointment_list_navBar/appointment_list_navBar.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
@@ -501,6 +502,8 @@ class _AppointmentListState extends State<AppointmentList> {
         print(value.body);
         if (value.statusCode == 200) {
           setState(() {
+            SnackbarDialogueHelper().showSnackbarDialog(context, 'Appointment Cancelled Successfully', Colors.green);
+
             // Navigator.pop(context);
             // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BottomNevigation()));
             appointmentlist.removeAt(index);

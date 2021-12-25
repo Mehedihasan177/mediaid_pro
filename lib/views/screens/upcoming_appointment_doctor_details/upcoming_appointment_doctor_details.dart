@@ -67,7 +67,8 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
       },
       child: Scaffold(
         body: ListView(
-          physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          // <-- this will disable scroll
           shrinkWrap: true,
           children: [
             // Padding(

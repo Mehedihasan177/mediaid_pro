@@ -117,7 +117,7 @@ class AppointmentSlot {
     this.deletedAt,
   });
 
-  int id;
+  int ?id;
   String doctorId;
   String startTime;
   String endTime;
@@ -128,7 +128,7 @@ class AppointmentSlot {
   dynamic deletedAt;
 
   factory AppointmentSlot.fromJson(Map<String, dynamic> json) => AppointmentSlot(
-    id: json["id"],
+    id: json["id"]!,
     doctorId: json["doctor_id"],
     startTime: json["start_time"],
     endTime: json["end_time"],

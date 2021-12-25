@@ -35,7 +35,7 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
   final navigatorKey = GlobalKey<NavigatorState>();
   TextEditingController presNameC = new TextEditingController();
   SelectionOption position = selectionOption.first;
-  String myCurrentPos = '';
+  String myCurrentPos = 'prescription';
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -194,6 +194,8 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                       print(this.position.title);
                       print(this.position.selectiontype);
                       myCurrentPos = this.position.selectiontype;
+                      print("myCurrentPos: ");
+                      print(myCurrentPos);
                     }),
                   ),
                 ),
@@ -259,7 +261,8 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                           //   // (Route<dynamic> route) => false
                           // );
                           SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              BottomNevigation()), (Route<dynamic> route) => false);
 
                         });
                       }

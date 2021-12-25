@@ -122,35 +122,7 @@ class _HomePageState extends State<HomePage> {
     _getUpcomingAppointment();
     super.initState();
   }
-  Future<bool> _onWillPop(BuildContext context) async {
-    bool? exitResult = await showDialog(
-      context: context,
-      builder: (context) => _buildExitDialog(context),
-    );
-    return exitResult ?? false;
-  }
-  Future<bool?> _showExitDialog(BuildContext context) async {
-    return await showDialog(
-      context: context,
-      builder: (context) => _buildExitDialog(context),
-    );
-  }
-  AlertDialog _buildExitDialog(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Please confirm'),
-      content: const Text('Do you want to exit the app?'),
-      actions: <Widget>[
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: Text('No'),
-        ),
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: Text('Yes'),
-        ),
-      ],
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -158,14 +130,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
 
       onWillPop: () async {
-        // clean();
-        //_onWillPop(context);
-        //Navigator.of(context).pop();
-        //Navigator.popUntil(context, ModalRoute.withName('/'));
-        // Navigator.pop(context,false);
-        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SingInPage()),);
 
-        //Navigator.push(context,MaterialPageRoute(builder: (context) => SplashScreen()));
         return true;
       },
       child: Scaffold(
@@ -388,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
                     itemBuilder: (BuildContext context, int index) {
-                      return index<1? buildDoctorListTile(doctorFeturedlist[index], context):Container();
+                      return index<3? buildDoctorListTile(doctorFeturedlist[index], context):Container();
                     }
                 )
             ),

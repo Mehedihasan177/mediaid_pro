@@ -201,7 +201,7 @@ class _SingInPageState extends State<SingInPage> {
                     if (value.statusCode == 200) {
 
                       SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign in successfully', Colors.green);
-                      return  Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                      return  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
                     } else {
                       // return LoginController.requestThenResponsePrint(jsonData);
                       SnackbarDialogueHelper().showSnackbarDialog(context, value.body, Colors.red);

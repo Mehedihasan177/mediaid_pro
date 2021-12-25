@@ -32,7 +32,9 @@ class _RechargeScreenState extends State<RechargeScreen> {
         ),
         body: Container(
           padding: EdgeInsets.all(20),
-          child: Column(
+          child: ListView(
+            physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+
             children: [
               Text('Please Enter Transaction Gateway',style: TextStyle(fontSize: 16),),
               SizedBox(height: 5,),

@@ -15,7 +15,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => ConfirmaAppointment()));
         return true;
       },
       child: Scaffold(

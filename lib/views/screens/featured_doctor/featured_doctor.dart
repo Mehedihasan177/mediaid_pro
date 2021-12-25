@@ -21,7 +21,7 @@ class FeaturedDoctor extends StatefulWidget {
 class _FeaturedDoctorState extends State<FeaturedDoctor> {
 
   List<FeaturedDoctorrr> doctorFeturedlist = [];
-
+  TextEditingController searchC = TextEditingController();
 
   _getFeturedDoctor() async {
 
@@ -55,61 +55,36 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Featured Doctor'),
+          backgroundColor: Color(0xff1CBFA8),
+        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    splashColor: Colors.transparent,
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
-                    },
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 60),
-                      child: Text(
-                        "Featured Doctor",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
 
             Center(
               child: Container(
-                margin: EdgeInsets.only(left: 10,right: 10, top: 30),
+                margin: EdgeInsets.only(left: 10, right: 10, top: 30),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
+                  controller: searchC,
+                  onChanged: onSearch,
+                  onSubmitted: onSearch,
                   style: TextStyle(color: Colors.black),
                   scrollPadding: EdgeInsets.all(10),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: 14),
                     border: InputBorder.none,
-                    hintText: "Search doctor catagory",
+                    hintText: "Search your doctor",
                     hintStyle: TextStyle(
                         color: Colors.black.withOpacity(0.5), fontSize: 15),
                     prefixIcon: Icon(
@@ -123,22 +98,60 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
             ),
 
             SizedBox(height: 20),
-
-            Container(
-                height: 680,
-                //color: Colors.red,
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Container(
+                height: 900,
                 child: ListView.builder(
-                    // physics: NeverScrollableScrollPhysics(),
-                    // shrinkWrap: true,
-                    itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
-                    itemBuilder: (BuildContext context, int index) {
-                      return buildDoctorListTile(doctorFeturedlist[index], context);
-                    }
-                )
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: doctorFeturedlist.length,
+                    itemBuilder: (context, index) {
+
+                      if(searchKey.length==0){
+                        return buildDoctorListTile(doctorFeturedlist[index], context);
+                      }else{
+                        if(doctorFeturedlist[index].name.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].specialization.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].address.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].bmdcReg.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].chambers.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].department.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].hospitalName.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].degree.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].introduction.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].visitingFee.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else if(doctorFeturedlist[index].district.toLowerCase().contains(searchKey)){
+                          return buildDoctorListTile(doctorFeturedlist[index], context);
+                        }else{
+                          return Container();
+                        }
+                      }
+
+
+                    }),
+              ),
             ),
+
           ],
         ),
       ),
     );
+  }
+  String searchKey = '';
+  void onSearch(String value) {
+    setState(() {
+      searchKey=value;
+    });
   }
 }

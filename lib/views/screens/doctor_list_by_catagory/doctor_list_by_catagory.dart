@@ -61,42 +61,16 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Find Best ${widget.name}'),
+          backgroundColor: Color(0xff1CBFA8),
+        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    splashColor: Colors.transparent,
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 0),
-                    child: Text(
-                      "Find Best ${widget.name}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 23,
-                        color: Colors.black.withOpacity(0.5),
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+
             Center(
               child: Container(
                 margin: EdgeInsets.only(left: 10, right: 10, top: 30),

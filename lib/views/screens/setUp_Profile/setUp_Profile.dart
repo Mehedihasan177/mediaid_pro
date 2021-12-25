@@ -34,8 +34,8 @@ class _SetupProfileState extends State<SetupProfile> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SingUpPage()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => SingUpPage()));
         return true;
       },
       child: Scaffold(

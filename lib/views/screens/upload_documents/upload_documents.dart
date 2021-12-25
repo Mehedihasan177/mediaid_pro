@@ -17,8 +17,8 @@ class _UploadDocumentState extends State<UploadDocument> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BottomNevigation())); //HealthHistory()
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => BottomNevigation())); //HealthHistory()
         return true;
       },
       child: Scaffold(

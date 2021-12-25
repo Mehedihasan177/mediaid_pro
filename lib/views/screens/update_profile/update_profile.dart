@@ -52,8 +52,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => BottomNevigation()));
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(

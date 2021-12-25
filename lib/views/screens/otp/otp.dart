@@ -15,7 +15,7 @@ class _OTPpageState extends State<OTPpage> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => SingUpPage()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => SingUpPage()));
         return true;
       },
       child: Scaffold(

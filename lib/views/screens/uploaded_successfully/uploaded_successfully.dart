@@ -16,7 +16,7 @@ class _UploadedSuccessfullyState extends State<UploadedSuccessfully> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => UploadDocument()));
+        // Navigator.push(context,MaterialPageRoute(builder: (context) => UploadDocument()));
         return true;
       },
       child: Scaffold(

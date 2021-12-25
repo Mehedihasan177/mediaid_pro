@@ -36,23 +36,13 @@ class _ChangePasswordState extends State<ChangePassword> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Change Password'),
+          backgroundColor: Color(0xff1CBFA8),
+        ),
         body: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 30),
-              child: Container(
-                alignment: Alignment.topLeft,
-                child: Text("Change Password", style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black.withOpacity(0.5)
-                ),
-                ),
-              ),
-            ),
 
             Center(
               child: Image(
@@ -255,7 +245,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                           });
                           SnackbarDialogueHelper().showSnackbarDialog(context, 'Password changed successfully', Colors.green);
                           //SnackbarDialogueHelper().showSnackbarDialog(context, "New Passowrd",value.body);
-                          return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                          return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              BottomNevigation()), (Route<dynamic> route) => false);
                         }
                         else{
                           // SnackbarDialogueHelper().showSnackbarDialog(context, 'Password not matched $passChange', Colors.red);

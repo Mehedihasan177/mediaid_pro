@@ -21,7 +21,7 @@ class AmbulanceList extends StatefulWidget {
 class _AmbulanceListState extends State<AmbulanceList> {
   List<AmbulanceRes> ambulancelist = [];
 
-
+  TextEditingController searchC = TextEditingController();
   _getAmbulanceList() async {
 
 
@@ -58,45 +58,17 @@ class _AmbulanceListState extends State<AmbulanceList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         //Navigator.pop(context);
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Ambulance list'),
+          backgroundColor: Color(0xff1CBFA8),
+        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    splashColor: Colors.transparent,
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
-                    },
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 60),
-                      child: Text(
-                        "Ambulance List",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Center(
@@ -109,7 +81,10 @@ class _AmbulanceListState extends State<AmbulanceList> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextField(
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
+                    controller: searchC,
+                    onChanged: onSearch,
+                    onSubmitted: onSearch,
                     style: TextStyle(color: Colors.black),
                     scrollPadding: EdgeInsets.all(10),
                     decoration: InputDecoration(
@@ -129,18 +104,100 @@ class _AmbulanceListState extends State<AmbulanceList> {
               ),
             ),
             SizedBox(height: 5),
-            Row(
-              children: [
-                Flexible(
-                  child: Container(
-                    padding: EdgeInsets.only(left: 5, right: 5),
-                    alignment: Alignment.centerLeft,
-                    height: 700,
-                    child: ListView.builder(
-                      //controller: PageController(viewportFraction: 0.3),
-                        scrollDirection: Axis.vertical,
-                        itemCount: ambulancelist.length,
-                        itemBuilder: (context,index) {
+            // Row(
+            //   children: [
+            //     Flexible(
+            //       child: Container(
+            //         padding: EdgeInsets.only(left: 5, right: 5),
+            //         alignment: Alignment.centerLeft,
+            //         height: 700,
+            //         child: ListView.builder(
+            //           //controller: PageController(viewportFraction: 0.3),
+            //             scrollDirection: Axis.vertical,
+            //             itemCount: ambulancelist.length,
+            //             itemBuilder: (context,index) {
+            //               return AmbulanceHospitalWidget(
+            //                   ambulancelist[index].id,
+            //                   ambulancelist[index].hospital.name,
+            //                   ambulancelist[index].name,
+            //                   ambulancelist[index].hospital.description,
+            //                   ambulancelist[index].hospital.address,
+            //                   ambulancelist[index].hospital.mobile,
+            //                   ambulancelist[index].hospital.image,
+            //                   ambulancelist[index].hospital.website,
+            //                   nevigation,
+            //                 context
+            //               );
+            //             // String id,
+            //               //         String type,
+            //               //         String hospital,
+            //               //         String about,
+            //               //         String phone_number,
+            //               //         String address,
+            //               //         String image,
+            //               //         String website,
+            //               //
+            //               //         bool nevigation,
+            //               //         BuildContext context
+            //             }
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+
+
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Container(
+                height: 900,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: ambulancelist.length,
+                    itemBuilder: (context, index) {
+
+                      if(searchKey.length==0){
+                        return AmbulanceHospitalWidget(
+                            ambulancelist[index].id,
+                            ambulancelist[index].hospital.name,
+                            ambulancelist[index].name,
+                            ambulancelist[index].hospital.description,
+                            ambulancelist[index].hospital.address,
+                            ambulancelist[index].hospital.mobile,
+                            ambulancelist[index].hospital.image,
+                            ambulancelist[index].hospital.website,
+                            nevigation,
+                            context
+                        );
+                      }else{
+                        if(ambulancelist[index].name.toLowerCase().contains(searchKey)){
+                          return  AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );
+                        }else if(ambulancelist[index].id.toLowerCase().contains(searchKey)){
+                          return  AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );
+                        }else if(ambulancelist[index].hospital.name.toLowerCase().contains(searchKey)){
                           return AmbulanceHospitalWidget(
                               ambulancelist[index].id,
                               ambulancelist[index].hospital.name,
@@ -151,29 +208,99 @@ class _AmbulanceListState extends State<AmbulanceList> {
                               ambulancelist[index].hospital.image,
                               ambulancelist[index].hospital.website,
                               nevigation,
-                            context
-                          );
-                        // String id,
-                          //         String type,
-                          //         String hospital,
-                          //         String about,
-                          //         String phone_number,
-                          //         String address,
-                          //         String image,
-                          //         String website,
-                          //
-                          //         bool nevigation,
-                          //         BuildContext context
+                              context
+                          );}else if(ambulancelist[index].name.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );}else if(ambulancelist[index].hospital.description.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );                        }else if(ambulancelist[index].hospital.address.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );                        }else if(ambulancelist[index].hospital.mobile.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );                        }else if(ambulancelist[index].hospital.image.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );                        }else if(ambulancelist[index].hospital.website.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              ambulancelist[index].id,
+                              ambulancelist[index].hospital.name,
+                              ambulancelist[index].name,
+                              ambulancelist[index].hospital.description,
+                              ambulancelist[index].hospital.address,
+                              ambulancelist[index].hospital.mobile,
+                              ambulancelist[index].hospital.image,
+                              ambulancelist[index].hospital.website,
+                              nevigation,
+                              context
+                          );                        }else{
+                          return Container();
                         }
-                    ),
-                  ),
-                ),
-              ],
+
+                      }
+
+
+                    }),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+  String searchKey = '';
+  void onSearch(String value) {
+    setState(() {
+      searchKey=value;
+    });
   }
 }
 

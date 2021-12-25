@@ -19,7 +19,7 @@ class _CarePlusLabReportListState extends State<CarePlusLabReportList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(

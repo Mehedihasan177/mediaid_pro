@@ -22,7 +22,7 @@ class _CarePlusPrescriptionsListState extends State<CarePlusPrescriptionsList> {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
         return true;
       },
       child: Scaffold(

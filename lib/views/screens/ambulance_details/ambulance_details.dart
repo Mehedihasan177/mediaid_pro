@@ -47,8 +47,8 @@ class _AmbulanceDetailsPageState extends State<AmbulanceDetailsPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AmbulanceList()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => AmbulanceList()));
         return true;
       },
       child: Scaffold(

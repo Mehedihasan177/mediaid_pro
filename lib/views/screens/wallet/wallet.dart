@@ -52,38 +52,12 @@ class _walletUiState extends State<walletUi> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Wallet'),
+          backgroundColor: Color(0xff1CBFA8),
+        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    splashColor: Colors.transparent,
-                    onPressed: () {},
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 60),
-                      child: Text(
-                        "Wallet",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

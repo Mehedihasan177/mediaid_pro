@@ -48,51 +48,54 @@ class _HospitalListState extends State<HospitalList> {
     // TODO: implement initState
     super.initState();
   }
-
+  TextEditingController searchC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
 
       onWillPop: () async {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+        //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Hospital list'),
+          backgroundColor: Color(0xff1CBFA8),
+        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  FlatButton(
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 30,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                    splashColor: Colors.transparent,
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
-                    },
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 60),
-                      child: Text(
-                        "Hospital List",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Colors.black.withOpacity(0.5),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 20),
+            //   child: Row(
+            //     children: [
+            //       FlatButton(
+            //         child: Icon(
+            //           Icons.arrow_back_ios,
+            //           size: 30,
+            //           color: Colors.black.withOpacity(0.5),
+            //         ),
+            //         splashColor: Colors.transparent,
+            //         onPressed: () {
+            //           Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
+            //         },
+            //       ),
+            //       Expanded(
+            //         child: Padding(
+            //           padding: const EdgeInsets.only(right: 60),
+            //           child: Text(
+            //             "Hospital List",
+            //             textAlign: TextAlign.center,
+            //             style: TextStyle(
+            //               fontSize: 23,
+            //               color: Colors.black.withOpacity(0.5),
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Center(
@@ -105,12 +108,15 @@ class _HospitalListState extends State<HospitalList> {
                   ),
                   child: TextField(
                     keyboardType: TextInputType.text,
+                    controller: searchC,
+                    onChanged: onSearch,
+                    onSubmitted: onSearch,
                     style: TextStyle(color: Colors.black),
                     scrollPadding: EdgeInsets.all(10),
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 14),
                       border: InputBorder.none,
-                      hintText: "Search your doctor",
+                      hintText: "Search your hospital",
                       hintStyle: TextStyle(
                           color: Colors.black.withOpacity(0.5), fontSize: 15),
                       prefixIcon: Icon(
@@ -123,18 +129,58 @@ class _HospitalListState extends State<HospitalList> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                Flexible(
-                  child: Container(
-                    //padding: EdgeInsets.only(left: 20),
-                    alignment: Alignment.centerLeft,
-                    height: 780,
-                    child: ListView.builder(
-                      //controller: PageController(viewportFraction: 0.3),
-                        scrollDirection: Axis.vertical,
-                        itemCount: hospitallist.length,
-                        itemBuilder: (context,index) {
+
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Container(
+                height: 900,
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    itemCount: hospitallist.length,
+                    itemBuilder: (context, index) {
+
+                      if(searchKey.length==0){
+                        return AmbulanceHospitalWidget(
+                            hospitallist[index].id,
+                            hospitallist[index].type,
+                            hospitallist[index].name,
+                            hospitallist[index].description,
+                            hospitallist[index].mobile,
+                            hospitallist[index].address,
+                            hospitallist[index].image,
+                            hospitallist[index].website,
+                            nevigation,
+                            context
+                        );
+                      }else{
+                        if(hospitallist[index].name.toLowerCase().contains(searchKey)){
+                          return  AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );
+                        }else if(hospitallist[index].id.toLowerCase().contains(searchKey)){
+                          return  AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );
+                        }else if(hospitallist[index].type.toLowerCase().contains(searchKey)){
                           return AmbulanceHospitalWidget(
                               hospitallist[index].id,
                               hospitallist[index].type,
@@ -145,18 +191,99 @@ class _HospitalListState extends State<HospitalList> {
                               hospitallist[index].image,
                               hospitallist[index].website,
                               nevigation,
-                              context,
-                          );
+                              context
+                          );}else if(hospitallist[index].name.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );}else if(hospitallist[index].description.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );                        }else if(hospitallist[index].address.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );                        }else if(hospitallist[index].mobile.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );                        }else if(hospitallist[index].image.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );                        }else if(hospitallist[index].website.toLowerCase().contains(searchKey)){
+                          return AmbulanceHospitalWidget(
+                              hospitallist[index].id,
+                              hospitallist[index].type,
+                              hospitallist[index].name,
+                              hospitallist[index].description,
+                              hospitallist[index].mobile,
+                              hospitallist[index].address,
+                              hospitallist[index].image,
+                              hospitallist[index].website,
+                              nevigation,
+                              context
+                          );                        }else{
+                          return Container();
                         }
-                    ),
-                  ),
-                ),
-              ],
+
+                      }
+
+
+                    }),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+  String searchKey = '';
+  void onSearch(String value) {
+    setState(() {
+      searchKey=value;
+    });
   }
 }
 // int id,

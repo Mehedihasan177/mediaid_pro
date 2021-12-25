@@ -62,7 +62,7 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
 
       onWillPop: () async {
          //Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()));
-         Navigator.pop(context, true);
+         // Navigator.pop(context, true);
         return true;
       },
       child: Scaffold(

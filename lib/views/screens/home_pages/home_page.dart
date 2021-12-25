@@ -203,7 +203,9 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  onSubmitted: onNevigation,
                   style: TextStyle(color: Colors.black),
                   scrollPadding: EdgeInsets.all(10),
                   decoration: InputDecoration(
@@ -384,7 +386,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
+  void onNevigation(String value) {
+    setState(() {
+      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor()));
+    });
+  }
 }
 
 

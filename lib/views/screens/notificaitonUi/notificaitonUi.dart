@@ -57,8 +57,15 @@ class _NotificationPageState extends State<NotificationPage> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Notification'),
-          backgroundColor: Color(0xff1CBFA8),
+        appBar: AppBar(title: Text('Notification', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
         ),
         body: ListView(
           children: [

@@ -6,6 +6,7 @@ import 'package:care_plus/models/reg_requst_model.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
+import 'package:care_plus/views/screens/signInPage/sign_in_page.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -394,8 +395,8 @@ class _SingUpPageState extends State<SingUpPage> {
                       FlatButton(
                         minWidth: 10,
                         onPressed: () {
-                          // Navigator.pushReplacement(
-                          //     context, MaterialPageRoute(builder: (context) => SingInPage()));
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(builder: (context) => SingInPage()));
                         },
                         child: Text(
                           "Sign in",

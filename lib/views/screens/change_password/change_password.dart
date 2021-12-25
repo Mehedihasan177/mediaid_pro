@@ -36,8 +36,15 @@ class _ChangePasswordState extends State<ChangePassword> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Change Password'),
-          backgroundColor: Color(0xff1CBFA8),
+        appBar: AppBar(title: Text('Change Password', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
         ),
         body: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,

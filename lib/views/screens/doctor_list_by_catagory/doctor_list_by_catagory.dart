@@ -65,8 +65,16 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Find Best ${widget.name}'),
-          backgroundColor: Color(0xff1CBFA8),
+       
+        appBar: AppBar(title: Text('Find Best ${widget.name}', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
         ),
         body: ListView(
           children: [

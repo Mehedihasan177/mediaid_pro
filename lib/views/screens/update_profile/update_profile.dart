@@ -452,6 +452,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
             child: Row(
               children: [
                 Expanded(
+                  flex: 2,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -490,40 +491,43 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 ),
 
                 ///Height
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(children: [
-                      Image.asset(
-                        "images/height.png",
-                        height: 30,
-                        width: 30,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Height",
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ]),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0, right: 10),
-                      child: Container(
-                        width: 90,
-                        child: TextField(
-                          controller: _textHeight,
-                          keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(color: Colors.black),
-                          //scrollPadding: EdgeInsets.all(10),
-                          decoration: InputDecoration(
-                            //contentPadding: EdgeInsets.all(20),
-                            hintText: "Height",
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(children: [
+                        Image.asset(
+                          "images/height.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Height",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                      ]),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10),
+                        child: Container(
+                          width: 90,
+                          child: TextField(
+                            controller: _textHeight,
+                            keyboardType: TextInputType.emailAddress,
+                            style: TextStyle(color: Colors.black),
+                            //scrollPadding: EdgeInsets.all(10),
+                            decoration: InputDecoration(
+                              //contentPadding: EdgeInsets.all(20),
+                              hintText: "Height",
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),

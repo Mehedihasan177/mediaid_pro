@@ -35,23 +35,22 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Forget Password', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
+        ),
         body: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
 
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 30),
-              child: Container(
-                alignment: Alignment.topLeft,
-                child: Text("Forget Password", style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black.withOpacity(0.5)
-                ),
-                ),
-              ),
-            ),
+
 
             Center(
               child: Image(

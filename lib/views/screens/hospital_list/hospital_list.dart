@@ -59,8 +59,15 @@ class _HospitalListState extends State<HospitalList> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Hospital list'),
-          backgroundColor: Color(0xff1CBFA8),
+        appBar: AppBar(title: Text('Hospital List', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
         ),
         body: ListView(
           children: [

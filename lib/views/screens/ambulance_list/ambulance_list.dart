@@ -63,8 +63,15 @@ class _AmbulanceListState extends State<AmbulanceList> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Ambulance list'),
-          backgroundColor: Color(0xff1CBFA8),
+        appBar: AppBar(title: Text('Ambulance List', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
         ),
         body: ListView(
           children: [

@@ -27,17 +27,18 @@ class _ProfilePageState extends State<ProfilePage> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(title: Text('Profile', style: TextStyle(
+            color: Colors.black
+        ),
+
+        ),
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          backgroundColor: Colors.white,
+        ),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 20),
-              child: Center(
-                child: Text(
-                  "Profile",
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-            ),
 
             Row(
               children: [

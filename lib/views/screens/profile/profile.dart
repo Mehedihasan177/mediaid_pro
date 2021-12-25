@@ -475,7 +475,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     GridTile(
                       child: GestureDetector(
                         onTap: (){
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => SplashScreen()));
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              SplashScreen()), (Route<dynamic> route) => false);
 
                         },
                         child: new Card(

@@ -176,8 +176,8 @@ class _SingUpPageState extends State<SingUpPage> {
                               },
                               showFlag: true,
                               // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                              initialSelection: 'IT',
-                              favorite: ['+880', 'BD'],
+                              initialSelection: 'AU',
+                              favorite: ['+61', 'AU'],
                               showCountryOnly: false,
                               // optional. Shows only country name and flag when popup is closed.
                               showOnlyCountryWhenClosed: false,

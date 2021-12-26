@@ -447,7 +447,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   if(selectedIndex!=-1){
 
                                     CreateAppointmentReq createAppointmentSchedule = CreateAppointmentReq(
-                                        SIGNINGRESPONSE.id,
+                                        SIGNINGRESPONSE.id.toString(),
                                         slotWithDate[selectedIndex].timeslotlist.doctorId,
                                         slotWithDate[selectedIndex].timeslotlist.id,
                                         slotWithDate[selectedIndex].date,

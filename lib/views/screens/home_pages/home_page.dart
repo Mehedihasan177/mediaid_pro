@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
   int _index = 0;
   List<SpecializationResponse> informationslist = [];
   List<FeaturedDoctorrr> doctorFeturedlist = [];
+  TextEditingController _textSearch = TextEditingController();
 
 
   _getUpcomingAppointment() async {
@@ -203,6 +204,7 @@ class _HomePageState extends State<HomePage> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: _textSearch,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   onSubmitted: onNevigation,
@@ -336,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                   child: FlatButton(
                     minWidth: 10,
                     onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: _textSearch.text)));
                     },
                     child: Text(
                       "See All",
@@ -365,7 +367,7 @@ class _HomePageState extends State<HomePage> {
                 if(snapshot.hasData && !snapshot.hasError &&
                     snapshot.data?.snapshot.value != null){
                   print('prev $gone');
-                  if(gone==0)goForCallorNot(SIGNINGRESPONSE.id,context);
+                  if(gone==0)goForCallorNot(SIGNINGRESPONSE.id.toString(),context);
                   gone=1;
                   print('next $gone');
 
@@ -388,7 +390,7 @@ class _HomePageState extends State<HomePage> {
 
   void onNevigation(String value) {
     setState(() {
-      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor()));
+      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: _textSearch.text)));
     });
   }
 }

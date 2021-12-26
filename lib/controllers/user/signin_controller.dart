@@ -20,6 +20,8 @@ class SigninController{
       'mobile': "${signinController.mobile}",
       'password': "${signinController.password}",
     };
+    print("login");
+    print(login);
 
     // Here we are getting the response
     var response = await http.post(Uri.parse(url), body: login,
@@ -33,7 +35,7 @@ class SigninController{
       final loginobject = SignInResponse.fromJson(parsed);
       print(loginobject.data.token);
       USERTOKEN = loginobject.data.token;
-      USERID = loginobject.data.user.id;
+      USERID = loginobject.data.user.id.toString();
       SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
       sharedPreferences.setString("token", loginobject.data.token);

@@ -18,6 +18,7 @@ import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -35,14 +36,14 @@ class SingInPage extends StatefulWidget {
 }
 
 class _SingInPageState extends State<SingInPage> {
-  TextEditingController _textMobile = TextEditingController(text: "01744319");
-  TextEditingController _textPassword = TextEditingController(text: "12345678");
+  TextEditingController _textMobile = TextEditingController(text: "111");
+  TextEditingController _textPassword = TextEditingController(text: "qqqqqqqq");
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();
   late DatabaseReference databaseReference;
 
-
+  String countryCode = '+880';
   @override
   void initState() {
     // TODO: implement initState
@@ -71,43 +72,44 @@ class _SingInPageState extends State<SingInPage> {
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.dock,
-                      size: 18,
-                      color: Colors.black.withOpacity(0.6),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Text(
-                      "Mobile Number",
-                      style: TextStyle(fontSize: 17),
-                    ),
-                  ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                flex:1,
+                child: CountryCodePicker(
+                  onChanged: (code){
+                    setState(() {
+                      countryCode = code.dialCode!;
+                    });
+                  },
+                  showFlag: true,
+                  // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                  initialSelection: 'IT',
+                  favorite: ['+880', 'BD'],
+                  showCountryOnly: false,
+                  // optional. Shows only country name and flag when popup is closed.
+                  showOnlyCountryWhenClosed: false,
                 ),
-                SizedBox(
-                  width: 20,
-                ),
-                TextField(
-                  controller: _textMobile,
-                  keyboardType: TextInputType.text,
-                  style: TextStyle(color: Colors.black),
-                  //scrollPadding: EdgeInsets.all(10),
-                  decoration: InputDecoration(
-                    //contentPadding: EdgeInsets.all(20),
-                    hintText: "Enter your mobile number",
+              ),
+              Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 0),
+                  child: TextField(
+                    controller: _textMobile,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: Colors.black),
+                    //scrollPadding: EdgeInsets.all(10),
+                    decoration: InputDecoration(
+                      //contentPadding: EdgeInsets.all(20),
+                      hintText: "Enter your phone number",
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
 
           SizedBox(
@@ -184,10 +186,9 @@ class _SingInPageState extends State<SingInPage> {
                 ),
                 onPressed: () async {
 
-
                   SigninModel myInfo = new SigninModel(
-                      mobile: _textMobile.text, password: _textPassword.text);
-                  USERNAME = _textMobile.text;
+                      mobile: countryCode +_textMobile.text, password: _textPassword.text);
+                  USERNAME = countryCode + _textMobile.text;
                   USERPASS = _textPassword.text;
                   await SigninController.requestThenResponsePrint(myInfo)
                       .then((value) async {

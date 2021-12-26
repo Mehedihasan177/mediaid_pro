@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
@@ -13,7 +12,8 @@ import 'package:care_plus/views/widgets/homepage_doctor_card_widget/homepage_doc
 import 'package:flutter/material.dart';
 
 class FeaturedDoctor extends StatefulWidget {
-  const FeaturedDoctor({Key? key}) : super(key: key);
+  final String text;
+  const FeaturedDoctor({Key? key, required this.text}) : super(key: key);
 
   @override
   _FeaturedDoctorState createState() => _FeaturedDoctorState();
@@ -45,6 +45,9 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
 
   @override
   void initState() {
+    searchC = TextEditingController(text: widget.text);
+    searchKey = searchC.text;
+
     _getFeturedDoctor();
     // TODO: implement initState
     super.initState();
@@ -84,7 +87,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: 14),
                     border: InputBorder.none,
-                    hintText: "Search your doctor",
+                    hintText: 'Search your doctor',
                     hintStyle: TextStyle(
                         color: Colors.black.withOpacity(0.5), fontSize: 15),
                     prefixIcon: Icon(

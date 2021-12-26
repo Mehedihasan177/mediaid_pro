@@ -631,7 +631,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
       print(value.body);
       final Map parsed = json.decode(value.body);
 
-      final loginobject = User.fromJson(parsed);
+      final loginobject = Data.fromJson(parsed);
       print(loginobject.token);
       print(loginobject.token);
 

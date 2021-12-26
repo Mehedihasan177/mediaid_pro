@@ -37,7 +37,7 @@ class Data {
   User user;
   String token;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<dynamic, dynamic> json) => Data(
     user: User.fromJson(json["user"]),
     token: json["token"],
   );

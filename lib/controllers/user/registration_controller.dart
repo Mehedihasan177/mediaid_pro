@@ -21,6 +21,8 @@ class RegistrationController{
       'image': "${information.image}",
     };
 
+    print(data1);
+
     // Here we are getting the response
     var response = await http.post(Uri.parse(url), body: data1,
         headers: {

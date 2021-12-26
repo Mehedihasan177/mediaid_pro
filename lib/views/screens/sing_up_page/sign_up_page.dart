@@ -171,7 +171,7 @@ class _SingUpPageState extends State<SingUpPage> {
                             child: CountryCodePicker(
                               onChanged: (code){
                                 setState(() {
-                                  countryCode = code.code!;
+                                  countryCode = code.dialCode!;
                                 });
                               },
                               showFlag: true,
@@ -184,7 +184,7 @@ class _SingUpPageState extends State<SingUpPage> {
                             ),
                           ),
                           Expanded(
-                            flex: 3,
+                            flex: 2,
                             child: Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: TextField(
@@ -355,15 +355,15 @@ class _SingUpPageState extends State<SingUpPage> {
                           password_confirmation: _textConfirmPassword.text,
                           image: '',
                         );
-                        await RegistrationController.requestThenResponsePrint(myInfo).then((value) async {
-                          print(value.statusCode);
-                          print(value.body);
+                        await RegistrationController.requestThenResponsePrint(myInfo).then((value2) async {
+                          print(value2.statusCode);
+                          print(value2.body);
                           //EasyLoading.dismiss();
-                          if(value.statusCode==200){
+                          if(value2.statusCode==200){
                             print("successfull");
                             //EasyLoading.showSuccess('logging in...');
                             SigninModel myInfo = new SigninModel(
-                                mobile: _textMobile.text, password: _textPassword.text);
+                                mobile: countryCode+_textMobile.text, password: _textPassword.text);
                             await SigninController.requestThenResponsePrint(myInfo)
                                 .then((value) async {
                               print(value.statusCode);
@@ -378,7 +378,7 @@ class _SingUpPageState extends State<SingUpPage> {
                               sharedPreferences.setString("token", loginobject.data.token);
                               //EasyLoading.dismiss();
                               if (value.statusCode == 200) {
-                                sharedPreferences.setString("mobile", _textMobile.text);
+                                sharedPreferences.setString("mobile", countryCode+_textMobile.text);
                                 sharedPreferences.setString("password", _textPassword.text);
                                 return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
                               } else {
@@ -389,11 +389,11 @@ class _SingUpPageState extends State<SingUpPage> {
                             });
 
                           }else{
-                            AlertDialogueHelper().showAlertDialog(context, '', value.body.replaceAll("{", "").replaceAll("}", "")
+                            AlertDialogueHelper().showAlertDialog(context, '', value2.body.replaceAll("{", "").replaceAll("}", "")
                             .replaceAll("[", "").replaceAll("]", "")
 
                             );
-                            print(value.body);
+                            print(value2.body);
                           }
                         });
 

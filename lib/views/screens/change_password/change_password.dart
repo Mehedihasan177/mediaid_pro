@@ -231,11 +231,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                               setState(() {
                                 var reobj = SignInResponse.fromJson(json.decode(value.body));
                                 var loginobject = reobj.data.user;
+                                var loginobject1 = reobj.data;
+
+
                                 print('loginobject.image');
                                 print(loginobject.image);
                                 SIGNINGRESPONSE = loginobject;
-                                print(loginobject.token);
-                                sharedPreferences.setString("token", loginobject.token);
+                                print(loginobject1.token);
+                                sharedPreferences.setString("token", loginobject1.token);
 
                                 USERPASS = _confirmPassword.text;
 

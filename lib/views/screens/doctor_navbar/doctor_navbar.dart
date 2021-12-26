@@ -25,6 +25,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
   List<DoctorINformation> allinformatonss = List.of(allinformations);
   List<UpcommingAppointment> appointment = List.of(allappointmnet);
   List<Datum> doctorlistbycatagory = [];
+  TextEditingController _textSearch = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +126,7 @@ class _DoctorsNavbarState extends State<DoctorsNavbar> {
                 child: FlatButton(
                   minWidth: 10,
                   onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor()));
+                    //Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: _textSearch.text)));
                   },
                   child: Text(
                     "See All",

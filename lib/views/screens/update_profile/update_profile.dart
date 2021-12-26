@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/controllers/user/user_update_controller.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
@@ -57,27 +58,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
         return true;
       },
       child: Scaffold(
+        appBar: myAppBar("Update profile", null),
         body: ListView(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30, left: 20),
-            child: Text(
-              "Update your profile",
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, left: 20),
-            child: Text(
-              "Update your profile picture or renew informaton",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ),
-          ),
+
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Stack(children: [

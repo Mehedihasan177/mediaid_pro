@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/user_update_controller.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/user_profile_update_response.dart';
@@ -39,27 +40,10 @@ class _SetupProfileState extends State<SetupProfile> {
         return true;
       },
       child: Scaffold(
+        appBar: myAppBar("Set up profile", null),
         body: ListView(children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 30, left: 20),
-            child: Text(
-              "Set up your profile",
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, left: 20),
-            child: Text(
-              "Update your profile picture or renew informaton",
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ),
-          ),
+
+
 
           Padding(
             padding: const EdgeInsets.only(top: 20),
@@ -231,7 +215,7 @@ class _SetupProfileState extends State<SetupProfile> {
                     width: 10,
                   ),
                   Text(
-                    "Medicare Id",
+                    "Medicare ID",
                     style: TextStyle(fontSize: 17),
                   ),
                 ]),
@@ -244,7 +228,7 @@ class _SetupProfileState extends State<SetupProfile> {
                     //scrollPadding: EdgeInsets.all(10),
                     decoration: InputDecoration(
                       //contentPadding: EdgeInsets.all(20),
-                      hintText: "Enter your medicare Id",
+                      hintText: "Enter your medicare id",
                     ),
                   ),
                 ),
@@ -371,32 +355,37 @@ class _SetupProfileState extends State<SetupProfile> {
                   };
                   print(USERTOKEN);
 
-                  await UserUpdateController.requestThenResponsePrint( USERTOKEN, data1).then((value) async {
-                    print(value.statusCode);
-                    print("mmmmmm :   ");
-                    print(value.body);
-                    final Map parsed = json.decode(value.body);
+              if(_textMedicareID.text.isEmpty){
+                SnackbarDialogueHelper().showSnackbarDialog(context, 'Please enter Medicare ID', Colors.red);
+              }else{
+                await UserUpdateController.requestThenResponsePrint( USERTOKEN, data1).then((value) async {
+                  print(value.statusCode);
+                  print("mmmmmm :   ");
+                  print(value.body);
+                  final Map parsed = json.decode(value.body);
 
 
-                    //final doctorProfile = Data.fromJson(parsed);
-                    //DOCTORUPDATEPROFILERESPONSES = doctorProfile;
-                    // DoctorSigninController();
+                  //final doctorProfile = Data.fromJson(parsed);
+                  //DOCTORUPDATEPROFILERESPONSES = doctorProfile;
+                  // DoctorSigninController();
 
 
-                    //EasyLoading.dismiss();
-                    if(value.statusCode==200){
-                      SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
-                      return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                  //EasyLoading.dismiss();
+                  if(value.statusCode==200){
+                    SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
+                    return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
 
-                    }else{
-                      SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')
-                          .replaceAll('{', ' ')
-                          .replaceAll('}', ' ')
-                          .replaceAll('[', ' ')
-                          .replaceAll(']', ' '), Colors.red);
-                    }
+                  }else{
+                    SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')
+                        .replaceAll('{', ' ')
+                        .replaceAll('}', ' ')
+                        .replaceAll('[', ' ')
+                        .replaceAll(']', ' '), Colors.red);
                   }
-                  );
+                }
+                );
+              }
+
 
                 },
                 style: ElevatedButton.styleFrom(

@@ -47,7 +47,7 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                             //     child: Image.asset("images/medicareID_logo.png")),
                             Text("Medicare id: "),
                             SizedBox(width: 5),
-                            Text(profile_model.medicare_no.toString()),
+                            Text(SIGNINGRESPONSE.medicareNo),
                           ],
                         ),
                       ],

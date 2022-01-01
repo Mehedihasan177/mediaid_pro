@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
@@ -310,7 +311,23 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 height: 120,
                 // color: Colors.red,
-                child: ListView.builder(
+                child: appointment.isEmpty ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset("images/appointment_history.png",
+                          height: 50,
+                          width: 50,
+                        ),
+                        Text("No Appointment found",
+                          style: TextStyle(fontSize: 12, color: Color(0xFF1CBFA8)),
+
+                        ),
+                      ],
+                    )
+                  //NoDataFound("images/find_doctor.png", "No Doctor Found"),
+                ) :ListView.builder(
                   shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemCount: appointment.length,
@@ -350,7 +367,23 @@ class _HomePageState extends State<HomePage> {
 
             Container(
               // height: 300,
-                child: ListView.builder(
+                child: doctorFeturedlist.isEmpty ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset("images/find_doctor.png",
+                      height: 60,
+                        width: 60,
+                      ),
+                      Text("No Doctor Found",
+                      style: TextStyle(fontSize: 15, color: Color(0xFF1CBFA8)),
+
+                      ),
+                    ],
+                  )
+                  //NoDataFound("images/find_doctor.png", "No Doctor Found"),
+                ) : ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length

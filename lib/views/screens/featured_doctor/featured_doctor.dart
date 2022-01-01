@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
 import 'package:care_plus/data/doctor_list_and_details/doctorlist_and_%20details.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
@@ -103,7 +104,9 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
             //SizedBox(height: 20),
             Container(
                 height: 735,
-                child: ListView.builder(
+                child: doctorFeturedlist.isEmpty ? Center(
+                  child: NoDataFoundSize("images/find_doctor.png", "No Doctor Found"),
+                ) : ListView.builder(
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     //shrinkWrap: true,
                     scrollDirection: Axis.vertical,

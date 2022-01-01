@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/ambulanceList_controller.dart';
 import 'package:care_plus/data/ambulance_list_data/ambulance_list_data.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
@@ -150,7 +151,10 @@ class _AmbulanceListState extends State<AmbulanceList> {
               padding: const EdgeInsets.only(left: 5),
               child: Container(
                 height: 900,
-                child: ListView.builder(
+                child: ambulancelist.isEmpty ? Center(
+                  child: NoDataFoundSize("images/ambulance_image.png", "Ambulance not available"),
+                ) :ListView.builder(
+
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,

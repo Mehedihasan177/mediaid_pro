@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/data/doctor_list_by_catagory_data/doctor_list_by_catagory_data.dart';
 import 'package:care_plus/models/ui_model/doctor_list_by_catagory_model/doctor_list_by_catagory_model.dart';
@@ -106,9 +107,11 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
               padding: const EdgeInsets.only(left: 5),
               child: Container(
                 height: 900,
-                child: ListView.builder(
+                child: doctorlistbycatagory.isEmpty ? Center(
+                  child: NoDataFound("images/find_doctor.png", "No Doctor Found"),
+                ) : ListView.builder(
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    shrinkWrap: true,
+                    //shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     itemCount: doctorlistbycatagory.length,
                     itemBuilder: (context, index) {

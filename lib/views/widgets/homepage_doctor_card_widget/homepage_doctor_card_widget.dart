@@ -55,7 +55,14 @@ Widget doctorList(Datum doctorINformation, context) => Container(
                               Container(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  doctorINformation.specialization.replaceAll(',', '')+" at ",
+                                  doctorINformation.specialization+" at ",
+                                  style: TextStyle(
+                                    fontSize: 15,),
+                                ),
+                              ),Container(
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  doctorINformation.hospitalName.replaceAll("null", "(none hospital)"),
                                   style: TextStyle(
                                     fontSize: 15,),
                                 ),

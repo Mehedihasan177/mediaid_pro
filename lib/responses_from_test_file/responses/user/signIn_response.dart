@@ -81,7 +81,7 @@ class User {
     required this.labReports,
   });
 
-  String id;
+  int id;
   String token;
   dynamic adminId;
   String name;
@@ -112,7 +112,7 @@ class User {
   String labReports; //List<dynamic> labReports;
 
   factory User.fromJson(Map<dynamic, dynamic> json) => User(
-    id: json["id"].toString(),
+    id: json["id"],
     token: json["token"].toString(),
     adminId: json["admin_id"].toString(),
     name: json["name"].toString(),

@@ -2,10 +2,14 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/controllers/user/user_update_controller.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
+import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/user_profile_update_response.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart' as login;
+
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
 
 import 'package:flutter/material.dart';
@@ -55,21 +59,23 @@ class _SetupProfileState extends State<SetupProfile> {
                     onTap: () {
                       Navigator.push(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 2)),);
                     },
-                    child: Container(
-                      height: 130,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        // border: Border.all(color: Colors.black.withOpacity(0.1)),
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.black.withOpacity(0.07),
-                      ), //BoxDecoration
+                    child: CircleAvatar(
+                      radius: 78,
+                      backgroundColor: Colors.white,
+                      child: ClipOval(
+                          child: Image.network(
+                            '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
+                            fit: BoxFit.fill,
+                            width: 170,
+                            height: 190,
+                          )),
                     ),
                   ), //Container
                 ],
               ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 115),
+                  padding: const EdgeInsets.only(top: 135),
                   child: Image.asset(
                     "images/camera.png",
                     height: 30,
@@ -364,16 +370,11 @@ class _SetupProfileState extends State<SetupProfile> {
                   print(value.body);
                   final Map parsed = json.decode(value.body);
 
-
-                  //final doctorProfile = Data.fromJson(parsed);
-                  //DOCTORUPDATEPROFILERESPONSES = doctorProfile;
-                  // DoctorSigninController();
-
-
-                  //EasyLoading.dismiss();
                   if(value.statusCode==200){
+                    //signInAgain(context);
                     SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
-                    return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                    return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                        BottomNevigation()), (Route<dynamic> route) => false);
 
                   }else{
                     SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')
@@ -409,4 +410,5 @@ class _SetupProfileState extends State<SetupProfile> {
       ),
     );
   }
+
 }

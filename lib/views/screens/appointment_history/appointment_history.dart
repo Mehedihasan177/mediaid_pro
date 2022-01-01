@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/apponitment_cencel_controller.dart';
 import 'package:care_plus/controllers/user/previous_appointment_controller.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
@@ -56,7 +57,9 @@ class _AppointmentHistoryState extends State<AppointmentHistory> {
             child: Container(
               height: 775,
               //color: Colors.red,
-              child: ListView.builder(
+              child: appointmentlistH.isEmpty ? Center(
+                child: NoDataFound("images/appointment_history.png", "No Appointment History"),
+              ) : ListView.builder(
                   physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), // <-- this will disable scroll
                   //shrinkWrap: true,
                   scrollDirection: Axis.vertical,

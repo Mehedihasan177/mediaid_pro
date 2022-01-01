@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/user_wallet_controller.dart';
 import 'package:care_plus/controllers/user/user_wallet_log_controller.dart';
 import 'package:care_plus/data/wallet_data/wallet_data.dart';
@@ -139,22 +140,18 @@ class _walletUiState extends State<walletUi> {
               children: [
                 Flexible(
                   child: Container(
-                    //padding: EdgeInsets.only(left: 20),
-                    alignment: Alignment.centerLeft,
-                    //height: 750,
-                    //color: Colors.red,
-                    child: ListView.builder(
-                        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                    alignment: Alignment.center,
+                    child: moneyWallet.isEmpty ? Center(
+                      child: NoDataFound("images/transaction_history.png", "No Transaction History"),
+                    ) : ListView.builder(
+                      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       reverse: true,
                       shrinkWrap: true,
-                      //controller: PageController(viewportFraction: 0.3),
-                        scrollDirection: Axis.vertical,
-                        itemCount: moneyWallet.length,
-                        itemBuilder: (context,index) {
-                          //var information = carePlushPrescriptionList[index];
-                          return MoneyWallet(moneyWallet[index]);
-
-                        }
+                      scrollDirection: Axis.vertical,
+                      itemCount: moneyWallet.length,
+                      itemBuilder: (context,index) {
+                      return MoneyWallet(moneyWallet[index]);
+                      },
                     ),
                   ),
                 ),

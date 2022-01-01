@@ -260,9 +260,17 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                           //           )),
                           //   // (Route<dynamic> route) => false
                           // );
-                          SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              BottomNevigation()), (Route<dynamic> route) => false);
+                          if(value.statusCode == 200){
+                            if(widget.page == 2){
+                              SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
+                              Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+                            }else{
+                              SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
+                              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                  BottomNevigation()), (Route<dynamic> route) => false);
+                            }
+                          }
+
 
                         });
                       }
@@ -310,17 +318,18 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                                   sharedPreferences.setString("password", USERPASS);
                                 });
 
+
                                 SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
-                                return Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                                return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                    BottomNevigation()), (Route<dynamic> route) => false);
                               } else {
                                 // return LoginController.requestThenResponsePrint(jsonData);
-                                Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
-                              }
+                                SnackbarDialogueHelper().showSnackbarDialog(context, 'Image not Uploaded', Colors.red);
+                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                    BottomNevigation()), (Route<dynamic> route) => false);                              }
 
                             });
-
                           }
-
                         });
                       } else {
                         // BasicFunctions.showAlertDialogTOView(context, 'Warning', 'Select an image to upload');

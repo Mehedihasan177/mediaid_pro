@@ -630,8 +630,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
         );
       } else {
         // return LoginController.requestThenResponsePrint(jsonData);
-        AlertDialogueHelper().showAlertDialog(
-            context, 'Warning', 'Please recheck email and password');
+        SnackbarDialogueHelper().showSnackbarDialog(context, 'Please recheck email and password', Colors.red);
+
       }
     });
   }

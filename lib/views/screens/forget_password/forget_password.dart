@@ -14,6 +14,7 @@ import 'package:care_plus/views/screens/otp/otp.dart';
 import 'package:care_plus/views/screens/otp/otp_two.dart';
 import 'package:care_plus/views/screens/reset_Password/reset_Password.dart';
 import 'package:care_plus/views/screens/signInPage/sign_in_page.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,8 +26,9 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  TextEditingController _textEmail = TextEditingController();
+  TextEditingController _textMobile = TextEditingController();
   TextEditingController _textPassword = TextEditingController();
+  String countryCode = '+880';
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -40,6 +42,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         body: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
+          physics: NeverScrollableScrollPhysics(),
           children: [
 
             Center(
@@ -52,43 +55,44 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.email_outlined,
-                        size: 18,
-                        color: Colors.black.withOpacity(0.6),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        "Mobile Number",
-                        style: TextStyle(fontSize: 17),
-                      ),
-                    ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex:1,
+                  child: CountryCodePicker(
+                    onChanged: (code){
+                      setState(() {
+                        countryCode = code.dialCode!;
+                      });
+                    },
+                    showFlag: true,
+                    // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                    initialSelection: 'AU',
+                    favorite: ['+880', 'BD'],
+                    showCountryOnly: false,
+                    // optional. Shows only country name and flag when popup is closed.
+                    showOnlyCountryWhenClosed: false,
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  TextField(
-                    controller: _textEmail,
-                    keyboardType: TextInputType.emailAddress,
-                    style: TextStyle(color: Colors.black),
-                    //scrollPadding: EdgeInsets.all(10),
-                    decoration: InputDecoration(
-                      //contentPadding: EdgeInsets.all(20),
-                      hintText: "Enter your mobile number",
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 18),
+                    child: TextField(
+                      controller: _textMobile,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(color: Colors.black),
+                      //scrollPadding: EdgeInsets.all(10),
+                      decoration: InputDecoration(
+                        //contentPadding: EdgeInsets.all(20),
+                        hintText: "Enter your phone number",
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
 
 
@@ -105,7 +109,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     onPressed: () {
             print("token of user\n");
             print("token at call mehedi hasan who are you: " + USERTOKEN);
-            ResetPasswordModel passChange = new ResetPasswordModel(mobile: _textEmail.text);
+            ResetPasswordModel passChange = new ResetPasswordModel(mobile: countryCode + _textMobile.text);
 
             ResetPasswordController.requestThenResponsePrint(passChange).then((value) async {
               print('dddddddd');

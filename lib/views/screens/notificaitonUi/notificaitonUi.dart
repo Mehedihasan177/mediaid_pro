@@ -15,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -74,7 +75,11 @@ class _NotificationPageState extends State<NotificationPage> {
                     //padding: EdgeInsets.only(top: 10),
                     alignment: Alignment.centerLeft,
                     height: 780,
-                    child: ListView.builder(
+                    child: notification.isEmpty
+                        ? Center(
+                        child: NoDataFound("images/no_notification.png", "No Notification Found")
+                    )
+                        : ListView.builder(
                         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       //controller: PageController(viewportFraction: 0.3),
                         scrollDirection: Axis.vertical,

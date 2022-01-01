@@ -398,7 +398,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                 Container(
                                   margin: EdgeInsets.symmetric(vertical: 5.0),
                                   height: 100.0,
-                                  child: ListView.builder(
+                                  child: slotWithDate.isEmpty ? Text("No Timeslot"):ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: slotWithDate.length,
                                       itemBuilder: (BuildContext context,int index){

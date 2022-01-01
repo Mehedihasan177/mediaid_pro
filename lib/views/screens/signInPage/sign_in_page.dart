@@ -36,8 +36,8 @@ class SingInPage extends StatefulWidget {
 }
 
 class _SingInPageState extends State<SingInPage> {
-  TextEditingController _textMobile = TextEditingController(text: "111");
-  TextEditingController _textPassword = TextEditingController(text: "qqqqqqqq");
+  TextEditingController _textMobile = TextEditingController();
+  TextEditingController _textPassword = TextEditingController();
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();
@@ -58,6 +58,9 @@ class _SingInPageState extends State<SingInPage> {
 
     return Scaffold(
       body: ListView(
+        // scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -94,9 +97,9 @@ class _SingInPageState extends State<SingInPage> {
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 0),
+                  padding: const EdgeInsets.only(right: 18),
                   child: TextField(
                     controller: _textMobile,
                     keyboardType: TextInputType.text,

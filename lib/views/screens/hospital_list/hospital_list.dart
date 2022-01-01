@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/hospital_controller.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
 import 'package:care_plus/helper/alertDialogue.dart';
@@ -132,8 +133,11 @@ class _HospitalListState extends State<HospitalList> {
             Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Container(
-                height: 900,
-                child: ListView.builder(
+                height: 715,
+                 // color: Colors.red,
+                child: hospitallist.isEmpty ? Container(
+                  child: NoDataFoundSize("images/hospital_image_s.png", "No Hospital Available"),
+                ) :ListView.builder(
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,

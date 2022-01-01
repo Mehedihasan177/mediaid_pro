@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/controllers/user/apponitment_cencel_controller.dart';
 import 'package:care_plus/controllers/user/previous_appointment_controller.dart';
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
@@ -18,6 +19,7 @@ import 'package:care_plus/views/screens/splash_screen/splash_Screen.dart';
 import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upcoming_appointment_doctor_details.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/appointmnet_history_widget.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/upcomming_List_navbar_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -64,11 +66,11 @@ class _AppointmentListState extends State<AppointmentList> {
     });
   }
 
-  @override
+@override
   void initState() {
+  _getUpcomingAppointment();
+  _getPrevAppointment();
     // TODO: implement initState
-    _getUpcomingAppointment();
-    _getPrevAppointment();
     super.initState();
   }
 
@@ -97,13 +99,14 @@ class _AppointmentListState extends State<AppointmentList> {
             Container(
                height: 725,
                //color: Colors.red,
-              child: ListView.builder(
+              child: appointmentlist.isEmpty ? Center(
+                child: NoDataFound("images/appointment_history.png", "No Appointment History"),
+              ) : ListView.builder(
                   physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), // <-- this will disable scroll
                   //shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: appointmentlist.length,
                   itemBuilder: (context, index) {
-                    //return Appointment_List(appointmentlist[index], context);
 
                     if ((appointmentlist[index].active.toString() != '0') &&
                         (appointmentlist[index].consult == '0')) {

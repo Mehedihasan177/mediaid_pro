@@ -52,37 +52,62 @@ class _SetupProfileState extends State<SetupProfile> {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Stack(children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Stack(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        //flex: 1,
+                        fit: FlexFit.loose,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      NewImageUploadPage(page: 2)),
+                            );
+                          },
+                          child: CircleAvatar(
+                            radius: 78,
+                            backgroundColor: Colors.white,
+                            child: ClipOval(
+                                child: Image.network(
+                                  '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
+                                  fit: BoxFit.fill,
+                                  width: 170,
+                                  height: 190,
+                                )),
+                          ),
+                        ), //Container
+                      ),
+                    ],
+                  ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 2)),);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                NewImageUploadPage(page: 1)),
+                      );
                     },
-                    child: CircleAvatar(
-                      radius: 78,
-                      backgroundColor: Colors.white,
-                      child: ClipOval(
-                          child: Image.network(
-                            '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
-                            fit: BoxFit.fill,
-                            width: 170,
-                            height: 190,
-                          )),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 138),
+                        child: Image.asset(
+                          "images/camera.png",
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
                     ),
-                  ), //Container
-                ],
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 135),
-                  child: Image.asset(
-                    "images/camera.png",
-                    height: 30,
-                    width: 30,
                   ),
-                ),
+                ]),
               ),
+
             ]),
           ),
 

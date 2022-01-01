@@ -64,7 +64,7 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                 iconSize: 30,
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => UpdateProfile(page: 1)));
+                      MaterialPageRoute(builder: (context) => UpdateProfile()));
                 },
               ),
             ),

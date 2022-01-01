@@ -38,7 +38,7 @@ NoDataFoundSize(img, msg) {
           height: 17,
         ),
         Text(msg, style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             color: Color(0xFF1CBFA8)
         ),)
       ],

@@ -14,6 +14,7 @@ import 'package:care_plus/responses_from_test_file/responses/user/signIn_respons
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/profile/profile.dart';
 import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
+import 'package:care_plus/views/screens/update_profile/update_profile.dart';
 import 'package:care_plus/views/screens/user_prev_prescription_ui/userPrevPresUpload.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -319,9 +320,20 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                                 });
 
 
-                                SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
-                                return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                    BottomNevigation()), (Route<dynamic> route) => false);
+                                if(widget.page == 1){
+                                  SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
+                                  return Navigator.push(context,MaterialPageRoute(builder: (context) => UpdateProfile()));
+
+                                }
+                                else if(widget.page == 2){
+                                  SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
+                                  return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()));
+                                }
+                                else{
+                                  SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
+                                  return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                      BottomNevigation()), (Route<dynamic> route) => false);
+                                }
                               } else {
                                 // return LoginController.requestThenResponsePrint(jsonData);
                                 SnackbarDialogueHelper().showSnackbarDialog(context, 'Image not Uploaded', Colors.red);

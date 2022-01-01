@@ -142,7 +142,7 @@ class _walletUiState extends State<walletUi> {
                   child: Container(
                     alignment: Alignment.center,
                     child: moneyWallet.isEmpty ? Center(
-                      child: NoDataFound("images/transaction_history.png", "No Transaction History"),
+                      child: NoDataFoundSize("images/transaction_history.png", "No Transaction History"),
                     ) : ListView.builder(
                       physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                       reverse: true,

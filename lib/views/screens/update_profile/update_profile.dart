@@ -20,8 +20,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 class UpdateProfile extends StatefulWidget {
-  final int page;
-  const UpdateProfile({Key? key, required this.page}) : super(key: key);
+  // final int page;
+  const UpdateProfile({Key? key}) : super(key: key);
 
   @override
   _UpdateProfileState createState() => _UpdateProfileState();

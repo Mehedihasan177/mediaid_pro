@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/data/doctor_list_by_catagory_data/doctor_list_by_catagory_data.dart';
 import 'package:care_plus/models/ui_model/doctor_list_by_catagory_model/doctor_list_by_catagory_model.dart';
@@ -29,12 +30,13 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
 
   List<Datum> doctorlistbycatagory = [];
 
-
+int val = 0;
   _getDoctorListByCatagory() async {
 
 
     DoctorListController.requestThenResponsePrint(USERTOKEN,widget.name).then((value) {
       setState(() {
+        val = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -103,7 +105,7 @@ class _DoctorListByCatagoryState extends State<DoctorListByCatagory> {
                 ),
               ),
             ),
-            Padding(
+            val == 0 ? shimmer(context) : Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Container(
                 height: 900,

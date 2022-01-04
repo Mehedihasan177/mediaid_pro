@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/apponitment_cencel_controller.dart';
 import 'package:care_plus/controllers/user/previous_appointment_controller.dart';
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
@@ -34,11 +35,12 @@ class AppointmentList extends StatefulWidget {
 class _AppointmentListState extends State<AppointmentList> {
   List<UpcomingAppointment> appointmentlist = [];
   List<UpcomingAppointment> appointmentlistH = [];
-
+int val = 0;
   _getUpcomingAppointment() async {
     UpcomingAppointmentController.requestThenResponsePrint(USERTOKEN)
         .then((value) {
       setState(() {
+        val = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -96,7 +98,7 @@ class _AppointmentListState extends State<AppointmentList> {
         ),]),
         body: ListView(
           children: [
-            Container(
+            val == 0 ? shimmer(context) : Container(
                height: 725,
                //color: Colors.red,
               child: appointmentlist.isEmpty ? Center(

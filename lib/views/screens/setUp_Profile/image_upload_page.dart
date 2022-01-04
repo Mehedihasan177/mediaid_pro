@@ -264,7 +264,8 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                           if(value.statusCode == 200){
                             if(widget.page == 2){
                               SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
-                              Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+                              return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                  SetupProfile()), (Route<dynamic> route) => false);
                             }else{
                               SnackbarDialogueHelper().showSnackbarDialog(context, 'Image Uploaded Successfully', Colors.green);
                               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
@@ -330,7 +331,7 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                                   return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()));
                                 }
                                 else{
-                                  SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
+                                  SnackbarDialogueHelper().showSnackbarDialog(context, "Image not Uploaded",Colors.red);
                                   return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                                       BottomNevigation()), (Route<dynamic> route) => false);
                                 }

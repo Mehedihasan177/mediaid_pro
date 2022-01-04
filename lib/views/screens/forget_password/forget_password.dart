@@ -4,7 +4,6 @@ import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/reset_password_controller.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
-import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/reset_password_model.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
@@ -42,7 +41,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         body: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
-          physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
 
             Center(

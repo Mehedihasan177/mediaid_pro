@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
-import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses/firebase_model.dart';
@@ -36,8 +35,11 @@ class SingInPage extends StatefulWidget {
 }
 
 class _SingInPageState extends State<SingInPage> {
-  TextEditingController _textMobile = TextEditingController();
-  TextEditingController _textPassword = TextEditingController();
+  TextEditingController _textMobile = TextEditingController(text: "");
+  TextEditingController _textPassword = TextEditingController(text: "");
+
+  // TextEditingController _textMobile = TextEditingController(text: "1744319808");
+  // TextEditingController _textPassword = TextEditingController(text: "11223344");
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();
@@ -58,9 +60,10 @@ class _SingInPageState extends State<SingInPage> {
 
     return Scaffold(
       body: ListView(
+        physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+
         // scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -193,25 +196,32 @@ class _SingInPageState extends State<SingInPage> {
                       mobile: countryCode +_textMobile.text, password: _textPassword.text);
                   USERNAME = countryCode + _textMobile.text;
                   USERPASS = _textPassword.text;
-                  await SigninController.requestThenResponsePrint(myInfo)
-                      .then((value) async {
-                    print(value.statusCode);
-                    print(value.body);
+                 if(_textMobile == null){
+                    SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter phone number", Colors.red);
+                  }else if(_textPassword.text.length < 8){
+                    SnackbarDialogueHelper().showSnackbarDialog(context, "password is less than 6 digit or enter password", Colors.red);
+                  }
+                  else{
+                   await SigninController.requestThenResponsePrint(myInfo)
+                       .then((value) async {
+                     print(value.statusCode);
+                     print(value.body);
 
-                    final Map<String,dynamic> parsed = json.decode(value.body);
+                     final Map<String,dynamic> parsed = json.decode(value.body);
 
-                    print("this is the token" + USERTOKEN);
-                    //EasyLoading.dismiss();
-                    if (value.statusCode == 200) {
+                     print("this is the token" + USERTOKEN);
+                     //EasyLoading.dismiss();
+                     if (value.statusCode == 200) {
 
-                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign in successfully', Colors.green);
-                      return  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
-                    } else {
-                      // return LoginController.requestThenResponsePrint(jsonData);
-                      SnackbarDialogueHelper().showSnackbarDialog(context, value.body, Colors.red);
-                    }
+                       SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign in successfully', Colors.green);
+                       return  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                     } else {
+                       // return LoginController.requestThenResponsePrint(jsonData);
+                       SnackbarDialogueHelper().showSnackbarDialog(context, value.body, Colors.red);
+                     }
 
-                  });
+                   });
+                 }
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(350, 59),

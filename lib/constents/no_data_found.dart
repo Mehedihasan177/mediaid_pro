@@ -68,3 +68,26 @@ NoDataFoundSmallSize(img, msg) {
     ),
   );
 }
+
+
+NoDataFoundMoreSmallSize(img, msg) {
+  return Container(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset(img,
+          height: 55,
+          width: 55,
+        ),
+        SizedBox(
+          height: 6,
+        ),
+        Text(msg, style: TextStyle(
+            fontSize: 12,
+            color: Color(0xFF1CBFA8)
+        ),)
+      ],
+    ),
+  );
+}

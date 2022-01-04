@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:care_plus/controllers/user/registration_controller.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
-import 'package:care_plus/helper/alertDialogue.dart';
+import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/reg_requst_model.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
@@ -24,7 +24,7 @@ class _SingUpPageState extends State<SingUpPage> {
   TextEditingController _textMobile = TextEditingController();
   TextEditingController _textPassword = TextEditingController();
   TextEditingController _textConfirmPassword = TextEditingController();
-  TextEditingController _textaddress = TextEditingController();
+  TextEditingController _textaddress = TextEditingController(text: "");
 
 
   String countryCode = '+880';
@@ -39,6 +39,8 @@ class _SingUpPageState extends State<SingUpPage> {
       },
       child: Scaffold(
         body: ListView(
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -230,19 +232,19 @@ class _SingUpPageState extends State<SingUpPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      TextField(
-                        controller: _textaddress,
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(color: Colors.black),
-                        //scrollPadding: EdgeInsets.all(10),
-                        decoration: InputDecoration(
-                          //contentPadding: EdgeInsets.all(20),
-                          hintText: "Enter your address",
-                        ),
-                      ),
+                      // SizedBox(
+                      //   width: 20,
+                      // ),
+                      // TextField(
+                      //   controller: _textaddress,
+                      //   keyboardType: TextInputType.text,
+                      //   style: TextStyle(color: Colors.black),
+                      //   //scrollPadding: EdgeInsets.all(10),
+                      //   decoration: InputDecoration(
+                      //     //contentPadding: EdgeInsets.all(20),
+                      //     hintText: "Enter your address",
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -355,47 +357,62 @@ class _SingUpPageState extends State<SingUpPage> {
                           password_confirmation: _textConfirmPassword.text,
                           image: '',
                         );
-                        await RegistrationController.requestThenResponsePrint(myInfo).then((value2) async {
-                          print(value2.statusCode);
-                          print(value2.body);
-                          //EasyLoading.dismiss();
-                          if(value2.statusCode==200){
-                            print("successfull");
-                            //EasyLoading.showSuccess('logging in...');
-                            SigninModel myInfo = new SigninModel(
-                                mobile: countryCode+_textMobile.text, password: _textPassword.text);
-                            await SigninController.requestThenResponsePrint(myInfo)
-                                .then((value) async {
-                              print(value.statusCode);
-                              print(value.body);
-                              final Map parsed = json.decode(value.body);
-
-                              var jsonData = null;
-                              SharedPreferences sharedPreferences =
-                              await SharedPreferences.getInstance();
-                              final loginobject = SignInResponse.fromJson(parsed);
-                              print(loginobject.data.token);
-                              sharedPreferences.setString("token", loginobject.data.token);
-                              //EasyLoading.dismiss();
-                              if (value.statusCode == 200) {
-                                sharedPreferences.setString("mobile", countryCode+_textMobile.text);
-                                sharedPreferences.setString("password", _textPassword.text);
-                                return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
-                              } else {
-                                // return LoginController.requestThenResponsePrint(jsonData);
-                                AlertDialogueHelper().showAlertDialog(context, 'Warning', 'Please recheck email and password');
-                              }
-
-                            });
-
-                          }else{
-                            AlertDialogueHelper().showAlertDialog(context, '', value2.body.replaceAll("{", "").replaceAll("}", "")
-                            .replaceAll("[", "").replaceAll("]", "")
-
-                            );
+                        if(_textEmail == null){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter email id", Colors.red);
+                        }else if(_textPassword == null){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter name", Colors.red);
+                        }else if(_textName == null){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter AHPRA No.", Colors.red);
+                        }else if(_textMobile == null){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter phone number", Colors.red);
+                        }else if(_textaddress.text.length < 8){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "password is less than 6 digit or enter password", Colors.red);
+                        }else if(_textConfirmPassword.text.length != _textPassword.text.length){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Given password is not matched", Colors.red);
+                        }
+                        else{
+                          await RegistrationController.requestThenResponsePrint(myInfo).then((value2) async {
+                            print(value2.statusCode);
                             print(value2.body);
-                          }
-                        });
+                            //EasyLoading.dismiss();
+                            if(value2.statusCode==200){
+                              print("successfull");
+                              //EasyLoading.showSuccess('logging in...');
+                              SigninModel myInfo = new SigninModel(
+                                  mobile: countryCode+_textMobile.text, password: _textPassword.text);
+                              await SigninController.requestThenResponsePrint(myInfo)
+                                  .then((value) async {
+                                print(value.statusCode);
+                                print(value.body);
+                                final Map parsed = json.decode(value.body);
+
+                                var jsonData = null;
+                                SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                                final loginobject = SignInResponse.fromJson(parsed);
+                                print(loginobject.data.token);
+                                sharedPreferences.setString("token", loginobject.data.token);
+                                //EasyLoading.dismiss();
+                                if (value.statusCode == 200) {
+                                  sharedPreferences.setString("mobile", countryCode+_textMobile.text);
+                                  sharedPreferences.setString("password", _textPassword.text);
+                                  SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign up successfully', Colors.green);
+                                  return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+                                } else {
+                                  // return LoginController.requestThenResponsePrint(jsonData);
+                                  SnackbarDialogueHelper().showSnackbarDialog(context, 'Please check email and password', Colors.red);
+                                }
+                              });
+
+                            }else{
+                              SnackbarDialogueHelper().showSnackbarDialog(context, value2.body.replaceAll("{", "").replaceAll("}", "")
+                                  .replaceAll("[", "").replaceAll("]", ""), Colors.red
+
+                              );
+                              print(value2.body);
+                            }
+                          });
+                        }
 
                       },
                       style: ElevatedButton.styleFrom(

@@ -27,7 +27,6 @@ Future<void> main() async {
        debugShowCheckedModeBanner: false,
        home: Scaffold(
          body: SplashScreen(),
-
        ),
        builder: EasyLoading.init(),
      );

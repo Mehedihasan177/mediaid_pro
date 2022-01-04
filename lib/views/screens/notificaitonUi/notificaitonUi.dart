@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/notification_controller.dart';
 import 'package:care_plus/controllers/user/notification_delete_controller.dart';
 import 'package:care_plus/data/notification_data/notification_data.dart';
@@ -26,12 +27,13 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   List<NotificationRes> notification = [];
-
+int val = 0;
   _getNotification() async {
 
 
     NotificationController.requestThenResponsePrint( USERTOKEN).then((value) {
       setState(() {
+        val = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -68,7 +70,7 @@ class _NotificationPageState extends State<NotificationPage> {
           children: [
 
 
-            Row(
+            val == 0 ? shimmer(context) :Row(
               children: [
                 Flexible(
                   child: Container(

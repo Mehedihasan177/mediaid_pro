@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
 import 'package:care_plus/data/doctor_list_and_details/doctorlist_and_%20details.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
@@ -24,13 +25,11 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
 
   List<FeaturedDoctorrr> doctorFeturedlist = [];
   TextEditingController searchC = TextEditingController();
-
+int val = 0;
   _getFeturedDoctor() async {
-
-
-
     GetFeaturedDoctorController.requestThenResponsePrint(USERTOKEN).then((value) {
       setState(() {
+        val = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -102,7 +101,7 @@ class _FeaturedDoctorState extends State<FeaturedDoctor> {
             ),
 
             //SizedBox(height: 20),
-            Container(
+            val == 0 ? shimmer(context) :Container(
                 height: 735,
                 child: doctorFeturedlist.isEmpty ? Center(
                   child: NoDataFoundSize("images/find_doctor.png", "No Doctor Found"),

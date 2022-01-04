@@ -168,7 +168,6 @@ class _HealthHistoryState extends State<HealthHistory> {
 
       var myvar = UserHealthHistory.fromJson(jsonDecode(value.body));
       print(myvar);
-
       myvar.epres.forEach((element) {
         setState(() {
           print(element.doctor.name);

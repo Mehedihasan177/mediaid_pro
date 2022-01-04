@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/create_appointment_schedule_controller.dart';
 import 'package:care_plus/controllers/user/user_get_doctor_slots.dart';
 import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointment_data.dart';
@@ -30,22 +32,22 @@ class DoctorAppointment extends StatefulWidget {
       visitingfee;
   final int docID;
 
-  const DoctorAppointment({
-    Key? key,
-    required this.name,
-    required this.specialization,
-    required this.hospital_name,
-    required this.fee,
-    required this.rating,
-    required this.experience,
-    required this.about,
-    required this.image,
-    required this.department,
-    required this.address,
-    required this.chamber,
-    required this.visitingfee,
-    required this.docID
-  }) : super(key: key);
+  const DoctorAppointment(
+      {Key? key,
+      required this.name,
+      required this.specialization,
+      required this.hospital_name,
+      required this.fee,
+      required this.rating,
+      required this.experience,
+      required this.about,
+      required this.image,
+      required this.department,
+      required this.address,
+      required this.chamber,
+      required this.visitingfee,
+      required this.docID})
+      : super(key: key);
 
   @override
   _DoctorAppointmentState createState() => _DoctorAppointmentState();
@@ -54,7 +56,7 @@ class DoctorAppointment extends StatefulWidget {
 class _DoctorAppointmentState extends State<DoctorAppointment> {
   List<DoctorAppointmentModel> doctorAppointment =
       List.of(doctor_appointment_data);
-
+  int val = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -73,30 +75,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
       child: Scaffold(
         body: ListView(
           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-
           children: [
-            // Row(
-            //   children: [
-            //     Flexible(
-            //       child: Container(
-            //         //padding: EdgeInsets.only(left: 20),
-            //         alignment: Alignment.centerLeft,
-            //         height: 750,
-            //         child: ListView.builder(
-            //           //controller: PageController(viewportFraction: 0.3),
-            //             scrollDirection: Axis.vertical,
-            //             itemCount: doctorAppointment.length,
-            //             itemBuilder: (context,index) {
-            //               //var information = carePlushPrescriptionList[index];
-            //               return DoctorAboutAppointmentWidget(
-            //                   doctorAppointment[index], context);
-            //
-            //             }
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             Container(
               child: Column(
                 children: [
@@ -181,23 +160,30 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(top: 1.0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 1.0),
                                                   child: Container(
-                                                      alignment: Alignment.topLeft,
+                                                      alignment:
+                                                          Alignment.topLeft,
                                                       child: Text(" at ")),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(bottom: 0),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 0),
                                                   child: Container(
-                                                    alignment: Alignment.topLeft,
+                                                    alignment:
+                                                        Alignment.topLeft,
                                                     child: Text(
-                                                        widget.hospital_name.replaceAll("null", "No hospital name"),
-                                                        style: TextStyle(
-                                                          fontSize: 15,
-                                                        ),
+                                                      widget.hospital_name
+                                                          .replaceAll("null",
+                                                              "No hospital name"),
+                                                      style: TextStyle(
+                                                        fontSize: 15,
                                                       ),
+                                                    ),
                                                   ),
-
                                                 ),
                                               ],
                                             ),
@@ -264,7 +250,10 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         padding:
                                             const EdgeInsets.only(left: 20),
                                         child: Text(
-                                          widget.experience.replaceAll("null", "").replaceAll("years", "")+" years",
+                                          widget.experience
+                                                  .replaceAll("null", "")
+                                                  .replaceAll("years", "") +
+                                              " years",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -274,13 +263,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   ),
                                 ],
                               ),
-
-
-
-
                             ],
                           ),
-
 
                           ///about doctor
                           Padding(
@@ -305,8 +289,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         "null", "Haven't any description"),
                                     style: TextStyle(
                                         color: Colors.black.withOpacity(0.5),
-                                      fontSize: 16
-                                    ),
+                                        fontSize: 16),
                                   ),
                                 ),
                                 SizedBox(
@@ -321,21 +304,23 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                       child: Text(
                                         "Address",
                                         style: TextStyle(
-                                            color: Colors.black.withOpacity(0.5),
+                                            color:
+                                                Colors.black.withOpacity(0.5),
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 10  ),
+                                      padding: const EdgeInsets.only(top: 10),
                                       child: Container(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
                                           widget.address,
                                           style: TextStyle(
-                                              color: Colors.black.withOpacity(0.5),
-                                              fontSize: 16,
-                                              //fontWeight: FontWeight.bold
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 16,
+                                            //fontWeight: FontWeight.bold
                                           ),
                                         ),
                                       ),
@@ -346,41 +331,42 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   height: 10,
                                 ),
 
-                                  ///chamber
+                                ///chamber
 
-                                  Column(
-                                    children: [
-                                      Container(
+                                Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Chamber",
+                                        style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Container(
                                         alignment: Alignment.centerLeft,
                                         child: Text(
-                                          "Chamber",
+                                          widget.chamber
+                                              .replaceAll("null", "Not yet"),
                                           style: TextStyle(
-                                              color: Colors.black.withOpacity(0.5),
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10  ),
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            widget.chamber.replaceAll("null", "Not yet"),
-                                            style: TextStyle(
-                                              color: Colors.black.withOpacity(0.5),
-                                              fontSize: 16,
-                                              //fontWeight: FontWeight.bold
-                                            ),
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                            fontSize: 16,
+                                            //fontWeight: FontWeight.bold
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 10,),
-
-
-
-
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
 
                                 Container(
                                   padding: EdgeInsets.only(top: 10),
@@ -394,23 +380,34 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                   ),
                                 ),
 
+                                val == 0
+                                    ? shimmerOneLine(context)
+                                    : Container(
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 5.0),
+                                        height: 100.0,
+                                        child: slotWithDate.isEmpty
+                                            ? Center(
+                                                child: NoDataFoundMoreSmallSize(
+                                                    "images/calender.png",
+                                                    "No slot available"),
+                                              )
+                                            : ListView.builder(
+                                          physics: BouncingScrollPhysics(),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: slotWithDate.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return cardBuilder(
+                                                      slotWithDate[index],
+                                                      index);
+                                                }),
+                                      ),
 
                                 Container(
-                                  margin: EdgeInsets.symmetric(vertical: 5.0),
-                                  height: 100.0,
-                                  child: slotWithDate.isEmpty ? Text("No Timeslot"):ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: slotWithDate.length,
-                                      itemBuilder: (BuildContext context,int index){
-                                        return cardBuilder(slotWithDate[index],index);
-                                      }
-                                  ),
-                                ),
-
-
-
-                                Container(
-                                  padding: EdgeInsets.only(top: 10,right: 20),
+                                  padding: EdgeInsets.only(top: 10, right: 20),
                                   alignment: Alignment.centerLeft,
                                   child: TextFormField(
                                     controller: appointmentForC,
@@ -421,8 +418,11 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                         // enabledBorder: InputBorder.none,
                                         // errorBorder: InputBorder.none,
                                         // disabledBorder: InputBorder.none,
-                                        contentPadding:
-                                        EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                                        contentPadding: EdgeInsets.only(
+                                            left: 15,
+                                            bottom: 11,
+                                            top: 11,
+                                            right: 15),
                                         hintText: "Appointment For"),
                                   ),
                                 ),
@@ -443,32 +443,51 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                       color: Colors.white, fontSize: 20),
                                 ),
                                 onPressed: () async {
-
-                                  if(selectedIndex!=-1){
-
-                                    CreateAppointmentReq createAppointmentSchedule = CreateAppointmentReq(
-                                        SIGNINGRESPONSE.id.toString(),
-                                        slotWithDate[selectedIndex].timeslotlist.doctorId,
-                                        slotWithDate[selectedIndex].timeslotlist.id,
-                                        slotWithDate[selectedIndex].date,
+                                  if (selectedIndex != -1) {
+                                    CreateAppointmentReq
+                                        createAppointmentSchedule =
+                                        CreateAppointmentReq(
+                                      SIGNINGRESPONSE.id.toString(),
+                                      slotWithDate[selectedIndex]
+                                          .timeslotlist
+                                          .doctorId,
+                                      slotWithDate[selectedIndex]
+                                          .timeslotlist
+                                          .id,
+                                      slotWithDate[selectedIndex].date,
                                     );
 
-                                    CreateAppointmentScheduleController.requestThenResponsePrint(createAppointmentSchedule,appointmentForC.text, USERTOKEN).then((value) {
+                                    CreateAppointmentScheduleController
+                                            .requestThenResponsePrint(
+                                                createAppointmentSchedule,
+                                                appointmentForC.text,
+                                                USERTOKEN)
+                                        .then((value) {
                                       setState(() {
                                         print(value.statusCode);
-                                        if(value.statusCode==200){
-                                          SnackbarDialogueHelper().showSnackbarDialog(context, 'Appointment Created Successfully', Colors.green);
-                                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                              BottomNevigation()), (Route<dynamic> route) => false);
+                                        if (value.statusCode == 200) {
+                                          SnackbarDialogueHelper()
+                                              .showSnackbarDialog(
+                                                  context,
+                                                  'Appointment Created Successfully',
+                                                  Colors.green);
+                                          Navigator.of(
+                                                  context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BottomNevigation()),
+                                                  (Route<dynamic> route) =>
+                                                      false);
                                         }
                                       });
                                     });
-
-
-                                  }else{
-                                    SnackbarDialogueHelper().showSnackbarDialog(context, 'Please Select a Time Slot', Colors.red);
+                                  } else {
+                                    SnackbarDialogueHelper().showSnackbarDialog(
+                                        context,
+                                        'Please Select a Time Slot',
+                                        Colors.red);
                                   }
-
                                 },
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: const Size(350, 59),
@@ -496,7 +515,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
     );
   }
 
-  TextEditingController appointmentForC = new TextEditingController(text: 'Appointment For ');
+  TextEditingController appointmentForC =
+      new TextEditingController(text: 'Appointment For ');
 
   designPortion() => Row(
         children: [
@@ -523,7 +543,6 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
               padding: const EdgeInsets.only(top: 120),
               child: Container(
                 height: 590,
-
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -538,29 +557,26 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
       );
 
   void fetchDoctorSlots(doctorID) {
-    UserGetSlotDoctor.requestThenResponsePrint(context, USERTOKEN, doctorID).then((value) {
+    UserGetSlotDoctor.requestThenResponsePrint(context, USERTOKEN, doctorID)
+        .then((value) {
       print(value.statusCode);
       // print(value.body);
 
       setState(() {
-
+        val = 1;
       });
-
-
 
       Map<String, dynamic> decoded = json.decode(value.body);
       for (var date in decoded.keys) {
         List Doctor7SlotResponseJSON = json.decode(json.encode(decoded[date]));
-        timeSlotList = Doctor7SlotResponseJSON.map((m) => new Doctor7SlotResponse.fromJson(m)).toList();
+        timeSlotList = Doctor7SlotResponseJSON.map(
+            (m) => new Doctor7SlotResponse.fromJson(m)).toList();
         print(timeSlotList);
         for (var slot in timeSlotList) {
-          slotWithDate.add(SlotsWithDate(slot,date));
+          slotWithDate.add(SlotsWithDate(slot, date));
         }
       }
       print(slotWithDate);
-
-
-
     });
   }
 
@@ -570,14 +586,18 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
 
   Widget cardBuilder(SlotsWithDate slotWithDate, int index) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         setState(() {
-          selectedIndex=index;
-          SnackbarDialogueHelper().showSnackbarDialog(context, 'Appointment on ${slotWithDate.timeslotlist.day} ${slotWithDate.date} is Selected', Colors.blue);
+          selectedIndex = index;
+          SnackbarDialogueHelper().showSnackbarDialog(
+              context,
+              'Appointment on ${slotWithDate.timeslotlist.day} - ${DateFormat('dd MMM yyyy')
+                  .format(DateFormat('yyyy-MM-dd').parse(slotWithDate.date))} is Selected',
+              Colors.blue);
         });
       },
       child: Card(
-        color: selectedIndex==index?Colors.green:Colors.white,
+        color: selectedIndex == index ? Colors.orange : Colors.white,
         child: Container(
           // height: 150,
           width: 150,
@@ -585,32 +605,31 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
-              Text(slotWithDate.timeslotlist.day,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-              Text(DateFormat('dd MMM yyyy').format(DateFormat('yyyy-MM-dd').parse(slotWithDate.date))),
-
+              Text(
+                slotWithDate.timeslotlist.day,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              Text(DateFormat('dd MMM yyyy')
+                  .format(DateFormat('yyyy-MM-dd').parse(slotWithDate.date))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(slotWithDate.timeslotlist.startTime))),
+                  Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss')
+                      .parse(slotWithDate.timeslotlist.startTime))),
                   Text(' - '),
-                  Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(slotWithDate.timeslotlist.endTime))),
+                  Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss')
+                      .parse(slotWithDate.timeslotlist.endTime))),
                 ],
               )
-
             ],
           ),
         ),
       ),
     );
   }
-
-
 }
 
-
-
-class SlotsWithDate{
+class SlotsWithDate {
   late Doctor7SlotResponse timeslotlist;
   late String date;
 

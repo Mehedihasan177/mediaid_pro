@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/user_wallet_controller.dart';
 import 'package:care_plus/controllers/user/user_wallet_log_controller.dart';
 import 'package:care_plus/data/wallet_data/wallet_data.dart';
@@ -29,7 +30,7 @@ class _walletUiState extends State<walletUi> {
   List<WalletLogResponses> moneyWallet = [];
 
   String userbalance = '0';
-
+int val = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -136,7 +137,7 @@ class _walletUiState extends State<walletUi> {
             ),
 
 
-            Row(
+            val == 0 ? shimmer(context) : Row(
               children: [
                 Flexible(
                   child: Container(
@@ -186,6 +187,7 @@ class _walletUiState extends State<walletUi> {
 
     WalletLogController.requestThenResponsePrint(USERTOKEN).then((value) {
       setState(() {
+        val = 1;
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listTrx = decoded['data'];
         print(decoded['data']);

@@ -66,7 +66,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
 
 
       SizedBox(
-        width: 20,
+        width: 0,
       ),
 
       ///hospital

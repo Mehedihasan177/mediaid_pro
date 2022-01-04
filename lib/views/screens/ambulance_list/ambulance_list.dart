@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/ambulanceList_controller.dart';
 import 'package:care_plus/data/ambulance_list_data/ambulance_list_data.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
@@ -24,11 +25,13 @@ class _AmbulanceListState extends State<AmbulanceList> {
   List<AmbulanceRes> ambulancelist = [];
 
   TextEditingController searchC = TextEditingController();
+  int val = 0;
   _getAmbulanceList() async {
 
 
     AmbulanceListController.requestThenResponsePrint().then((value) {
       setState(() {
+        val =1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -147,12 +150,15 @@ class _AmbulanceListState extends State<AmbulanceList> {
             // ),
 
 
-            Padding(
+            val == 0 ? shimmer(context) : Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Container(
-                height: 900,
-                child: ambulancelist.isEmpty ? Center(
-                  child: NoDataFoundSize("images/ambulance_image.png", "Ambulance not available"),
+                //height: 900,
+                child: ambulancelist.isEmpty ? Padding(
+                  padding: const EdgeInsets.only(top: 250),
+                  child: Center(
+                    child: NoDataFoundSize("images/ambulance_image.png", "Ambulance not available"),
+                  ),
                 ) :ListView.builder(
 
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),

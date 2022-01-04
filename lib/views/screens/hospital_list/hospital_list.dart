@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/hospital_controller.dart';
 import 'package:care_plus/data/hospital_list_data/hospital_list_data.dart';
-import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/models/ui_model/hospital_model/hospital_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/hospital_responses.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
@@ -22,12 +22,13 @@ class HospitalList extends StatefulWidget {
 class _HospitalListState extends State<HospitalList> {
   List<HospitalRes> hospitallist = [];
   bool nevigation = true;
-
+  int val = 0;
   _getHospitalList() async {
 
 
     HospitalController.requestThenResponsePrint().then((value) {
       setState(() {
+        val = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -130,12 +131,13 @@ class _HospitalListState extends State<HospitalList> {
               ),
             ),
 
-            Padding(
+            val == 0 ? shimmer(context) : Padding(
               padding: const EdgeInsets.only(left: 5),
               child: Container(
-                height: 715,
+                //height: 715,
                  // color: Colors.red,
                 child: hospitallist.isEmpty ? Container(
+                  padding: EdgeInsets.only(top: 250),
                   child: NoDataFoundSize("images/hospital_image_s.png", "No Hospital Available"),
                 ) :ListView.builder(
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),

@@ -396,7 +396,7 @@ class _SetupProfileState extends State<SetupProfile> {
                   final Map parsed = json.decode(value.body);
 
                   if(value.statusCode==200){
-                    //signInAgain(context);
+
                     SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
                     return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                         BottomNevigation()), (Route<dynamic> route) => false);

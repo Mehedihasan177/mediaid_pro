@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/doctorList_controller.dart';
 import 'package:care_plus/controllers/user/get_type_doctor_controller.dart';
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
 import 'package:care_plus/data/near_by/near_by.dart';
-import 'package:care_plus/helper/alertDialogue.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/ui_model/doctor_informations/doctor_information_model.dart';
 import 'package:care_plus/data/doctor_list_and_details/doctorlist_and_%20details.dart';
@@ -59,13 +59,15 @@ class _HomePageState extends State<HomePage> {
   List<SpecializationResponse> informationslist = [];
   List<FeaturedDoctorrr> doctorFeturedlist = [];
   TextEditingController _textSearch = TextEditingController();
-
+  int val = 0;
+  int val1 = 0;
 
   _getUpcomingAppointment() async {
 
 
     UpcomingAppointmentController.requestThenResponsePrint( USERTOKEN).then((value) {
       setState(() {
+        val = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -85,6 +87,7 @@ class _HomePageState extends State<HomePage> {
 
     GetFeaturedDoctorController.requestThenResponsePrint(USERTOKEN).then((value) {
       setState(() {
+        val1 = 1;
         print(value.body);
         Map<String, dynamic> decoded = json.decode("${value.body}");
         Iterable listNotification = decoded['data'];
@@ -141,22 +144,14 @@ class _HomePageState extends State<HomePage> {
             children: [
 
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(left:20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: [
-                    Image(
-                      height: 25,
-                      width: 25,
-                      image: AssetImage("images/location.png"),
-                    ),
-                    SizedBox(width: 20),
-                    Text(
-                      "${SIGNINGRESPONSE.address}",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                  ]),
+                  Text(
+                    "Hello, ${SIGNINGRESPONSE.name}",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
                   IconButton(
                     icon: ImageIcon(
                       AssetImage("images/notification.png"),
@@ -170,16 +165,25 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+
             Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(left: 17),
-              child: Text(
-                "Hello, ${SIGNINGRESPONSE.name}",
-                style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black.withOpacity(0.5),
-                    fontWeight: FontWeight.bold),
-              ),
+              child: Row(children: [
+                Image(
+                  height: 15,
+                  width: 15,
+                  image: AssetImage("images/location.png"),
+                ),
+                SizedBox(width: 5),
+                Text(
+                  "${SIGNINGRESPONSE.address}",
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.5),
+                      fontWeight: FontWeight.bold),
+                ),
+              ]),
             ),
             SizedBox(height: 20),
             Container(
@@ -261,6 +265,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.centerLeft,
               height: 90,
               child: ListView.builder(
+                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                 //controller: PageController(viewportFraction: 0.3),
                   scrollDirection: Axis.horizontal,
                   itemCount: informationslist.length,
@@ -282,11 +287,13 @@ class _HomePageState extends State<HomePage> {
             // ),
             ///ambulance and hospital list
 
+
             Container(
               margin: const EdgeInsets.symmetric(vertical: 8.0),
               padding: EdgeInsets.only(left: 20),
               height: 125,
               child: ListView.builder(
+                physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: nearby.length,
@@ -298,7 +305,7 @@ class _HomePageState extends State<HomePage> {
 
             Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Text("Upcoming Appointment", style: TextStyle(
+              child: Text("Upcoming Appointments", style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold
               ),),
@@ -306,7 +313,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 10,
             ),
-            Padding(
+              val == 0 ? shimmerOneLine(context) : Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Container(
                 height: 120,
@@ -329,6 +336,7 @@ class _HomePageState extends State<HomePage> {
                   //NoDataFound("images/find_doctor.png", "No Doctor Found"),
                 ) :ListView.builder(
                   shrinkWrap: true,
+                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                     scrollDirection: Axis.horizontal,
                     itemCount: appointment.length,
                     itemBuilder: (context, index) {
@@ -355,7 +363,7 @@ class _HomePageState extends State<HomePage> {
                   child: FlatButton(
                     minWidth: 10,
                     onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: _textSearch.text)));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: '',)));
                     },
                     child: Text(
                       "See All",
@@ -365,7 +373,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
-            Container(
+              val1 == 0 ? shimmerThreeLine(context) : Container(
               // height: 300,
                 child: doctorFeturedlist.isEmpty ? Center(
                   child: Column(

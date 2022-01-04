@@ -61,6 +61,7 @@ dependencies:
   double_back_to_close_app: ^2.1.0
   flutter_slidable: ^1.1.0
   shimmer: ^2.0.0
+  introduction_screen: ^2.1.0
 
 
 
@@ -95,6 +96,10 @@ flutter:
     - images/
     - assets/music.mp3
     - images/care+_Logo.png
+    - assets/care+_Logo.png
+    - assets/online_doctor.png
+    - assets/online_doctor1.jpg
+    - assets/online_doctor2.png
     - images/location.png
     - images/notification.png
     - images/hospital.png

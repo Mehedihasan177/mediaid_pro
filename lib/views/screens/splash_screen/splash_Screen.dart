@@ -14,6 +14,8 @@ import 'package:care_plus/views/screens/update_profile/update_profile.dart';
 import 'package:care_plus/views/screens/upload_documents/upload_documents.dart';
 import 'package:care_plus/views/screens/wallet/wallet.dart';
 import 'package:flutter/material.dart';
+
+import '../intro_screens.dart';
 // import 'package:havartye/screen/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future getValidationData() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => SingInPage()));
+        context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
   }
 
   @override

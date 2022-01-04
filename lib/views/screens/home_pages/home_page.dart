@@ -139,289 +139,293 @@ class _HomePageState extends State<HomePage> {
         return true;
       },
       child: Scaffold(
-          body: ListView(
-            physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-            children: [
-
-            Padding(
-              padding: const EdgeInsets.only(left:20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Hello, ${SIGNINGRESPONSE.name}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  IconButton(
-                    icon: ImageIcon(
-                      AssetImage("images/notification.png"),
-                      color: Color(0xFF1CBFA8),
-                    ),
-                    iconSize: 28,
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => NotificationPage()));
-                    },
-                  ),
-                ],
-              ),
+          body: DoubleBackToCloseApp(
+            snackBar: const SnackBar(
+              content: Text('Tap back again to leave'),
             ),
-
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(left: 17),
-              child: Row(children: [
-                Image(
-                  height: 15,
-                  width: 15,
-                  image: AssetImage("images/location.png"),
+            child: ListView(
+              physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+              children: [
+              Padding(
+                padding: const EdgeInsets.only(left:20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Hello, ${SIGNINGRESPONSE.name}",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                    IconButton(
+                      icon: ImageIcon(
+                        AssetImage("images/notification.png"),
+                        color: Color(0xFF1CBFA8),
+                      ),
+                      iconSize: 28,
+                      onPressed: () {
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => NotificationPage()));
+                      },
+                    ),
+                  ],
                 ),
-                SizedBox(width: 5),
-                Text(
-                  "${SIGNINGRESPONSE.address}",
+              ),
+
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 17),
+                child: Row(children: [
+                  Image(
+                    height: 15,
+                    width: 15,
+                    image: AssetImage("images/location.png"),
+                  ),
+                  SizedBox(width: 5),
+                  Text(
+                    "${SIGNINGRESPONSE.address}",
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black.withOpacity(0.5),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ]),
+              ),
+              SizedBox(height: 20),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(left: 17),
+                child: Text(
+                  "Find Your Doctors",
                   style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.black.withOpacity(0.5),
+                      fontSize: 22,
+                      color: Colors.black.withOpacity(0.8),
                       fontWeight: FontWeight.bold),
                 ),
-              ]),
-            ),
-            SizedBox(height: 20),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(left: 17),
-              child: Text(
-                "Find Your Doctors",
-                style: TextStyle(
-                    fontSize: 22,
-                    color: Colors.black.withOpacity(0.8),
-                    fontWeight: FontWeight.bold),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: Container(
-                margin: EdgeInsets.only(left: 10,right: 10),
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  controller: _textSearch,
-                  keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.done,
-                  onSubmitted: onNevigation,
-                  style: TextStyle(color: Colors.black),
-                  scrollPadding: EdgeInsets.all(10),
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(top: 14),
-                    border: InputBorder.none,
-                    hintText: "Search your doctor",
-                    hintStyle: TextStyle(
-                        color: Colors.black.withOpacity(0.5), fontSize: 15),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 25,
-                      color: Color(0xFF1CBFA8),
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Container(
+                  margin: EdgeInsets.only(left: 10,right: 10),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextField(
+                    controller: _textSearch,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
+                    onSubmitted: onNevigation,
+                    style: TextStyle(color: Colors.black),
+                    scrollPadding: EdgeInsets.all(10),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 14),
+                      border: InputBorder.none,
+                      hintText: "Search your doctor",
+                      hintStyle: TextStyle(
+                          color: Colors.black.withOpacity(0.5), fontSize: 15),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        size: 25,
+                        color: Color(0xFF1CBFA8),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(left: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Find by Specialist",
-                    style: TextStyle(fontSize: 17),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Find by Specialist",
+                      style: TextStyle(fontSize: 17),
+                    ),
                   ),
-                ),
 
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: FlatButton(
+                        minWidth: 10,
+                        onPressed: () {
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) => DoctorCatagory(informationslist: informationslist,)));
+                        },
+                        child: Text(
+                          "See All",
+                        ),
+                      ),
+                    ),
+
+                ],
+              ),
+
+              Container(
+                padding: EdgeInsets.only(left: 20),
+                alignment: Alignment.centerLeft,
+                height: 90,
+                child: ListView.builder(
+                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                  //controller: PageController(viewportFraction: 0.3),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: informationslist.length,
+                    itemBuilder: (context,index) {
+                      return Findspecialist(informationslist[index], context, index);
+
+                    }
+                ),
+              ),
+
+              // Container(
+              //     child: ListView.builder(
+              //         itemCount: informationslist.length,
+              //         itemBuilder: (BuildContext context, int index) {
+              //           return Findspecialist(
+              //               informationslist[index], context, index);
+              //         }
+              //     )
+              // ),
+              ///ambulance and hospital list
+
+
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.only(left: 20),
+                height: 125,
+                child: ListView.builder(
+                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: nearby.length,
+                  itemBuilder: (context, index) {
+                  return Nearby_ambulance_hospital(nearby[index], context);
+                },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text("Upcoming Appointments", style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+                val == 0 ? shimmerOneLine(context) : Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Container(
+                  height: 120,
+                  // color: Colors.red,
+                  child: appointment.isEmpty ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset("images/appointment_history.png",
+                            height: 50,
+                            width: 50,
+                          ),
+                          Text("No Appointment found",
+                            style: TextStyle(fontSize: 12, color: Color(0xFF1CBFA8)),
+
+                          ),
+                        ],
+                      )
+                    //NoDataFound("images/find_doctor.png", "No Doctor Found"),
+                  ) :ListView.builder(
+                    shrinkWrap: true,
+                      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: appointment.length,
+                      itemBuilder: (context, index) {
+                        return upcommingAppointment(appointment[index], context);
+                      }),
+
+                ),
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(left: 20),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Featured Doctors",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      )),
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: FlatButton(
                       minWidth: 10,
                       onPressed: () {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => DoctorCatagory(informationslist: informationslist,)));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: '',)));
                       },
                       child: Text(
                         "See All",
                       ),
                     ),
                   ),
-
-              ],
-            ),
-
-            Container(
-              padding: EdgeInsets.only(left: 20),
-              alignment: Alignment.centerLeft,
-              height: 90,
-              child: ListView.builder(
-                  physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                //controller: PageController(viewportFraction: 0.3),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: informationslist.length,
-                  itemBuilder: (context,index) {
-                    return Findspecialist(informationslist[index], context, index);
-
-                  }
+                ],
               ),
-            ),
 
-            // Container(
-            //     child: ListView.builder(
-            //         itemCount: informationslist.length,
-            //         itemBuilder: (BuildContext context, int index) {
-            //           return Findspecialist(
-            //               informationslist[index], context, index);
-            //         }
-            //     )
-            // ),
-            ///ambulance and hospital list
-
-
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8.0),
-              padding: EdgeInsets.only(left: 20),
-              height: 125,
-              child: ListView.builder(
-                physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: nearby.length,
-                itemBuilder: (context, index) {
-                return Nearby_ambulance_hospital(nearby[index], context);
-              },
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Text("Upcoming Appointments", style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-              val == 0 ? shimmerOneLine(context) : Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Container(
-                height: 120,
-                // color: Colors.red,
-                child: appointment.isEmpty ? Center(
+                val1 == 0 ? shimmerThreeLine(context) : Container(
+                // height: 300,
+                  child: doctorFeturedlist.isEmpty ? Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Image.asset("images/appointment_history.png",
-                          height: 50,
-                          width: 50,
+                        Image.asset("images/find_doctor.png",
+                        height: 60,
+                          width: 60,
                         ),
-                        Text("No Appointment found",
-                          style: TextStyle(fontSize: 12, color: Color(0xFF1CBFA8)),
+                        Text("No Doctor Found",
+                        style: TextStyle(fontSize: 15, color: Color(0xFF1CBFA8)),
 
                         ),
                       ],
                     )
-                  //NoDataFound("images/find_doctor.png", "No Doctor Found"),
-                ) :ListView.builder(
-                  shrinkWrap: true,
-                    physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: appointment.length,
-                    itemBuilder: (context, index) {
-                      return upcommingAppointment(appointment[index], context);
-                    }),
-
-              ),
-            ),
-            SizedBox(
-              height: 3,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    padding: EdgeInsets.only(left: 20),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Featured Doctors",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: FlatButton(
-                    minWidth: 10,
-                    onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => FeaturedDoctor(text: '',)));
-                    },
-                    child: Text(
-                      "See All",
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-              val1 == 0 ? shimmerThreeLine(context) : Container(
-              // height: 300,
-                child: doctorFeturedlist.isEmpty ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset("images/find_doctor.png",
-                      height: 60,
-                        width: 60,
-                      ),
-                      Text("No Doctor Found",
-                      style: TextStyle(fontSize: 15, color: Color(0xFF1CBFA8)),
-
-                      ),
-                    ],
+                    //NoDataFound("images/find_doctor.png", "No Doctor Found"),
+                  ) : ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
+                      itemBuilder: (BuildContext context, int index) {
+                        return index<3? buildDoctorListTile(doctorFeturedlist[index], context):Container();
+                      }
                   )
-                  //NoDataFound("images/find_doctor.png", "No Doctor Found"),
-                ) : ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: doctorFeturedlist.length,    //doctorFeturedlist.length
-                    itemBuilder: (BuildContext context, int index) {
-                      return index<3? buildDoctorListTile(doctorFeturedlist[index], context):Container();
-                    }
-                )
+              ),
+
+              StreamBuilder(
+                stream: FirebaseDatabase().reference().child('callModule').child("Patient").child('${SIGNINGRESPONSE.id}').onValue,
+                builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                  print(snapshot.data?.snapshot.value.toString());
+                  if(snapshot.hasData && !snapshot.hasError &&
+                      snapshot.data?.snapshot.value != null){
+                    print('prev $gone');
+                    if(gone==0)goForCallorNot(SIGNINGRESPONSE.id.toString(),context);
+                    gone=1;
+                    print('next $gone');
+
+                    return const Text('');
+                  }else{
+                    return (const Text(''));
+                  }
+                },
+              ),
+
+
+            ],
+              shrinkWrap: true,
             ),
-
-            StreamBuilder(
-              stream: FirebaseDatabase().reference().child('callModule').child("Patient").child('${SIGNINGRESPONSE.id}').onValue,
-              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                print(snapshot.data?.snapshot.value.toString());
-                if(snapshot.hasData && !snapshot.hasError &&
-                    snapshot.data?.snapshot.value != null){
-                  print('prev $gone');
-                  if(gone==0)goForCallorNot(SIGNINGRESPONSE.id.toString(),context);
-                  gone=1;
-                  print('next $gone');
-
-                  return const Text('');
-                }else{
-                  return (const Text(''));
-                }
-              },
-            ),
-
-
-          ],
-            shrinkWrap: true,
           ),
 
         ),

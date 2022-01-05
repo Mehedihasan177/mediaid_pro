@@ -86,15 +86,15 @@ class User {
   String mobile;
   dynamic dob;
   String address;
-  dynamic district;
+  String district;
   dynamic policeStation;
   dynamic postOffice;
-  int status;
+  String status;
   String referralCode;
   String image;
   dynamic emailVerifiedAt;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
   dynamic gender;
   String lat;
   String lng;
@@ -120,8 +120,8 @@ class User {
     referralCode: json["referral_code"],
     image: json["image"],
     emailVerifiedAt: json["email_verified_at"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    createdAt: json["created_at"],
+    updatedAt: json["updated_at"],
     gender: json["gender"],
     lat: json["lat"],
     lng: json["lng"],
@@ -148,8 +148,8 @@ class User {
     "referral_code": referralCode,
     "image": image,
     "email_verified_at": emailVerifiedAt,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
+    "created_at": createdAt,
+    "updated_at": updatedAt,
     "gender": gender,
     "lat": lat,
     "lng": lng,

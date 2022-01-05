@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:care_plus/constents/constant.dart';
-import 'package:care_plus/helper/basic_functions.dart';
 import 'package:care_plus/helper/shared_pref.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,11 +48,10 @@ class UserRegisterControllerExtraImg{
           validateStatus: (status) { return status! < 500; }
       ),
     );
-    print("this is the responses: ");
     print(response);
 
 
-    print(USERTOKEN);
+
     // After geting the response we need to split all the json formatted data. Otherwise
     if(response.statusCode==200){
       // BasicFunctions.showAlertDialogTOView(context, "Successful", "You have successfully added your health attachment");
@@ -62,7 +60,6 @@ class UserRegisterControllerExtraImg{
 
       var decoded = response.data;
       print(response.statusMessage);
-      print(response.data);
       // print("token: "+decoded['data']['token']);
 
       SharedPref sharedPref = new SharedPref();

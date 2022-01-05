@@ -13,6 +13,8 @@ import 'package:care_plus/responses_from_test_file/responses/user/signIn_respons
 import 'package:care_plus/views/screens/sing_up_page/sign_up_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/Picker.dart';
+import 'package:intl/intl.dart';
 
 import 'image_upload_page.dart';
 
@@ -32,7 +34,7 @@ class _SetupProfileState extends State<SetupProfile> {
   bool checkbox = true;
   String gender = 'Male';
 
-
+  String dateTime = '';
 
 
   @override
@@ -91,7 +93,7 @@ class _SetupProfileState extends State<SetupProfile> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                NewImageUploadPage(page: 1)),
+                                NewImageUploadPage(page: 2)),
                       );
                     },
                     child: Center(
@@ -194,35 +196,95 @@ class _SetupProfileState extends State<SetupProfile> {
 
 
 
+          // Padding(
+          //   padding: EdgeInsets.only(left: 25),
+          //   child: Column(
+          //     children: [
+          //       Row(children: [
+          //         Icon(
+          //           Icons.location_on,
+          //           size: 30,
+          //         ),
+          //         SizedBox(
+          //           width: 10,
+          //         ),
+          //         Text(
+          //           "Address",
+          //           style: TextStyle(fontSize: 17),
+          //         ),
+          //       ]),
+          //       Padding(
+          //         padding: const EdgeInsets.only(left: 43.0, right: 10),
+          //         child: TextField(
+          //           controller: _textAddress,
+          //           keyboardType: TextInputType.text,
+          //           style: TextStyle(color: Colors.black),
+          //           //scrollPadding: EdgeInsets.all(10),
+          //           decoration: InputDecoration(
+          //             //contentPadding: EdgeInsets.all(20),
+          //             hintText: "Enter your address",
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+
           Padding(
-            padding: EdgeInsets.only(left: 25),
+            padding: const EdgeInsets.only(left: 30),
             child: Column(
               children: [
-                Row(children: [
-                  Icon(
-                    Icons.location_on,
-                    size: 30,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Address",
-                    style: TextStyle(fontSize: 17),
-                  ),
-                ]),
-                Padding(
-                  padding: const EdgeInsets.only(left: 43.0, right: 10),
-                  child: TextField(
-                    controller: _textAddress,
-                    keyboardType: TextInputType.text,
-                    style: TextStyle(color: Colors.black),
-                    //scrollPadding: EdgeInsets.all(10),
-                    decoration: InputDecoration(
-                      //contentPadding: EdgeInsets.all(20),
-                      hintText: "Enter your address",
+                Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 20,
                     ),
-                  ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Date of Birth       ",
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        Text("${SIGNINGRESPONSE.dob}".replaceAll("null", " "))
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20),
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                      onPressed: () {
+                        Picker(
+                            backgroundColor: Colors.white,
+                            hideHeader: true,
+                            adapter: DateTimePickerAdapter(),
+                            title: Text("Select Data"),
+                            selectedTextStyle: TextStyle(color: Colors.blue),
+                            onConfirm: (Picker picker, List value) {
+                              print((picker.adapter as DateTimePickerAdapter)
+                                  .value);
+                              dateTime =
+                                  (picker.adapter as DateTimePickerAdapter)
+                                      .value
+                                      .toString();
+                              dateTime = DateFormat('yyyy-MM-dd')
+                                  .format(DateTime.parse(dateTime.toString()));
+                              print("dateTime");
+                              print(dateTime);
+                              setState(() {
+                                dateTime = dateTime;
+                              });
+                            }).showDialog(context);
+                      },
+                      child: Text("Select date of birth: " + "${dateTime}")),
                 ),
               ],
             ),
@@ -376,7 +438,7 @@ class _SetupProfileState extends State<SetupProfile> {
 
                   Map data1 = {
                     'gender': "${gender}",
-                    'address': "${_textAddress.text}",
+                    'dob': "${dateTime}",
                     'medicare_no': "${_textMedicareID.text}",
                     'weight': "${_textWeight.text}",
                     'height': "${_textHeight.text}",
@@ -391,16 +453,23 @@ class _SetupProfileState extends State<SetupProfile> {
               }else{
                 await UserUpdateController.requestThenResponsePrint( USERTOKEN, data1).then((value) async {
                   print(value.statusCode);
-                  print("mmmmmm :   ");
                   print(value.body);
                   final Map parsed = json.decode(value.body);
 
+                  print(value.statusCode);
+                  print(value.body);
                   if(value.statusCode==200){
-
-                    SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
-                    return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                        BottomNevigation()), (Route<dynamic> route) => false);
-
+                    SigninModel myInfo = new SigninModel(
+                      mobile: USERNAME,
+                      password: USERPASS,
+                    );
+                    SigninController.requestThenResponsePrint(myInfo).then((value) {
+                      if(value.statusCode == 200){
+                        SnackbarDialogueHelper().showSnackbarDialog(context, 'successfully set up your profile', Colors.green);
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                            BottomNevigation()), (Route<dynamic> route) => false);
+                      }
+                    });
                   }else{
                     SnackbarDialogueHelper().showSnackbarDialog(context, value.body.replaceAll('"', ' ')
                         .replaceAll('{', ' ')

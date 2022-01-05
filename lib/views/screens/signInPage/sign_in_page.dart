@@ -22,8 +22,10 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-// import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+
 
 import '../calling_screen.dart';
 
@@ -35,16 +37,16 @@ class SingInPage extends StatefulWidget {
 }
 
 class _SingInPageState extends State<SingInPage> {
-  TextEditingController _textMobile = TextEditingController(text: "");
-  TextEditingController _textPassword = TextEditingController(text: "");
+  // TextEditingController _textMobile = TextEditingController(text: "");
+  // TextEditingController _textPassword = TextEditingController(text: "");
 
-  // TextEditingController _textMobile = TextEditingController(text: "1744319808");
-  // TextEditingController _textPassword = TextEditingController(text: "11223344");
+  TextEditingController _textMobile = TextEditingController(text: "1744319808");
+  TextEditingController _textPassword = TextEditingController(text: "11223344");
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();
   late DatabaseReference databaseReference;
-
+  bool _passwordVisible = false;
   String countryCode = '+880';
   @override
   void initState() {
@@ -148,12 +150,27 @@ class _SingInPageState extends State<SingInPage> {
                 ),
                 TextField(
                   controller: _textPassword,
+                  obscureText: !_passwordVisible,
                   keyboardType: TextInputType.emailAddress,
                   style: TextStyle(color: Colors.black),
                   //scrollPadding: EdgeInsets.all(10),
                   decoration: InputDecoration(
                     //contentPadding: EdgeInsets.all(20),
                     hintText: "Enter your password",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                        color: Color(0xFF1CBFA8),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -191,7 +208,8 @@ class _SingInPageState extends State<SingInPage> {
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onPressed: () async {
-
+                  SharedPreferences sharedPreferences =
+                  await SharedPreferences.getInstance();
                   SigninModel myInfo = new SigninModel(
                       mobile: countryCode +_textMobile.text, password: _textPassword.text);
                   USERNAME = countryCode + _textMobile.text;
@@ -212,7 +230,8 @@ class _SingInPageState extends State<SingInPage> {
                      print("this is the token" + USERTOKEN);
                      //EasyLoading.dismiss();
                      if (value.statusCode == 200) {
-
+                       sharedPreferences.setString("mobile", _textMobile.text);
+                       sharedPreferences.setString("password", _textPassword.text);
                        SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign in successfully', Colors.green);
                        return  Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
                      } else {

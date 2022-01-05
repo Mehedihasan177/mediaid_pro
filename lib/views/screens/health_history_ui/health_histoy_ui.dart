@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
+import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/others/viewUserHealthHistory.dart';
 import 'package:care_plus/controllers/user/view_all_prescription/userViewAllPrevPrescription.dart';
 import 'package:care_plus/data/health_history/health_history_data.dart';
@@ -35,7 +36,7 @@ class _HealthHistoryState extends State<HealthHistory> {
 
 //
   List<Health_History> health_history = [];
-
+  int val = 0;
 
   // _getDoctorListByCatagory() async {
   //
@@ -134,7 +135,7 @@ class _HealthHistoryState extends State<HealthHistory> {
             //   ),
             // ),
 
-            Container(
+            val == 0 ? shimmer(context) : Container(
               height: 750,
               child: health_history.isEmpty? Center(
                 child: NoDataFound("images/health_history.png", "No Health History"),
@@ -163,6 +164,9 @@ class _HealthHistoryState extends State<HealthHistory> {
   void getPatientHealthHistory() {
     health_history.clear();
     DocViewUserHistory.requestThenResponsePrint(SIGNINGRESPONSE.id).then((value){
+      setState(() {
+        val = 1;
+      });
       print(value.statusCode);
       print(value.body);
 

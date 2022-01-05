@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/controllers/user/registration_controller.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
@@ -25,7 +26,8 @@ class _SingUpPageState extends State<SingUpPage> {
   TextEditingController _textPassword = TextEditingController();
   TextEditingController _textConfirmPassword = TextEditingController();
   TextEditingController _textaddress = TextEditingController(text: "");
-
+  bool _passwordVisible = false;
+  bool _passwordVisible1 = false;
 
   String countryCode = '+880';
 
@@ -191,7 +193,7 @@ class _SingUpPageState extends State<SingUpPage> {
                               padding: const EdgeInsets.only(top: 0),
                               child: TextField(
                                 controller: _textMobile,
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.number,
                                 style: TextStyle(color: Colors.black),
                                 //scrollPadding: EdgeInsets.all(10),
                                 decoration: InputDecoration(
@@ -232,19 +234,19 @@ class _SingUpPageState extends State<SingUpPage> {
                           ),
                         ],
                       ),
-                      // SizedBox(
-                      //   width: 20,
-                      // ),
-                      // TextField(
-                      //   controller: _textaddress,
-                      //   keyboardType: TextInputType.text,
-                      //   style: TextStyle(color: Colors.black),
-                      //   //scrollPadding: EdgeInsets.all(10),
-                      //   decoration: InputDecoration(
-                      //     //contentPadding: EdgeInsets.all(20),
-                      //     hintText: "Enter your address",
-                      //   ),
-                      // ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      TextField(
+                        controller: _textaddress,
+                        keyboardType: TextInputType.text,
+                        style: TextStyle(color: Colors.black),
+                        //scrollPadding: EdgeInsets.all(10),
+                        decoration: InputDecoration(
+                          //contentPadding: EdgeInsets.all(20),
+                          hintText: "Enter your address",
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -278,12 +280,27 @@ class _SingUpPageState extends State<SingUpPage> {
                       ),
                       TextField(
                         controller: _textPassword,
+                        obscureText: !_passwordVisible1,
                         keyboardType: TextInputType.text,
                         style: TextStyle(color: Colors.black),
                         //scrollPadding: EdgeInsets.all(10),
                         decoration: InputDecoration(
                           //contentPadding: EdgeInsets.all(20),
                           hintText: "Enter your password",
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible1
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Color(0xFF1CBFA8),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _passwordVisible1 = !_passwordVisible1;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -320,12 +337,28 @@ class _SingUpPageState extends State<SingUpPage> {
                       TextField(
                         controller: _textConfirmPassword,
                         keyboardType: TextInputType.text,
+                        obscureText: !_passwordVisible,
                         style: TextStyle(color: Colors.black),
                         //scrollPadding: EdgeInsets.all(10),
                         decoration: InputDecoration(
                           //contentPadding: EdgeInsets.all(20),
                           hintText: "Confirm your password",
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              // Based on passwordVisible state choose the icon
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Color(0xFF1CBFA8),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _passwordVisible = !_passwordVisible;
+                              });
+                            },
+                          ),
                         ),
+
                       ),
                     ],
                   ),
@@ -357,15 +390,15 @@ class _SingUpPageState extends State<SingUpPage> {
                           password_confirmation: _textConfirmPassword.text,
                           image: '',
                         );
-                        if(_textEmail == null){
+                        if(_textEmail.text.length == 0){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter email id", Colors.red);
-                        }else if(_textPassword == null){
+                        }else if(_textPassword.text.length == 0){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter name", Colors.red);
-                        }else if(_textName == null){
+                        }else if(_textName.text.length == 0){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter AHPRA No.", Colors.red);
-                        }else if(_textMobile == null){
+                        }else if(_textMobile.text.length == 0){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter phone number", Colors.red);
-                        }else if(_textaddress.text.length < 8){
+                        }else if(_textPassword.text.length < 8){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "password is less than 6 digit or enter password", Colors.red);
                         }else if(_textConfirmPassword.text.length != _textPassword.text.length){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Given password is not matched", Colors.red);
@@ -385,7 +418,8 @@ class _SingUpPageState extends State<SingUpPage> {
                                 print(value.statusCode);
                                 print(value.body);
                                 final Map parsed = json.decode(value.body);
-
+                                USERNAME = countryCode + _textMobile.text;
+                                USERPASS = _textPassword.text;
                                 var jsonData = null;
                                 SharedPreferences sharedPreferences =
                                 await SharedPreferences.getInstance();

@@ -6,7 +6,7 @@ class DoctorSpecializationController{
 
     String domain = apiDomainRoot;
 
-    var url = '$domain/api/specialization';
+    var url = '$domain/api/specialization-with-doctor';
 
     var response = await http.get(Uri.parse(url),
         headers: {

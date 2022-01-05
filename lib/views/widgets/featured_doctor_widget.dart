@@ -13,20 +13,39 @@ Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext cont
         child: Row(
 
           children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
 
-            Container(
-
-              height: 90,
-
-              width: 90,
-
-              child:  Image.network(  //
-
-                  '$apiDomainRoot/images/${doctorFeturedlist.image}'
+            height: 80.0,
+            width: 80.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                    doctorFeturedlist.image.toString()=='null'?
+                    avatarLink:'$apiDomainRoot/images/${doctorFeturedlist.image}'
+                ),
+                fit: BoxFit.fill,
               ),
-                  // :  Image.asset("images/download.png") ,
-
+              shape: BoxShape.circle,
             ),
+            ),
+          ),
+            // Container(
+            //
+            //   height: 90,
+            //
+            //   width: 90,
+            //
+            //   child:  ClipOval(
+            //     child: Image.network(  //
+            //         doctorFeturedlist.image.toString()=='null'?
+            //         avatarLink:'$apiDomainRoot/images/${doctorFeturedlist.image}'
+            //     ),
+            //   ),
+            //       // :  Image.asset("images/download.png") ,
+            //
+            // ),
 
             Padding(
 

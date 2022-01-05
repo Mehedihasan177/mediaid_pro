@@ -12,6 +12,8 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
       width: 290,
         child: GestureDetector(
         child: Card(
+          //color: Colors.indigo,
+
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -77,12 +79,20 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10),
-              child: Image(
-                image: NetworkImage(
-                  '$apiDomainRoot/images/${upcomingAppointment.doctor.image.toString()}',
+              child: Container(
+
+                height: 80.0,
+                width: 80.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        upcomingAppointment.doctor.image.toString()=='null'?
+                        avatarLink:'$apiDomainRoot/images/${upcomingAppointment.doctor.image}'
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
                 ),
-                height: 70,
-                width: 70,
               ),
             ),
           ],

@@ -6,6 +6,74 @@ import 'package:flutter/material.dart';
 Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
     Row(
     children: <Widget>[
+      ///hospital
+
+      GestureDetector(
+        onTap: (){
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HospitalList()));
+        },
+        child: Card(
+          color: Colors.black54,
+          // height: 30,
+          shape:  OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.white)
+          ),
+          //color: Colors.white60.withOpacity(0.8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 40, left: 10),
+                    alignment: Alignment.topLeft,
+                    child: Text(nearby_hospital_ambulance.hospital,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 10),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: Text(nearby_hospital_ambulance.text_for_hospital,
+                        style: TextStyle(
+                            color: Colors.white
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+
+              SizedBox(width: 10),
+              Container(
+                height: 70.0,
+                width: 70.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                        nearby_hospital_ambulance.image
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+              ),
+              SizedBox(width: 10,)
+            ],
+          ),
+
+
+        ),
+
+      ),
      GestureDetector(
           onTap: (){
             Navigator.push(
@@ -16,6 +84,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
        ///ambulance
 
           child: Card(
+            color: Colors.blue[500],
             shape:  OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(color: Colors.white)
@@ -33,6 +102,7 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.white
                                 )),
                           ),
                         Padding(
@@ -40,6 +110,9 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                           child: Container(
                             alignment: Alignment.centerLeft,
                             child: Text(nearby_hospital_ambulance.text_for_ambulance,
+                              style: TextStyle(
+                                  color: Colors.white
+                              ),
                             ),
                           ),
                         ),
@@ -47,17 +120,21 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
                       ],
                     ),
 
-
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    height: 70,
-                    width:70,
-                    child: Image(
-                      image: AssetImage(nearby_hospital_ambulance.image_ambulance),
+                Container(
+                  height: 70.0,
+                  width: 70.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                          nearby_hospital_ambulance.image_ambulance
+                      ),
+                      fit: BoxFit.fill,
                     ),
+                    shape: BoxShape.circle,
                   ),
                 ),
+                SizedBox(width: 10,)
+
               ],
             ),
 
@@ -65,68 +142,6 @@ Widget Nearby_ambulance_hospital(nearby_hospital_ambulance, context) =>
         ),
 
 
-      SizedBox(
-        width: 0,
-      ),
-
-      ///hospital
-
-      GestureDetector(
-          onTap: (){
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HospitalList()));
-          },
-          child: Card(
-              // height: 30,
-              shape:  OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Colors.white)
-              ),
-              //color: Colors.white60.withOpacity(0.8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 40, left: 10),
-                            alignment: Alignment.topLeft,
-                            child: Text(nearby_hospital_ambulance.hospital,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                )),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 10),
-                            child: Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(nearby_hospital_ambulance.text_for_hospital,
-                              ),
-                            ),
-                          ),
-
-                        ],
-                      ),
-
-                  SizedBox(width: 5),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10, left: 10),
-                    child: Container(
-                      height: 70,
-                      width: 70,
-                      child: Image(
-                        image: AssetImage(nearby_hospital_ambulance.image),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-
-            ),
-          
-        ),
 
     ],
   );

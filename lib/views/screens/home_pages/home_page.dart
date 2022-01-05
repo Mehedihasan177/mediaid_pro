@@ -147,47 +147,89 @@ class _HomePageState extends State<HomePage> {
               physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
               children: [
               Padding(
-                padding: const EdgeInsets.only(left:20.0),
+                padding: const EdgeInsets.only(top: 0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Hello, ${SIGNINGRESPONSE.name}",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                    IconButton(
-                      icon: ImageIcon(
-                        AssetImage("images/notification.png"),
-                        color: Color(0xFF1CBFA8),
+                    Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Container(
+
+                          height: 70.0,
+                          width: 70.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  '$apiDomainRoot/images/${SIGNINGRESPONSE.image}'
+                              ),
+                              fit: BoxFit.fill,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
                       ),
-                      iconSize: 28,
-                      onPressed: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => NotificationPage()));
-                      },
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left:20.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+
+                                  Text(
+                                    "Hello, ${SIGNINGRESPONSE.name}",
+                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                  ),
+                                  IconButton(
+                                    icon: ImageIcon(
+                                      AssetImage("images/notification.png"),
+                                      color: Color(0xFF1CBFA8),
+                                    ),
+                                    iconSize: 28,
+                                    onPressed: () {
+                                      Navigator.push(context,MaterialPageRoute(builder: (context) => NotificationPage()));
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: EdgeInsets.only(left: 17),
+                              child: Row(children: [
+                                Image(
+                                  height: 15,
+                                  width: 15,
+                                  image: AssetImage("images/location.png"),
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  "${SIGNINGRESPONSE.address}",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black.withOpacity(0.5),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ]),
+                            ),
+
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
 
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 17),
-                child: Row(children: [
-                  Image(
-                    height: 15,
-                    width: 15,
-                    image: AssetImage("images/location.png"),
-                  ),
-                  SizedBox(width: 5),
-                  Text(
-                    "${SIGNINGRESPONSE.address}",
-                    style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black.withOpacity(0.5),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ]),
-              ),
+
               SizedBox(height: 20),
               Container(
                 alignment: Alignment.topLeft,
@@ -238,7 +280,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 10),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Find by Specialist",
@@ -264,7 +306,7 @@ class _HomePageState extends State<HomePage> {
               ),
 
               Container(
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: 10),
                 alignment: Alignment.centerLeft,
                 height: 90,
                 child: ListView.builder(
@@ -293,7 +335,7 @@ class _HomePageState extends State<HomePage> {
 
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 8.0),
-                padding: EdgeInsets.only(left: 20),
+                padding: EdgeInsets.only(left: 10),
                 height: 125,
                 child: ListView.builder(
                   physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
@@ -307,7 +349,7 @@ class _HomePageState extends State<HomePage> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 10),
                 child: Text("Upcoming Appointments", style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold
@@ -317,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                 height: 10,
               ),
                 val == 0 ? shimmerOneLine(context) : Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(left: 10),
                 child: Container(
                   height: 120,
                   // color: Colors.red,
@@ -355,7 +397,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      padding: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.only(left: 10),
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Featured Doctors",

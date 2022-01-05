@@ -431,7 +431,8 @@ class _SingUpPageState extends State<SingUpPage> {
                                   sharedPreferences.setString("mobile", countryCode+_textMobile.text);
                                   sharedPreferences.setString("password", _textPassword.text);
                                   SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign up successfully', Colors.green);
-                                  return Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
+                                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                      SetupProfile()), (Route<dynamic> route) => false);
                                 } else {
                                   // return LoginController.requestThenResponsePrint(jsonData);
                                   SnackbarDialogueHelper().showSnackbarDialog(context, 'Please check email and password', Colors.red);

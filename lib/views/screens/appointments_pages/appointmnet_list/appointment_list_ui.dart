@@ -232,164 +232,177 @@ class _AppointmentListState extends State<AppointmentList> {
               ),
             ],
           ),
-          child: Card(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 10),
-                  child: Container(
-                    height: 120,
-                    width: 120,
-                    child: Image.network(
-                      '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: Card(
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Container(
+                      height: 80.0,
+                      width: 80.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(appointment_list_navBar.doctor.name),
-                            ),
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Container(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      "\$" + appointment_list_navBar.doctor.fee,
-                                      style: TextStyle(color: Colors.red),
+
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(appointment_list_navBar.doctor.name, style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17
+                                ),),
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        "\$" + appointment_list_navBar.doctor.fee,
+                                        style: TextStyle(color: Colors.red),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                // PopupMenuButton(
-                                //   itemBuilder: (_) => <PopupMenuEntry>[
-                                //     PopupMenuItem(
-                                //       child: Text('Set Reminder'),
-                                //     ),
-                                //     PopupMenuItem(
-                                //       child: Text('Cancel'),
-                                //       onTap: () {
-                                //         setState(() {
-                                //           print(appointment_list_navBar
-                                //               .doctor.id
-                                //               .toString());
-                                //           cancelThisAppointment(
-                                //               appointment_list_navBar.id
-                                //                   .toString(),
-                                //               index);
-                                //         });
-                                //       },
-                                //     ),
-                                //   ],
-                                // )
-                              ],
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 25,
-                          child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(appointment_list_navBar
-                                          .doctor.department),
-                                    ),
-                                  ],
-                                ),
-                              ]),
-                        ),
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text("For: " +
-                              appointment_list_navBar.appointmentFor
-                                  .replaceAll('null', '')),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(DateFormat("dd-MM-yyyy || hh:mm a")
-                                    .format(appointment_list_navBar.date))),
-                            // Text(" | "),
-                            //
-                            // Container(
-                            //
-                            //     alignment: Alignment.bottomLeft,
-                            //
-                            //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.call,
+                                  // PopupMenuButton(
+                                  //   itemBuilder: (_) => <PopupMenuEntry>[
+                                  //     PopupMenuItem(
+                                  //       child: Text('Set Reminder'),
+                                  //     ),
+                                  //     PopupMenuItem(
+                                  //       child: Text('Cancel'),
+                                  //       onTap: () {
+                                  //         setState(() {
+                                  //           print(appointment_list_navBar
+                                  //               .doctor.id
+                                  //               .toString());
+                                  //           cancelThisAppointment(
+                                  //               appointment_list_navBar.id
+                                  //                   .toString(),
+                                  //               index);
+                                  //         });
+                                  //       },
+                                  //     ),
+                                  //   ],
+                                  // )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 25,
+                            child: ListView(
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(appointment_list_navBar
+                                            .doctor.department),
+                                      ),
+                                    ],
                                   ),
-                                  iconSize: 20,
-                                  color: Color(0xFF1CBFA8),
-                                  splashColor: Color(0xFF1CBFA8),
-                                  onPressed: () async {
-                                    String channelName =
-                                        appointment_list_navBar.id.toString();
-                                    if (channelName.isNotEmpty) {
-                                      // await for camera and mic permissions before pushing video page
-                                      //await _handleCameraAndMic();
-                                      await _handleCameraAndMic(
-                                          Permission.camera);
-                                      await _handleCameraAndMic(
-                                          Permission.microphone);
-                                      // push video page with given channel name
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              CallPage(channelName), //testing
-                                        ),
-                                      );
-                                    }
-                                  },
-                                ),
-                                // IconButton(
-                                //
-                                //   icon: Icon(
-                                //
-                                //     Icons.cancel,
-                                //
-                                //   ),
-                                //
-                                //   iconSize: 20,
-                                //
-                                //   color: Colors.red,
-                                //
-                                //   splashColor: Color(0xFF1CBFA8),
-                                //
-                                //   onPressed: () {
-                                //     print(appointment_list_navBar.doctor.id.toString());
-                                //     cancelThisAppointment(appointment_list_navBar.id.toString(),index);
-                                //   },
-                                //
-                                // ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
+                                ]),
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text("For: " +
+                                appointment_list_navBar.appointmentFor
+                                    .replaceAll('null', '')),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Text(DateFormat("dd-MM-yyyy || hh:mm a")
+                                      .format(appointment_list_navBar.date))),
+                              // Text(" | "),
+                              //
+                              // Container(
+                              //
+                              //     alignment: Alignment.bottomLeft,
+                              //
+                              //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.call,
+                                    ),
+                                    iconSize: 20,
+                                    color: Color(0xFF1CBFA8),
+                                    splashColor: Color(0xFF1CBFA8),
+                                    onPressed: () async {
+                                      String channelName =
+                                          appointment_list_navBar.id.toString();
+                                      if (channelName.isNotEmpty) {
+                                        // await for camera and mic permissions before pushing video page
+                                        //await _handleCameraAndMic();
+                                        await _handleCameraAndMic(
+                                            Permission.camera);
+                                        await _handleCameraAndMic(
+                                            Permission.microphone);
+                                        // push video page with given channel name
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CallPage(channelName), //testing
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                  // IconButton(
+                                  //
+                                  //   icon: Icon(
+                                  //
+                                  //     Icons.cancel,
+                                  //
+                                  //   ),
+                                  //
+                                  //   iconSize: 20,
+                                  //
+                                  //   color: Colors.red,
+                                  //
+                                  //   splashColor: Color(0xFF1CBFA8),
+                                  //
+                                  //   onPressed: () {
+                                  //     print(appointment_list_navBar.doctor.id.toString());
+                                  //     cancelThisAppointment(appointment_list_navBar.id.toString(),index);
+                                  //   },
+                                  //
+                                  // ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           endActionPane: ActionPane(

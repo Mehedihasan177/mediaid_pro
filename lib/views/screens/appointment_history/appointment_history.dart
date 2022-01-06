@@ -9,6 +9,7 @@ import 'package:care_plus/controllers/user/previous_appointment_controller.dart'
 import 'package:care_plus/responses_from_test_file/responses/user/upcoming_appointment_list_responses.dart';
 import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upcoming_appointment_doctor_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 
 import '../give_review.dart';
@@ -88,131 +89,184 @@ int val = 0;
 
   Widget Appointment_ListHist(UpcomingAppointment appointment_list_navBar, context, int index) =>
       GestureDetector(
-        child: Card(
-          child: Row(
+        child: Slidable(
+          key: UniqueKey(),
+          startActionPane: ActionPane(
+            // A motion is a widget used to control how the pane animates.
+            motion: const ScrollMotion(),
+
+            // A pane can dismiss the Slidable.
+
+            // All actions are defined in the children parameter.
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20, left: 10),
-                child: Container(
-                  height: 120,
-                  width: 120,
-                  child: Image.network(
-                    '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',
-                  ),
-                ),
+              // A SlidableAction can have an icon and/or a label.
+              SlidableAction(
+                onPressed: (v) {
+                  cancelThisAppointment(
+                      appointment_list_navBar.id.toString(), index);
+                  print("this is hot day");
+                },
+                backgroundColor: Color(0xFFFE4A49),
+                foregroundColor: Colors.white,
+                icon: Icons.delete,
+                label: 'Delete',
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20,right: 10, top: 30),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(appointment_list_navBar.doctor.name),
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 0),
-                                child: Container(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    "\$" + appointment_list_navBar.doctor.fee,
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ],
+            ],
+          ),
+          child: Card(
+            child: Row(
+              children: [
+                ///circle image
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Container(
+                    height: 80.0,
+                    width: 80.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',                      ),
+                        fit: BoxFit.fill,
                       ),
-                      Container(
-                        height: 25,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(appointment_list_navBar
-                                        .doctor.department),
-                                  ),
-
-                                ],
-                              ),
-                            ]),
-                      ),
-
-                      Container(
-
-                        alignment: Alignment.centerLeft,
-                        child: Text("For: "+appointment_list_navBar.appointmentFor.replaceAll('null', '')),
-
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(DateFormat("dd-MM-yyyy || hh:mm a")
-                                  .format(appointment_list_navBar.date))),
-                          // Text(" | "),
-                          //
-                          // Container(
-                          //
-                          //     alignment: Alignment.bottomLeft,
-                          //
-                          //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  Icons.rate_review,
-                                ),
-                                iconSize: 20,
-                                color: Color(0xFF1CBFA8),
-                                splashColor: Color(0xFF1CBFA8),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => GiveReview(appointment: appointment_list_navBar,)));
-                                },
-                              ),
-                              // IconButton(
-                              //
-                              //   icon: Icon(
-                              //
-                              //     Icons.cancel,
-                              //
-                              //   ),
-                              //
-                              //   iconSize: 20,
-                              //
-                              //   color: Colors.red,
-                              //
-                              //   splashColor: Color(0xFF1CBFA8),
-                              //
-                              //   onPressed: () {
-                              //     print(appointment_list_navBar.doctor.id.toString());
-                              //     cancelThisAppointment(appointment_list_navBar.id.toString(),index);
-                              //   },
-                              //
-                              // ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                      shape: BoxShape.circle,
+                    ),
                   ),
                 ),
+
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20,right: 10, top: 30),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(appointment_list_navBar.doctor.name),
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 0),
+                                  child: Container(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      "\$" + appointment_list_navBar.doctor.fee,
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ),
+
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 25,
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(appointment_list_navBar
+                                          .doctor.department),
+                                    ),
+
+                                  ],
+                                ),
+                              ]),
+                        ),
+
+                        Container(
+
+                          alignment: Alignment.centerLeft,
+                          child: Text("For: "+appointment_list_navBar.appointmentFor.replaceAll('null', '')),
+
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(DateFormat("dd-MM-yyyy || hh:mm a")
+                                    .format(appointment_list_navBar.date))),
+                            // Text(" | "),
+                            //
+                            // Container(
+                            //
+                            //     alignment: Alignment.bottomLeft,
+                            //
+                            //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.rate_review,
+                                  ),
+                                  iconSize: 20,
+                                  color: Color(0xFF1CBFA8),
+                                  splashColor: Color(0xFF1CBFA8),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => GiveReview(appointment: appointment_list_navBar,)));
+                                  },
+                                ),
+                                // IconButton(
+                                //
+                                //   icon: Icon(
+                                //
+                                //     Icons.cancel,
+                                //
+                                //   ),
+                                //
+                                //   iconSize: 20,
+                                //
+                                //   color: Colors.red,
+                                //
+                                //   splashColor: Color(0xFF1CBFA8),
+                                //
+                                //   onPressed: () {
+                                //     print(appointment_list_navBar.doctor.id.toString());
+                                //     cancelThisAppointment(appointment_list_navBar.id.toString(),index);
+                                //   },
+                                //
+                                // ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          endActionPane: ActionPane(
+            // A motion is a widget used to control how the pane animates.
+            motion: const ScrollMotion(),
+            //key: ValueKey(1),
+            // A pane can dismiss the Slidable.
+            // dismissible: DismissiblePane(onDismissed: () {}),
+
+            // All actions are defined in the children parameter.
+            children: [
+              // A SlidableAction can have an icon and/or a label.
+              SlidableAction(
+                onPressed: (v) {
+                  //cancelThisAppointment(appointment_list_navBar.id.toString(),index);
+                },
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                icon: Icons.calendar_today_rounded,
+                label: 'Reminder',
               ),
             ],
           ),

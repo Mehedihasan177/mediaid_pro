@@ -39,16 +39,25 @@ Widget Findspecialist(SpecializationResponse informationslist, BuildContext cont
                 ],
               ),
             ),
-            SizedBox(height: 5,),
-            Container(
-              // alignment: Alignment.bottomRight,
-              // padding: EdgeInsets.only(right: 10, top: 5),
-              child: Image(
-                height: 35,
-                width: 35,
-                image: NetworkImage(apiDomainRoot+'/'+informationslist.icon),
+            SizedBox(height: 0,),
+            Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Container(
+
+                height: 40.0,
+                width: 40.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        apiDomainRoot+'/'+informationslist.icon
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
+
           ],
         ),
       ),

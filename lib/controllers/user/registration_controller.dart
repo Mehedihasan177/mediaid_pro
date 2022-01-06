@@ -27,6 +27,7 @@ class RegistrationController{
     var response = await http.post(Uri.parse(url), body: data1,
         headers: {
           "Accept": "application/json",
+          //"Content-Type": "application/json",
         }
     );
 

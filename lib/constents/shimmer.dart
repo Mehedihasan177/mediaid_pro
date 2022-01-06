@@ -103,10 +103,12 @@ shimmerOneLine(context) {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          width:  MediaQuery.of(context).size.width,
-                          height: 50.0,
-                          color: Colors.white,
-                        ),
+                          height: 50,
+
+                          child: CircleAvatar(
+
+                          ),
+                        )
                       ),
                       SizedBox(width: 20,),
                       Expanded(
@@ -171,10 +173,12 @@ shimmerThreeLine(context) {
                       Expanded(
                         flex: 1,
                         child: Container(
-                          width:  MediaQuery.of(context).size.width,
-                          height: 50.0,
-                          color: Colors.white,
-                        ),
+                          height: 90,
+                          padding: EdgeInsets.only(bottom: 40),
+                          child: CircleAvatar(
+
+                          ),
+                        )
                       ),
                       SizedBox(width: 20,),
                       Expanded(

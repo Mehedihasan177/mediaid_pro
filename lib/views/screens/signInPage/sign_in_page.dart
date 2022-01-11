@@ -40,7 +40,7 @@ class _SingInPageState extends State<SingInPage> {
   // TextEditingController _textMobile = TextEditingController(text: "");
   // TextEditingController _textPassword = TextEditingController(text: "");
 
-  TextEditingController _textMobile = TextEditingController(text: "1744319808");
+  TextEditingController _textMobile = TextEditingController();
   TextEditingController _textPassword = TextEditingController(text: "11223344");
 
   final databaseRef = FirebaseDatabase.instance.reference();
@@ -48,10 +48,32 @@ class _SingInPageState extends State<SingInPage> {
   late DatabaseReference databaseReference;
   bool _passwordVisible = false;
   String countryCode = '+880';
+  late String finalMobile = '';
+  late String finalCountry = '+880';
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences =
+    await SharedPreferences.getInstance();
+    String? obtainedMobile = sharedPreferences.getString("mobile");
+    String? obtainedCountry = sharedPreferences.getString("country");
+
+    setState(() {
+      finalMobile = obtainedMobile!;
+      _textMobile = TextEditingController(text: finalMobile);
+      finalCountry = obtainedCountry!;
+
+    });
+    print(finalMobile);
+    print(finalCountry);
+  }
+
+  @override
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getValidationData();
     databaseReference = databaseRef;
     // goForCallorNot(9);
 
@@ -94,7 +116,7 @@ class _SingInPageState extends State<SingInPage> {
                   },
                   showFlag: true,
                   // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                  initialSelection: 'AU',
+                  initialSelection: finalCountry,
                   favorite: ['+880', 'BD'],
                   showCountryOnly: false,
                   // optional. Shows only country name and flag when popup is closed.
@@ -220,6 +242,8 @@ class _SingInPageState extends State<SingInPage> {
                     SnackbarDialogueHelper().showSnackbarDialog(context, "password is less than 6 digit or enter password", Colors.red);
                   }
                   else{
+                   PHONEONLY = _textMobile.text;
+                   COUNTRYCODE = countryCode;
                    await SigninController.requestThenResponsePrint(myInfo)
                        .then((value) async {
                      print(value.statusCode);

@@ -13,7 +13,7 @@
     <uses-permission android:name="android.Manifest.permission.INTERNET" />
 
    <application
-        android:label="Care+"
+        android:label="Mediaid Pro"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
        <activity

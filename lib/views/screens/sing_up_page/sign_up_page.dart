@@ -392,6 +392,8 @@ class _SingUpPageState extends State<SingUpPage> {
                         );
                         if(_textEmail.text.length == 0){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter email id", Colors.red);
+                        }else if(!(RegExp(r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$').hasMatch(_textEmail.text))){
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter a valid email", Colors.red);
                         }else if(_textPassword.text.length == 0){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Please enter name", Colors.red);
                         }else if(_textName.text.length == 0){
@@ -409,6 +411,8 @@ class _SingUpPageState extends State<SingUpPage> {
                             print(value2.body);
                             //EasyLoading.dismiss();
                             if(value2.statusCode==200){
+                              PHONEONLY = _textMobile.text;
+                              COUNTRYCODE = countryCode;
                               print("successfull");
                               //EasyLoading.showSuccess('logging in...');
                               SigninModel myInfo = new SigninModel(

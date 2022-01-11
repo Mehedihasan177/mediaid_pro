@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:care_plus/views/screens/appointment_booked_successfully/appointment_booked_successfully.dart';
 import 'package:care_plus/views/screens/care_plus_lab_report_list/care_plus_lab_report_list.dart';
 import 'package:care_plus/views/screens/care_plus_prescriptions_list/care_plus_prescriptions_list.dart';
@@ -14,6 +16,7 @@ import 'package:care_plus/views/screens/update_profile/update_profile.dart';
 import 'package:care_plus/views/screens/upload_documents/upload_documents.dart';
 import 'package:care_plus/views/screens/wallet/wallet.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../intro_screens.dart';
 // import 'package:havartye/screen/home_page.dart';
@@ -26,17 +29,38 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late String finalMobile = '';
+  late String finalPassword = '';
+  var obtainedMobile;
+  var obtainedPassword;
   @override
   void initState() {
     // TODO: implement initState
-    getValidationData();
+    getValidationData().whenComplete(() async {
+      Timer(
+          Duration(seconds: 3),
+              () =>Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => finalMobile == null && finalPassword == null
+              ? OnBoardingPage()
+              : SingInPage())));
+
+
+    });
     super.initState();
   }
 
   Future getValidationData() async {
-    await Future.delayed(Duration(milliseconds: 3000), () {});
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
+    final SharedPreferences sharedPreferences =
+    await SharedPreferences.getInstance();
+    obtainedMobile = sharedPreferences.getString("mobile");
+    obtainedPassword = sharedPreferences.getString("password");
+
+    setState(() {
+      finalMobile = obtainedMobile;
+      finalPassword = obtainedPassword;
+    });
+    print(finalMobile);
+    print(finalPassword);
   }
 
   @override

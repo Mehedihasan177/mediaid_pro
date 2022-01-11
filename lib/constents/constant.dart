@@ -13,4 +13,6 @@ String USERID = '';
 String USERPHONE = '';
 
 late User SIGNINGRESPONSE;
+String PHONEONLY = '';
+String COUNTRYCODE = '';
 // late SpecializationResponse SPECIALIZATION;

@@ -41,7 +41,8 @@ class SigninController{
       sharedPreferences.setString("token", loginobject.data.token);
       print(sharedPreferences.getString("token"));
       SIGNINGRESPONSE = loginobject.data.user;
-
+      sharedPreferences.setString("mobile", PHONEONLY);
+      sharedPreferences.setString("country", COUNTRYCODE);
       // PHONE_NUMBER = doctorSignInModel.mobile;
       // PASSWORD = doctorSignInModel.password;
 

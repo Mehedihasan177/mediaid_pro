@@ -96,7 +96,8 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                 width: 120,
                                 child: ClipRRect(
                                   child: Image.network(
-                                    '$apiDomainRoot/images/${widget.image}',
+                                    widget.image.toString()=='null'?
+                                    avatarLink:'$apiDomainRoot/images/${widget.image}',
                                   ),
                                   borderRadius: BorderRadius.circular(10),
                                 ),

@@ -45,7 +45,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   String dateTime = '';
   late DateTime _selectedDate;
-
+bool image = false;
   //Method for showing the date picker
 
   @override
@@ -82,7 +82,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         radius: 78,
                         backgroundColor: Colors.white,
                         child: ClipOval(
-                            child: Image.network(
+                            child: image == false ? Image.network(avatarLink) : Image.network(
                           '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
                           fit: BoxFit.fill,
                           width: 170,

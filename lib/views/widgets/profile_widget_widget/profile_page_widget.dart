@@ -3,7 +3,7 @@ import 'package:care_plus/models/ui_model/profile_model/profile_model.dart';
 import 'package:care_plus/views/screens/update_profile/update_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+bool image = false;
 Widget Profile_Page(Profile_Model profile_model, context) => Card(
       child: Padding(
         padding: const EdgeInsets.only(top: 20, bottom: 20),
@@ -32,10 +32,10 @@ Widget Profile_Page(Profile_Model profile_model, context) => Card(
                     child: Container(
 
                       height: 80.0,
-                      width: 80.0,
+                      width: 100.0,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
+                          image: image == false ? NetworkImage(avatarLink) : NetworkImage(
                               '$apiDomainRoot/images/${SIGNINGRESPONSE.image}'
                           ),
                           fit: BoxFit.fill,

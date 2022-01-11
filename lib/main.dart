@@ -25,7 +25,7 @@ Future<void> main() async {
    Widget build(BuildContext context) {
      return MaterialApp(
        debugShowCheckedModeBanner: false,
-       title: 'Doctor Mediaid',
+       title: 'Mediaid Pro',
        home: Scaffold(
          body: SplashScreen(),
        ),

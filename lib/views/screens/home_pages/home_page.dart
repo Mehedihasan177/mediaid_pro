@@ -62,6 +62,8 @@ class _HomePageState extends State<HomePage> {
   int val = 0;
   int val1 = 0;
 
+  bool image = false;
+
   _getUpcomingAppointment() async {
 
 
@@ -162,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                           width: 70.0,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: NetworkImage(
+                              image: image == false ? NetworkImage(avatarLink) : NetworkImage(
                                   '$apiDomainRoot/images/${SIGNINGRESPONSE.image}'
                               ),
                               fit: BoxFit.fill,
@@ -308,7 +310,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 padding: EdgeInsets.only(left: 10),
                 alignment: Alignment.centerLeft,
-                height: 90,
+                height: 130,
                 child: ListView.builder(
                     physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                   //controller: PageController(viewportFraction: 0.3),

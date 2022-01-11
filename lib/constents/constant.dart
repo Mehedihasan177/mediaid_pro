@@ -1,8 +1,8 @@
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/specialization_responses.dart';
 
-String apiDomainRoot = "http://careplus.skoder.co";
-String avatarLink = 'https://www.w3schools.com/howto/img_avatar.png';
+String apiDomainRoot = "http://mediaidpro.skoder.co";
+String avatarLink = '$apiDomainRoot/asset_p/img/logo.jpeg';
 //String reportImageView = "http://careplus.skoder.co";
 
 String APITOKEN = "";

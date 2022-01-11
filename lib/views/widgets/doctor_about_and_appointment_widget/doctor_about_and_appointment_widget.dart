@@ -656,7 +656,7 @@ designPortion1() => Row(
       children: [
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.only(top: 120),
+            padding: const EdgeInsets.only(top: 110),
             child: Container(
               height: 550,
               decoration: BoxDecoration(

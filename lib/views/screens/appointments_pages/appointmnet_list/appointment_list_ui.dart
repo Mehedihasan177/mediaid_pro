@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
@@ -36,7 +37,11 @@ class AppointmentList extends StatefulWidget {
 class _AppointmentListState extends State<AppointmentList> {
   List<UpcomingAppointment> appointmentlist = [];
   List<UpcomingAppointment> appointmentlistH = [];
+
+
   int val = 0;
+
+
   _getUpcomingAppointment() async {
     UpcomingAppointmentController.requestThenResponsePrint(USERTOKEN)
         .then((value) {
@@ -206,237 +211,268 @@ class _AppointmentListState extends State<AppointmentList> {
   }
 
   Widget Appointment_List(
-          UpcomingAppointment appointment_list_navBar, context, int index) =>
-      GestureDetector(
-        child: Slidable(
-          key: UniqueKey(),
-          startActionPane: ActionPane(
-            // A motion is a widget used to control how the pane animates.
-            motion: const ScrollMotion(),
+          UpcomingAppointment appointment_list_navBar, context, int index) {
 
-            // A pane can dismiss the Slidable.
+    String dateonly = '${DateFormat('yyyy-MM-dd').parse(DateFormat('yyyy-MM-dd hh:mm:ss').format(appointment_list_navBar.date))}'.split(' ')[0].trim();
+    String timeonlyS = '${appointment_list_navBar.appointmentSlot.startTime}';
+    String timeonlyE = '${appointment_list_navBar.appointmentSlot.endTime}';
+    String finStrt = dateonly+' '+timeonlyS;
+    String finEnd = dateonly+" "+timeonlyE;
 
-            // All actions are defined in the children parameter.
-            children: [
-              // A SlidableAction can have an icon and/or a label.
-              SlidableAction(
-                onPressed: (v) {
-                  cancelThisAppointment(
-                      appointment_list_navBar.id.toString(), index);
-                  print("this is hot day");
-                },
-                backgroundColor: Color(0xFFFE4A49),
-                foregroundColor: Colors.white,
-                icon: Icons.delete,
-                label: 'Delete',
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 5, right: 5),
-            child: Card(
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Container(
-                      height: 80.0,
-                      width: 80.0,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',
-                          ),
-                          fit: BoxFit.fill,
+    return GestureDetector(
+      child: Slidable(
+        key: UniqueKey(),
+        startActionPane: ActionPane(
+          // A motion is a widget used to control how the pane animates.
+          motion: const ScrollMotion(),
+
+          // A pane can dismiss the Slidable.
+
+          // All actions are defined in the children parameter.
+          children: [
+            // A SlidableAction can have an icon and/or a label.
+            SlidableAction(
+              onPressed: (v) {
+                cancelThisAppointment(
+                    appointment_list_navBar.id.toString(), index);
+                print("this is hot day");
+              },
+              backgroundColor: Color(0xFFFE4A49),
+              foregroundColor: Colors.white,
+              icon: Icons.delete,
+              label: 'Delete',
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 5, right: 5),
+          child: Card(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Container(
+                    height: 80.0,
+                    width: 80.0,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          '$apiDomainRoot/images/${appointment_list_navBar.doctor.image.toString()}',
                         ),
-                        shape: BoxShape.circle,
+                        fit: BoxFit.fill,
                       ),
+                      shape: BoxShape.circle,
                     ),
                   ),
+                ),
 
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(appointment_list_navBar.doctor.name, style: TextStyle(
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(appointment_list_navBar.doctor.name, style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 17
-                                ),),
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: Container(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        "\$" + appointment_list_navBar.doctor.fee,
-                                        style: TextStyle(color: Colors.red),
-                                      ),
+                              ),),
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: Container(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      "\$" + appointment_list_navBar.doctor.fee,
+                                      style: TextStyle(color: Colors.red),
                                     ),
                                   ),
-                                  // PopupMenuButton(
-                                  //   itemBuilder: (_) => <PopupMenuEntry>[
-                                  //     PopupMenuItem(
-                                  //       child: Text('Set Reminder'),
-                                  //     ),
-                                  //     PopupMenuItem(
-                                  //       child: Text('Cancel'),
-                                  //       onTap: () {
-                                  //         setState(() {
-                                  //           print(appointment_list_navBar
-                                  //               .doctor.id
-                                  //               .toString());
-                                  //           cancelThisAppointment(
-                                  //               appointment_list_navBar.id
-                                  //                   .toString(),
-                                  //               index);
-                                  //         });
-                                  //       },
-                                  //     ),
-                                  //   ],
-                                  // )
-                                ],
-                              ),
-                            ],
-                          ),
-                          Container(
-                            height: 25,
-                            child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(appointment_list_navBar
-                                            .doctor.department),
-                                      ),
-                                    ],
-                                  ),
-                                ]),
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text("For: " +
-                                appointment_list_navBar.appointmentFor
-                                    .replaceAll('null', '')),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Text(DateFormat("dd-MM-yyyy || hh:mm a")
-                                      .format(appointment_list_navBar.date))),
-                              // Text(" | "),
-                              //
-                              // Container(
-                              //
-                              //     alignment: Alignment.bottomLeft,
-                              //
-                              //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.call,
+                                ),
+                                // PopupMenuButton(
+                                //   itemBuilder: (_) => <PopupMenuEntry>[
+                                //     PopupMenuItem(
+                                //       child: Text('Set Reminder'),
+                                //     ),
+                                //     PopupMenuItem(
+                                //       child: Text('Cancel'),
+                                //       onTap: () {
+                                //         setState(() {
+                                //           print(appointment_list_navBar
+                                //               .doctor.id
+                                //               .toString());
+                                //           cancelThisAppointment(
+                                //               appointment_list_navBar.id
+                                //                   .toString(),
+                                //               index);
+                                //         });
+                                //       },
+                                //     ),
+                                //   ],
+                                // )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 25,
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(appointment_list_navBar
+                                          .doctor.department),
                                     ),
-                                    iconSize: 20,
-                                    color: Color(0xFF1CBFA8),
-                                    splashColor: Color(0xFF1CBFA8),
-                                    onPressed: () async {
-                                      String channelName =
-                                          appointment_list_navBar.id.toString();
-                                      if (channelName.isNotEmpty) {
-                                        // await for camera and mic permissions before pushing video page
-                                        //await _handleCameraAndMic();
-                                        await _handleCameraAndMic(
-                                            Permission.camera);
-                                        await _handleCameraAndMic(
-                                            Permission.microphone);
-                                        // push video page with given channel name
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                CallPage(channelName), //testing
-                                          ),
-                                        );
-                                      }
-                                    },
+                                  ],
+                                ),
+                              ]),
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("For: " +
+                              appointment_list_navBar.appointmentFor
+                                  .replaceAll('null', '')),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                                alignment: Alignment.bottomLeft,
+                                child: Text(DateFormat("dd MMMM yyyy")
+                                    .format(appointment_list_navBar.date))),
+
+                            Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(appointment_list_navBar
+                                .appointmentSlot.startTime)).toString()),
+
+                            // Text(" | "),
+                            //
+                            // Container(
+                            //
+                            //     alignment: Alignment.bottomLeft,
+                            //
+                            //     child: Text(DateFormat("H:m:s").format(appointment_list_navBar.date))),
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.call,
                                   ),
-                                  // IconButton(
-                                  //
-                                  //   icon: Icon(
-                                  //
-                                  //     Icons.cancel,
-                                  //
-                                  //   ),
-                                  //
-                                  //   iconSize: 20,
-                                  //
-                                  //   color: Colors.red,
-                                  //
-                                  //   splashColor: Color(0xFF1CBFA8),
-                                  //
-                                  //   onPressed: () {
-                                  //     print(appointment_list_navBar.doctor.id.toString());
-                                  //     cancelThisAppointment(appointment_list_navBar.id.toString(),index);
-                                  //   },
-                                  //
-                                  // ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                                  iconSize: 20,
+                                  color: Color(0xFF1CBFA8),
+                                  splashColor: Color(0xFF1CBFA8),
+                                  onPressed: () async {
+                                    String channelName =
+                                    appointment_list_navBar.id.toString();
+                                    if (channelName.isNotEmpty) {
+                                      // await for camera and mic permissions before pushing video page
+                                      //await _handleCameraAndMic();
+                                      await _handleCameraAndMic(
+                                          Permission.camera);
+                                      await _handleCameraAndMic(
+                                          Permission.microphone);
+                                      // push video page with given channel name
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              CallPage(channelName), //testing
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                                // IconButton(
+                                //
+                                //   icon: Icon(
+                                //
+                                //     Icons.cancel,
+                                //
+                                //   ),
+                                //
+                                //   iconSize: 20,
+                                //
+                                //   color: Colors.red,
+                                //
+                                //   splashColor: Color(0xFF1CBFA8),
+                                //
+                                //   onPressed: () {
+                                //     print(appointment_list_navBar.doctor.id.toString());
+                                //     cancelThisAppointment(appointment_list_navBar.id.toString(),index);
+                                //   },
+                                //
+                                // ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          endActionPane: ActionPane(
-            // A motion is a widget used to control how the pane animates.
-            motion: const ScrollMotion(),
-            //key: ValueKey(1),
-            // A pane can dismiss the Slidable.
-            // dismissible: DismissiblePane(onDismissed: () {}),
-
-            // All actions are defined in the children parameter.
-            children: [
-              // A SlidableAction can have an icon and/or a label.
-              SlidableAction(
-                onPressed: (v) {
-                  //cancelThisAppointment(appointment_list_navBar.id.toString(),index);
-                },
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-                icon: Icons.calendar_today_rounded,
-                label: 'Reminder',
-              ),
-            ],
-          ),
         ),
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => UpcomingAppointmentDoctorDetails(
-                        upcomingAppointmentDoctorDetails:
-                            appointment_list_navBar,
-                      )));
-        },
-      );
+        endActionPane: ActionPane(
+          // A motion is a widget used to control how the pane animates.
+          motion: const ScrollMotion(),
+          //key: ValueKey(1),
+          // A pane can dismiss the Slidable.
+          // dismissible: DismissiblePane(onDismissed: () {}),
+
+          // All actions are defined in the children parameter.
+          children: [
+            // A SlidableAction can have an icon and/or a label.
+            SlidableAction(
+              onPressed: (v) {
+                setState(() {
+
+
+
+                  Add2Calendar.addEvent2Cal(
+                      buildEvent(
+                        'Appointment to ${appointment_list_navBar.doctor.name} on $APPNAME',
+                        'Dear ${SIGNINGRESPONSE.name}, You have an appointment with ${appointment_list_navBar.doctor.name} on $APPNAME for ${appointment_list_navBar.appointmentFor}. Please be ready for the appointment before the time. $APPNAME Doctor will call you over the app. $APPNAME wish you a good experience for your consultation. Thank You :)',
+                        '${SIGNINGRESPONSE.email}',
+                        // DateFormat().parse(inputString),
+                        // DateFormat().format(date),
+                        DateFormat('yyyy-MM-dd hh:mm:ss').parse(finStrt),
+                        DateFormat('yyyy-MM-dd hh:mm:ss').parse(finEnd),
+                      )
+                  );
+                });
+              },
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              icon: Icons.calendar_today_rounded,
+              label: 'Reminder',
+            ),
+          ],
+        ),
+      ),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => UpcomingAppointmentDoctorDetails(
+                  upcomingAppointmentDoctorDetails:
+                  appointment_list_navBar,
+                )));
+      },
+    );
+  }
+
+
+
+
   Widget Appointment_ListHist(
           UpcomingAppointment appointment_list_navBar, context, int index) =>
       GestureDetector(
@@ -610,6 +646,29 @@ class _AppointmentListState extends State<AppointmentList> {
                   )));
     });
   }
+
+
+
+  Event buildEvent(title,description,email,startDate,endDate) {
+    return Event(
+      title: title,
+      description: description,
+      location: APPNAME,
+      startDate: startDate,
+      endDate: endDate,
+      allDay: false,
+      iosParams: IOSParams(
+        reminder: Duration(minutes: 40),
+      ),
+      androidParams: AndroidParams(
+        emailInvites: [email],
+      ),
+      // recurrence: recurrence,
+    );
+  }
+
+
+
 }
 
 Future<void> _handleCameraAndMic(Permission permission) async {

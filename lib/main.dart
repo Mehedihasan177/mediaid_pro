@@ -1,3 +1,4 @@
+import 'package:care_plus/test.dart';
 import 'package:care_plus/views/screens/calling_screen.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:care_plus/views/screens/splash_screen/splash_Screen.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import 'constents/constant.dart';
 
 Future<void> main() async {
   GestureBinding.instance?.resamplingEnabled = true;
@@ -25,7 +28,7 @@ Future<void> main() async {
    Widget build(BuildContext context) {
      return MaterialApp(
        debugShowCheckedModeBanner: false,
-       title: 'Mediaid Pro',
+       title: APPNAME,
        home: Scaffold(
          body: SplashScreen(),
        ),

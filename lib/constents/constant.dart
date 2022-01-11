@@ -15,4 +15,6 @@ String USERPHONE = '';
 late User SIGNINGRESPONSE;
 String PHONEONLY = '';
 String COUNTRYCODE = '';
+
+String APPNAME = 'Mediaid Pro';
 // late SpecializationResponse SPECIALIZATION;

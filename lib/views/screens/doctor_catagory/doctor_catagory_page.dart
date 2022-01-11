@@ -83,7 +83,7 @@ class _DoctorCatagoryState extends State<DoctorCatagory> {
                           shrinkWrap: true,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
-                            childAspectRatio: (1 / 0.8),
+                            childAspectRatio: (1 / 1.1),
                             crossAxisCount: 3,
                             crossAxisSpacing: 2.0,
                             mainAxisSpacing: 9.0,

@@ -1,4 +1,4 @@
-package com.example.care_plus
+package mediaidpro.skoder.co
 
 import io.flutter.embedding.android.FlutterActivity
 

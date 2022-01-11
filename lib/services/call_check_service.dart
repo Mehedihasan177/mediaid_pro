@@ -26,7 +26,7 @@ void goForCallorNot(String id,context) {
       int diff = now.difference(date).inMinutes;
       print("diff");
       print(diff);
-      if (diff < 500) {
+      if (diff < 5) {
         if (value.callStatus == "called") {
           database.createStatusData(value.patientId, value.appointmentId, value.doctor,value.doctorImage,'ringing');
           // goForCall(value["Doctor"], value["DoctorImage"], value["appointment_id"],value["patient_id"]);

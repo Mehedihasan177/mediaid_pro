@@ -50,7 +50,7 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
                   child: Container(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      upcomingAppointment.doctor.department,
+                      upcomingAppointment.doctor.specialization,
                       style: TextStyle(fontSize: 13),
                     ),
                   ),

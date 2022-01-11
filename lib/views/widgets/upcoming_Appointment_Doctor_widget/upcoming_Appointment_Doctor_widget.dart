@@ -23,15 +23,25 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                   children: [
                     Expanded(
                       flex: 1,
-                      child: Container(
-                        height: 70,
-                        width: 70,
-                        child: Image.network(
-                          // upcomingAppointmentDoctorDetail.doctor.image,
-                          '$apiDomainRoot/images/${upcomingAppointmentDoctorDetail.doctor.image}',
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Container(
+                          height: 80.0,
+                          width: 80.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                '$apiDomainRoot/images/${upcomingAppointmentDoctorDetail.doctor.image}',
+                              ),
+                              fit: BoxFit.fill,
+                            ),
+                            shape: BoxShape.circle,
+                          ),
                         ),
                       ),
                     ),
+
+
                     Expanded(
                       flex: 4,
                       child: Padding(
@@ -106,7 +116,7 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                               ),
                             ),
                             Container(
-                                alignment: Alignment.centerLeft,
+                                // alignment: Alignment.centerLeft,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
@@ -131,141 +141,133 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
               designPortion1(),
               Column(
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 40, left: 10),
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.6),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(40),
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                      SizedBox(width: 20,),
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(height: 10,),
+                              Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.6),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(40),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.calendar_today_rounded,
+                                      color: Colors.white,
+                                      size: 18,
+                                    ),
                                   ),
                                 ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.calendar_today_rounded,
+                              SizedBox(height: 10,),
+                              Text(
+                                "Appointment Date",
+                                style: TextStyle(
+                                    fontSize: 14,
                                     color: Colors.white,
-                                    size: 18,
-                                  ),
-                                ),
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 40, left: 10),
-                              child: Column(
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                    alignment: Alignment.bottomLeft,
+
                                     child: Text(
-                                      "Appointment Date",
+                                      //DateFormat("dd-MM-yyyy").format(
+                                      upcomingAppointmentDoctorDetail.appointmentSlot.day,
+//),
                                       style: TextStyle(
                                           fontSize: 14,
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          //DateFormat("dd-MM-yyyy").format(
-                                              upcomingAppointmentDoctorDetail.appointmentSlot.day,
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      //DateFormat("dd-MM-yyyy").format(
+                                      ", " + DateFormat("dd MMM yyyy").format(
+                                          upcomingAppointmentDoctorDetail.date),
 //),
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          //DateFormat("dd-MM-yyyy").format(
-                                          ", " + DateFormat("dd-MM-yyyy").format(
-                                              upcomingAppointmentDoctorDetail.date),
-//),
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-
-
-
-
-
-
                                 ],
                               ),
-                            ),
-                          ],
+
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 40, left: 10),
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.6),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(40),
+
+                        Expanded(
+                          flex: 2,
+                          child: Row(
+                            children: [
+                              Column(
+                                children: [
+                                  SizedBox(height: 10,),
+                                  Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.6),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(40),
+                                      ),
+                                    ),
+                                    child: Center(
+                                        child:Icon(
+                                          Icons.timer_outlined,
+                                          color: Colors.white,
+                                          size: 18,
+                                        )),
                                   ),
-                                ),
-                                child: Center(
-                                    child:Icon(
-                                      Icons.timer_outlined,
-                                      color: Colors.white,
-                                      size: 18,
-                                    )),
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 40),
-                                  child: Text('From: '+
-                                    DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(upcomingAppointmentDoctorDetail
-                                        .appointmentSlot.startTime))
-                                        .replaceAll("null", "0"),
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 0),
-                                  child: Text('Till: '+
+                                  SizedBox(height: 10,),
+                                  Text('From: '+
                                       DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(upcomingAppointmentDoctorDetail
                                           .appointmentSlot.startTime))
                                           .replaceAll("null", "0"),
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 0),
+                                    child: Text('Till: '+
+                                        DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(upcomingAppointmentDoctorDetail
+                                            .appointmentSlot.startTime))
+                                            .replaceAll("null", "0"),
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 60, left: 30),
@@ -291,46 +293,7 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                 TextStyle(color: Colors.black.withOpacity(0.5)),
                           ),
                         ),
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
-                        // Container(
-                        //   alignment: Alignment.centerLeft,
-                        //   child: Text(
-                        //     "Working Time",
-                        //     style: TextStyle(
-                        //         color: Colors.black.withOpacity(0.5),
-                        //         fontSize: 16,
-                        //         fontWeight: FontWeight.bold),
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: 10,
-                        // ),
-                        // Row(
-                        //   children: [
-                        //     Container(
-                        //       alignment: Alignment.centerLeft,
-                        //       child: Text(
-                        //         upcomingAppointmentDoctorDetail.day,
-                        //         style: TextStyle(
-                        //           color: Colors.black.withOpacity(0.5),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     Container(
-                        //       padding: EdgeInsets.only(left: 10),
-                        //       alignment: Alignment.centerLeft,
-                        //       child: Text(
-                        //         upcomingAppointmentDoctorDetail.time_range,
-                        //         style: TextStyle(
-                        //           color: Colors.black.withOpacity(0.5),
-                        //           // fontSize: 16,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+
                       ],
                     ),
                   ),

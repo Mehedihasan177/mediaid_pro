@@ -41,7 +41,7 @@ class _SingInPageState extends State<SingInPage> {
   // TextEditingController _textPassword = TextEditingController(text: "");
 
   TextEditingController _textMobile = TextEditingController();
-  TextEditingController _textPassword = TextEditingController(text: "11223344");
+  TextEditingController _textPassword = TextEditingController();
 
   final databaseRef = FirebaseDatabase.instance.reference();
   //final Future<FirebaseApp> _future = Firebase.initializeApp();

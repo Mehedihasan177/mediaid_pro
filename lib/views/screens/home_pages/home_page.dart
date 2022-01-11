@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                           width: 70.0,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: image == false ? NetworkImage(avatarLink) : NetworkImage(
+                              image: image == true ? NetworkImage(avatarLink) : NetworkImage(
                                   '$apiDomainRoot/images/${SIGNINGRESPONSE.image}'
                               ),
                               fit: BoxFit.fill,

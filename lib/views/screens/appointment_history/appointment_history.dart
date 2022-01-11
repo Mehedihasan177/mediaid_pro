@@ -193,8 +193,11 @@ int val = 0;
                           children: [
                             Container(
                                 alignment: Alignment.bottomLeft,
-                                child: Text(DateFormat("dd-MM-yyyy || hh:mm a")
+                                child: Text(DateFormat("dd MMMM yyyy")
                                     .format(appointment_list_navBar.date))),
+
+                            Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss').parse(appointment_list_navBar
+                                .appointmentSlot.startTime)).toString()),
                             // Text(" | "),
                             //
                             // Container(

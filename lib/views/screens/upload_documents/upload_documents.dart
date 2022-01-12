@@ -36,7 +36,7 @@ class _UploadDocumentState extends State<UploadDocument> {
           Padding(
             padding: const EdgeInsets.only(top: 5, left: 20),
             child: Text(
-              "Upload your Prescriptions, Lab reports or other informations",
+              "Upload your Prescriptions, Lab reports or other information",
               style: TextStyle(
                 fontSize: 13,
                 color: Colors.black.withOpacity(0.5),

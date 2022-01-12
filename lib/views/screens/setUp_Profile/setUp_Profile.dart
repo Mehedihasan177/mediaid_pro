@@ -34,7 +34,6 @@ class _SetupProfileState extends State<SetupProfile> {
   TextEditingController _textHeight = TextEditingController();
   bool checkbox = true;
   String gender = 'Male';
-String image = '';
   String dateTime = '';
 
 
@@ -81,12 +80,14 @@ String image = '';
                               radius: 78,
                               backgroundColor: Colors.white,
                               child: ClipOval(
-                                  child: image == null ? Image.network(avatarLink) : Image.network(
-                                    '$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
+                                  child:  Image.network(
+                                    SIGNINGRESPONSE.image.toString()=='null'?
+                                    avatarLink:'$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
                                     fit: BoxFit.fill,
                                     width: 170,
                                     height: 190,
-                                  )),
+                                  )
+                              ),
                             ),
                           ), //Container
                         ),

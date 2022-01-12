@@ -16,6 +16,7 @@ import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:care_plus/views/screens/setUp_Profile/image_upload_page.dart';
 import 'package:care_plus/views/screens/splash_screen/splash_Screen.dart';
 import 'package:care_plus/views/screens/upload_documents/upload_documents.dart';
+import 'package:care_plus/views/screens/user_prev_prescription_ui/upload_report_pres.dart';
 import 'package:care_plus/views/widgets/health_history_ui_widget/health_history_widget_widget.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -82,7 +83,7 @@ class _HealthHistoryState extends State<HealthHistory> {
           color: Colors.white,
           splashColor: Colors.purple,
           onPressed: () {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => NewImageUploadPage(page: 3,)));
+            Navigator.push(context,MaterialPageRoute(builder: (context) => UploadReportPresPage()));
           },
         ),]),
         body: ListView(

@@ -42,7 +42,8 @@ Widget Health_History_List(Health_History health_history, BuildContext context) 
 
                     image: NetworkImage(
 
-                      health_history.image,                     ),
+                      health_history.image,
+                    ),
 
                     fit: BoxFit.fill,
 

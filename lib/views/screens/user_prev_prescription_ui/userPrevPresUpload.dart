@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 class UserPrevPres{
   //this class is for make understand how it works actually
 
-  static Future<dio.Response> requestThenResponsePrint(BuildContext context, token, name, type, File img) async {
+  static Future<dio.Response> requestThenResponsePrint(BuildContext context, token, name, type,  img) async {
     // It starts showing the progressbar
 
 

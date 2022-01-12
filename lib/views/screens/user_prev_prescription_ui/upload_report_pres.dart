@@ -4,32 +4,27 @@ import 'dart:io';
 import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/signin_controller.dart';
-import 'package:care_plus/controllers/user/user_edit_img_ctrl.dart';
 import 'package:care_plus/helper/snackbarDialouge.dart';
+import 'package:care_plus/models/image_selection_dropDOwn.dart';
 import 'package:care_plus/models/signIn_model/signIn_model.dart';
 import 'package:care_plus/responses_from_test_file/responses/user/signIn_response.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
-import 'package:care_plus/views/screens/setUp_Profile/setUp_Profile.dart';
-
+import 'package:care_plus/views/screens/user_prev_prescription_ui/userPrevPresUpload.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-
-class NewImageUploadPage extends StatefulWidget {
-
-  final int page;
-
-  const NewImageUploadPage({Key? key, required this.page}) : super(key: key);
+class UploadReportPresPage extends StatefulWidget {
+  const UploadReportPresPage({Key? key}) : super(key: key);
 
   @override
-  _NewImageUploadPageState createState() => _NewImageUploadPageState();
+  _UploadReportPresPageState createState() => _UploadReportPresPageState();
 }
 
-class _NewImageUploadPageState extends State<NewImageUploadPage> {
-
+class _UploadReportPresPageState extends State<UploadReportPresPage> {
+  TextEditingController textReasons = TextEditingController();
+  String myCurrentPres = 'Prescription';
   final navigatorKey = GlobalKey<NavigatorState>();
-
+  SelectionOption value = selectionOption.first;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -44,7 +39,7 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
         return true;
       },
       child: Scaffold(
-          appBar: myAppBar("Upload Image", null),
+          appBar: myAppBar("Upload Health History", null),
           body: imageUploadSection()
       ),
     );
@@ -60,13 +55,109 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
       return Image.file(imageFile!, width: 250, height: 250);
     } else {
       return Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Text( "Please Select an Image",
-            style: TextStyle(
-                fontSize: 16
+        child: Column(
+          children: [
+
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.only(left: 20, bottom: 10),
+                  child: Text(
+                    "Select a document type",
+                    style: TextStyle(fontSize: 17),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 0, bottom: 20),
+                  child: Container(
+                    // alignment: Alignment.center,
+                    // height:
+                    //     MediaQuery.of(context).size.height * 0.067,
+                    width: MediaQuery.of(context).size.width * 0.87,
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: DropdownButton<SelectionOption>(
+                      isExpanded: true,
+                      value: value, // currently selected item
+                      items: selectionOption
+                          .map((item) => DropdownMenuItem<SelectionOption>(
+                        child: Row(
+                          children: [
+                            const SizedBox(width: 8),
+                            Text(
+                              item.title,
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        value: item,
+                      ))
+                          .toList(),
+                      onChanged: (value) => setState(() {
+                        this.value = value!;
+                        print(this.value.title);
+                        print(this.value.selectiontype);
+                        myCurrentPres = this.value.selectiontype;
+                      }),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.notes,
+                        size: 20,
+                        color: Colors.black.withOpacity(0.6),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Text(
+                        "Title",
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  TextField(
+                    controller: textReasons,
+                    keyboardType: TextInputType.emailAddress,
+                    style: TextStyle(color: Colors.black),
+                    //scrollPadding: EdgeInsets.all(10),
+                    decoration: InputDecoration(
+                      //contentPadding: EdgeInsets.all(20),
+                      hintText: "Enter your name",
+
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text( "Please Select an Image",
+                style: TextStyle(
+                    fontSize: 16
+                ),
+              ),
+            ),
+          ],
         ),
       );
     }
@@ -141,7 +232,10 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
         children: [
 
 
+          /// put Document name
+          /// put Document Type here
 
+          SizedBox(height: 20),
           _setImageView(),
           SizedBox(height: 20),
           Row(
@@ -171,51 +265,17 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
                       color: Colors.white
                   ),),
                   onPressed: () async {
-                    // String presName = presNameC.text;
-                    // String presType = presTypeC.text;
+
+
                     if ((imageFile != null)) {
-                      await UserRegisterControllerExtraImg.postRequestRegistrationExtra(context, imageFile, USERTOKEN)
+                      await UserPrevPres.requestThenResponsePrint(context,USERTOKEN, textReasons.text, myCurrentPres, imageFile )
                           .then((value) async {
                         print(value.statusCode);
                         print(value.statusMessage);
                         print(value);
                         if(value.statusCode==200){
-                          SigninModel myInfo = new SigninModel(
-                              mobile: USERNAME, password: USERPASS);
-                          await SigninController.requestThenResponsePrint(myInfo)
-                              .then((value) async {
-                            print(value.statusCode);
-                            print(value.body);
-                            //EasyLoading.dismiss();
-                            if (value.statusCode == 200) {
-
-                              setState(() {
-                                var reobj = SignInResponse.fromJson(json.decode(value.body));
-                                var loginobject = reobj.data.user;
-
-                                print(loginobject.image);
-                                SIGNINGRESPONSE = loginobject;
-                                print(loginobject.token);
-
-
-
-                              });
-                              if(widget.page == 2){
-                                SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
-                                return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                    SetupProfile()), (Route<dynamic> route) => false);
-                              }else{
-                                SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
-                                return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                    BottomNevigation()), (Route<dynamic> route) => false);
-                              }
-                            } else {
-                              SnackbarDialogueHelper().showSnackbarDialog(context, "Image not Uploaded",Colors.red);
-                              // return LoginController.requestThenResponsePrint(jsonData);
-                              Navigator.push(context,MaterialPageRoute(builder: (context) => SetupProfile()),);
-                            }
-
-                          });
+                          SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
 
                         }
 
@@ -223,12 +283,8 @@ class _NewImageUploadPageState extends State<NewImageUploadPage> {
 
                       });
                     } else {
-                      // BasicFunctions.showAlertDialogTOView(context, 'Warning', 'Select an image to upload');
-                      // BasicFunctions.showAlertDialogTOView(context,
-                      //     "Warning",
-                      //     "Please Select an Image to Upload");
-
                       SnackbarDialogueHelper().showSnackbarDialog(context, 'Image can not get uploaded', Colors.red);
+
                     }
                   },
                 ),

@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
   int val = 0;
   int val1 = 0;
 
-  bool image = false;
+
 
   _getUpcomingAppointment() async {
 
@@ -164,8 +164,9 @@ class _HomePageState extends State<HomePage> {
                           width: 70.0,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: image == true ? NetworkImage(avatarLink) : NetworkImage(
-                                  '$apiDomainRoot/images/${SIGNINGRESPONSE.image}'
+                              image: NetworkImage(
+                                SIGNINGRESPONSE.image.toString()=='null'?
+                                avatarLink:'$apiDomainRoot/images/${SIGNINGRESPONSE.image}',
                               ),
                               fit: BoxFit.fill,
                             ),

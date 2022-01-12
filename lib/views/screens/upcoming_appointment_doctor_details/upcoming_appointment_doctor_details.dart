@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/controllers/user/upcoming_appointment_controller.dart';
 import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointment_data.dart';
 import 'package:care_plus/data/upcoming_appointment_doctor_details_data/upcoming_appointment_doctor_details_data.dart';
@@ -50,6 +51,7 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
         return true;
       },
       child: Scaffold(
+        appBar: myAppBar("Doctor", null),
         body: ListView(
           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           // <-- this will disable scroll
@@ -57,7 +59,7 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
           children: [
 
             SizedBox(
-              height: 40,
+              height: 10,
             ),
             Row(
               children: [
@@ -65,7 +67,7 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
                   child: Container(
                     //padding: EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
-                    height: 750,
+                    height: MediaQuery.of(context).size.height,
                     child: ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,

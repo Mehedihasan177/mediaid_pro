@@ -22,6 +22,7 @@ import 'package:care_plus/views/screens/upcoming_appointment_doctor_details/upco
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/appointmnet_history_widget.dart';
 import 'package:care_plus/views/widgets/appointment_list_navBar_widget/upcomming_List_navbar_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
@@ -283,18 +284,28 @@ class _AppointmentListState extends State<AppointmentList> {
                                   children: [
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(appointment_list_navBar
-                                          .doctor.department),
+                                      child: Text(
+                                          appointment_list_navBar
+                                          .doctor.department
+
+
+                                      ),
                                     ),
                                   ],
                                 ),
                               ]),
                         ),
                         Container(
+                          height: 17,
                           alignment: Alignment.centerLeft,
-                          child: Text("For: " +
-                              appointment_list_navBar.appointmentFor
-                                  .replaceAll('null', '')),
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              Text("For: " +
+                                  appointment_list_navBar.appointmentFor
+                                      .replaceAll('null', '')),
+                            ],
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -481,9 +492,15 @@ class _AppointmentListState extends State<AppointmentList> {
                               Row(
                                 children: [
                                   Container(
+                                    height: 18,
                                     alignment: Alignment.centerLeft,
-                                    child: Text(appointment_list_navBar
-                                        .doctor.department),
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: [
+                                        Text(appointment_list_navBar
+                                            .doctor.department),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -491,9 +508,14 @@ class _AppointmentListState extends State<AppointmentList> {
                       ),
                       Container(
                         alignment: Alignment.centerLeft,
-                        child: Text("For: " +
-                            appointment_list_navBar.appointmentFor
-                                .replaceAll('null', '')),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Text("For: " +
+                                appointment_list_navBar.appointmentFor
+                                    .replaceAll('null', '')),
+                          ],
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

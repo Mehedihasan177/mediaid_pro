@@ -658,7 +658,7 @@ designPortion1() => Row(
           child: Padding(
             padding: const EdgeInsets.only(top: 110),
             child: Container(
-              height: 550,
+              height: 750,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

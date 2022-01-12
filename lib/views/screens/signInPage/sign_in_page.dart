@@ -87,7 +87,7 @@ class _SingInPageState extends State<SingInPage> {
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
 
         // scrollDirection: Axis.vertical,
-        shrinkWrap: true,
+        // shrinkWrap: true,
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [

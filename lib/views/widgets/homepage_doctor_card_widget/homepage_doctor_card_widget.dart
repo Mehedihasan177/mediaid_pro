@@ -18,10 +18,20 @@ Widget doctorList(Datum doctorINformation, context) => Container(
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: Image.network(
-                '$apiDomainRoot/images/${doctorINformation.image}',
-                height: 70,
-                width: 70,
+              child: Container(
+
+                height: 70.0,
+                width: 70.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        doctorINformation.image.toString()=='null'?
+                        avatarLink:'$apiDomainRoot/images/${doctorINformation.image}'
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ),
@@ -85,15 +95,18 @@ Widget doctorList(Datum doctorINformation, context) => Container(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text(
-                                  "Exp: "+doctorINformation.experience.replaceAll('null', ''),
-                                  style: TextStyle(
-                                    fontSize: 15,),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Exp: "+doctorINformation.experience.replaceAll('null', '0'),
+                                    style: TextStyle(
+                                      fontSize: 15,),
+                                  ),
                                 ),
 
                                 // SizedBox(width: 20,),
                                 Text(
-                                  "Fee: "+doctorINformation.fee,
+                                  "Fee: \$"+doctorINformation.fee,
                                   style: TextStyle(
                                     fontSize: 15,),
                                 )

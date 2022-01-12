@@ -408,7 +408,6 @@ class _SetupProfileState extends State<SetupProfile> {
                               style: TextStyle(color: Colors.black),
                               //scrollPadding: EdgeInsets.all(10),
                               decoration: InputDecoration(
-                                //contentPadding: EdgeInsets.all(20),
                                 hintText: "5'10\"",
                               ),
                             ),

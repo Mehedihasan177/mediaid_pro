@@ -22,7 +22,8 @@ import '../intro_screens.dart';
 // import 'package:havartye/screen/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+
+  const SplashScreen({Key? key,}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();

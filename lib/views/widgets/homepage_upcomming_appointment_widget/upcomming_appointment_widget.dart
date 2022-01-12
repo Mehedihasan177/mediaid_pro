@@ -46,32 +46,35 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 2, left: 10),
+                  padding: const EdgeInsets.only(top: 5, left: 10),
                   child: Container(
+                    height: 18,
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      upcomingAppointment.doctor.specialization,
-                      style: TextStyle(fontSize: 13),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Text(
+                          upcomingAppointment.doctor.specialization,
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.only(top: 2, left: 10),
-                //   child: Container(
-                //     alignment: Alignment.topLeft,
-                //     child: Text(
-                //       "Exp: " + upcomingAppointment.doctor.experience.replaceAll("null", "0"),
-                //       style: TextStyle(fontSize: 13),
-                //     ),
-                //   ),
-                // ),
+
                 Padding(
-                  padding: const EdgeInsets.only(top: 2, left: 10),
+                  padding: const EdgeInsets.only(top: 0, left: 10),
                   child: Container(
+                    height: 25,
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      upcomingAppointment.doctor.hospitalName.replaceAll("null", ""),
-                      style: TextStyle(fontSize: 13),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Text(
+                          upcomingAppointment.doctor.hospitalName.replaceAll("null", ""),
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ],
                     ),
                   ),
                 ),

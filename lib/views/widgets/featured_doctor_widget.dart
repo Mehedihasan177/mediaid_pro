@@ -66,18 +66,26 @@ Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext cont
 
                       padding: const EdgeInsets.only(top: 4, bottom: 5),
 
-                      child: Text(doctorFeturedlist.specialization,
+                      child: Container(
+                        height: 18,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            Text(doctorFeturedlist.specialization.replaceAll("null", "Specialization not given"),
 
-                        style: TextStyle(
+                              style: TextStyle(
 
-                          fontSize: 15,
+                                fontSize: 15,
 
-                          //fontWeight: FontWeight.bold
+                                //fontWeight: FontWeight.bold
 
+                              ),
+
+
+
+                            ),
+                          ],
                         ),
-
-
-
                       ),
 
                     ),
@@ -105,6 +113,7 @@ Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext cont
                             // ),
                             Container(
                               alignment: Alignment.centerRight,
+                              padding: EdgeInsets.only(right: 10),
                               height: 30,
                               child: TextButton(
                                   child: Text(

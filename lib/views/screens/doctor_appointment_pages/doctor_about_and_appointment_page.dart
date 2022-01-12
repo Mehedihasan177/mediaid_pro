@@ -726,7 +726,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
         children: [
           Flexible(
             child: Container(
-              height: MediaQuery.of(context).size.height,
+              height: 560,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xff1CBFA8),
@@ -746,7 +746,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
             child: Padding(
               padding: const EdgeInsets.only(top: 80),
               child: Container(
-                height: MediaQuery.of(context).size.height,
+                height: 560,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

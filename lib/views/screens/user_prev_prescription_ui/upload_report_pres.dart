@@ -127,7 +127,7 @@ class _UploadReportPresPageState extends State<UploadReportPresPage> {
                         width: 20,
                       ),
                       Text(
-                        "Title",
+                        "Health Report title",
                         style: TextStyle(fontSize: 17),
                       ),
                     ],
@@ -142,7 +142,7 @@ class _UploadReportPresPageState extends State<UploadReportPresPage> {
                     //scrollPadding: EdgeInsets.all(10),
                     decoration: InputDecoration(
                       //contentPadding: EdgeInsets.all(20),
-                      hintText: "Enter your name",
+                      hintText: "Enter health report title",
 
                     ),
                   ),
@@ -275,7 +275,8 @@ class _UploadReportPresPageState extends State<UploadReportPresPage> {
                         print(value);
                         if(value.statusCode==200){
                           SnackbarDialogueHelper().showSnackbarDialog(context, "Image Uploaded successfully",Colors.green);
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => BottomNevigation()),);
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              BottomNevigation()), (Route<dynamic> route) => false);
 
                         }
 

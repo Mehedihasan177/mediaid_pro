@@ -60,7 +60,8 @@ Widget Health_History_List(Health_History health_history, BuildContext context) 
           ),
 
 
-SizedBox(width: 15,),
+          SizedBox(width: 15,),
+
           Expanded(
 
             flex: 5,

@@ -152,9 +152,24 @@ int val = 0;
                                   padding: const EdgeInsets.only(right: 0),
                                   child: Container(
                                     alignment: Alignment.centerRight,
-                                    child: Text(
-                                      "\$" + appointment_list_navBar.doctor.fee,
-                                      style: TextStyle(color: Colors.red),
+                                    height: 30,
+                                    child: TextButton(
+                                        child: Text(
+                                            '\$'+appointment_list_navBar.doctor.fee,
+                                            style: TextStyle(fontSize: 14)
+                                        ),
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1CBFA8)),
+                                            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(18.0),
+                                                    side: BorderSide(color: Color(0xFF1CBFA8))
+                                                )
+                                            )
+                                        ),
+                                        onPressed: () => null
                                     ),
                                   ),
                                 ),

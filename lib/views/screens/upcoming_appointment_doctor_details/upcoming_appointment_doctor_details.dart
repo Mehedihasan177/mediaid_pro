@@ -29,22 +29,6 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
 
 
 
-  // _getUpcomingAppointment() async {
-  //
-  //
-  //   UpcomingAppointmentController.requestThenResponsePrint( USERTOKEN).then((value) {
-  //     setState(() {
-  //       print(value.body);
-  //       Map<String, dynamic> decoded = json.decode("${value.body}");
-  //       Iterable listNotification = decoded['data'];
-  //       print(decoded['data']);
-  //       upcomingAppointmentDoctorDetails =
-  //           listNotification.map((model) => UpcomingAppointment.fromJson(model)).toList();
-  //       print(upcomingAppointmentDoctorDetails);
-  //
-  //     });
-  //   });
-  // }
 
   @override
   void initState() {
@@ -71,32 +55,7 @@ class _UpcomingAppointmentDoctorDetailsState extends State<UpcomingAppointmentDo
           // <-- this will disable scroll
           shrinkWrap: true,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 20),
-            //   child: Row(
-            //     children: [
-            //       FlatButton(
-            //         child: Icon(
-            //           Icons.arrow_back_ios,
-            //           size: 30,
-            //           color: Colors.black.withOpacity(0.5),
-            //         ),
-            //         splashColor: Colors.transparent,
-            //         onPressed: () {},
-            //       ),
-            //       Text("About Doctor",
-            //         style: TextStyle(
-            //           fontSize: 23,
-            //           color: Colors.black.withOpacity(0.5),
-            //           fontWeight: FontWeight.bold,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(
-            //   height: 30,
-            // ),
+
             SizedBox(
               height: 40,
             ),

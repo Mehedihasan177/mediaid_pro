@@ -229,7 +229,7 @@ class _SingUpPageState extends State<SingUpPage> {
                             width: 20,
                           ),
                           Text(
-                            "address",
+                            "Address",
                             style: TextStyle(fontSize: 17),
                           ),
                         ],

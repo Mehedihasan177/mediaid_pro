@@ -464,7 +464,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             //scrollPadding: EdgeInsets.all(10),
                             decoration: InputDecoration(
                               //contentPadding: EdgeInsets.all(20),
-                              hintText: "Weight",
+                              hintText: "10 kg",
                             ),
                           ),
                         ),
@@ -504,7 +504,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             //scrollPadding: EdgeInsets.all(10),
                             decoration: InputDecoration(
                               //contentPadding: EdgeInsets.all(20),
-                              hintText: "Height",
+                              hintText: "5'10\"",
                             ),
                           ),
                         ),

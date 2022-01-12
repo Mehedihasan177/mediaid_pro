@@ -121,8 +121,8 @@ Widget doctorList(Datum doctorINformation, context) => Container(
         rating: doctorINformation.rating,
         experience: doctorINformation.experience,
         about: doctorINformation.introduction,
-        department: doctorINformation.department, address: '', chamber: '', visitingfee: '',
-        docID:doctorINformation.id,
+        department: doctorINformation.department, address: doctorINformation.address, chamber: doctorINformation.chambers, visitingfee: doctorINformation.visitingFee,
+        docID:doctorINformation.id,degree: doctorINformation.degree,
 
       )));
     },

@@ -135,7 +135,6 @@ class _AppointmentListState extends State<AppointmentList> {
                                     appointmentlist[index], context, index);
                               } else {
                                 return Container();
-                                // return Appointment_List(appointmentlist[index], context, index);
                               }
                             }),
                   ),
@@ -144,66 +143,7 @@ class _AppointmentListState extends State<AppointmentList> {
               height: 10,
             ),
 
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 20, top: 10),
-            //   child: Text(
-            //     "Appointment History",
-            //     style:
-            //         TextStyle(fontSize: 25, color: Colors.black.withOpacity(0.5)),
-            //   ),
-            // ),
-            // Container(
-            //   height: 390,
-            //   // color: Colors.red,
-            //   child: ListView.builder(
-            //       // physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-            //       // shrinkWrap: true,
-            //       scrollDirection: Axis.vertical,
-            //       itemCount: 4,
-            //       itemBuilder: (context, index) {
-            //         return Appointment_History(appointmentHistoy[index], context);
-            //       }),
-            //
-            // ),
 
-            // Container(
-            //    height: 300,
-            //   // color: Colors.red,
-            //   child: ListView.builder(
-            //       physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()), // <-- this will disable scroll
-            //       //shrinkWrap: true,
-            //       scrollDirection: Axis.vertical,
-            //       itemCount: appointmentlistH.length,
-            //       itemBuilder: (context, index) {
-            //         return Appointment_ListHist(
-            //             appointmentlistH[index], context, index);
-            //         //return Appointment_List(appointmentlist[index], context);
-            //         if ((appointmentlist[index].active.toString() != '0') &&
-            //             (appointmentlist[index].consult == '1')) {
-            //           return Appointment_ListHist(
-            //               appointmentlist[index], context, index);
-            //         } else {
-            //           return Container();
-            //           // return Appointment_List(appointmentlist[index], context, index);
-            //         }
-            //       }),
-            // ),
-
-            ///this is the upcoming appiontment only for test. jehetu history api te data nai tai
-
-            // Container(
-            //   height: 300,
-            //   // color: Colors.red,
-            //   child: ListView.builder(
-            //       physics: NeverScrollableScrollPhysics(), // <-- this will disable scroll
-            //       shrinkWrap: true,
-            //       scrollDirection: Axis.vertical,
-            //       itemCount: appointmentlist.length,
-            //       itemBuilder: (context, index) {
-            //         return index <4 ?Appointment_List(appointmentlist[index], context): Container();
-            //       }),
-            //
-            // ),
           ],
         ),
       ),
@@ -288,9 +228,24 @@ class _AppointmentListState extends State<AppointmentList> {
                                   padding: const EdgeInsets.only(right: 10),
                                   child: Container(
                                     alignment: Alignment.centerRight,
-                                    child: Text(
-                                      "\$" + appointment_list_navBar.doctor.fee,
-                                      style: TextStyle(color: Colors.red),
+                                    height: 30,
+                                    child: TextButton(
+                                        child: Text(
+                                            '\$'+appointment_list_navBar.doctor.fee,
+                                            style: TextStyle(fontSize: 14)
+                                        ),
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1CBFA8)),
+                                            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(18.0),
+                                                    side: BorderSide(color: Color(0xFF1CBFA8))
+                                                )
+                                            )
+                                        ),
+                                        onPressed: () => null
                                     ),
                                   ),
                                 ),

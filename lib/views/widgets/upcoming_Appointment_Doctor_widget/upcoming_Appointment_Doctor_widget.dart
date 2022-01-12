@@ -15,44 +15,40 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
             child: Card(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 10, bottom: 10, left: 10, right: 0),
+              child:  Container(
+                padding: EdgeInsets.all(10),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Container(
-                          height: 80.0,
-                          width: 80.0,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                '$apiDomainRoot/images/${upcomingAppointmentDoctorDetail.doctor.image}',
-                              ),
+                      flex: 2,
+                      child: CircleAvatar(
+                        radius: 40,
+                        backgroundColor: Colors.white,
+                        child: ClipOval(
+                            child: Image.network(
+                              upcomingAppointmentDoctorDetail.doctor.image.toString()=='null'?
+                              avatarLink:'$apiDomainRoot/images/${upcomingAppointmentDoctorDetail.doctor.image}',
                               fit: BoxFit.fill,
-                            ),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
+                              width: 100,
+                              height: 100,
+                            )),
                       ),
                     ),
-
+                    SizedBox(width: 10,),
 
                     Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              //crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
+                      flex: 7,
+
+                      child: Column(
+                        children: [
+                          Row(
+                            // mainAxisAlignment:
+                            //     MainAxisAlignment.spaceEvenly,
+                            //crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Expanded(
+                                child: Container(
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     upcomingAppointmentDoctorDetail.doctor.name,
@@ -62,77 +58,102 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 15),
-                                  child: Text(
-                                    "\$" +
-                                        upcomingAppointmentDoctorDetail
-                                            .doctor.fee,
-                                    style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 17,
-                                      //fontWeight: FontWeight.bold
+                              ),
+
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Container(
+                              height: 25,
+                              child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          child: Text(
+                                            upcomingAppointmentDoctorDetail.doctor.specialization,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                              top: 1.0),
+                                          child: Container(
+                                              alignment:
+                                              Alignment.topLeft,
+                                              child: Text(" at ")),
+                                        ),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                              bottom: 0),
+                                          child: Container(
+                                            alignment:
+                                            Alignment.topLeft,
+                                            child: Text(
+                                              upcomingAppointmentDoctorDetail.doctor.hospitalName
+                                                  .replaceAll("null",
+                                                  "No hospital name"),
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text("Ratings: " + upcomingAppointmentDoctorDetail.doctor.rating),
+                                      Icon(Icons.star,size: 17,color: Colors.yellow,)
+                                    ],
+                                  ),
+                                  Container(
+                                    alignment: Alignment.centerRight,
+                                    height: 30,
+                                    child: TextButton(
+                                        child: Text(
+                                            '\$'+upcomingAppointmentDoctorDetail.doctor.fee,
+                                            style: TextStyle(fontSize: 14)
+                                        ),
+                                        style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1CBFA8)),
+                                            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                                            foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(18.0),
+                                                    side: BorderSide(color: Color(0xFF1CBFA8))
+                                                )
+                                            )
+                                        ),
+                                        onPressed: () => null
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Container(
-                                height: 22,
-                                child: ListView(
-                                    scrollDirection: Axis.horizontal,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              upcomingAppointmentDoctorDetail
-                                                  .doctor.department,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ),
-                                          /*Padding(
-                                            padding: const EdgeInsets.only(bottom: 5),
-                                            child: Text(" at "),
-                                          ),
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              upcomingAppointmentDoctorDetail
-                                                  .doctor.hospitalName,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ),*/
-                                        ],
-                                      ),
-                                    ]),
-                              ),
-                            ),
-                            Container(
-                                // alignment: Alignment.centerLeft,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text("Experience of "),
-                                    Text(upcomingAppointmentDoctorDetail
-                                        .doctor.experience.replaceAll('years', '')+' years')
-                                  ],
-                                )
-                            ),
-                          ],
-                        ),
+                                ],
+                              )
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
+
             ),
           ),
           Stack(
@@ -270,7 +291,7 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 60, left: 30),
+                    padding: EdgeInsets.only(top: 60, left: 20),
                     child: Column(
                       children: [
                         Container(
@@ -303,117 +324,234 @@ Widget UpcomingAppointmentDoctorDetailsWidget(
                   ),
 
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 30, bottom: 10, top: 10),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Address",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black.withOpacity(0.5)),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30),
+                    padding: EdgeInsets.only(right: 8,left: 20),
                     child: Column(
                       children: [
-                        Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              upcomingAppointmentDoctorDetail.doctor.address,
-                              style: TextStyle(fontSize: 15),
-                            )),
+                        Row(
+                          children: [
+                            ///Department
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Department",
+                                      style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        upcomingAppointmentDoctorDetail.doctor.department
+                                            .replaceAll("null", "Not yet"),
+                                        style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ///Specialization
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Specialization",
+                                      style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        upcomingAppointmentDoctorDetail.doctor.specialization
+                                            .replaceAll("null", "Not yet"),
+                                        style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Row(
+                          children: [
+                            ///address
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Address",
+                                      style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        upcomingAppointmentDoctorDetail.doctor.address,
+                                        style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ///Hospital Name
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Hospital Name",
+                                      style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        upcomingAppointmentDoctorDetail.doctor.hospitalName
+                                            .replaceAll("null", "Not yet"),
+                                        style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            ///Chamber
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Chamber",
+                                      style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        upcomingAppointmentDoctorDetail.doctor.chambers,
+                                        style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ///Degree
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      "Degree",
+                                      style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        upcomingAppointmentDoctorDetail.doctor.degree.toString().replaceAll("null", "Not Yet"),
+                                        style: TextStyle(
+                                          color:
+                                          Colors.black.withOpacity(0.5),
+                                          fontSize: 16,
+                                          //fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
-                  ),
-
-
-
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  Padding(
-                    padding:
-                    const EdgeInsets.only(left: 30, bottom: 10, top: 10),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Chamber",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black.withOpacity(0.5)),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 10,
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30),
-                    child: Column(
-                      children: [
-                        Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              upcomingAppointmentDoctorDetail.doctor.chambers.replaceAll("null", "Till not available"),
-                              style: TextStyle(fontSize: 15),
-                            )),
-                      ],
-                    ),
-                  ),
-
-
-
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 30, bottom: 10, top: 10),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Appointment For",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.black.withOpacity(0.5)),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(
-                    height: 20,
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30),
-                    child: Column(
-                      children: [
-                        Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              upcomingAppointmentDoctorDetail.appointmentFor,
-                              style: TextStyle(fontSize: 15),
-                            )),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
                   ),
 
                   // Container(

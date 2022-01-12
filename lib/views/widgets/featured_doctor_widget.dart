@@ -8,138 +8,141 @@ bool _loaded = false;
 Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext context) => GestureDetector(
   child:   Card(
 
-      child: Center(
-
-        child: Row(
+      child:Row(
 
           children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
 
-            height: 80.0,
-            width: 80.0,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                    doctorFeturedlist.image.toString()=='null'?
-                    avatarLink:'$apiDomainRoot/images/${doctorFeturedlist.image}'
+              height: 80.0,
+              width: 80.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                      doctorFeturedlist.image.toString()=='null'?
+                      avatarLink:'$apiDomainRoot/images/${doctorFeturedlist.image}'
+                  ),
+                  fit: BoxFit.fill,
                 ),
-                fit: BoxFit.fill,
+                shape: BoxShape.circle,
               ),
-              shape: BoxShape.circle,
-            ),
+              ),
             ),
           ),
-            // Container(
-            //
-            //   height: 90,
-            //
-            //   width: 90,
-            //
-            //   child:  ClipOval(
-            //     child: Image.network(  //
-            //         doctorFeturedlist.image.toString()=='null'?
-            //         avatarLink:'$apiDomainRoot/images/${doctorFeturedlist.image}'
-            //     ),
-            //   ),
-            //       // :  Image.asset("images/download.png") ,
-            //
-            // ),
-
-            Padding(
-
-              padding: const EdgeInsets.only(left: 20),
-
-              child: Column(
-
-                mainAxisAlignment: MainAxisAlignment.start,
-
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-
-                  Text(doctorFeturedlist.name,
-
-                    style: TextStyle(
-
-                        fontSize: 18,
-
-                        fontWeight: FontWeight.bold
-
-                    ),
-
-                  ),
 
 
+            Expanded(
+              flex: 6,
+              child: Padding(
 
-                  Padding(
+                padding: const EdgeInsets.only(left: 20),
 
-                    padding: const EdgeInsets.only(top: 4, bottom: 5),
+                child: Column(
 
-                    child: Text(doctorFeturedlist.specialization,
+                  mainAxisAlignment: MainAxisAlignment.start,
+
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+
+                    Text(doctorFeturedlist.name,
 
                       style: TextStyle(
 
-                        fontSize: 15,
+                          fontSize: 18,
 
-                        //fontWeight: FontWeight.bold
+                          fontWeight: FontWeight.bold
 
                       ),
-
-
 
                     ),
 
-                  ),
 
-                  Row(
 
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Padding(
 
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                      padding: const EdgeInsets.only(top: 4, bottom: 5),
 
-                    children: [
+                      child: Text(doctorFeturedlist.specialization,
 
-                      Text("Exp:    " + doctorFeturedlist.experience.replaceAll("null", "0")),
+                        style: TextStyle(
 
-                      Padding(
+                          fontSize: 15,
 
-                        padding: const EdgeInsets.only(left: 10),
+                          //fontWeight: FontWeight.bold
 
-                        child: Text("Fee:    " + "\$" + doctorFeturedlist.fee),
+                        ),
+
+
 
                       ),
 
+                    ),
+
+                     Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            Row(
+                              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                              children: [
+                                Text("Ratings: " + doctorFeturedlist.rating),
+                                Icon(Icons.star,size: 17,color: Colors.yellow,)
+                              ],
+                            ),
+
+                            // Row(
+                            //   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //
+                            //   children: [
+                            //     Text("Ratings: " + doctorFeturedlist.rating),
+                            //     Icon(Icons.star,size: 17,color: Colors.yellow,)
+                            //   ],
+                            // ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              height: 30,
+                              child: TextButton(
+                                  child: Text(
+                                      '\$'+doctorFeturedlist.fee,
+                                      style: TextStyle(fontSize: 14)
+                                  ),
+                                  style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1CBFA8)),
+                                      padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(18.0),
+                                              side: BorderSide(color: Color(0xFF1CBFA8))
+                                          )
+                                      )
+                                  ),
+                                  onPressed: () => null
+                              ),
+                            ),
+                          ],
+                        )
 
 
-                      Padding(
-
-                        padding: const EdgeInsets.only(left: 10),
-
-                        child: Text("Rating:    " + doctorFeturedlist.rating.replaceAll("[]", "0")),
-
-                      ),
 
 
+                  ],
 
-                    ],
-
-                  ),
-
-
-
-                ],
+                ),
 
               ),
-
             ),
 
           ],
 
         ),
 
-      )
+
 
 
 
@@ -149,7 +152,7 @@ Widget buildDoctorListTile(FeaturedDoctorrr doctorFeturedlist, BuildContext cont
   onTap: (){
     Navigator.push(context,MaterialPageRoute(builder: (context) => DoctorAppointment(fee: doctorFeturedlist.fee, rating: doctorFeturedlist.rating, image: doctorFeturedlist.image,
       address: doctorFeturedlist.address, specialization: doctorFeturedlist.specialization, department: doctorFeturedlist.department, visitingfee: doctorFeturedlist.visitingFee,
-      hospital_name: doctorFeturedlist.hospitalName, chamber: doctorFeturedlist.chambers, about: doctorFeturedlist.introduction, experience: doctorFeturedlist.experience, name: doctorFeturedlist.name,docID: doctorFeturedlist.id,)));
+      hospital_name: doctorFeturedlist.hospitalName, chamber: doctorFeturedlist.chambers, about: doctorFeturedlist.introduction, experience: doctorFeturedlist.experience, name: doctorFeturedlist.name,docID: doctorFeturedlist.id,degree: doctorFeturedlist.degree,)));
 
   },
 );

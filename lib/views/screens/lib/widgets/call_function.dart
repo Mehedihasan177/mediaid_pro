@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/views/screens/lib/utils/settings.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
 import 'package:flutter/material.dart';
@@ -302,7 +303,7 @@ class _VideoCallState extends State<VideoCall> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Care+ Calling'),
+        title: Text('$APPNAME Calling'),
         backgroundColor: Color(0xFF1CBFA8),
       ),
       body: Container(

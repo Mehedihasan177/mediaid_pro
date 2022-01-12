@@ -372,7 +372,7 @@ class _SetupProfileState extends State<SetupProfile> {
                               //scrollPadding: EdgeInsets.all(10),
                               decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.all(20),
-                                hintText: "Weight",
+                                hintText: "10 kg",
                               ),
                             ),
                           ),
@@ -409,7 +409,7 @@ class _SetupProfileState extends State<SetupProfile> {
                               //scrollPadding: EdgeInsets.all(10),
                               decoration: InputDecoration(
                                 //contentPadding: EdgeInsets.all(20),
-                                hintText: "Height",
+                                hintText: "5'10\"",
                               ),
                             ),
                           ),

@@ -251,8 +251,8 @@ class _ChangePasswordState extends State<ChangePassword> {
 
                     if(_oldPassword.text!=USERPASS){
                       SnackbarDialogueHelper().showSnackbarDialog(context, 'Old Password not matched',Colors.red);
-                    }else if(_newPassword.text.length<6){
-                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Password Should be 6 digit',Colors.red);
+                    }else if(_newPassword.text.length<8){
+                      SnackbarDialogueHelper().showSnackbarDialog(context, 'Password Should be 8 digit',Colors.red);
                     }else if(_newPassword.text != _confirmPassword.text){
                       SnackbarDialogueHelper().showSnackbarDialog(context, 'Please Confirm new Password',Colors.red);
                     }else{
@@ -263,6 +263,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         print('dddddddd');
                         print(value.statusCode);
                         if (value.statusCode == 200) {
+                          USERPASS = _confirmPassword.text;
 
                           print("successfully done");
                           print(value.body);
@@ -288,7 +289,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                 print(loginobject1.token);
                                 sharedPreferences.setString("token", loginobject1.token);
 
-                                USERPASS = _confirmPassword.text;
+
 
                                 sharedPreferences.setString("mobile", USERNAME);
                                 sharedPreferences.setString("password", USERPASS);

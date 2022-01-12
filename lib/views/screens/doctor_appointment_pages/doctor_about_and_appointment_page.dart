@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:care_plus/constents/constant.dart';
+import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/constents/no_data_found.dart';
 import 'package:care_plus/constents/shimmer.dart';
 import 'package:care_plus/controllers/user/create_appointment_schedule_controller.dart';
@@ -9,6 +10,7 @@ import 'package:care_plus/data/doctor_appointment_data/doctor_about_and_appointm
 import 'package:care_plus/helper/snackbarDialouge.dart';
 import 'package:care_plus/models/doctor_7_slots_model.dart';
 import 'package:care_plus/models/ui_model/doctor_appointment_model/doctor_about_and_appointment_model.dart';
+import 'package:care_plus/responses_from_test_file/responses/user/featured_doctor_responses.dart';
 import 'package:care_plus/views/screens/confirm_appointment/confirm_appointment.dart';
 import 'package:care_plus/views/screens/home_pages/home_page.dart';
 import 'package:care_plus/views/screens/navbar_pages/bottomnevigation.dart';
@@ -28,7 +30,7 @@ class DoctorAppointment extends StatefulWidget {
       image,
       department,
       chamber,
-      address,
+      address,degree,
       visitingfee;
   final int docID;
 
@@ -44,9 +46,10 @@ class DoctorAppointment extends StatefulWidget {
       required this.image,
       required this.department,
       required this.address,
+      required this.degree,
       required this.chamber,
       required this.visitingfee,
-      required this.docID})
+      required this.docID,})
       : super(key: key);
 
   @override
@@ -73,135 +76,156 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
         return true;
       },
       child: Scaffold(
+        appBar: myAppBar("Doctor", null),
         body: ListView(
           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
             Container(
               child: Column(
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 0, right: 0, bottom: 10),
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 10, bottom: 10, left: 10, right: 20),
+                  SizedBox(height: 10,),
+                   Card(
+                      child:  Container(
+                        padding: EdgeInsets.all(10),
                         child: Row(
-                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20),
-                              child: Container(
-                                height: 120,
-                                width: 120,
-                                child: ClipRRect(
-                                  child: Image.network(
-                                    widget.image.toString()=='null'?
-                                    avatarLink:'$apiDomainRoot/images/${widget.image}',
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
+                            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: CircleAvatar(
+                                  radius: 40,
+                                  backgroundColor: Colors.white,
+                                  child: ClipOval(
+                                      child: Image.network(
+                                        widget.image.toString()=='null'?
+                                        avatarLink:'$apiDomainRoot/images/${widget.image}',
+                                        fit: BoxFit.fill,
+                                        width: 100,
+                                        height: 100,
+                                      )),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    // mainAxisAlignment:
-                                    //     MainAxisAlignment.spaceEvenly,
-                                    //crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            widget.name,
-                                            style: TextStyle(
-                                                color: Color(0xff1CBFA8),
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 0),
+                              SizedBox(width: 10,),
+                             
+                              Expanded(
+                                flex: 7,
+
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceEvenly,
+                                      //crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Expanded(
                                           child: Container(
-                                            alignment: Alignment.centerRight,
+                                            alignment: Alignment.centerLeft,
                                             child: Text(
-                                              "\$ " + widget.fee,
+                                              widget.name,
                                               style: TextStyle(
-                                                color: Colors.red,
-                                                fontSize: 17,
-                                                //fontWeight: FontWeight.bold
-                                              ),
+                                                  color: Color(0xff1CBFA8),
+                                                  fontSize: 17,
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 5),
-                                    child: Container(
-                                      height: 25,
-                                      child: ListView(
-                                          scrollDirection: Axis.horizontal,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Text(
-                                                    widget.specialization,
-                                                    style: TextStyle(
-                                                      fontSize: 15,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 1.0),
-                                                  child: Container(
-                                                      alignment:
-                                                          Alignment.topLeft,
-                                                      child: Text(" at ")),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 0),
-                                                  child: Container(
-                                                    alignment:
-                                                        Alignment.topLeft,
+
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Container(
+                                        height: 25,
+                                        child: ListView(
+                                            scrollDirection: Axis.horizontal,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    alignment: Alignment.topLeft,
                                                     child: Text(
-                                                      widget.hospital_name
-                                                          .replaceAll("null",
-                                                              "No hospital name"),
+                                                      widget.specialization,
                                                       style: TextStyle(
                                                         fontSize: 15,
                                                       ),
                                                     ),
                                                   ),
-                                                ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 1.0),
+                                                    child: Container(
+                                                        alignment:
+                                                            Alignment.topLeft,
+                                                        child: Text(" at ")),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 0),
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.topLeft,
+                                                      child: Text(
+                                                        widget.hospital_name
+                                                            .replaceAll("null",
+                                                                "No hospital name"),
+                                                        style: TextStyle(
+                                                          fontSize: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                    Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text("Ratings: " + widget.rating),
+                                                Icon(Icons.star,size: 17,color: Colors.yellow,)
                                               ],
                                             ),
-                                          ]),
+                                            Container(
+                                              alignment: Alignment.centerRight,
+                                              height: 30,
+                                              child: TextButton(
+                                                  child: Text(
+                                                      '\$'+widget.fee,
+                                                      style: TextStyle(fontSize: 14)
+                                                  ),
+                                                  style: ButtonStyle(
+                                                      backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF1CBFA8)),
+                                                      padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(0)),
+                                                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                              borderRadius: BorderRadius.circular(18.0),
+                                                              side: BorderSide(color: Color(0xFF1CBFA8))
+                                                          )
+                                                      )
+                                                  ),
+                                                  onPressed: () => null
+                                              ),
+                                            ),
+                                          ],
+                                        )
                                     ),
-                                  ),
-                                  Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text("Ratings: " + widget.rating)),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
                       ),
+
                     ),
-                  ),
+                  SizedBox(height: 10,),
                   Stack(
                     children: [
                       designPortion(),
@@ -211,12 +235,15 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Row(
+                                
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 40, left: 40),
+                                        top: 10, left: 0),
                                     child: Container(
                                       height: 60,
                                       width: 60,
@@ -238,7 +265,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(
-                                            left: 20, top: 40),
+                                            left: 20, top: 10),
                                         child: Text(
                                           widget.department,
                                           style: TextStyle(
@@ -267,9 +294,11 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                             ],
                           ),
 
+
+
                           ///about doctor
                           Padding(
-                            padding: EdgeInsets.only(top: 60, left: 30),
+                            padding: EdgeInsets.only(top: 30, left: 30),
                             child: Column(
                               children: [
                                 Container(
@@ -296,77 +325,247 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                                 SizedBox(
                                   height: 10,
                                 ),
-
-                                ///address
-                                Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        "Address",
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          widget.address,
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 16,
-                                            //fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                                 SizedBox(
                                   height: 10,
                                 ),
 
-                                ///chamber
 
-                                Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        "Chamber",
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Container(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          widget.chamber
-                                              .replaceAll("null", "Not yet"),
-                                          style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            fontSize: 16,
-                                            //fontWeight: FontWeight.bold
+                                Padding(
+                                  padding: EdgeInsets.only(right: 8),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          ///Department
+                                          Expanded(
+                                            flex: 1,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Department",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget.department
+                                                          .replaceAll("null", "Not yet"),
+                                                      style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        //fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
+                                          ///Specialization
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Specialization",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget.specialization
+                                                          .replaceAll("null", "Not yet"),
+                                                      style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        //fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+
+                                      Row(
+                                        children: [
+                                          ///address
+                                          Expanded(
+                                            flex: 1,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Address",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget.address,
+                                                      style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        //fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          ///Hospital Name
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Hospital Name",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget.hospital_name
+                                                          .replaceAll("null", "Not yet"),
+                                                      style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        //fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        children: [
+                                          ///Chamber
+                                          Expanded(
+                                            flex: 1,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Chamber",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget.chamber,
+                                                      style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        //fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          ///Degree
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: Text(
+                                                    "Degree",
+                                                    style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.only(top: 10),
+                                                  child: Container(
+                                                    alignment: Alignment.centerLeft,
+                                                    child: Text(
+                                                      widget.degree.toString().replaceAll("null", "Not Yet"),
+                                                      style: TextStyle(
+                                                        color:
+                                                        Colors.black.withOpacity(0.5),
+                                                        fontSize: 16,
+                                                        //fontWeight: FontWeight.bold
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
+
+
+
+
                                 SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
 
                                 Container(
@@ -433,6 +632,10 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
                           SizedBox(
                             height: 20,
                           ),
+
+
+
+
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Container(
@@ -523,7 +726,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
         children: [
           Flexible(
             child: Container(
-              height: 550,
+              height: MediaQuery.of(context).size.height,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xff1CBFA8),
@@ -541,9 +744,9 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
         children: [
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(top: 120),
+              padding: const EdgeInsets.only(top: 80),
               child: Container(
-                height: 590,
+                height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

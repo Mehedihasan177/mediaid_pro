@@ -21,6 +21,24 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10, left: 10),
+              child: Container(
+
+                height: 80.0,
+                width: 80.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        upcomingAppointment.doctor.image.toString()=='null'?
+                        avatarLink:'$apiDomainRoot/images/${upcomingAppointment.doctor.image}'
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
             Expanded(
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +64,7 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5, left: 10),
+                  padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                   child: Container(
                     height: 18,
                     alignment: Alignment.topLeft,
@@ -80,24 +98,7 @@ Widget upcommingAppointment(UpcomingAppointment upcomingAppointment, context) =>
                 ),
               ]),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Container(
 
-                height: 80.0,
-                width: 80.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        upcomingAppointment.doctor.image.toString()=='null'?
-                        avatarLink:'$apiDomainRoot/images/${upcomingAppointment.doctor.image}'
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
           ],
         ),
       ),

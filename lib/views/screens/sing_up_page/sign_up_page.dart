@@ -29,7 +29,7 @@ class _SingUpPageState extends State<SingUpPage> {
   bool _passwordVisible = false;
   bool _passwordVisible1 = false;
 
-  String countryCode = '+880';
+  String countryCode = '+61';
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +180,7 @@ class _SingUpPageState extends State<SingUpPage> {
                               },
                               showFlag: true,
                               // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
-                              initialSelection: 'AU',
+                              initialSelection: countryCode,
                               favorite: ['+880', 'BD'],
                               showCountryOnly: false,
                               // optional. Shows only country name and flag when popup is closed.
@@ -432,6 +432,7 @@ class _SingUpPageState extends State<SingUpPage> {
                                 sharedPreferences.setString("token", loginobject.data.token);
                                 //EasyLoading.dismiss();
                                 if (value.statusCode == 200) {
+                                  COUNTRYCODE = countryCode;
                                   sharedPreferences.setString("mobile", countryCode+_textMobile.text);
                                   sharedPreferences.setString("password", _textPassword.text);
                                   SnackbarDialogueHelper().showSnackbarDialog(context, 'Sign up successfully', Colors.green);

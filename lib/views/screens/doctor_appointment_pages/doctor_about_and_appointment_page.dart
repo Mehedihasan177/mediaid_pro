@@ -726,7 +726,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
         children: [
           Flexible(
             child: Container(
-              height: 560,
+              height: 580,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xff1CBFA8),
@@ -746,7 +746,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
             child: Padding(
               padding: const EdgeInsets.only(top: 80),
               child: Container(
-                height: 560,
+                height: 580,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -801,7 +801,7 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
         });
       },
       child: Card(
-        color: selectedIndex == index ? Colors.orange : Colors.white,
+        color: selectedIndex == index ? Colors.green : Colors.blue,
         child: Container(
           // height: 150,
           width: 150,
@@ -811,18 +811,18 @@ class _DoctorAppointmentState extends State<DoctorAppointment> {
             children: [
               Text(
                 slotWithDate.timeslotlist.day,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
               ),
               Text(DateFormat('dd MMM yyyy')
-                  .format(DateFormat('yyyy-MM-dd').parse(slotWithDate.date))),
+                  .format(DateFormat('yyyy-MM-dd').parse(slotWithDate.date)), style: TextStyle(color: Colors.white),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss')
-                      .parse(slotWithDate.timeslotlist.startTime))),
-                  Text(' - '),
+                      .parse(slotWithDate.timeslotlist.startTime)), style: TextStyle(color: Colors.white),),
+                  Text(' - ', style: TextStyle(color: Colors.white),),
                   Text(DateFormat('hh:mm a').format(DateFormat('hh:mm:ss')
-                      .parse(slotWithDate.timeslotlist.endTime))),
+                      .parse(slotWithDate.timeslotlist.endTime)), style: TextStyle(color: Colors.white),),
                 ],
               )
             ],

@@ -61,6 +61,7 @@ class _SingInPageState extends State<SingInPage> {
       finalMobile = obtainedMobile!;
       _textMobile = TextEditingController(text: finalMobile);
       finalCountry = obtainedCountry!;
+      countryCode = finalCountry;
 
     });
     print(finalMobile);
@@ -74,6 +75,7 @@ class _SingInPageState extends State<SingInPage> {
     // TODO: implement initState
     super.initState();
     getValidationData();
+
     databaseReference = databaseRef;
     // goForCallorNot(9);
 

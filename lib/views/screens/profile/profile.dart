@@ -1,3 +1,4 @@
+import 'package:care_plus/constents/constant.dart';
 import 'package:care_plus/constents/global_appbar.dart';
 import 'package:care_plus/data/profile_data/profile_data.dart';
 import 'package:care_plus/models/ui_model/profile_model/profile_model.dart';
@@ -475,6 +476,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     GridTile(
                       child: GestureDetector(
                         onTap: (){
+                          print("this is the country code: ");
+                          print(COUNTRYCODE);
+                          print("this is the country code: ");
+                          COUNTRYCODE;
                           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                               SplashScreen()), (Route<dynamic> route) => false);
 

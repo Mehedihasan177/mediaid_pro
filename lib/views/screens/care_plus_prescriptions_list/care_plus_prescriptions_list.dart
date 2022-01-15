@@ -42,7 +42,7 @@ class _CarePlusPrescriptionsListState extends State<CarePlusPrescriptionsList> {
                     Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
                   },
                 ),
-                Text("Care+ Prescriptions List",
+                Text("Mediaid pro Prescriptions List",
                 style: TextStyle(
                   fontSize: 23,
                   color: Colors.black.withOpacity(0.5),

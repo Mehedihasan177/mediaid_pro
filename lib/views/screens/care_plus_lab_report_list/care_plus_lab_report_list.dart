@@ -39,7 +39,7 @@ class _CarePlusLabReportListState extends State<CarePlusLabReportList> {
                     Navigator.push(context,MaterialPageRoute(builder: (context) => AppointmentList()));
                   },
                 ),
-                Text("Care+ Lab Report List",
+                Text("Mediaid pro Lab Report List",
                   style: TextStyle(
                     fontSize: 23,
                     color: Colors.black.withOpacity(0.5),

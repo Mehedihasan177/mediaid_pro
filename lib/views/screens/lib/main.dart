@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Care+ Calling',
+      title: 'Mediaid pro Calling',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

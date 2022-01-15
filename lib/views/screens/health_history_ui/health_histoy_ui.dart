@@ -177,7 +177,7 @@ class _HealthHistoryState extends State<HealthHistory> {
         setState(() {
           print(element.doctor.name);
           health_history.add(Health_History(
-              name: element.doctor.name,lab_report_type: 'Care+ Prescription',time: DateFormat('hh:mm a').format(element.createdAt),date: DateFormat('dd MMM yyyy').format(element.createdAt), image: '$apiDomainRoot/images/${element.doctor.image.toString()}',id: element.id.toString()
+              name: element.doctor.name,lab_report_type: 'Mediaid pro Prescription',time: DateFormat('hh:mm a').format(element.createdAt),date: DateFormat('dd MMM yyyy').format(element.createdAt), image: '$apiDomainRoot/images/${element.doctor.image.toString()}',id: element.id.toString()
           ));
 
 
